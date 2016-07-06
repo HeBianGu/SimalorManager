@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="......" Category="Category3" Bounds="191.826840209961,-46.1579728805542,50,25.24" UseManualLocation="True" />
+    <Node Id="BaseFile.cs" Category="Category3" Bounds="-8.39999833424887,-80.2705817901611,80.5566666666667,25.24" UseManualLocation="True" />
+    <Node Id="CoSim.exe" Category="Category3" Bounds="-355.865325000542,20.1471139961873,79.6133333333333,25.24" UseManualLocation="True">
+      <Category Ref="Category10" />
+    </Node>
+    <Node Id="EclipseData.cs" Category="Category3" Bounds="-185.545520121257,-36.6302867614746,100.363333333333,25.24" UseManualLocation="True" />
+    <Node Id="PetrelData.cs" Category="Category3" Bounds="158.712798533931,88.0724166518589,94.5466666666667,25.24" UseManualLocation="True" />
+    <Node Id="SCHEDULETITLEGRIDINCLUDEREGIONSPROPS等共享的关键字类" Category="Comment" Bounds="-90.6345156695483,220.793512820878,243.833333333333,55.72" Label="示例关键字：SCHEDULE TITLE GRID INCLUDE REGIONS PROPS等共享的关键字类" UseManualLocation="True" />
+    <Node Id="SimON.exe" Category="Category3" Bounds="-256.826559089093,167.646532220714,83.4933333333333,25.24" UseManualLocation="True">
+      <Category Ref="Category10" />
+    </Node>
+    <Node Id="SimONData.cs" Category="Category3" Bounds="-176.161256306966,81.5405225125905,102.236666666667,25.24" UseManualLocation="True" />
+    <Node Id="SimalorManager.dll" Category="Category1" Bounds="-32.316491394043,-135.510681790161,131.81,25.24" UseManualLocation="True" />
+    <Node Id="公用关键字" Category="Category2" Bounds="-35.9566618177238,139.947634180271,139.303333333333,25.24" Label="BaseKey公用关键字池" UseManualLocation="True" />
+    <Node Id="其他数模文件的扩展" Category="Comment" Bounds="234.040704345703,-116.598072880554,164,25.24" Label="其他第三方数模文件的扩展" UseManualLocation="True" />
+    <Node Id="数模文件处理程序集" Category="Comment" Bounds="-47.2531933037685,-197.967811651407,152,25.24" Label="数模文件处理中心程序集" UseManualLocation="True" />
+    <Node Id="读取Eclipse数模文件的类" Category="Comment" Bounds="-353.954030049642,-91.8703867614746,155.026666666667,25.24" UseManualLocation="True" />
+    <Node Id="读取Petrel数模文件的类" Category="Comment" Bounds="187.000014519806,189.330620158564,149.21,25.24" UseManualLocation="True" />
+    <Node Id="读取SimON数模文件的类" Category="Comment" Bounds="-391.265264440728,104.156926092213,156.9,25.24" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="BaseFile.cs" Target="......" Bounds="72.1566692860921,-60.2214932210813,110.819460344136,20.4399656496923" Label="扩展" LabelBounds="116.902857183319,-69.2420699829687,23.9999999999999,15.24" />
+    <Link Source="BaseFile.cs" Target="EclipseData.cs" Bounds="-78.6906284024998,-57.1729930373901,70.4158198980922,18.3743544014637" Label="扩展" LabelBounds="-50.8989658915807,-43.9836460763916,24,15.24" />
+    <Link Source="BaseFile.cs" Target="PetrelData.cs" Bounds="44.930499111841,-55.0305832672119,141.533292740735,136.847059956127" Label="扩展" LabelBounds="117.08735532011,-3.28486990005576,24,15.24" />
+    <Link Source="BaseFile.cs" Target="SimONData.cs" Bounds="-106.538702021151,-55.0305832672119,126.178407759132,130.110271981056" Label="扩展" LabelBounds="-42.013757308897,11.4169062205836,24,15.24" />
+    <Link Source="EclipseData.cs" Target="CoSim.exe" Bounds="-268.973478424688,-11.3902867614746,93.4463220687576,29.3624403203247" Label="创建应用程序" LabelBounds="-228.322629529538,7.29536700549045,72,15.24" />
+    <Link Source="SCHEDULETITLEGRIDINCLUDEREGIONSPROPS等共享的关键字类" Target="公用关键字" Bounds="31.9817545020694,174.184798297883,1.17041127407627,46.6087203788744" />
+    <Link Source="SimONData.cs" Target="SimON.exe" Bounds="-195.379401887951,106.780522460938,57.1403433941984,54.6456295887014" Label="创建应用程序" LabelBounds="-165.426921640251,135.548751753256,72,15.2400000000001" />
+    <Link Source="SimalorManager.dll" Target="BaseFile.cs" Bounds="32.5475333282447,-110.270681790161,0.650273759816258,21.0044099471961" />
+    <Link Source="公用关键字" Target="......" Bounds="46.1133492577446,-14.5029657210974,151.982643073766,154.450600303617" />
+    <Link Source="公用关键字" Target="EclipseData.cs" Bounds="-117.05719462849,-4.88942068965114,138.669584645633,144.837055272171" />
+    <Link Source="公用关键字" Target="PetrelData.cs" Bounds="75.6093149400974,115.9071679415,79.8446597248849,24.0404666410191" />
+    <Link Source="公用关键字" Target="SimONData.cs" Bounds="-82.2980996403408,109.888343432,81.6946665477011,30.0592911505191" />
+    <Link Source="其他数模文件的扩展" Target="......" Bounds="241.940425846385,-91.3580731201172,56.3251871420215,39.9898885729363" />
+    <Link Source="数模文件处理程序集" Target="SimalorManager.dll" Bounds="29.7251113969891,-172.727816467285,2.18949195846527,28.2440553648196" />
+    <Link Source="读取Eclipse数模文件的类" Target="EclipseData.cs" Bounds="-244.210672477343,-66.6303867614746,68.2363380450929,26.718645314823" />
+    <Link Source="读取Petrel数模文件的类" Target="PetrelData.cs" Bounds="217.250912316321,121.200764173511,37.4222201921949,68.1298583850826" />
+    <Link Source="读取SimON数模文件的类" Target="SimONData.cs" Bounds="-234.36526184082,101.393749838056,49.2685861637887,5.93419845104323" />
+  </Links>
+  <Categories>
+    <Category Id="Category1" Label="类别 1" Background="#FFE51400" IsTag="True" />
+    <Category Id="Category10" Label="类别 10" Background="#FF672878" IsTag="True" />
+    <Category Id="Category2" Label="类别 2" Background="#FF339933" IsTag="True" />
+    <Category Id="Category3" Label="类别 3" Background="#FF3EBCED" IsTag="True" />
+    <Category Id="Comment" Label="注释" Description="表示在图表中用户定义的注释" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="注释" />
+  </Categories>
+  <Properties>
+    <Property Id="Background" Label="背景" Description="背景色" DataType="System.Windows.Media.Brush" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="Label" Label="标签" Description="可批注对象的可显示标签" DataType="System.String" />
+    <Property Id="LabelBounds" DataType="System.Windows.Rect" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="类别 10" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category10')" />
+      <Setter Property="Background" Value="#FF672878" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 3" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category3')" />
+      <Setter Property="Background" Value="#FF3EBCED" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 2" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category2')" />
+      <Setter Property="Background" Value="#FF339933" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 1" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category1')" />
+      <Setter Property="Background" Value="#FFE51400" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="注释" ValueLabel="包含注释">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
+  </Styles>
+</DirectedGraph>

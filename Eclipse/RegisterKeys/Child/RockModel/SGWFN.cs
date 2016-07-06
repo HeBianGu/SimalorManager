@@ -1,0 +1,106 @@
+﻿#region <版 本 注 释>
+/*
+ * ========================================================================
+ * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * ========================================================================
+ *    
+ * 作者：[李海军]   时间：2015/12/2 10:38:01
+ * 文件名：START
+ * 说明：
+ * ROCK
+             0            11
+/
+ * 
+ * 
+ * 修改者：           时间：               
+ * 修改说明：
+ * ========================================================================
+*/
+#endregion
+using OPT.Product.SimalorManager.Base.AttributeEx;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+{
+    /// <summary> 油水相渗 </summary>
+    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
+    public class SGWFN : RegionKey<SGWFN.Item>
+    {
+        public SGWFN(string _name)
+            : base(_name)
+        {
+
+        }
+
+        /// <summary> 分区数量 </summary>
+        public int RegionCount=0;
+
+
+        public class Item: OPT.Product.SimalorManager.ItemNormal
+        {
+            /// <summary> 含气饱和度 </summary>
+            public string hqbhd0;
+           /// <summary> 气相相对渗透率 </summary>
+            public string qxxdstl1;
+           /// <summary> 水相相对渗透率 </summary>
+            public string sxxdstl2;
+           /// <summary> 气水毛管压力 </summary>
+            public string mgyl;
+
+
+           string formatStr = "{0}{1}{2}{3}";
+
+            /// <summary> 转换成字符串 </summary>
+            public override string ToString()
+            {
+                return string.Format(formatStr, hqbhd0.ToDD(), qxxdstl1.ToDD(), sxxdstl2.ToDD(), mgyl.ToDD());
+            }
+
+            /// <summary> 解析字符串 </summary>
+            public override void Build(List<string> newStr)
+            {
+                this.ID = Guid.NewGuid().ToString();
+
+                for (int i = 0; i < newStr.Count; i++)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            this.hqbhd0 = newStr[0];
+                            break;
+                        case 1:
+                            this.qxxdstl1 = newStr[1];
+                            break;
+                        case 2:
+                            this.sxxdstl2 = newStr[2];
+                            break;
+                        case 3:
+                            this.mgyl = newStr[3];
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+
+
+            public override object Clone()
+            {
+                Item item = new Item()
+                {
+                    hqbhd0 = this.hqbhd0,
+                    qxxdstl1 = this.qxxdstl1,
+                    sxxdstl2=this.sxxdstl2,
+                    mgyl=this.mgyl
+                };
+                return item;
+            }
+        }
+    }
+}

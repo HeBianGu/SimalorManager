@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph Layout="ForceDirected" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="64f9fa0c-b495-4182-b8b0-205c2bbfdad71" Category="Category2" Bounds="226.369663400467,-154.899147211331,94.9266666666667,25.24" Label="CheckListKey" UseManualLocation="True" />
+    <Node Id="BaseKey" Category="Category1" Bounds="109.033386289759,-140.162030080566,87.3033333333333,25.087552" Group="Collapsed" UseManualLocation="True" />
+    <Node Id="ConfigerKey" Category="Category2" Bounds="166.050400198997,-44.4111911431279,90.25,25.24" UseManualLocation="True" />
+    <Node Id="ItemKey&lt;T&gt;" Category="Category2" Bounds="110.416956321022,10.8117453118473,91.5066666666667,25.24" UseManualLocation="True" />
+    <Node Id="ModifyKey" Category="Category2" Bounds="230.492523464711,-99.6591467465653,81.51,25.24" UseManualLocation="True" />
+    <Node Id="ParentKey" Category="Category2" Bounds="177.12364413185,-210.148254688153,78.01,25.24" UseManualLocation="True" />
+    <Node Id="RegionKey" Category="Category2" Bounds="65.7633411693443,-210.218263107737,81.3133333333333,25.24" UseManualLocation="True" />
+    <Node Id="SingleKey" Category="Category2" Bounds="0.698480732393463,-99.6682546881527,75.97,25.24" UseManualLocation="True" />
+    <Node Id="TableKey" Category="Category2" Bounds="64.1354190546024,-44.4282546881527,71.9566666666667,25.24" UseManualLocation="True" />
+    <Node Id="UnkonwKey" Category="Category2" Bounds="-12.1133048687801,-154.929099562893,88.16,25.24" UseManualLocation="True" />
+    <Node Id="关键字基类：所有关键字继承此基类，包含公共信息和方法" Category="Comment" Bounds="28.7780948094427,-335.868254688153,248,40.48" UseManualLocation="True" />
+    <Node Id="用于解析Eclipse八大主关键字" Category="Comment" Bounds="175.435920405234,-265.388254688153,188,25.24" Label="用于解析八大主关键字的抽象类" UseManualLocation="True" />
+    <Node Id="用于解析Eclipse只有" Category="Comment" Bounds="-177.864680945397,-44.4282546881527,212,25.24" Label="用于解析只有无内容关键字的抽象类" UseManualLocation="True" />
+    <Node Id="用于解析Eclipse带分区关键字的抽象类" Category="Comment" Bounds="-42.5641795947664,-265.388254688153,188,25.24" Label="用于解析带分区关键字的抽象类" UseManualLocation="True" />
+    <Node Id="用于解析勾选性质关键字的抽象类" Category="Comment" Bounds="285.13374413185,-210.148254688153,200,25.24" UseManualLocation="True" />
+    <Node Id="用于解析包含修正关键字的抽象类" Category="Comment" Bounds="286.342285721269,-44.4282546881527,200,25.24" UseManualLocation="True" />
+    <Node Id="用于解析包含表的关键字的抽象类" Category="Comment" Bounds="-107.583143678979,10.8117453118474,188,25.24" Label="用于解析包含表关键字的抽象类" UseManualLocation="True" />
+    <Node Id="用于解析包含配置信息的关键字抽象类" Category="Comment" Bounds="231.923722987688,10.8117453118473,212,25.24" Label="用于解析包含配置信息关键字抽象类" UseManualLocation="True" />
+    <Node Id="用于解析提取没有解析的关键字的抽象类" Category="Comment" Bounds="-200.285921467922,-210.179712486643,236,25.24" Label="用于解析提取没有定义的关键字的抽象类" UseManualLocation="True" />
+    <Node Id="用于解析解析" Category="Comment" Bounds="40.6639104961897,76.0088662943618,200,25.24" Label="用于解析包含项的关键字的抽象类" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="BaseKey" Target="64f9fa0c-b495-4182-b8b0-205c2bbfdad71" Bounds="196.336719623092,-135.476203594521,21.0977764570353,2.54614832252608" Label="派生" LabelBounds="197.283202115308,-153.761502511226,24,15.24" />
+    <Link Source="BaseKey" Target="ConfigerKey" Bounds="160.315751964922,-115.162030080566,38.4940664741304,63.0578968441621" Label="派生" LabelBounds="181.269846322467,-99.9151672264437,24,15.24" />
+    <Link Source="BaseKey" Target="ItemKey&lt;T&gt;" Bounds="152.973375421644,-115.162030080566,2.69828689758194,116.982165070931" Label="派生" LabelBounds="158.322519011888,-64.3370668727108,24,15.24" />
+    <Link Source="BaseKey" Target="ModifyKey" Bounds="189.170688144834,-115.162030080566,36.7267545941063,12.5826076497136" Label="派生" LabelBounds="202.011480714728,-128.116886374869,24,15.24" />
+    <Link Source="BaseKey" Target="ParentKey" Bounds="164.035958120502,-178.245417380704,34.5824734056535,38.0833873001378" Label="派生" LabelBounds="155.846564310563,-175.788243453311,24,15.24" />
+    <Link Source="BaseKey" Target="RegionKey" Bounds="119.742514260209,-177.424019812259,24.6675132013969,37.2619897316929" Label="派生" LabelBounds="106.40858862579,-157.689015905384,24,15.24" />
+    <Link Source="BaseKey" Target="SingleKey" Bounds="82.5200433602829,-115.162030080566,35.0778218685678,12.4966633621794" Label="派生" LabelBounds="94.7705773530013,-104.906557777119,24,15.24" />
+    <Link Source="BaseKey" Target="TableKey" Bounds="111.351911206969,-115.162030080566,34.4756615849257,62.8431668006174" Label="派生" LabelBounds="128.188481726328,-78.8507986769197,24,15.24" />
+    <Link Source="BaseKey" Target="UnkonwKey" Bounds="84.9811759409644,-135.876374031062,24.0522103487946,2.91819519478264" Label="派生" LabelBounds="84.766392568795,-130.417169662204,24,15.24" />
+    <Link Source="关键字基类：所有关键字继承此基类，包含公共信息和方法" Target="BaseKey" Bounds="152.695694129982,-295.408789870289,0.0723831276540921,146.24676089206" />
+    <Link Source="用于解析Eclipse八大主关键字" Target="ParentKey" Bounds="234.551055856611,-240.168689870289,22.7109136133327,23.5430330977776" />
+    <Link Source="用于解析Eclipse只有" Target="SingleKey" Bounds="-46.6198238940079,-70.4058148632218,51.9935835219673,25.9775601750692" />
+    <Link Source="用于解析Eclipse带分区关键字的抽象类" Target="RegionKey" Bounds="63.9973553296166,-240.168689870289,23.5119491517218,23.6213806736921" />
+    <Link Source="用于解析勾选性质关键字的抽象类" Target="64f9fa0c-b495-4182-b8b0-205c2bbfdad71" Bounds="307.319415772389,-184.908254688153,52.3894442272041,26.0042398898684" />
+    <Link Source="用于解析包含修正关键字的抽象类" Target="ModifyKey" Bounds="305.655609190923,-70.5281871791362,54.3924464388402,26.1058289848892" />
+    <Link Source="用于解析包含表的关键字的抽象类" Target="TableKey" Bounds="12.3885517126075,-15.2548136201267,53.6446375322985,26.0666589319741" />
+    <Link Source="用于解析包含配置信息的关键字抽象类" Target="ConfigerKey" Bounds="248.403579923763,-15.5859290930261,60.5699141529365,26.403670898779" />
+    <Link Source="用于解析提取没有解析的关键字的抽象类" Target="UnkonwKey" Bounds="-56.1840856370461,-184.928589870289,53.9463046341164,26.0825471776674" />
+    <Link Source="用于解析解析" Target="ItemKey&lt;T&gt;" Bounds="143.665707236331,44.8134610587421,7.42014784022737,31.1954052356197" />
+  </Links>
+  <Categories>
+    <Category Id="Category1" Label="类别 1" Background="#FFE51400" IsTag="True" />
+    <Category Id="Category2" Label="类别 2" Background="#FF339933" IsTag="True" />
+    <Category Id="Comment" Label="注释" Description="表示在图表中用户定义的注释" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="注释" />
+  </Categories>
+  <Properties>
+    <Property Id="Background" Label="背景" Description="背景色" DataType="System.Windows.Media.Brush" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="Group" Label="组" Description="将节点显示为组" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="Label" Label="标签" Description="可批注对象的可显示标签" DataType="System.String" />
+    <Property Id="LabelBounds" DataType="System.Windows.Rect" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="类别 2" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category2')" />
+      <Setter Property="Background" Value="#FF339933" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 1" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category1')" />
+      <Setter Property="Background" Value="#FFE51400" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="注释" ValueLabel="包含注释">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
+  </Styles>
+</DirectedGraph>

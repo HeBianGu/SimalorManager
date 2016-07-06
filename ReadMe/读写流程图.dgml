@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="EclipseData数模文件读写类" Bounds="-44.4000000000001,-27.9999999999999,169.903333333333,25.24" UseManualLocation="True" />
+    <Node Id="Eclipse主文件3T1.DATA" Bounds="-37.6,-96.8,155.326666666667,25.24" Label="Eclipse主文件 3T1.DATA" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="Eclipse主文件3T1.DATA" Target="EclipseData数模文件读写类" Bounds="40.1529070127505,-71.560004119873,0.245304817926154,34.5602308216853" />
+  </Links>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="Label" Label="标签" Description="可批注对象的可显示标签" DataType="System.String" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+  </Properties>
+</DirectedGraph>

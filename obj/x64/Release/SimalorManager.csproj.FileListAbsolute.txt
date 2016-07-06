@@ -1,0 +1,6 @@
+E:\6.x\6.25\DEV\Product\Bin\SimalorManager.dll
+E:\6.x\6.25\DEV\Product\Bin\SimalorManager.pdb
+E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\x64\Release\OPT.Product.SimalorManager.Properties.Resources.resources
+E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\x64\Release\SimalorManager.csproj.GenerateResource.Cache
+E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\x64\Release\SimalorManager.dll
+E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\x64\Release\SimalorManager.pdb
