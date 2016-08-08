@@ -25,7 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> NXFIN中参数个数=X2-X1+1</summary>
     [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.Eclipse)]

@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> SCHEDULE(必须) 确定模拟的作业（产量、注水量控制和限制）和给定需要输出模拟结果的时间。在SCHEDULE部分中同样还能确定垂向流动的动态曲线和油管模拟参数。 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Parent)]

@@ -103,10 +103,12 @@
     <Compile Include="Eclipse\FileInfos\EclipseData.cs" />
     <Compile Include="Eclipse\FileInfos\OutPutExMethod.cs" />
     <Compile Include="Eclipse\FileInfos\RestartInfoModel.cs" />
+    <Compile Include="Eclipse\KeyBase\BaseKeyHandleFactory.cs" />
     <Compile Include="Eclipse\KeyBase\BigDataKey.cs" />
     <Compile Include="Eclipse\KeyBase\ConfigerKey.cs" />
     <Compile Include="Eclipse\KeyBase\ConnectKey.cs" />
     <Compile Include="Eclipse\KeyBase\DynamicKey.cs" />
+    <Compile Include="Eclipse\KeyBase\FileKey.cs" />
     <Compile Include="Eclipse\KeyBase\OutPutBindKey.cs" />
     <Compile Include="Eclipse\KeyBase\CheckListKey.cs" />
     <Compile Include="Eclipse\KeyBase\UnkownKey.cs" />
@@ -118,8 +120,6 @@
     <Compile Include="Eclipse\KeyBase\ParentKey.cs" />
     <Compile Include="Eclipse\KeyBase\RegionKey.cs" />
     <Compile Include="Eclipse\KeyBase\SingleKey.cs" />
-    <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\GRAVDR.cs" />
-    <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\EQLOPTS.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\LGR.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\COAL.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\REGDIMS.cs" />
@@ -128,7 +128,6 @@
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\CARFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\COALNUM.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DIFFMMF.cs" />
-    <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DZMTRXV.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HYFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HXFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HZFIN.cs" />
@@ -136,8 +135,6 @@
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\NYFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\NXFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\ROCKDEN.cs" />
-    <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DZMTRX.cs" />
-    <Compile Include="Eclipse\RegisterKeys\Child\InitModel\THPRES.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\ProdModel\PROPANTTABLE.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\ProdModel\NPROPANTS.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\GRIDUNIT.cs" />

@@ -25,7 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 空隙体积</summary>
     [KeyAttribute(EclKeyType = EclKeyType.Edit, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]

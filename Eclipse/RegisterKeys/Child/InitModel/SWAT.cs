@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 含水饱和度 </summary>
      [KeyAttribute(EclKeyType = EclKeyType.Solution, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]

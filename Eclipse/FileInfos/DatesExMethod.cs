@@ -1,4 +1,4 @@
-﻿using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child;
+﻿using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.Linq;

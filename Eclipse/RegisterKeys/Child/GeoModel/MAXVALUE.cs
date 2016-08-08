@@ -31,7 +31,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 取最大值 </summary>
     public class MAXVALUE : ModifyKey

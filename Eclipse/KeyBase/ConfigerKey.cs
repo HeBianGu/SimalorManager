@@ -17,8 +17,8 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
+using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+//using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,131 +29,22 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 写入方法是直接调用this.ToString()方法 </summary>
-    public abstract class ConfigerKey : BaseKey
+    public abstract class ConfigerKey : Key
     {
         public ConfigerKey(string _name)
             : base(_name)
         {
-
-        }
-
-        public override BaseKey ReadKeyLine(StreamReader reader)
-        {
-            base.ReadKeyLine(reader);
-
-            string tempStr = string.Empty;
-
-            while (!reader.EndOfStream)
+            this.BuilderHandler = (l, k) =>
             {
-                tempStr = reader.ReadLine().TrimEnd();
-
-                bool isParenRegister = KeyConfigerFactroy.Instance.IsParentRegisterKey(tempStr);
-                //  读到了父节点
-                if (isParenRegister)
-                {
-                    this.CmdToItems();
-
-                    ParentKey findkey = KeyConfigerFactroy.Instance.CreateParentKey<ParentKey>(tempStr);
-                    this.BaseFile.Key.Add(findkey);
-                    //findkey.BaseFile = this.ParentKey.BaseFile;
-                    findkey.ParentKey = this.BaseFile.Key;
-                    findkey.BaseFile = this.BaseFile;
-                    findkey.ReadKeyLine(reader);
-                }
-                else
-                {
-                    bool isChildRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(tempStr);
-
-                    if (isChildRegister)
-                    {
-                        this.CmdToItems();
-
-                        //  读到下一关注关键字终止
-                        BaseKey TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
-
-                        //  插入到DATES的同一级
-                        if (TempKey is DATES)
-                        {
-                            if (this.ParentKey is DATES)
-                            {
-                                this.ParentKey.ParentKey.Add(TempKey);
-                            }
-                            else
-                            {
-                                this.ParentKey.Add(TempKey);
-                            }
-                        }
-                        else
-                        {
-                            this.ParentKey.Add(TempKey);
-                        }
-
-                        TempKey.BaseFile = this.ParentKey.BaseFile;
-                        TempKey.ReadKeyLine(reader);
-
-                    }
-                    else
-                    {
-                        //  普通关键字下面可能存在INCLUDE关键字
-                        bool isIncludeKey = KeyConfigerFactroy.Instance.IsINCLUDERegisterKey(tempStr);
-
-                        if (isIncludeKey)
-                        {
-                            this.CmdToItems();
-
-                            INCLUDE includeKey = KeyConfigerFactroy.Instance.CreateIncludeKey<INCLUDE>(tempStr);
-                            this.ParentKey.Add(includeKey);
-                            includeKey.BaseFile = this.BaseFile;
-                            includeKey.ReadKeyLine(reader);
-                        }
-                        else
-                        {
-                            if (this.Match(tempStr)) //if (tempStr.IsKeyFormat())
-                            {
-
-                                this.CmdToItems();
-
-                                //  添加普通关键字
-                                UnkownKey normalKey = new UnkownKey(KeyChecker.FormatKey(tempStr));
-                                normalKey.ParentKey = this;
-                                normalKey.BaseFile = this.BaseFile;
-
-                                //  触发事件
-                                if (normalKey.BaseFile != null && normalKey.BaseFile.OnUnkownKey != null)
-                                {
-                                    normalKey.BaseFile.OnUnkownKey(normalKey.BaseFile, normalKey);
-                                }
-                                this.Keys.Add(normalKey);
-                                normalKey.ReadKeyLine(reader);
-                            }
-                            else
-                            {
-
-                                if (tempStr.IsWorkLine())
-                                {
-                                    this.Lines.Add(tempStr);
-                                }
-
-                            }
-                        }
-                    }
-
-                }
-            }
-
-            CmdToItems();
-
-            //  读到末尾返回空值
-            return null;
-
-
+                CmdToItems();
+            };
         }
 
         void CmdToItems()
         {
             string str = null;
 
-            this.Lines.RemoveAll(l => !l.IsWorkLine());
+            this.Lines.RemoveAll(l => l.StartsWith(KeyConfiger.ExcepFlag));
 
             for (int i = 0; i < Lines.Count; i++)
             {

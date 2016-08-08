@@ -20,7 +20,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 支撑剂数量 </summary>
     public class NPROPANTS : ConfigerKey

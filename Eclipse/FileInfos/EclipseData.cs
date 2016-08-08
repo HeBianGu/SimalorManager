@@ -16,9 +16,8 @@
 */
 #endregion
 using OPT.Product.SimalorManager.Base.AttributeEx;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent;
+using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using OPT.Product.SimalorManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -196,7 +195,6 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             END end = this.Key.CreateSingle<END>("END");
 
         }
-
         /// <summary> 初始化类(树形结构) </summary>
         protected override void InitializeComponent()
         {
@@ -208,7 +206,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                 {
                     while (!streamRead.EndOfStream)
                     {
-                        strTemp = streamRead.ReadLine().TrimEnd();
+                        //strTemp = streamRead.ReadLine().TrimEnd();
 
                         //  注释内容 以 -- 开头
                         //if (strTemp.StartsWith(base.ExceptString))
@@ -216,6 +214,10 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                         //    this.Lines.Add(strTemp);
                         //}
 
+                        this.Key.ReadKeyLine(streamRead);
+
+
+                        /*
                         bool isRegister = KeyConfigerFactroy.Instance.IsParentRegisterKey(strTemp);
 
                         if (isRegister)
@@ -245,7 +247,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                                 this.Lines.Add(strTemp);
                             }
 
-                        }
+                        }*/
                     }
                 }
             }
@@ -508,7 +510,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                     if (funKey == null)
                     {
                         //  没有则创建关键字
-                        funKey = KeyConfigerFactroy.Instance.CreateChildKey<TableKey>(md.KeyName);
+                        funKey = KeyConfigerFactroy.Instance.CreateKey<TableKey>(md.KeyName) as TableKey;
 
                         m.ParentKey.Add(funKey);
 
@@ -531,7 +533,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                         if (copyKey == null)
                         {
                             //  没有则创建关键字
-                            copyKey = KeyConfigerFactroy.Instance.CreateChildKey<TableKey>(copy.Value);
+                            copyKey = KeyConfigerFactroy.Instance.CreateKey<TableKey>(copy.Value,ecl.SimKeyType) as TableKey;
 
                             m.ParentKey.Add(copyKey);
 
@@ -569,22 +571,22 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
 
             if (group == EclKeyType.Grid)
             {
-                return KeyConfigerFactroy.GridPartConfiger;
+                return EclipseKeyFactory.Instance.GridPartConfiger;
 
             }
             else if (group == EclKeyType.Props)
             {
-                return KeyConfigerFactroy.PropsPartConfiger;
+                return EclipseKeyFactory.Instance.PropsPartConfiger;
             }
 
             else if (group == EclKeyType.Solution)
             {
-                return KeyConfigerFactroy.SolutionPartConfiger;
+                return EclipseKeyFactory.Instance.SolutionPartConfiger;
             }
 
             else if (group == EclKeyType.Regions)
             {
-                return KeyConfigerFactroy.RegionsPartConfiger;
+                return EclipseKeyFactory.Instance.RegionsPartConfiger;
             }
 
             return null;

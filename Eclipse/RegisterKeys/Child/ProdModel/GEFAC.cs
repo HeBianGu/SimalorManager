@@ -28,7 +28,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 井组生产时率 该关键字主要用于设置修井时间（downtime）对于模拟的影响。 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include)]

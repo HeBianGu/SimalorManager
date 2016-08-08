@@ -111,6 +111,24 @@ namespace OPT.Product.SimalorManager
             set { _match = value; }
         }
 
+
+        Action<BaseKey, BaseKey> _createrHandler = BaseKeyHandleFactory.Instance.AddNodeHandler;
+        /// <summary> 创建节点结构关系  T1本节点 T2下一节点 </summary>
+        public Action<BaseKey, BaseKey> CreaterHandler
+        {
+            get { return _createrHandler; }
+            set { _createrHandler = value; }
+        }
+
+
+        Action<BaseKey, BaseKey> _builderHandler;
+        /// <summary> 读取到下一关键字前要做的处理方法 T1本节点 T2下一节点  </summary>
+        public Action<BaseKey, BaseKey> BuilderHandler
+        {
+            get { return _builderHandler; }
+            set { _builderHandler = value; }
+        }
+
         #endregion
 
         #region - 关键字操作方法 -
@@ -156,9 +174,58 @@ namespace OPT.Product.SimalorManager
         /// <summary> 读取关键字内容 (具体关键字读取方法不同) </summary>
         public virtual BaseKey ReadKeyLine(StreamReader reader)
         {
-            //  增加占位符
-            //this.parentKey.lines.Add(this.ID);
-            return null;
+            string tempStr = string.Empty;
+
+            while (!reader.EndOfStream)
+            {
+                tempStr = reader.ReadLine().TrimEnd();
+
+                if (tempStr.IsKeyFormat())
+                {
+                    BaseKey newKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr);
+
+                    if (this._builderHandler != null)
+                    {
+                        //  当碰到新关键字 触发本节点构建方法
+                        this._builderHandler.Invoke(this, newKey);
+                    }
+
+                    if (newKey._createrHandler != null)
+                    {
+                        //  触发新关键字构建节点结构的方法
+                        newKey._createrHandler.Invoke(this, newKey);
+                    }
+
+                    //  读到未解析关键字触发事件
+                    if (newKey is UnkownKey)
+                    {
+                        //  触发事件
+                        if (newKey.BaseFile != null && newKey.BaseFile.OnUnkownKey != null)
+                        {
+                            newKey.BaseFile.OnUnkownKey(newKey.BaseFile, newKey);
+                        }
+                    }
+
+                    //  开始读取新关键字
+                    newKey.ReadKeyLine(reader);
+                }
+                else
+                {
+                    if (tempStr.IsNotExcepLine())
+                    {
+                        //  不是记录行
+                        this.Lines.Add(tempStr);
+                    }
+                }
+            }
+
+            if (this._builderHandler != null)
+            {
+                //  读到最后触发一次创建方法
+                this._builderHandler.Invoke(this, this);
+            }
+            //  读到末尾返
+            return this;
         }
 
         #endregion
@@ -629,6 +696,12 @@ namespace OPT.Product.SimalorManager
         {
             return this.name;
         }
+
+    }
+
+    /// <summary> 标示节点是父节点 </summary>
+    public interface IRootNode
+    {
 
     }
 

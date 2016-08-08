@@ -22,7 +22,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 形状因子 </summary>
     public class SIGMA : ConfigerKey

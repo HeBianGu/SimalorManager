@@ -15,9 +15,8 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent;
+using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using OPT.Product.SimalorManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,7 +46,6 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         {
 
         }
-
         /// <summary> 初始化类(树形结构) </summary>
         protected override void InitializeComponent()
         {
@@ -61,6 +59,10 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                     {
                         tempStr = streamRead.ReadLine().TrimEnd();
 
+                        this.Key.ReadKeyLine(streamRead);
+
+                        /*
+
                         bool isParenRegister = KeyConfigerFactroy.Instance.IsParentRegisterKey(tempStr);
                         //  读到了父节点
                         if (isParenRegister)
@@ -73,17 +75,17 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                         }
                         else
                         {
-                            bool isChildRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(tempStr);
+                            bool isChildRegister = KeyConfigerFactroy.Instance.IsRegister(tempStr,this.SimKeyType);
 
                             if (isChildRegister)
                             {
 
                                 //  读到下一关注关键字终止
-                                BaseKey TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
-                                this.Key.Keys.Add(TempKey);
-                                TempKey.BaseFile = this;
-                                TempKey.ParentKey = this.Key;
-                                TempKey.ReadKeyLine(streamRead);
+                                CatcheKeyFactroy.Instance.TempKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr,this.SimKeyType);
+                                this.Key.Keys.Add(CatcheKeyFactroy.Instance.TempKey);
+                                CatcheKeyFactroy.Instance.TempKey.BaseFile = this;
+                                CatcheKeyFactroy.Instance.TempKey.ParentKey = this.Key;
+                                CatcheKeyFactroy.Instance.TempKey.ReadKeyLine(streamRead);
 
                             }
                             else
@@ -118,7 +120,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                                 }
                             }
 
-                        }
+                        }*/
                     }
                 }
             }

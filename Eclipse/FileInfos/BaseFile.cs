@@ -1,4 +1,5 @@
-﻿using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child;
+﻿using OPT.Product.SimalorManager.Base.AttributeEx;
+using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace OPT.Product.SimalorManager
 
         public BaseFile()
         {
-            this.Key = new Key("BaseFile");
+            this.Key = new FileKey("BaseFile");
+            this.Key.BaseFile = this;
 
         }
         public BaseFile(string _filePath)
@@ -24,7 +26,8 @@ namespace OPT.Product.SimalorManager
 
             fileName = _filePath.GetFileNameWithoutExtension();
 
-            this.Key = new Key(fileName);
+            this.Key = new FileKey(fileName);
+            this.Key.BaseFile = this;
 
             InitializeComponent();
         }
@@ -36,7 +39,8 @@ namespace OPT.Product.SimalorManager
 
             fileName = fileFulPath.GetFileNameWithoutExtension();
 
-            this.Key = new Key(fileName);
+            this.Key = new FileKey(fileName);
+            this.Key.BaseFile = this;
 
             InitializeComponent();
         }
@@ -45,7 +49,8 @@ namespace OPT.Product.SimalorManager
         {
             filePath = _filePath;
             fileName = _filePath.GetFileNameWithoutExtension();
-            this.Key = new Key(fileName);
+            this.Key = new FileKey(fileName);
+            this.Key.BaseFile = this;
             this.OnUnkownKey = UnkownEvent;
             InitializeComponent();
         }
@@ -54,7 +59,8 @@ namespace OPT.Product.SimalorManager
         {
             filePath = _filePath;
             fileName = _filePath.GetFileNameWithoutExtension();
-            this.Key = new Key(fileName);
+            this.Key = new FileKey(fileName);
+            this.Key.BaseFile = this;
             this.OnUnkownKey = UnkownEvent;
             isReadIclude = isReadInclu;
 
@@ -62,6 +68,15 @@ namespace OPT.Product.SimalorManager
         }
 
         bool isReadIclude = true;
+
+
+        SimKeyType _simKeyType = SimKeyType.Eclipse;
+
+        public SimKeyType SimKeyType
+        {
+            get { return _simKeyType; }
+            set { _simKeyType = value; }
+        }
 
         public bool IsReadIclude
         {
@@ -98,9 +113,9 @@ namespace OPT.Product.SimalorManager
             }
         }
 
-        Key key;
+        FileKey key;
         /// <summary> 关键字集合 </summary>
-        public Key Key
+        public FileKey Key
         {
             get { return key; }
             set { key = value; }

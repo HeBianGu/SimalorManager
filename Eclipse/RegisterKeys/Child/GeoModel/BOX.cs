@@ -31,7 +31,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 范围类 </summary>
     public class BOX : ModifyKey
@@ -78,12 +78,12 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 if (tempStr == endFlag)
                     break;
 
-                bool isChildRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(tempStr);
+                bool isChildRegister = KeyConfigerFactroy.Instance.IsRegister(tempStr, this.BaseFile.SimKeyType);
 
                 if (isChildRegister)
                 {
                     //  读到下一关注关键字终止
-                    BaseKey tempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                    BaseKey tempKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr, this.BaseFile.SimKeyType);
 
                     //  是修正关键字
                     if (tempKey is ModifyKey)
@@ -147,7 +147,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         /// <summary> 循环读取BOX修改的关键字 </summary>
         public void ReadBOX(System.IO.StreamReader reader, string keyName)
         {
-            TableKey tk = KeyConfigerFactroy.Instance.CreateChildKey<TableKey>(keyName);
+            TableKey tk = KeyConfigerFactroy.Instance.CreateKey<TableKey>(keyName, this.BaseFile.SimKeyType) as TableKey;
 
             string tempStr;
 
@@ -161,12 +161,13 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                     break;
                 }
 
-                bool isChildRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(tempStr);
+
+                bool isChildRegister = KeyConfigerFactroy.Instance.IsRegister(tempStr, this.BaseFile.SimKeyType);
 
                 if (isChildRegister)
                 {
                     //  读到下一关注关键字终止
-                    BaseKey tempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                    BaseKey tempKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr, this.BaseFile.SimKeyType);
 
                     //  是修正关键字
                     if (tempKey is ModifyKey)

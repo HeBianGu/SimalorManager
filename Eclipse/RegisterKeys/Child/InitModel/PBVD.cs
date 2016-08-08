@@ -26,7 +26,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OPT.Product.SimalorManager;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 泡点压力</summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]

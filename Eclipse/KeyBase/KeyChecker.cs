@@ -72,8 +72,33 @@ namespace OPT.Product.SimalorManager
         /// <summary> 获取关键字别名 </summary>
         static string AnatherName(this string str)
         {
-            return KeyConfigerFactroy.AnatherNameConfiger.ContainsKey(str) ? KeyConfigerFactroy.AnatherNameConfiger[str] : str;
+            return EclipseKeyFactory.Instance.AnatherNameConfiger.ContainsKey(str) ? EclipseKeyFactory.Instance.AnatherNameConfiger[str] : str;
         }
+
+        /// <summary> 是否为注册关键字格式 </summary>
+        public static bool IsRegisterName(this string str)
+        {
+            return true;
+        }
+
+
+        /// <summary> 判断是否是过滤的行 </summary> 
+        public static bool IsNotExcepLine(this string tempStr)
+        {
+            if (
+                !string.IsNullOrEmpty(tempStr) &&
+                !tempStr.StartsWith(KeyConfiger.ExcepFlag) &&
+                !tempStr.StartsWith(KeyConfiger.ExcepFlag1)
+                )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         /// <summary> 判断是否是有效的行 </summary> 
         public static bool IsWorkLine(this string tempStr)

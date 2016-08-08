@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> SUMMARY(选择) 在每一个时间步后，确定的数据被编入汇总文件中； </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Parent)]

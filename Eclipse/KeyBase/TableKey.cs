@@ -1,5 +1,5 @@
 ﻿using OPT.Product.SimalorManager.Eclipse.FileInfos;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child;
+using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -281,7 +281,7 @@ namespace OPT.Product.SimalorManager
         /// <summary> 深复制成指定名称的关键字 </summary>
         public TableKey TransToTableKeyByName(string name)
         {
-            TableKey tb = KeyConfigerFactroy.Instance.CreateChildKey<TableKey>(name);
+            TableKey tb = KeyConfigerFactroy.Instance.CreateKey<TableKey>(name,this.BaseFile.SimKeyType) as TableKey;
             //  复制行数据
             this.Lines.ForEach(l => tb.Lines.Add(l));
 
@@ -422,7 +422,7 @@ namespace OPT.Product.SimalorManager
                         if (copyKey == null)
                         {
                             //  没有则创建关键字
-                            copyKey = KeyConfigerFactroy.Instance.CreateChildKey<TableKey>(copy.Value);
+                            copyKey = KeyConfigerFactroy.Instance.CreateKey<TableKey>(copy.Value,this.BaseFile.SimKeyType) as TableKey;
 
                             m.ParentKey.Add(copyKey);
 
@@ -533,7 +533,7 @@ namespace OPT.Product.SimalorManager
                         if (copyKey == null)
                         {
                             //  没有则创建关键字
-                            copyKey = KeyConfigerFactroy.Instance.CreateChildKey<TableKey>(copy.Value);
+                            copyKey = KeyConfigerFactroy.Instance.CreateKey<TableKey>(copy.Value,this.BaseFile.SimKeyType) as TableKey;
 
                             m.ParentKey.Add(copyKey);
 

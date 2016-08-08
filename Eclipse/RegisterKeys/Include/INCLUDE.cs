@@ -24,11 +24,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> INCLUDE 关键字 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class INCLUDE : BaseKey
+    public class INCLUDE : BaseKey, IRootNode
     {
         public INCLUDE(string _name)
             : base(_name)
@@ -149,8 +149,11 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE
                 {
                     while (!streamRead.EndOfStream)
                     {
-
+                        //  直接调用基类读取方法
+                        base.ReadKeyLine(streamRead);
+                        /*
                         strTemp = streamRead.ReadLine().TrimEnd();
+
 
                         bool isRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(strTemp);
 
@@ -190,8 +193,8 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE
                                 }
 
                             }
-
-                        }
+                        
+                        }*/
                     }
                 }
             }

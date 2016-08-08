@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 对计算的孔隙体积，网格中心深度和传导率进行修改 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Parent)]

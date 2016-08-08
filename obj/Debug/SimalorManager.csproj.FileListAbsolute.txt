@@ -13,3 +13,9 @@ E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\OPT.Prod
 E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.csproj.GenerateResource.Cache
 E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.dll
 E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.pdb
+F:\资源\Temp\SimalorManager\obj\Debug\OPT.Product.SimalorManager.Properties.Resources.resources
+F:\资源\Temp\SimalorManager\obj\Debug\SimalorManager.csproj.GenerateResource.Cache
+F:\资源\Temp\SimalorManager\obj\Debug\SimalorManager.dll
+F:\资源\Temp\SimalorManager\obj\Debug\SimalorManager.pdb
+F:\Product\bin\SimalorManager.dll
+F:\Product\bin\SimalorManager.pdb

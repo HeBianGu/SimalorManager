@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> (必须)油层岩石和流体性质（密度、粘度、相对渗透率、毛管压力等）随压力、饱和度、组分变化表 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Parent)]

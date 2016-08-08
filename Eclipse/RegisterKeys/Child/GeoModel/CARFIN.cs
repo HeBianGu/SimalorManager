@@ -31,7 +31,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 局部网格加密 </summary>
     public class CARFIN : Key
@@ -239,7 +239,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 //  读到本关键字信息 处理两个CARFIN用一个ENDFIN问题
                 if (tempStr == this.Name)
                 {
-                    BaseKey findKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                    BaseKey findKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr, this.BaseFile.SimKeyType);
                     findKey.BaseFile = this.BaseFile;
                     findKey.ParentKey = this.ParentKey;
                     this.ParentKey.Add(findKey);
@@ -248,12 +248,12 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                     break;
                 }
 
-                bool isChildRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(tempStr);
+                bool isChildRegister = KeyConfigerFactroy.Instance.IsRegister(tempStr, this.BaseFile.SimKeyType);
 
                 if (isChildRegister)
                 {
                     //  读到下一关注关键字终止
-                    BaseKey tempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                    BaseKey tempKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr, this.BaseFile.SimKeyType);
 
                     //  是修正关键字
                     if (tempKey is ModifyKey)
@@ -357,7 +357,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         /// <summary> 循环读取BOX修改的关键字 </summary>
         public void ReadBOX(System.IO.StreamReader reader, string keyName)
         {
-            TableKey tk = KeyConfigerFactroy.Instance.CreateChildKey<TableKey>(keyName);
+            TableKey tk = KeyConfigerFactroy.Instance.CreateKey<TableKey>(keyName,this.BaseFile.SimKeyType) as TableKey;
 
             ModifyBoxModel model = new ModifyBoxModel(tk, this.newRegion);
             BOX box = new BOX("BOX");
@@ -384,12 +384,12 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                     break;
                 }
 
-                bool isChildRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(tempStr);
+                bool isChildRegister = KeyConfigerFactroy.Instance.IsRegister(tempStr);
 
                 if (isChildRegister)
                 {
                     //  读到下一关注关键字终止
-                    BaseKey tempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                    BaseKey tempKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr);
 
                     //  是修正关键字
                     if (tempKey is ModifyKey)

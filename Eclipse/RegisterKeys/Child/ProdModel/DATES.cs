@@ -33,10 +33,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class DATES : BaseKey, IComparable
+    public class DATES : BaseKey, IComparable,IRootNode
     {
         public DATES(string _name)
             : base(_name)
@@ -124,90 +124,6 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         public DATES Clone()
         {
             return new DATES("DATES", this.DateTime);
-        }
-
-        /// <summary> DATES作为父节点读取子节点 </summary>
-        public override BaseKey ReadKeyLine(StreamReader reader)
-        {
-            base.ReadKeyLine(reader);
-
-            string tempStr = string.Empty;
-
-            //BaseKey findKey = null;
-
-            while (!reader.EndOfStream)
-            {
-                tempStr = reader.ReadLine().TrimEnd();
-
-                bool isParenRegister = KeyConfigerFactroy.Instance.IsParentRegisterKey(tempStr);
-                //  读到了父节点
-                if (isParenRegister)
-                {
-                    ParentKey findkey = KeyConfigerFactroy.Instance.CreateParentKey<ParentKey>(tempStr);
-                    this.BaseFile.Key.Keys.Add(findkey);
-                    findkey.BaseFile = this.ParentKey.BaseFile;
-                    findkey.ParentKey = this.BaseFile.Key;
-                    findkey.ReadKeyLine(reader);
-                }
-                else
-                {
-                    bool isChildRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(tempStr);
-
-                    if (isChildRegister)
-                    {
-                        //  读到DATES节点
-                        if (tempStr == this.Name)
-                        {
-                            //  读到下一关注关键字终止
-                            BaseKey TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
-
-                            this.ParentKey.Add(TempKey);
-
-                            TempKey.BaseFile = this.ParentKey.BaseFile;
-                            // *** 子节点设置成同级别节点
-                            TempKey.ParentKey = this.ParentKey;
-                            TempKey.ReadKeyLine(reader);
-                        }
-                        else
-                        {
-                            //  读到下一关注关键字终止
-                            BaseKey TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
-                            this.Add(TempKey);
-                            TempKey.BaseFile = this.ParentKey.BaseFile;
-                            // *** 子节点设置成DATE节点
-                            TempKey.ParentKey = this;
-                            TempKey.ReadKeyLine(reader);
-                        }
-
-                    }
-                    else
-                    {
-                        //  普通关键字下面可能存在INCLUDE关键字
-                        bool isIncludeKey = KeyConfigerFactroy.Instance.IsINCLUDERegisterKey(tempStr);
-
-                        if (isIncludeKey)
-                        {
-                            OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE.INCLUDE includeKey
-                                = KeyConfigerFactroy.Instance.CreateIncludeKey<OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE.INCLUDE>(tempStr);
-                            includeKey.BaseFile = this.BaseFile;
-                            this.Keys.Add(includeKey);
-                            includeKey.ParentKey = this;
-                            includeKey.ReadKeyLine(reader);
-                        }
-                        else
-                        {
-                            if (tempStr.IsWorkLine())
-                            {
-                                //  不是记录行
-                                this.Lines.Add(tempStr);
-                            }
-                        }
-                    }
-
-                }
-            }
-            //  读到末尾返回空值
-            return null;
         }
 
 

@@ -15,9 +15,9 @@ namespace OPT.Product.SimalorManager
 
             BaseKey baseKey;
 
-            foreach (var keyName in KeyConfigerFactroy.keyOutPutConfiger)
+            foreach (var keyName in EclipseKeyFactory.Instance.keyOutPutConfiger)
             {
-                baseKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(keyName);
+                baseKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(keyName);
 
                 if (baseKey is CheckListKey)
                 {

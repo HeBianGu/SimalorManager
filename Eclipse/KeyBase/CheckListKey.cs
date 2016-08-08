@@ -14,7 +14,6 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

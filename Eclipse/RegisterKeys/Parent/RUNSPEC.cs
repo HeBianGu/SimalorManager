@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent
+namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> RUNSPEC(必须)  题目、作业维数、运算键、目前的相态等； </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Parent)]

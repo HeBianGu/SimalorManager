@@ -1,6 +1,5 @@
-﻿using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
-using OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent;
+﻿using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using OPT.Product.SimalorManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
