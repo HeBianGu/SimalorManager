@@ -59,7 +59,9 @@ namespace OPT.Product.SimalorManager.Base.AttributeEx
         /// <summary> 用于标识保存在Solution主关键字下面的类型  </summary>
         Solution,
         /// <summary> 用于标识保存在Regions主关键字下面的类型  </summary>
-        Regions
+        Regions,
+        /// <summary> 用于标识保存在Edit主关键字下面的类型  </summary>
+        Edit
     }
 
     /// <summary> 关键字所属模拟器 </summary>
