@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.PublicTool
 {
     /// <summary> 方案预测完善工具 </summary>
-    public class SimToolForProForecast : BaseFactory<SimToolForProForecast>
+    public class SimToolForProForecast 
     {
 
         /// <summary> 增加井底流压限制  </summary>
