@@ -572,6 +572,29 @@ namespace OPT.Product.SimalorManager
             return strs.Distinct().ToList();
         }
 
+        /// <summary> 获取所有井组名 </summary>
+        public static List<string> GetAllWellGroup(this EclipseData eclData)
+        {
+
+            SCHEDULE sch = eclData.Key.Find<SCHEDULE>();
+
+            List<GRUPTREE> ws = sch.FindAll<GRUPTREE>();
+
+            List<string> strs = new List<string>();
+
+            ws.ForEach(l =>
+            {
+                l.Items.ForEach(k =>
+                {
+                    strs.Add(k.zjzm0);
+                    strs.Add(k.fjzm1);
+                });
+
+            });
+
+            return strs.Distinct().ToList();
+        }
+
         /// <summary> 获取所有井名 </summary>
         public static List<WELSPECS> GetAllWellModel(this EclipseData eclData)
         {
