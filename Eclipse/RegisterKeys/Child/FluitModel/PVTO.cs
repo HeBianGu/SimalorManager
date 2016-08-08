@@ -88,8 +88,8 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                     //}
                     //else
                     //{
-                        //   没找到直接插入 有可能是新增
-                        this.Lines.Add(Regions[i][j].ToString() + s);
+                    //   没找到直接插入 有可能是新增
+                    this.Lines.Add(Regions[i][j].ToString() + s);
                     //}
                 }
                 //  增加分区标识
@@ -116,7 +116,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 str = Lines[i];
 
                 //  过滤空行和备注行
-                if (string.IsNullOrEmpty(str) || str.StartsWith(KeyConfiger.ExcepFlag))
+                if (string.IsNullOrEmpty(str) || str.StartsWith(KeyConfiger.ExcepFlag) || str.StartsWith(KeyConfiger.ExcepFlag2))
                 {
                     continue;
                 }

@@ -29,7 +29,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 完井数据 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class COMPDAT : ItemsKey<COMPDAT.Item>, ICompdatInterface
+    public class COMPDAT : ItemsKey<COMPDAT.Item>, ICompdatInterface,IProductEvent
     {
         public COMPDAT(string _name)
             : base(_name)
@@ -55,11 +55,8 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             }
         }
 
-        public class Item : OPT.Product.SimalorManager.Item
+        public class Item : OPT.Product.SimalorManager.Item,IProductItem
         {
-
-          
-
             /// <summary> 井名 </summary>
             public string jm0 = "新增";
 
@@ -171,17 +168,33 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             }
 
 
+            public string Name
+            {
+                get
+                {
+                    return this.jm0;
+                }
+                set
+                {
+                    this.jm0=value;
+                }
+            }
         }
 
         public IEnumerable<COMPDAT.Item> GetAllItems()
         {
             return this.Items;
         }
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
+        }
     }
 
     /// <summary> 局部加密完井数据 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class COMPDATL : ItemsKey<COMPDATL.Item>, ICompdatInterface
+    public class COMPDATL : ItemsKey<COMPDATL.Item>, ICompdatInterface,IProductEvent
     {
         public COMPDATL(string _name)
             : base(_name)
@@ -282,13 +295,17 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                     }
                 }
             }
-
-
         }
 
         public IEnumerable<COMPDAT.Item> GetAllItems()
         {
             return this.Items;
+        }
+
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
         }
     }
 

@@ -76,7 +76,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         {
             get
             {
-                string p = this.filePath + "\\" + this.fileName + ".EGRID";
+                string p = this.filePath + "\\" + Path.GetFileNameWithoutExtension(this.fileName) + ".EGRID";
 
                 return p;
             }
@@ -87,10 +87,11 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         {
             get
             {
-                string p = this.filePath + "\\" + this.fileName + ".data";
+                string _maifilePath = this.filePath + "\\" + this.fileName + ".data";
 
-                return p;
+                return _maifilePath;
             }
+            
         }
 
         private int index;
@@ -231,7 +232,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             MainFileRestart restart = new MainFileRestart();
             restart.Parent = null;
             restart.RestartTime = start.StartTime;
-            restart.FileName = mainData.FileName;
+            restart.FileName = Path.GetFileNameWithoutExtension(mainData.FileName);
             restart.FilePath = Path.GetDirectoryName(mainData.FilePath);
             restart.Index = 0;
             //  把主文件的SCH和SOLU部分传进来
@@ -282,17 +283,17 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                 throw new Exception("SimalorManager.InitRestartSchdule:没有对应日期的时间步:" + time.ToShortDateString());
             }
 
-           List<VFPINJ> Vins= sch.FindAll<VFPINJ>();
+            List<VFPINJ> Vins = sch.FindAll<VFPINJ>();
 
-           List<VFPPROD> Vpns = sch.FindAll<VFPPROD>();
+            List<VFPPROD> Vpns = sch.FindAll<VFPPROD>();
 
             ds.RemoveRange(0, findIndex);
 
-            if (Vins.Count>0)
-            include.AddRange(Vins);
+            if (Vins.Count > 0)
+                include.AddRange(Vins);
 
             if (Vpns.Count > 0)
-            include.AddRange(Vpns);
+                include.AddRange(Vpns);
 
             include.AddRange(ds);
 

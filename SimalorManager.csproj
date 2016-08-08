@@ -118,6 +118,8 @@
     <Compile Include="Eclipse\KeyBase\ParentKey.cs" />
     <Compile Include="Eclipse\KeyBase\RegionKey.cs" />
     <Compile Include="Eclipse\KeyBase\SingleKey.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\GRAVDR.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\EQLOPTS.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\LGR.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\COAL.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\REGDIMS.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\CARFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\COALNUM.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DIFFMMF.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DZMTRXV.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HYFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HXFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HZFIN.cs" />
@@ -133,6 +136,8 @@
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\NYFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\NXFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\ROCKDEN.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DZMTRX.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\InitModel\THPRES.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\ProdModel\PROPANTTABLE.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\ProdModel\NPROPANTS.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\GRIDUNIT.cs" />
@@ -307,7 +312,6 @@
     <Compile Include="Petrel\PetrelData.cs" />
     <Compile Include="PublicTool\EclipseExtend.cs" />
     <Compile Include="SimalorDefine\KeyAttribute.cs" />
-    <Compile Include="Base\BaseFactory.cs" />
     <Compile Include="SimalorDefine\ModelType.cs" />
     <Compile Include="Eclipse\FileInfos\BaseFile.cs" />
     <Compile Include="Base\CacheFactory\CatcheFileFactroy.cs" />

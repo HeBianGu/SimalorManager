@@ -32,21 +32,21 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
         }
 
-        private int x=1;
+        private int x = 1;
         [CategoryAttribute("维数定义"), DescriptionAttribute("X方向维数"), DisplayName("X方向维数")]
         public int X
         {
             get { return x; }
             set { x = value; }
         }
-        private int y=1;
+        private int y = 1;
         [CategoryAttribute("维数定义"), DescriptionAttribute("Y方向维数"), DisplayName("Y方向维数")]
         public int Y
         {
             get { return y; }
             set { y = value; }
         }
-        private int z=1;
+        private int z = 1;
         [CategoryAttribute("维数定义"), DescriptionAttribute("Z方向维数"), DisplayName("Z方向维数")]
         public int Z
         {
@@ -83,6 +83,16 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                         break;
                 }
             }
+
+            //  构造全网格范围
+            RegionParam tempRegion = new RegionParam();
+            tempRegion.XFrom = 1;
+            tempRegion.XTo = this.x;
+            tempRegion.YFrom = 1;
+            tempRegion.YTo = this.y;
+            tempRegion.ZFrom = 1;
+            tempRegion.ZTo = this.z;
+            this.BaseFile.TempRegion = tempRegion;
         }
 
     }

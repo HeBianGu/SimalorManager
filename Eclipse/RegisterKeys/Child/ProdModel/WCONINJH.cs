@@ -29,7 +29,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 注入井 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class WCONINJH : ItemsKey<WCONINJH.Item>
+    public class WCONINJH : ItemsKey<WCONINJH.Item>,IProductEvent
     {
         public WCONINJH(string _name)
             : base(_name)
@@ -37,8 +37,14 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
         }
 
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
+        }
+
         /// <summary> 项实体 </summary>
-        public class Item : OPT.Product.SimalorManager.Item
+        public class Item : OPT.Product.SimalorManager.Item,IProductItem
         {
             /// <summary> 井名 </summary>
             public string jm0;
@@ -130,6 +136,18 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 }
             }
 
+
+            public string Name
+            {
+                get
+                {
+                   return this.jm0;
+                }
+                set
+                {
+                    this.jm0=value;
+                }
+            }
         }
     }
 }

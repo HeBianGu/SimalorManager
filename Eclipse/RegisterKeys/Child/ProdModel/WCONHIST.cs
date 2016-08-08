@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class WCONHIST : ItemsKey<WCONHIST.Item>
+    public class WCONHIST : ItemsKey<WCONHIST.Item>,IProductEvent
     {
         public WCONHIST(string _name)
             : base(_name)
@@ -38,9 +38,14 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         }
 
 
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
+        }
+
 
         /// <summary> 黑油项实体 </summary>
-        public class Item : OPT.Product.SimalorManager.Item
+        public class Item : OPT.Product.SimalorManager.Item,IProductItem
         {
             /// <summary> 井名  </summary>
             public string wellName0;
@@ -122,6 +127,18 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 }
             }
 
+
+            public string Name
+            {
+                get
+                {
+                    return this.wellName0;
+                }
+                set
+                {
+                    this.wellName0=value;
+                }
+            }
         }
 
     }

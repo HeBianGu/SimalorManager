@@ -51,6 +51,8 @@ namespace OPT.Product.SimalorManager
                 //  读到了父节点
                 if (isParenRegister)
                 {
+                    this.CmdToItems();
+
                     ParentKey findkey = KeyConfigerFactroy.Instance.CreateParentKey<ParentKey>(tempStr);
                     this.BaseFile.Key.Add(findkey);
                     //findkey.BaseFile = this.ParentKey.BaseFile;
@@ -64,28 +66,30 @@ namespace OPT.Product.SimalorManager
 
                     if (isChildRegister)
                     {
+                        this.CmdToItems();
+
                         //  读到下一关注关键字终止
-                        CatcheKeyFactroy.Instance.TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                        BaseKey TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
 
                         //  插入到DATES的同一级
-                        if (CatcheKeyFactroy.Instance.TempKey is DATES)
+                        if (TempKey is DATES)
                         {
                             if (this.ParentKey is DATES)
                             {
-                                this.ParentKey.ParentKey.Add(CatcheKeyFactroy.Instance.TempKey);
+                                this.ParentKey.ParentKey.Add(TempKey);
                             }
                             else
                             {
-                                this.ParentKey.Add(CatcheKeyFactroy.Instance.TempKey);
+                                this.ParentKey.Add(TempKey);
                             }
                         }
                         else
                         {
-                            this.ParentKey.Add(CatcheKeyFactroy.Instance.TempKey);
+                            this.ParentKey.Add(TempKey);
                         }
 
-                        CatcheKeyFactroy.Instance.TempKey.BaseFile = this.ParentKey.BaseFile;
-                        CatcheKeyFactroy.Instance.TempKey.ReadKeyLine(reader);
+                        TempKey.BaseFile = this.ParentKey.BaseFile;
+                        TempKey.ReadKeyLine(reader);
 
                     }
                     else
@@ -95,6 +99,8 @@ namespace OPT.Product.SimalorManager
 
                         if (isIncludeKey)
                         {
+                            this.CmdToItems();
+
                             INCLUDE includeKey = KeyConfigerFactroy.Instance.CreateIncludeKey<INCLUDE>(tempStr);
                             this.ParentKey.Add(includeKey);
                             includeKey.BaseFile = this.BaseFile;
@@ -102,8 +108,11 @@ namespace OPT.Product.SimalorManager
                         }
                         else
                         {
-                            if (tempStr.IsKeyFormat())
+                            if (this.Match(tempStr)) //if (tempStr.IsKeyFormat())
                             {
+
+                                this.CmdToItems();
+
                                 //  添加普通关键字
                                 UnkownKey normalKey = new UnkownKey(KeyChecker.FormatKey(tempStr));
                                 normalKey.ParentKey = this;
@@ -137,14 +146,14 @@ namespace OPT.Product.SimalorManager
             //  读到末尾返回空值
             return null;
 
-           
+
         }
 
-        void  CmdToItems()
+        void CmdToItems()
         {
             string str = null;
 
-            this.Lines.RemoveAll(l => l.StartsWith(KeyConfiger.ExcepFlag));
+            this.Lines.RemoveAll(l => !l.IsWorkLine());
 
             for (int i = 0; i < Lines.Count; i++)
             {

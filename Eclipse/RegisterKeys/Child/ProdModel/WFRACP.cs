@@ -29,12 +29,18 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 裂缝数据 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class WFRACP : ItemsKey<WFRACP.Item>
+    public class WFRACP : ItemsKey<WFRACP.Item>,IProductEvent
     {
         public WFRACP(string _name)
             : base(_name)
         {
 
+        }
+
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
         }
 
         public Item GetSingleItem
@@ -92,7 +98,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             }
         }
 
-        public class Item : OPT.Product.SimalorManager.Item
+        public class Item : OPT.Product.SimalorManager.Item,IProductItem
         {
 
             /// <summary> 井名 </summary>
@@ -274,6 +280,18 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             }
 
 
+
+            public string Name
+            {
+                get
+                {
+                    return this.jm0;
+                }
+                set
+                {
+                    this.jm0=value;
+                }
+            }
         }
     }
 }

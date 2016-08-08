@@ -79,11 +79,11 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                             {
 
                                 //  读到下一关注关键字终止
-                                CatcheKeyFactroy.Instance.TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
-                                this.Key.Keys.Add(CatcheKeyFactroy.Instance.TempKey);
-                                CatcheKeyFactroy.Instance.TempKey.BaseFile = this;
-                                CatcheKeyFactroy.Instance.TempKey.ParentKey = this.Key;
-                                CatcheKeyFactroy.Instance.TempKey.ReadKeyLine(streamRead);
+                                BaseKey TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                                this.Key.Keys.Add(TempKey);
+                                TempKey.BaseFile = this;
+                                TempKey.ParentKey = this.Key;
+                                TempKey.ReadKeyLine(streamRead);
 
                             }
                             else

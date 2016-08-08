@@ -95,6 +95,22 @@ namespace OPT.Product.SimalorManager
             set { isUnKnowKey = value; }
         }
 
+        string titleStr;
+        /// <summary> 描述信息 </summary>
+        public string TitleStr
+        {
+            get { return titleStr; }
+            set { titleStr = value; }
+        }
+
+        Predicate<string> _match = l => KeyChecker.IsKeyFormat(l);
+        /// <summary> 当前关键字定义的检验是否为普通未识别关键字的方法 </summary>
+        public Predicate<string> Match
+        {
+            get { return _match; }
+            set { _match = value; }
+        }
+
         #endregion
 
         #region - 关键字操作方法 -

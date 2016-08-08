@@ -148,6 +148,15 @@ namespace OPT.Product.SimalorManager
             set { errLog = value; }
         }
 
+
+        RegionParam tempRegion;
+        /// <summary> 用于记录修正网格的临时范围 记录过程包括 DIMENS BOX 和其他修正关键字 </summary>
+        public RegionParam TempRegion
+        {
+            get { return tempRegion; }
+            set { tempRegion = value; }
+        }
+
         #endregion - 文件公用成员 End -
 
 
@@ -177,7 +186,7 @@ namespace OPT.Product.SimalorManager
             this.fileName = null;
             this.key = null;
             this.lines = null;
-            this.key = null;
+            this.modify.Clear();
             this.isReadBigData = default(bool);
         }
 

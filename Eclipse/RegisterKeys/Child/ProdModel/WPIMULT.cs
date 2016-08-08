@@ -32,12 +32,18 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 井指数乘子修改 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class WPIMULT : ItemsKey<WPIMULT.Item>
+    public class WPIMULT : ItemsKey<WPIMULT.Item>,IProductEvent
     {
         public WPIMULT(string _name)
             : base(_name)
         {
 
+        }
+
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
         }
 
         public Item GetSingleItem()
@@ -55,7 +61,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             }
         }
 
-        public class Item : OPT.Product.SimalorManager.Item, ProductItem
+        public class Item : OPT.Product.SimalorManager.Item, IProductItem
         {
 
             /// <summary> 井名 </summary>

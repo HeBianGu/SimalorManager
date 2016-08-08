@@ -43,7 +43,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         /// <summary> 黑油项实体 </summary>
         public class Item : OPT.Product.SimalorManager.Item
         {
-            /// <summary> 井名 </summary>
+            /// <summary> 井组名 </summary>
             public string jzm0;
 
             /// <summary> 生产时率 </summary>

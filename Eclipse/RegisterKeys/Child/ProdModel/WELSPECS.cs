@@ -30,7 +30,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 井定义 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class WELSPECS : ItemsKey<WELSPECS.Item>, IWelspecslDefine
+    public class WELSPECS : ItemsKey<WELSPECS.Item>, IWelspecslDefine,IProductEvent
     {
         public WELSPECS(string _name)
             : base(_name)
@@ -182,12 +182,14 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             return this.Items;
         }
 
-
-
-
         public WellType GetWellType()
         {
           return  this.GetSingleItem().WELSPECSType;
+        }
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
         }
     }
 
@@ -202,7 +204,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
     /// <summary> 局部网格加密井定义 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class WELSPECL : ItemsKey<WELSPECL.Item>, IWelspecslDefine
+    public class WELSPECL : ItemsKey<WELSPECL.Item>, IWelspecslDefine,IProductEvent
     {
         public WELSPECL(string _name)
             : base(_name)
@@ -324,6 +326,12 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         public WellType GetWellType()
         {
             return this.GetSingleItem().WELSPECSType;
+        }
+
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
         }
     }
 

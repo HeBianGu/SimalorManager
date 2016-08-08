@@ -32,7 +32,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 单井生产时率 该关键字主要用于设置修井时间（downtime）对于模拟的影响。 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class WEFAC  : ItemsKey<WEFAC .Item>
+    public class WEFAC  : ItemsKey<WEFAC .Item>,IProductEvent
     {
         public WEFAC(string _name)
             : base(_name)
@@ -40,8 +40,14 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
         }
 
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
+        }
+
         /// <summary> 黑油项实体 </summary>
-        public class Item : OPT.Product.SimalorManager.Item
+        public class Item : OPT.Product.SimalorManager.Item,IProductItem
         {
             /// <summary> 井名 </summary>
             public string jm0;
@@ -82,6 +88,18 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 }
             }
 
+
+            public string Name
+            {
+                get
+                {
+                   return this.jm0;
+                }
+                set
+                {
+                    this.jm0=value;
+                }
+            }
         }
     }
 

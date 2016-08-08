@@ -258,8 +258,19 @@ namespace OPT.Product.SimalorManager
                     for (int j = 0; j < v.Matrix.Col; j++)
                     {
                         sb.Append(v.Matrix[i, j].ToString().ToD().PadLeft(KeyConfiger.TableLenght));
+
+                        //  超出最大换行
+                        if ((j + 1) % KeyConfiger.MaxColCount == 0)
+                        {
+                            this.Lines.Add(sb.ToString());
+                            sb.Clear();
+                        }
                     }
-                    this.Lines.Add(sb.ToString());
+
+                    if (sb.Length > 0)
+                    {
+                        this.Lines.Add(sb.ToString());
+                    }
                 }
             }
             this.Lines.Add(KeyConfiger.EndFlag);
@@ -565,9 +576,9 @@ namespace OPT.Product.SimalorManager
                 ms.Remove(m);
 
                 //  如果不存在修正参数删除关键字
-                foreach(var v  in ms)
+                foreach (var v in ms)
                 {
-                    if(v.ObsoverModel.Count==0)
+                    if (v.ObsoverModel.Count == 0)
                     {
                         v.Delete();
                     }

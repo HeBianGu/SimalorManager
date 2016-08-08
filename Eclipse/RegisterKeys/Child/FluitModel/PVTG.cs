@@ -103,7 +103,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 str = Lines[i];
 
                 //  过滤空行和备注行
-                if (string.IsNullOrEmpty(str) || str.StartsWith(KeyConfiger.ExcepFlag))
+                if (string.IsNullOrEmpty(str) || str.StartsWith(KeyConfiger.ExcepFlag) || str.StartsWith(KeyConfiger.ExcepFlag2))
                 {
                     continue;
                 }

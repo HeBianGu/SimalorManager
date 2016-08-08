@@ -93,7 +93,7 @@ namespace OPT.Product.SimalorManager
         {
             foreach (ModifyItem it in this.Items)
             {
-                ModifyApplyModel model = it.ToModel(func,this);
+                ModifyApplyModel model = it.ToModel(func, this);
                 model.ParentKey = this;
                 obsoverModel.Add(model);
             }
@@ -248,7 +248,7 @@ namespace OPT.Product.SimalorManager
                 }
             }
 
-            public ModifyApplyModel ToModel(Func<double, double, double> func,ModifyKey modify)
+            public ModifyApplyModel ToModel(Func<double, double, double> func, ModifyKey modify)
             {
                 RegionParam region = null;
 
@@ -269,10 +269,13 @@ namespace OPT.Product.SimalorManager
                     region.ZTo = zt8.ToInt();
 
                     modify.DefautRegion = region;
+                    modify.BaseFile.TempRegion = region;
                 }
                 else
                 {
-                    region = modify.DefautRegion;
+
+                    //region = modify.DefautRegion;
+                    region = modify.BaseFile.TempRegion;
                 }
 
                 ModifyApplyModel model = new ModifyApplyModel(this.p1, region, this.p2, func);
@@ -299,10 +302,12 @@ namespace OPT.Product.SimalorManager
                     region.YTo = yt6.ToInt();
                     region.ZFrom = zf7.ToInt();
                     region.ZTo = zt8.ToInt();
+
+                    copy.BaseFile.TempRegion = region;
                 }
                 else
                 {
-                    region = copy.defautRegion;
+                    region = copy.BaseFile.TempRegion;
                 }
 
                 ModifyCopyModel model = new ModifyCopyModel(this.p2, region, this.p1);
@@ -310,7 +315,7 @@ namespace OPT.Product.SimalorManager
                 return model;
             }
         }
-        
+
         /// <summary> 删除指定关键字的修改参数 </summary>
         public void RemoveKey(string keyName)
         {
@@ -454,7 +459,7 @@ namespace OPT.Product.SimalorManager
             }
             set
             {
-                _parentKey =value;
+                _parentKey = value;
             }
         }
     }
@@ -696,7 +701,7 @@ namespace OPT.Product.SimalorManager
         public RegionParam()
         {
         }
-        int xFrom=0;
+        int xFrom = 0;
 
         public int XFrom
         {

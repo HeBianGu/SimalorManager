@@ -82,6 +82,7 @@ namespace OPT.Product.SimalorManager
                 !string.IsNullOrEmpty(tempStr) &&
                 !tempStr.StartsWith(KeyConfiger.ExcepFlag) &&
                 !tempStr.StartsWith(KeyConfiger.ExcepFlag1) &&
+                !tempStr.StartsWith(KeyConfiger.ExcepFlag2) &&
                 !tempStr.StartsWith(KeyConfiger.EndFlag)
                 )
             {

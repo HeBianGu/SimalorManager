@@ -29,7 +29,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 注入井 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class WCONINJE : ItemsKey<WCONINJE.ItemHY>
+    public class WCONINJE : ItemsKey<WCONINJE.ItemHY>,IProductEvent
     {
         public WCONINJE(string _name)
             : base(_name)
@@ -37,8 +37,14 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
         }
 
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
+        }
+
         /// <summary> 项实体 </summary>
-        public class ItemZF : OPT.Product.SimalorManager.Item, ProductItem
+        public class ItemZF : OPT.Product.SimalorManager.Item, IProductItem
         {
             /// <summary> 井名 </summary>
             public string jm0;
@@ -135,7 +141,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         }
 
         /// <summary> 项实体 </summary>
-        public class ItemHY : OPT.Product.SimalorManager.Item,ProductItem
+        public class ItemHY : OPT.Product.SimalorManager.Item,IProductItem
         {
             /// <summary> 井名 </summary>
             public string jm0;

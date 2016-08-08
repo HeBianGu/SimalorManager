@@ -120,6 +120,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             return this.DateTime.ToString("yyyy-MM-dd");
         }
 
+        /// <summary> 复制时间信息 (不包括子节点事件) </summary>
         public DATES Clone()
         {
             return new DATES("DATES", this.DateTime);
@@ -158,24 +159,24 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                         if (tempStr == this.Name)
                         {
                             //  读到下一关注关键字终止
-                            CatcheKeyFactroy.Instance.TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                            BaseKey TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
 
-                            this.ParentKey.Add(CatcheKeyFactroy.Instance.TempKey);
+                            this.ParentKey.Add(TempKey);
 
-                            CatcheKeyFactroy.Instance.TempKey.BaseFile = this.ParentKey.BaseFile;
+                            TempKey.BaseFile = this.ParentKey.BaseFile;
                             // *** 子节点设置成同级别节点
-                            CatcheKeyFactroy.Instance.TempKey.ParentKey = this.ParentKey;
-                            CatcheKeyFactroy.Instance.TempKey.ReadKeyLine(reader);
+                            TempKey.ParentKey = this.ParentKey;
+                            TempKey.ReadKeyLine(reader);
                         }
                         else
                         {
                             //  读到下一关注关键字终止
-                            CatcheKeyFactroy.Instance.TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
-                            this.Add(CatcheKeyFactroy.Instance.TempKey);
-                            CatcheKeyFactroy.Instance.TempKey.BaseFile = this.ParentKey.BaseFile;
+                            BaseKey TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                            this.Add(TempKey);
+                            TempKey.BaseFile = this.ParentKey.BaseFile;
                             // *** 子节点设置成DATE节点
-                            CatcheKeyFactroy.Instance.TempKey.ParentKey = this;
-                            CatcheKeyFactroy.Instance.TempKey.ReadKeyLine(reader);
+                            TempKey.ParentKey = this;
+                            TempKey.ReadKeyLine(reader);
                         }
 
                     }
@@ -248,12 +249,26 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             {
                 IEnumerable<ItemsKey<WELSPECS.Item>> items = welspecs;
 
-                WELSPECS p=new WELSPECS("WELSPECS");
+                WELSPECS p = new WELSPECS("WELSPECS");
 
                 p.Items.AddRange(items.CombineItem());
 
                 this.Add(p);
             }
+
+            var welspecl = this.FindAll<WELSPECL>();
+            this.Keys.RemoveAll(l => l is WELSPECL);
+            if (welspecl != null && welspecl.Count > 0)
+            {
+                IEnumerable<ItemsKey<WELSPECL.Item>> items = welspecl;
+
+                WELSPECL p = new WELSPECL("WELSPECL");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
             #endregion
 
             #region - 井组定义 -
@@ -265,7 +280,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
                 IEnumerable<ItemsKey<GRUPTREE.Item>> items = grop;
 
-                GRUPTREE p=new GRUPTREE("GRUPTREE");
+                GRUPTREE p = new GRUPTREE("GRUPTREE");
 
                 p.Items.AddRange(items.CombineItem());
 
@@ -282,13 +297,13 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             {
                 IEnumerable<ItemsKey<WELOPEN.Item>> items = welopen;
 
-                 WELOPEN p=new WELOPEN("WELOPEN");
+                WELOPEN p = new WELOPEN("WELOPEN");
 
                 p.Items.AddRange(items.CombineItem());
 
                 this.Add(p);
             }
-            #endregion 
+            #endregion
 
             #region - 生产数据 -
 
@@ -298,7 +313,20 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             {
                 IEnumerable<ItemsKey<COMPDAT.Item>> items = compdat;
 
-                 COMPDAT p=new COMPDAT("COMPDAT");
+                COMPDAT p = new COMPDAT("COMPDAT");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
+            var compdatl = this.FindAll<COMPDATL>();
+            this.Keys.RemoveAll(l => l is COMPDATL);
+            if (compdatl != null && compdatl.Count > 0)
+            {
+                IEnumerable<ItemsKey<COMPDATL.Item>> items = compdatl;
+
+                COMPDATL p = new COMPDATL("COMPDATL");
 
                 p.Items.AddRange(items.CombineItem());
 
@@ -312,7 +340,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 IEnumerable<ItemsKey<WCONHIST.Item>> items = wconhist;
 
 
-                WCONHIST p=new WCONHIST("WCONHIST");
+                WCONHIST p = new WCONHIST("WCONHIST");
 
                 p.Items.AddRange(items.CombineItem());
 
@@ -324,7 +352,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             {
                 IEnumerable<ItemsKey<WCONPROD.ItemHY>> items = wconprod;
 
-                 WCONPROD p=new WCONPROD("WCONPROD");
+                WCONPROD p = new WCONPROD("WCONPROD");
 
                 p.Items.AddRange(items.CombineItem());
 
@@ -337,7 +365,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 IEnumerable<ItemsKey<WCONINJH.Item>> items = wconinjh;
 
 
-                 WCONINJH p=new WCONINJH("WCONINJH");
+                WCONINJH p = new WCONINJH("WCONINJH");
 
                 p.Items.AddRange(items.CombineItem());
 
@@ -349,7 +377,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             {
                 IEnumerable<ItemsKey<WCONINJE.ItemHY>> items = wconinje;
 
- WCONINJE p=new WCONINJE("WCONINJE");
+                WCONINJE p = new WCONINJE("WCONINJE");
 
                 p.Items.AddRange(items.CombineItem());
 
@@ -363,7 +391,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 IEnumerable<ItemsKey<WECON.Item>> items = wecon;
 
 
-                 WECON p=new WECON("WECON");
+                WECON p = new WECON("WECON");
 
                 p.Items.AddRange(items.CombineItem());
 
@@ -378,7 +406,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             {
                 IEnumerable<ItemsKey<WPIMULT.Item>> items = wpimult;
 
-                     WPIMULT p=new WPIMULT("WPIMULT");
+                WPIMULT p = new WPIMULT("WPIMULT");
 
                 p.Items.AddRange(items.CombineItem());
 
@@ -491,6 +519,232 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
             var gefac = this.FindAll<GEFAC>();
             this.Keys.RemoveAll(l => l is GEFAC);
+            if (gefac != null && gefac.Count > 0)
+            {
+                IEnumerable<ItemsKey<GEFAC.Item>> items = gefac;
+
+                GEFAC p = new GEFAC("GEFAC");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
+            var end = this.FindAll<END>();
+            this.Keys.RemoveAll(l => l is END);
+            if (end != null && end.Count > 0)
+            {
+                this.Keys.AddRange(end);
+            }
+        }
+
+        /// <summary> 改变井名 </summary>
+        public void ChangeAllWellName(string newWellName)
+        {
+
+            var events = this.FindAll<IProductEvent>();
+
+            if (events == null || events.Count == 0) return;
+
+            events.ForEach(l => l.SetWellName(newWellName));
+
+            /*
+            #region - 井定义 -
+
+            var welspecs = this.FindAll<WELSPECS>();
+
+            this.Keys.RemoveAll(l => l is WELSPECS);
+
+            if (welspecs != null && welspecs.Count > 0)
+            {
+                IEnumerable<ItemsKey<WELSPECS.Item>> items = welspecs;
+
+                WELSPECS p = new WELSPECS("WELSPECS");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+            #endregion
+
+            #region - 关井/重开井 -
+
+            var welopen = this.FindAll<WELOPEN>();
+            this.Keys.RemoveAll(l => l is WELOPEN);
+            if (welopen != null && welopen.Count > 0)
+            {
+                IEnumerable<ItemsKey<WELOPEN.Item>> items = welopen;
+
+                WELOPEN p = new WELOPEN("WELOPEN");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+            #endregion
+
+            #region - 生产数据 -
+
+            var compdat = this.FindAll<COMPDAT>();
+
+            this.Keys.RemoveAll(l => l is COMPDAT);
+
+            if (compdat != null && compdat.Count > 0)
+            {
+                IEnumerable<ItemsKey<COMPDAT.Item>> items = compdat;
+
+                COMPDAT p = new COMPDAT("COMPDAT");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
+            var wconhist = this.FindAll<WCONHIST>();
+            this.Keys.RemoveAll(l => l is WCONHIST);
+            if (wconhist != null && wconhist.Count > 0)
+            {
+                IEnumerable<ItemsKey<WCONHIST.Item>> items = wconhist;
+
+
+                WCONHIST p = new WCONHIST("WCONHIST");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+            var wconprod = this.FindAll<WCONPROD>();
+            this.Keys.RemoveAll(l => l is WCONPROD);
+            if (wconprod != null && wconprod.Count > 0)
+            {
+                IEnumerable<ItemsKey<WCONPROD.ItemHY>> items = wconprod;
+
+                WCONPROD p = new WCONPROD("WCONPROD");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+            var wconinjh = this.FindAll<WCONINJH>();
+            this.Keys.RemoveAll(l => l is WCONINJH);
+            if (wconinjh != null && wconinjh.Count > 0)
+            {
+                IEnumerable<ItemsKey<WCONINJH.Item>> items = wconinjh;
+
+
+                WCONINJH p = new WCONINJH("WCONINJH");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+            var wconinje = this.FindAll<WCONINJE>();
+            this.Keys.RemoveAll(l => l is WCONINJE);
+            if (wconinje != null && wconinje.Count > 0)
+            {
+                IEnumerable<ItemsKey<WCONINJE.ItemHY>> items = wconinje;
+
+                WCONINJE p = new WCONINJE("WCONINJE");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+            var wecon = this.FindAll<WECON>();
+            this.Keys.RemoveAll(l => l is WECON);
+
+            if (wecon != null && wecon.Count > 0)
+            {
+                IEnumerable<ItemsKey<WECON.Item>> items = wecon;
+
+
+                WECON p = new WECON("WECON");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
+            #endregion
+
+            List<WPIMULT> wpimult = this.FindAll<WPIMULT>();
+            this.Keys.RemoveAll(l => l is WPIMULT);
+            if (wpimult != null && wpimult.Count > 0)
+            {
+                IEnumerable<ItemsKey<WPIMULT.Item>> items = wpimult;
+
+                WPIMULT p = new WPIMULT("WPIMULT");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+            var wdfac = this.FindAll<WDFAC>();
+            this.Keys.RemoveAll(l => l is WDFAC);
+            if (wdfac != null && wdfac.Count > 0)
+            {
+                IEnumerable<ItemsKey<WDFAC.Item>> items = wdfac;
+
+                WDFAC p = new WDFAC("WDFAC");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+            var weltarg = this.FindAll<WELTARG>();
+            this.Keys.RemoveAll(l => l is WELTARG);
+            if (weltarg != null && weltarg.Count > 0)
+            {
+                IEnumerable<ItemsKey<WELTARG.Item>> items = weltarg;
+
+                WELTARG p = new WELTARG("WELTARG");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
+            var wgrupcon = this.FindAll<WGRUPCON>();
+            this.Keys.RemoveAll(l => l is WGRUPCON);
+            if (wgrupcon != null && wgrupcon.Count > 0)
+            {
+                IEnumerable<ItemsKey<WGRUPCON.Item>> items = wgrupcon;
+
+                WGRUPCON p = new WGRUPCON("WGRUPCON");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
+            var wfracp = this.FindAll<WFRACP>();
+            this.Keys.RemoveAll(l => l is WFRACP);
+            if (wfracp != null && wfracp.Count > 0)
+            {
+                IEnumerable<ItemsKey<WFRACP.Item>> items = wfracp;
+
+                WFRACP p = new WFRACP("WFRACP");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
+            var wefac = this.FindAll<WEFAC>();
+            this.Keys.RemoveAll(l => l is WEFAC);
+            if (wefac != null && wefac.Count > 0)
+            {
+                IEnumerable<ItemsKey<WEFAC.Item>> items = wefac;
+
+                WEFAC p = new WEFAC("WEFAC");
+
+                p.Items.AddRange(items.CombineItem());
+
+                this.Add(p);
+            }
+
+            var gefac = this.FindAll<GEFAC>();
+            this.Keys.RemoveAll(l => l is GEFAC);
             if (wfracp != null && wfracp.Count > 0)
             {
                 IEnumerable<ItemsKey<GEFAC.Item>> items = gefac;
@@ -501,13 +755,13 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
                 this.Add(p);
             }
-          
+
             var end = this.FindAll<END>();
             this.Keys.RemoveAll(l => l is END);
             if (end != null && end.Count > 0)
             {
                 this.Keys.AddRange(end);
-            }
+            }*/
         }
 
 

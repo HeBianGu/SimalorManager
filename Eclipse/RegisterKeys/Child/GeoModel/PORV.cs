@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 空隙体积</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Edit, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
     public class PORV : TableKey
     {
         public PORV(string _name)

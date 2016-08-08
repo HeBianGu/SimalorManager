@@ -31,7 +31,8 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         public TITLE(string _name)
             : base(_name)
         {
-
+            //  指定当前名称始终不是关键字
+            this.Match += l => false;
         }
         string fileName = "Case";
         [CategoryAttribute("基本信息"), DescriptionAttribute("案例文件名称"), DisplayName("文件名称")]

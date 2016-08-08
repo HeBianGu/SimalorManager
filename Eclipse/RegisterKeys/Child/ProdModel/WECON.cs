@@ -29,12 +29,18 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class WECON : ItemsKey<WECON.Item>
+    public class WECON : ItemsKey<WECON.Item>,IProductEvent
     {
         public WECON(string _name)
             : base(_name)
         {
 
+        }
+
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
         }
 
         /// <summary> 设置井底流压限制值 </summary>
@@ -57,7 +63,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         }
 
         /// <summary> 项实体 </summary>
-        public class Item : OPT.Product.SimalorManager.Item, ProductItem
+        public class Item : OPT.Product.SimalorManager.Item, IProductItem
         {
 
             /// <summary> 井名 </summary>

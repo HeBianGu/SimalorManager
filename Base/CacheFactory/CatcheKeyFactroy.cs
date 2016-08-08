@@ -41,9 +41,6 @@ namespace OPT.Product.SimalorManager
         }
 
 
-
-        public BaseKey TempKey = null;
-
         /// <summary> 内部类用于不允许实例化 </summary>
         private class CatcheKeyFactroy_ : CatcheKeyFactroy
         {

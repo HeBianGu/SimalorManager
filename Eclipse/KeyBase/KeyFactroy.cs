@@ -27,8 +27,31 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 关键字工厂(一个关键字对应于一个关键字的实现类，没有实现用NormalKey) </summary>
-    public class KeyConfigerFactroy : BaseFactory<KeyConfigerFactroy>
+    public class KeyConfigerFactroy
     {
+        /// <summary> 单例模式 </summary>
+        private static KeyConfigerFactroy t = null;
+
+        /// <summary> 多线程锁 </summary>
+        private static object localLock = new object();
+
+        /// <summary> 创建指定对象的单例实例 </summary>
+        public static KeyConfigerFactroy Instance
+        {
+            get
+            {
+                if (t == null)
+                {
+                    lock (localLock)
+                    {
+                        if (t == null)
+                            return t = new KeyConfigerFactroy();
+                    }
+                }
+                return t;
+            }
+        }
+      
         protected Dictionary<Type, Object> _objectCache = new Dictionary<Type, Object>();
 
         #region - 初始化注册关键字 -

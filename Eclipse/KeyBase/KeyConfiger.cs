@@ -28,10 +28,13 @@ namespace OPT.Product.SimalorManager
         public const string EndFlag = "/";
 
         /// <summary> 项字符间隔 </summary>
-        public const int ItemLenght = 10;
+        public const int ItemLenght = 8;
 
         /// <summary> 表格间隔 </summary>
-        public const int TableLenght = 10;
+        public const int TableLenght = 8;
+
+        /// <summary> 表格最大列数 </summary>
+        public const int MaxColCount = 6;
 
         /// <summary> 注释标识 </summary>
         /// 
@@ -39,6 +42,9 @@ namespace OPT.Product.SimalorManager
 
         /// <summary> 注释标识 </summary>
         public const string ExcepFlag1 = "==";
+
+        /// <summary> 注释标识 </summary>
+        public const string ExcepFlag2 = "#";
 
         public const string exceptionFormat = "err ：Method {0}  line {1}";
 

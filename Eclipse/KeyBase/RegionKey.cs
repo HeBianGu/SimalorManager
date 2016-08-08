@@ -91,30 +91,16 @@ namespace OPT.Product.SimalorManager
                 //  读到结束符 增加分区
                 if (str.StartsWith(KeyConfiger.EndFlag) && str.EndsWith(KeyConfiger.EndFlag))
                 {
+                    ////  如果是最后一行的结束符 退出循环
+                    //if (i == Lines.Count - 1) break;
+
+
                     //  只是结束符时 
                     this.Regions.Add(pRegion);
                     regionNum++;
                     pRegion = new Region(regionNum);
                     continue;
                 }
-
-                ////  不以"/"开头 以 "/" 结束的行
-                //if (!string.IsNullOrEmpty(str) && str.EndsWith("/"))
-                //{
-                //    List<string> newStr = str.EclExtendToArray();
-
-                //    if (newStr.Count > 0)
-                //    {
-                //        T pitem = new T();
-                //        pitem.Build(newStr);
-                //        //  标记行的ID位置
-                //        Lines[i] = pitem.ID;
-                //        if (pitem != null)
-                //        {
-                //            pRegion.Add(pitem);
-                //        }
-                //    }
-                //}
 
                 //  不为空的行不包含结束符
                 if (str.IsWorkLine())
@@ -168,8 +154,8 @@ namespace OPT.Product.SimalorManager
                     //}
                     //else
                     //{
-                        //   没找到直接插入 有可能是新增
-                        this.Lines.Add(Regions[i][j].ToString());
+                    //   没找到直接插入 有可能是新增
+                    this.Lines.Add(Regions[i][j].ToString());
                     //}
                 }
                 //  增加分区标识

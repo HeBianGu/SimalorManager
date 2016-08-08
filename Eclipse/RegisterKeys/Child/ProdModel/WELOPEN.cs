@@ -30,7 +30,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 井定义 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class WELOPEN : ItemsKey<WELOPEN.Item>
+    public class WELOPEN : ItemsKey<WELOPEN.Item>, IProductEvent
     {
         public WELOPEN(string _name)
             : base(_name)
@@ -56,7 +56,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
             }
         }
 
-        public class Item : OPT.Product.SimalorManager.Item, ProductItem
+        public class Item : OPT.Product.SimalorManager.Item, IProductItem
         {
            /// <summary> 井名 </summary>
            public string jm0 = "新增";
@@ -141,6 +141,10 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
         }
 
 
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
+        }
     }
 
 

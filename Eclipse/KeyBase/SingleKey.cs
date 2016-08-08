@@ -144,6 +144,7 @@ namespace OPT.Product.SimalorManager
                 if (value==null)
                 {
                     isCheck = false;
+
                     return;
                 }
                 if (bool.TryParse(value.ToString(), out r))
@@ -167,6 +168,33 @@ namespace OPT.Product.SimalorManager
             {
                 this.Name=value;
             }
+        }
+
+
+        public string OutType
+        {
+            get
+            {
+                if(this.GetType().Name.StartsWith("F")&&this.GetType().Name.EndsWith("H"))
+                {
+                    return "油田历史输出项";
+                }
+                else if(this.GetType().Name.StartsWith("F")&&!this.GetType().Name.EndsWith("H"))
+                {
+                    return "油田指标输出项";
+                }
+                else
+                {
+                    return "其他指标项";
+                }
+              
+            }
+        }
+
+
+        public string Description
+        {
+            get { return this.TitleStr; }
         }
     }
 }

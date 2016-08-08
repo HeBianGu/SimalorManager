@@ -19,6 +19,14 @@ namespace OPT.Product.SimalorManager
             get;
             set;
         }
-    
+        string OutType
+        {
+            get;
+        }
+
+        string Description
+        {
+            get;
+        }
     }
 }

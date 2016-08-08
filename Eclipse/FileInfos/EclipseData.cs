@@ -100,7 +100,6 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
 
             RUNSPEC runspec = this.Key.CreateSingle<RUNSPEC>("RUNSPEC");
 
-
             GRID grid = this.Key.CreateSingle<GRID>("GRID");
             if (grid != null)
             {
@@ -444,7 +443,6 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
 
             END end = this.Key.CreateSingle<END>("END");
         }
-
     }
 
 

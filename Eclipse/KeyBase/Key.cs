@@ -64,27 +64,27 @@ namespace OPT.Product.SimalorManager
                     if (isChildRegister)
                     {
                         //  读到下一关注关键字终止
-                        CatcheKeyFactroy.Instance.TempKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
+                        BaseKey bk= KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(tempStr);
 
                         //  插入到DATES的同一级
-                        if (CatcheKeyFactroy.Instance.TempKey is DATES)
+                        if (bk is DATES)
                         {
                             if (this.ParentKey is DATES)
                             {
-                                this.ParentKey.ParentKey.Add(CatcheKeyFactroy.Instance.TempKey);
+                                this.ParentKey.ParentKey.Add(bk);
                             }
                             else
                             {
-                                this.ParentKey.Add(CatcheKeyFactroy.Instance.TempKey);
+                                this.ParentKey.Add(bk);
                             }
                         }
                         else
                         {
-                            this.ParentKey.Add(CatcheKeyFactroy.Instance.TempKey);
+                            this.ParentKey.Add(bk);
                         }
-                        CatcheKeyFactroy.Instance.TempKey.BaseFile = this.ParentKey.BaseFile;
+                        bk.BaseFile = this.BaseFile;// this.ParentKey.BaseFile;
                         //CatcheKeyFactroy.Instance.TempKey.ParentKey = this.ParentKey;
-                        CatcheKeyFactroy.Instance.TempKey.ReadKeyLine(reader);
+                        bk.ReadKeyLine(reader);
 
                     }
                     else

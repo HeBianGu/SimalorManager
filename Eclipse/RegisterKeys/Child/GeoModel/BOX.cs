@@ -71,6 +71,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                     region = new RegionParam();
                     region.BuildExtend(tempStr);
                     this.DefautRegion = region;
+                    this.BaseFile.TempRegion = region;
                 }
 
                 //  读到结束符结束

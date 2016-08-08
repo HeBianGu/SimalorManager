@@ -30,7 +30,7 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 {
     /// <summary> 井的参数控制目标WELTARG/WELLTARG </summary>
     [KeyAttribute(AnatherName = "WELLTARG")]
-    public class WELTARG : ItemsKey<WELTARG.Item>
+    public class WELTARG : ItemsKey<WELTARG.Item>,IProductEvent
     {
         public WELTARG(string _name)
             : base(_name)
@@ -38,8 +38,14 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
 
         }
 
+
+        public void SetWellName(string wellName)
+        {
+            this.Items.ForEach(l => l.Name = wellName);
+        }
+
         /// <summary> 黑油项实体 </summary>
-        public class Item : OPT.Product.SimalorManager.Item
+        public class Item : OPT.Product.SimalorManager.Item,IProductItem
         {
             /// <summary> 井名 </summary>
             public string jm0;
@@ -79,6 +85,18 @@ namespace OPT.Product.SimalorManager.Eclipse.RegisterKeys.Child
                 }
             }
 
+
+            public string Name
+            {
+                get
+                {
+                   return this.jm0;
+                }
+                set
+                {
+                    this.jm0=value;
+                }
+            }
         }
     }
 

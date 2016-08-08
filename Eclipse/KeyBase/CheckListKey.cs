@@ -17,6 +17,7 @@
 using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace OPT.Product.SimalorManager
             }
             set
             {
-                if (value==null)
+                if (value == null)
                 {
                     isCheck = string.Empty;
                 }
@@ -102,8 +103,10 @@ namespace OPT.Product.SimalorManager
                 //    }
                 //}
 
-                //  不为空的行
-                if (!string.IsNullOrEmpty(str) && !str.StartsWith(KeyConfiger.ExcepFlag))
+                ////  不为空的行
+                //if (!string.IsNullOrEmpty(str) && !str.StartsWith(KeyConfiger.ExcepFlag))
+                //{
+                if (str.IsWorkLine())
                 {
                     List<string> newStr = str.EclExtendToArray();
 
@@ -136,16 +139,16 @@ namespace OPT.Product.SimalorManager
         /// <summary> 转换成项</summary>
         void ConvertToItem()
         {
-           string[] strTemp= this.isCheck.Trim(',').Split(',');
+            string[] strTemp = this.isCheck.Trim(',').Split(',');
 
-           this.Items.Clear();
-             foreach(var item in strTemp)
-             {
-                 Item it = new Item();
-                 it.WellName = item;
-                 this.Items.Add(it);
+            this.Items.Clear();
+            foreach (var item in strTemp)
+            {
+                Item it = new Item();
+                it.WellName = item;
+                this.Items.Add(it);
 
-             }
+            }
         }
 
         /// <summary> 获取项字符串集合 </summary>
@@ -183,7 +186,7 @@ namespace OPT.Product.SimalorManager
         public class Item : OPT.Product.SimalorManager.Item
         {
 
-           public string WellName;
+            public string WellName;
 
 
             string formatStr = "{0}";
@@ -211,6 +214,61 @@ namespace OPT.Product.SimalorManager
             }
         }
 
+        public string OutType
+        {
+            get
+            {
+                return OutPutType.GetAttribute<DescriptionAttribute>().Description;
+            }
+        }
 
+        /// <summary> 输出指标类型 </summary>
+        public OutPutGroupType OutPutType
+        {
+            get
+            {
+                if (this.GetType().Name.StartsWith("W") && this.GetType().Name.EndsWith("H"))
+                {
+                    return OutPutGroupType.WellHist;
+                }
+                else if (this.GetType().Name.StartsWith("W") && !this.GetType().Name.EndsWith("H"))
+                {
+                    return OutPutGroupType.WellSingle;
+                }
+                else if (this.GetType().Name.StartsWith("G") && this.GetType().Name.EndsWith("H"))
+                {
+                    return OutPutGroupType.GroupHist;
+                }
+                else if (this.GetType().Name.StartsWith("G") && !this.GetType().Name.EndsWith("H"))
+                {
+                    return OutPutGroupType.GroupSingle;
+                }
+                else
+                {
+                    return OutPutGroupType.Others;
+                }
+            }
+        }
+
+
+        public string Description
+        {
+            get { return this.TitleStr; }
+        }
+    }
+
+    /// <summary> 输出指标分组 </summary>
+    public enum OutPutGroupType
+    {
+        [Description("单井历史输出项")]
+        WellHist = 0,
+        [Description("单井指标输出项")]
+        WellSingle,
+        [Description("井组历史输出项")]
+        GroupHist,
+        [Description("井组指标输出项")]
+        GroupSingle,
+        [Description("其他指标项")]
+        Others
     }
 }

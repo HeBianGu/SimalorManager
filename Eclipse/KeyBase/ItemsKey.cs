@@ -230,7 +230,7 @@ namespace OPT.Product.SimalorManager
     }
 
     /// <summary> 生产模型数据项名称接口 </summary>
-    public interface ProductItem
+    public interface IProductItem
     {
         /// <summary> 生产模型数据项名称 </summary>
         string Name
@@ -238,5 +238,15 @@ namespace OPT.Product.SimalorManager
             get;
             set;
         }
+    }
+
+    /// <summary> 生产模型事件接口 </summary>
+    public interface IProductEvent
+    {
+        /// <summary> 设置新井名 </summary> 
+        void SetWellName(string wellName);
+
+        ///// <summary> 设置新井名 </summary> 
+        //void SetWellName(string oldName,string wellName);
     }
 }
