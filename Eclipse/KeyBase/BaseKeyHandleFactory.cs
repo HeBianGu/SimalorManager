@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OPT.Product.SimalorManager
 {
-    class BaseKeyHandleFactory : BaseFactory<BaseKeyHandleFactory>
+    class BaseKeyHandleFactory : ServiceFactory<BaseKeyHandleFactory>
     {
         /// <summary> 增加节点方法 </summary>
        public Action<BaseKey,BaseKey> AddNodeHandler = (last,per )=>

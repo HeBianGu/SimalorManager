@@ -87,15 +87,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\AttributeEx\Desc.cs" />
-    <Compile Include="Base\CacheFactory\ObjectFactory.cs" />
-    <Compile Include="Base\CacheFactory\TypeCacheFactory.cs" />
-    <Compile Include="Base\ExtendMethod\EclipseKeyExt.cs" />
-    <Compile Include="Base\ExtendMethod\Match.cs" />
-    <Compile Include="Base\矩阵\Equation\LEquations.cs" />
-    <Compile Include="Base\矩阵\Matrix\Matrix.cs" />
-    <Compile Include="Base\矩阵\Matrix\RandNumber.cs" />
-    <Compile Include="Base\矩阵\Matrix\ValidateNum.cs" />
+    <Compile Include="Utils\CacheFactory\ServiceFactory.cs" />
+    <Compile Include="Utils\SimalorDefine\Desc.cs" />
+    <Compile Include="Utils\CacheFactory\ObjectFactory.cs" />
+    <Compile Include="Utils\CacheFactory\TypeCacheFactory.cs" />
+    <Compile Include="Utils\ExtendMethod\EclipseKeyExt.cs" />
+    <Compile Include="Utils\ExtendMethod\Match.cs" />
+    <Compile Include="Utils\矩阵\Equation\LEquations.cs" />
+    <Compile Include="Utils\矩阵\Matrix\Matrix.cs" />
+    <Compile Include="Utils\矩阵\Matrix\RandNumber.cs" />
+    <Compile Include="Utils\矩阵\Matrix\ValidateNum.cs" />
     <Compile Include="Eclipse\FileInfos\ConvertExtend.cs" />
     <Compile Include="Eclipse\FileInfos\DatesExMethod.cs" />
     <Compile Include="Eclipse\FileInfos\EclipseFileFactory.cs" />
@@ -120,6 +121,8 @@
     <Compile Include="Eclipse\KeyBase\ParentKey.cs" />
     <Compile Include="Eclipse\KeyBase\RegionKey.cs" />
     <Compile Include="Eclipse\KeyBase\SingleKey.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\EQLOPTS.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\GRAVDR.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\LGR.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\COAL.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\REGDIMS.cs" />
@@ -128,6 +131,8 @@
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\CARFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\COALNUM.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DIFFMMF.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DZMTRX.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\DZMTRXV.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HYFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HXFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\HZFIN.cs" />
@@ -135,6 +140,7 @@
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\NYFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\NXFIN.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\GeoModel\ROCKDEN.cs" />
+    <Compile Include="Eclipse\RegisterKeys\Child\InitModel\THPRES.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\ProdModel\PROPANTTABLE.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\ProdModel\NPROPANTS.cs" />
     <Compile Include="Eclipse\RegisterKeys\Child\DefineModel\GRIDUNIT.cs" />
@@ -308,14 +314,14 @@
     <Compile Include="Eclipse\RegisterKeys\Parent\SUMMARY.cs" />
     <Compile Include="Petrel\PetrelData.cs" />
     <Compile Include="PublicTool\EclipseExtend.cs" />
-    <Compile Include="SimalorDefine\KeyAttribute.cs" />
-    <Compile Include="SimalorDefine\ModelType.cs" />
+    <Compile Include="Utils\SimalorDefine\KeyAttribute.cs" />
+    <Compile Include="Utils\SimalorDefine\ModelType.cs" />
     <Compile Include="Eclipse\FileInfos\BaseFile.cs" />
-    <Compile Include="Base\CacheFactory\CatcheFileFactroy.cs" />
-    <Compile Include="Base\CacheFactory\CatcheKeyFactroy.cs" />
-    <Compile Include="Base\ExtendMethod\EnumEx.cs" />
-    <Compile Include="Base\ExtendMethod\PathFileEx.cs" />
-    <Compile Include="Base\ExtendMethod\StringTransEx.cs" />
+    <Compile Include="Utils\CacheFactory\CatcheFileFactroy.cs" />
+    <Compile Include="Utils\CacheFactory\CatcheKeyFactroy.cs" />
+    <Compile Include="Utils\ExtendMethod\EnumEx.cs" />
+    <Compile Include="Utils\ExtendMethod\PathFileEx.cs" />
+    <Compile Include="Utils\ExtendMethod\StringTransEx.cs" />
     <Compile Include="Eclipse\FileInfos\IBaseFile.cs" />
     <Compile Include="Eclipse\FileInfos\IFileInterface.cs" />
     <Compile Include="Eclipse\KeyBase\BaseKey.cs" />
@@ -361,7 +367,7 @@
     <None Include="ReadMe\读写流程图.dgml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interface\" />
+    <Folder Include="SimalorService\" />
     <Folder Include="SimON\" />
     <Folder Include="tNavigator\" />
   </ItemGroup>

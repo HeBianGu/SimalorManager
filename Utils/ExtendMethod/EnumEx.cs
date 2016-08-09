@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 公用枚举扩展类  --   Add by lihaijun 2015.09.30 11：42 </summary>
-    public static class EnumEx
+    public static class EnumUril
     {
         /// <summary>
         /// 获得枚举字段的特性(Attribute)，该属性不允许多次定义。
