@@ -6,11 +6,11 @@ using System.Text;
 
 namespace OPT.Product.SimalorManager
 {
-    /// <summary> 有关日期的操作扩展方法 </summary>
-    public static class DatesExMethod
+    /// <summary> 有关日期的操作服务 </summary>
+    public class DatesKeyService : ServiceFactory<DatesKeyService>
     {
         /// <summary> 查找指定井名的生产模型起始时间 </summary>
-        public static DATES GetWellProStartDate(this List<DATES> ds, string wellName)
+        public  DATES GetWellProStartDate(List<DATES> ds, string wellName)
         {
             //  查找生产数据其实时间
             foreach (DATES d in ds)
@@ -28,7 +28,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 查找指定井ming的注入模型起始时间 </summary>
-        public static DATES GetWellInjStartDate(this List<DATES> ds, string wellName)
+        public  DATES GetWellInjStartDate( List<DATES> ds, string wellName)
         {
             //  查找生产数据其实时间
             foreach (DATES d in ds)
@@ -46,7 +46,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 查找指定井ming的注入模型起始时间 </summary>
-        public static DATES GetWellInjHistStartDate(this List<DATES> ds, string wellName)
+        public  DATES GetWellInjHistStartDate( List<DATES> ds, string wellName)
         {
             //  查找生产数据其实时间
             foreach (DATES d in ds)
@@ -64,7 +64,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 查找指定井ming的注入模型起始时间 </summary>
-        public static DATES GetWellproHistStartDate(this List<DATES> ds, string wellName)
+        public  DATES GetWellproHistStartDate( List<DATES> ds, string wellName)
         {
             //  查找生产数据其实时间
             foreach (DATES d in ds)
@@ -83,27 +83,27 @@ namespace OPT.Product.SimalorManager
 
 
         /// <summary> 查找指定井名的生产模型起始时间 </summary>
-        public static DATES GetWellProStartDate(this BaseKey key, string wellName)
+        public  DATES GetWellProStartDate( BaseKey key, string wellName)
         {
             List<DATES> ds = key.FindAll<DATES>();
 
             if (ds != null)
             {
-                return ds.GetWellProStartDate(wellName);
+                return this.GetWellProStartDate(ds,wellName);
             }
 
             return null;
         }
 
         /// <summary> 查找指定井ming的注入模型起始时间 </summary>
-        public static DATES GetWellInjStartDate(this BaseKey key, string wellName)
+        public  DATES GetWellInjStartDate(BaseKey key, string wellName)
         {
 
             List<DATES> ds = key.FindAll<DATES>();
 
             if (ds != null)
             {
-                return ds.GetWellInjStartDate(wellName);
+                return this.GetWellInjStartDate(ds,wellName);
             }
 
             return null;

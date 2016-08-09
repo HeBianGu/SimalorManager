@@ -57,7 +57,7 @@ namespace OPT.Product.SimalorManager
 
             inclue.BaseFile = this;
 
-            include = INCLUDE.ThreadLoadFromFile(inclue, FilePath);
+            include = FileFactoryService.Instance.ThreadLoadFromFile(inclue, FilePath);
 
             this.Key.Add(include);
 

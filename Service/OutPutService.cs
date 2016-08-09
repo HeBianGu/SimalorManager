@@ -6,10 +6,10 @@ using System.Text;
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 有关输出控制的扩展方法 </summary>
-    public static class OutPutExMethod
+    public  class OutPutService : ServiceFactory<OutPutService>
     {
         /// <summary> 获取所有注册的输出关键字 </summary>
-        public static List<OutPutBindKey> GetAllOutPutKey()
+        public  List<OutPutBindKey> GetAllOutPutKey()
         {
             List<OutPutBindKey> keys = new List<OutPutBindKey>();
 
@@ -39,7 +39,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 过滤SingleKey </summary>
-        public static List<OutPutBindKey> RemveSingleKey(this List<OutPutBindKey> outPutKey)
+        public  List<OutPutBindKey> RemveSingleKey( List<OutPutBindKey> outPutKey)
         {
             List<OutPutBindKey> outs = outPutKey.FindAll(l => !(l is SingleKey && !bool.Parse(l.IsCheck.ToString())));
 
@@ -47,7 +47,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 过滤CheckListKey</summary>
-        public static List<OutPutBindKey> RemveCheckListKey(this List<OutPutBindKey> outPutKey)
+        public  List<OutPutBindKey> RemveCheckListKey( List<OutPutBindKey> outPutKey)
         {
             List<OutPutBindKey> outs = outPutKey.FindAll(l => !(l is CheckListKey && string.IsNullOrEmpty(l.IsCheck.ToString())));
 
@@ -55,7 +55,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 转换成Key </summary>
-        public static List<BaseKey> ConvertToKey(this List<OutPutBindKey> outPutKey)
+        public  List<BaseKey> ConvertToKey( List<OutPutBindKey> outPutKey)
         {
             List<BaseKey> bs = new List<BaseKey>();
 

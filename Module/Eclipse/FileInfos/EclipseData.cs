@@ -53,22 +53,26 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         {
             RUNSPEC runspec = new RUNSPEC("RUNSPEC");
             this.Key.Add(runspec);
+
             GRID grid = new GRID("GRID");
             this.Key.Add(grid);
+
             EDIT edit = new EDIT("EDIT");
             this.Key.Add(edit);
+
             PROPS props = new PROPS("PROPS");
             this.Key.Add(props);
+
             REGIONS regions = new REGIONS("REGIONS");
             this.Key.Add(regions);
+
             SOLUTION solution = new SOLUTION("SOLUTION");
             this.Key.Add(solution);
+
             SUMMARY summary = new SUMMARY("SUMMARY");
-            //summary.Lines.Add(this.outControlStr);
             this.Key.Add(summary);
+
             SCHEDULE schedule = new SCHEDULE("SCHEDULE");
-            //schedule.Lines.Add(this.calculateControlStrOne);
-            //schedule.Lines.Add(this.calculateControlStrTwo);
             this.Key.Add(schedule);
         }
 
@@ -77,19 +81,10 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         public void ClearParentKey()
         {
             var fs = this.Key.FindAll<ParentKey>();
+
             if (fs != null)
             {
-                fs.ForEach(l =>
-                    {
-                        //if (l is SUMMARY)
-                        //{
-
-                        //}
-                        //else
-                        //{
-                        l.Clear();
-                        //}
-                    });
+                fs.ForEach(l => l.Clear());
             }
         }
 
@@ -195,6 +190,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             END end = this.Key.CreateSingle<END>("END");
 
         }
+
         /// <summary> 初始化类(树形结构) </summary>
         protected override void InitializeComponent()
         {
@@ -279,30 +275,6 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                     this.Key.Keys.ForEach(l => l.WriteKey(streamWrite));
 
                 }
-            }
-        }
-
-        /// <summary> 递归写关键字 </summary>
-        [Obsolete("已过时")]
-        void SaveKey(StreamWriter streamWrite, BaseKey pKey)
-        {
-            if (pKey.Keys.Count > 0)
-            {
-                streamWrite.WriteLine();
-                streamWrite.WriteLine(pKey.Name);
-                for (int j = 0; j < pKey.Keys.Count; j++)
-                {
-                    //BaseKey cKey = pKey.Keys[j];
-                    ////  递归处
-                    //SaveKey(streamWrite, cKey);
-                }
-            }
-            else
-            {
-                streamWrite.WriteLine();
-                streamWrite.WriteLine(pKey.Name);
-                pKey.Lines.ForEach(l => streamWrite.WriteLine(l));
-                streamWrite.WriteLine();
             }
         }
 
@@ -446,152 +418,4 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             END end = this.Key.CreateSingle<END>("END");
         }
     }
-
-
-    public static class EclipseDataExtention
-    {
-
-        /// <summary> 对文件执行修改关键字修改 跟DataImportEcl对接方法 </summary>
-        public static void RunModify(this EclipseData ecl)
-        {
-            //  查找所有修改关键字
-            List<ModifyKey> modify = ecl.Key.FindAll<ModifyKey>();
-
-            DIMENS d = ecl.Key.Find<DIMENS>();
-
-            if (d == null) return;
-
-            //  构造全网格范围
-            RegionParam tempRegion = new RegionParam();
-            tempRegion.XFrom = 1;
-            tempRegion.XTo = d.X;
-            tempRegion.YFrom = 1;
-            tempRegion.YTo = d.Y;
-            tempRegion.ZFrom = 1;
-            tempRegion.ZTo = d.Z;
-
-            foreach (ModifyKey m in modify)
-            {
-                ParentKey p = m.GetParentKey();
-
-                if (p != null && p.Name == "EDIT")
-                {
-                    continue;
-                }
-
-                //  是空则用临时范围
-                if (m.DefautRegion == null)
-                {
-                    m.DefautRegion = tempRegion;
-                }
-                else
-                {
-                    //  不是空赋值临时范围
-                    tempRegion = m.DefautRegion;
-                }
-
-                foreach (IModifyModel md in m.ObsoverModel)
-                {
-
-                    //  是空则用临时范围
-                    if (md.Region == null)
-                    {
-                        md.Region = tempRegion;
-                    }
-                    else
-                    {
-                        //  不是空赋值临时范围
-                        tempRegion = md.Region;
-                    }
-
-
-                    TableKey funKey = ecl.Key.Find<TableKey>(l => l.Name == md.KeyName);
-
-                    if (funKey == null)
-                    {
-                        //  没有则创建关键字
-                        funKey = KeyConfigerFactroy.Instance.CreateKey<TableKey>(md.KeyName) as TableKey;
-
-                        m.ParentKey.Add(funKey);
-
-                    }
-
-                    funKey.Build(d.Z, d.X, d.Y);
-
-                    if (md is ModifyApplyModel)
-                    {
-                        ModifyApplyModel app = md as ModifyApplyModel;
-
-                        app.RunModify(funKey);
-                    }
-                    else if (md is ModifyCopyModel)
-                    {
-                        ModifyCopyModel copy = md as ModifyCopyModel;
-
-                        TableKey copyKey = ecl.Key.Find<TableKey>(l => l.Name == copy.Value);
-
-                        if (copyKey == null)
-                        {
-                            //  没有则创建关键字
-                            copyKey = KeyConfigerFactroy.Instance.CreateKey<TableKey>(copy.Value,ecl.SimKeyType) as TableKey;
-
-                            m.ParentKey.Add(copyKey);
-
-                        }
-
-                        copyKey.Build(d.Z, d.X, d.Y);
-
-                        copy.RunModify(copyKey, funKey);
-
-                    }
-                    else if (md is ModifyBoxModel)
-                    {
-                        ModifyBoxModel app = md as ModifyBoxModel;
-
-                        app.RunModify(funKey);
-                    }
-                }
-            }
-        }
-
-        /// <summary> 获取指定分组的修正关键字 </summary>
-        public static List<ModifyKey> FilterByGroup(this EclKeyType group, List<ModifyKey> modifys)
-        {
-            List<string> findKeys = group.GetGroupKeyNames();
-
-            if (modifys == null) return null;
-
-            //  默认取第一个修改参数做判断
-            return modifys.FindAll(l => l.ObsoverModel.Count > 0).FindAll(l => findKeys.Contains(l.ObsoverModel[0].KeyName));
-        }
-
-        /// <summary> 获取指定分区的所有关键字 </summary>
-        public static List<string> GetGroupKeyNames(this EclKeyType group)
-        {
-
-            if (group == EclKeyType.Grid)
-            {
-                return EclipseKeyFactory.Instance.GridPartConfiger;
-
-            }
-            else if (group == EclKeyType.Props)
-            {
-                return EclipseKeyFactory.Instance.PropsPartConfiger;
-            }
-
-            else if (group == EclKeyType.Solution)
-            {
-                return EclipseKeyFactory.Instance.SolutionPartConfiger;
-            }
-
-            else if (group == EclKeyType.Regions)
-            {
-                return EclipseKeyFactory.Instance.RegionsPartConfiger;
-            }
-
-            return null;
-        }
-
-    }
-
 }

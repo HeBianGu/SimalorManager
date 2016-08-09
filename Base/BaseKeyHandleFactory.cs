@@ -78,18 +78,5 @@ namespace OPT.Product.SimalorManager
                 last.ParentKey.Add(per);
                 #endregion
             };
-
-       ///// <summary> 增加子节点方法 </summary>
-       //public Action<BaseKey, BaseKey> AddChildPosition = (l, k) =>
-       //{
-           
-       //};
-
-
-       ///// <summary> 插入到文件的子节点下面 </summary>
-       //public Action<BaseKey, BaseKey> AddFileKeyPosition = (l, k) =>
-       //{
-       //    l.BaseFile.Key.Add(k);
-       //};
     }
 }

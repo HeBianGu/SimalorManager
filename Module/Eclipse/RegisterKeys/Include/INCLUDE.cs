@@ -248,32 +248,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             }
         }
 
-        /// <summary> 利用数模文件异步创建指定大小栈的内存模型 </summary>
-        public static INCLUDE ThreadLoadFromFile(string pfilePath, int stactSize = 4194304)
-        {
-            INCLUDE include = new INCLUDE("INCLUDE");
 
-            return INCLUDE.ThreadLoadFromFile(include, pfilePath, stactSize);
-        }
-
-        /// <summary> 利用数模文件异步创建指定大小栈的内存模型 </summary>
-        public static INCLUDE ThreadLoadFromFile(INCLUDE include, string pfilePath, int stactSize = 4194304)
-        {
-            include.FileName = Path.GetFileName(pfilePath);
-            include.FilePath = pfilePath;
-
-            Thread thread = new Thread(() => include.ReadFromStream(), stactSize);// 4mb栈
-
-            thread.Start();
-
-            while (true)
-            {
-                if (thread.ThreadState == ThreadState.Stopped)
-                {
-                    break;
-                }
-            }
-            return include;
-        }
     }
 }
