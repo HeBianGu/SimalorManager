@@ -57,7 +57,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                 {
                     while (!streamRead.EndOfStream)
                     {
-                        tempStr = streamRead.ReadLine().TrimEnd();
+                        //tempStr = streamRead.ReadLine().TrimEnd();
 
                         this.Key.ReadKeyLine(streamRead);
 

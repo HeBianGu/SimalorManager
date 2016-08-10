@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OPT.Product.SimalorManager.KeyConfigerFactroy">
+    <Position X="10.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAA4AAAABAAABAQAAAAAAAAAAAEAAAAAAADAA=</HashCode>
+      <FileName>Base\KeyFactroy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.BaseKeyFactory">
+    <Position X="4.5" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAIAAAABQAAAAAAAACAAAAAACAABAAAI=</HashCode>
+      <FileName>Base\KeyFactroy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.PublicKeyFactory" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Base\KeyFactroy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.EclipseKeyFactory" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAECAAABQgBAAEAAAAAAAAAAAAAQAAABAAgAARIIAA=</HashCode>
+      <FileName>Base\KeyFactroy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.SimONKeyFactory" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Base\KeyFactroy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

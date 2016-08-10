@@ -15,7 +15,7 @@ namespace OPT.Product.SimalorManager
 
             BaseKey baseKey;
 
-            foreach (var keyName in EclipseKeyFactory.Instance.keyOutPutConfiger)
+            foreach (var keyName in KeyConfigerFactroy.Instance.EclipseKeyFactory.keyOutPutConfiger)
             {
                 baseKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(keyName);
 

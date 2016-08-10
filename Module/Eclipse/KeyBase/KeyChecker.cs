@@ -72,7 +72,7 @@ namespace OPT.Product.SimalorManager
         /// <summary> 获取关键字别名 </summary>
         static string AnatherName(this string str)
         {
-            return EclipseKeyFactory.Instance.AnatherNameConfiger.ContainsKey(str) ? EclipseKeyFactory.Instance.AnatherNameConfiger[str] : str;
+            return KeyConfigerFactroy.Instance.EclipseKeyFactory.AnatherNameConfiger.ContainsKey(str) ? KeyConfigerFactroy.Instance.EclipseKeyFactory.AnatherNameConfiger[str] : str;
         }
 
         /// <summary> 是否为注册关键字格式 </summary>

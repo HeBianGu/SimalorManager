@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OPT.Product.SimalorManager.DatesKeyService">
+    <Position X="1.25" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAQAAAAAAIAAAA=</HashCode>
+      <FileName>Service\DatesKeyService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.ServiceFactory&lt;T&gt;">
+    <Position X="3.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAEAAAA=</HashCode>
+      <FileName>Utils\CacheFactory\ServiceFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.FileFactoryService">
+    <Position X="6" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Service\FileFactoryService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.IncludeKeyService">
+    <Position X="6" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Service\IncludeKeyService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.OutPutService">
+    <Position X="5.5" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAgAAAABAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Service\OutPutService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.RestartService">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAQAAAUCQAAQAAAAAAAAAACAAwIAAAAAAA=</HashCode>
+      <FileName>Service\RestartService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

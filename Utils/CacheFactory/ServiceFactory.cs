@@ -30,6 +30,7 @@ namespace OPT.Product.SimalorManager
                             return t = new T();
                     }
                 }
+
                 return t;
             }
         }

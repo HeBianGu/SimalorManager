@@ -28,8 +28,8 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIMAAiAAAhIgAIkyEByAAQAAANMQAACgAACAIFEAgA=</HashCode>
-      <FileName>Eclipse\KeyBase\BaseKey.cs</FileName>
+      <HashCode>AAIOAgiAAAhIgCIkyGByAAQAAQNMQAECgAACAIFEAhA=</HashCode>
+      <FileName>Base\BaseKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.CheckListKey" Collapsed="true">
@@ -43,33 +43,33 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>gAAAAAAABAAACEQAAAAAAAAAAAAAAAACAAAAAAAAAAg=</HashCode>
-      <FileName>Eclipse\KeyBase\CheckListKey.cs</FileName>
+      <HashCode>gAAAAAAABAAgCEQAAAAAAAACAAAAAAACAAAAAAAAAAk=</HashCode>
+      <FileName>Module\Eclipse\KeyBase\CheckListKey.cs</FileName>
     </TypeIdentifier>
     <Lollipop Orientation="Right" Position="0.1" />
   </Class>
   <Class Name="OPT.Product.SimalorManager.ItemsKey&lt;T&gt;" Collapsed="true">
     <Position X="6.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAMAAAAAAAACAAAQAAAAAAAAAAAAAACAACAAAAAAAg=</HashCode>
-      <FileName>Eclipse\KeyBase\ItemsKey.cs</FileName>
+      <HashCode>gAAMAAAAAAAACAAAQAgAAAAAAAAAAAACAACAAAAAAAg=</HashCode>
+      <FileName>Module\Eclipse\KeyBase\ItemsKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.Key" Collapsed="true">
     <Position X="6.5" Y="5.75" Width="1.5" />
     <InheritanceLine Type="OPT.Product.SimalorManager.BaseKey" FixedToPoint="true">
       <Path>
-        <Point X="1.438" Y="6.25" />
-        <Point X="1.438" Y="5.802" />
-        <Point X="3.25" Y="5.802" />
-        <Point X="3.25" Y="5.375" />
+        <Point X="2.687" Y="6.25" />
+        <Point X="2.687" Y="5.802" />
+        <Point X="3.625" Y="5.802" />
+        <Point X="3.625" Y="5.375" />
         <Point X="7.25" Y="5.375" />
         <Point X="7.25" Y="5.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Eclipse\KeyBase\Key.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Module\Eclipse\KeyBase\Key.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.ModifyKey" Collapsed="true">
@@ -83,22 +83,22 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAQgACAEAQAAAAAAAQAAAAIEAEAAAEAAAQAA=</HashCode>
-      <FileName>Eclipse\KeyBase\ModifyKey.cs</FileName>
+      <HashCode>AAAEAAAAAQgACAEAQAAEAAAAQCAAAIEAEAAAEAAAQAA=</HashCode>
+      <FileName>Module\Eclipse\KeyBase\ModifyKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.ParentKey" Collapsed="true">
     <Position X="7" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAEQAAAAAAAAAAAAEAAAEBAAABAAAA=</HashCode>
-      <FileName>Eclipse\KeyBase\ParentKey.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAEQAAAAAAAAAAAAEAAAEBAAABAAAA=</HashCode>
+      <FileName>Module\Eclipse\KeyBase\ParentKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.RegionKey&lt;T&gt;" Collapsed="true">
     <Position X="4.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAEAQAAAAAAAAIAQAAAAAAAgAAAAAACAAEAAABCAAk=</HashCode>
-      <FileName>Eclipse\KeyBase\RegionKey.cs</FileName>
+      <FileName>Module\Eclipse\KeyBase\RegionKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.SingleKey" Collapsed="true">
@@ -107,23 +107,23 @@
       <Path>
         <Point X="1.468" Y="6.25" />
         <Point X="1.468" Y="5.802" />
-        <Point X="3.25" Y="5.802" />
-        <Point X="3.25" Y="2.875" />
+        <Point X="3.625" Y="5.802" />
+        <Point X="3.625" Y="2.875" />
         <Point X="5.5" Y="2.875" />
         <Point X="5.5" Y="3.25" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAEAAAABAAAAEQAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Eclipse\KeyBase\SingleKey.cs</FileName>
+      <HashCode>AAAAAAAABAAgAEQAQAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Module\Eclipse\KeyBase\SingleKey.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OPT.Product.SimalorManager.TableKey" Collapsed="true">
     <Position X="10.5" Y="7.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAABAQAAIQAAAAAAAgAAAAABgAQAAYBE=</HashCode>
-      <FileName>Eclipse\KeyBase\TableKey.cs</FileName>
+      <HashCode>AAAEAAAIAAAAAABAQAAIQkABAAJQgAAIQABgAQAA4RE=</HashCode>
+      <FileName>Module\Eclipse\KeyBase\TableKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.UnkownKey">
@@ -138,21 +138,21 @@
     </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Eclipse\KeyBase\UnkownKey.cs</FileName>
+      <FileName>Base\UnkownKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.ConnectKey&lt;T&gt;" Collapsed="true">
     <Position X="4.5" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Eclipse\KeyBase\ConnectKey.cs</FileName>
+      <FileName>Module\Eclipse\KeyBase\ConnectKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.ConfigerKey" Collapsed="true">
     <Position X="9.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAQgAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Eclipse\KeyBase\ConfigerKey.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAQgAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Module\Eclipse\KeyBase\ConfigerKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.Eclipse.RegisterKeys.Parent.GRID" Collapsed="true">

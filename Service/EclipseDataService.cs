@@ -288,22 +288,22 @@ namespace OPT.Product.SimalorManager
 
             if (group == EclKeyType.Grid)
             {
-                return EclipseKeyFactory.Instance.GridPartConfiger;
+                return KeyConfigerFactroy.Instance.EclipseKeyFactory.GridPartConfiger;
 
             }
             else if (group == EclKeyType.Props)
             {
-                return EclipseKeyFactory.Instance.PropsPartConfiger;
+                return KeyConfigerFactroy.Instance.EclipseKeyFactory.PropsPartConfiger;
             }
 
             else if (group == EclKeyType.Solution)
             {
-                return EclipseKeyFactory.Instance.SolutionPartConfiger;
+                return KeyConfigerFactroy.Instance.EclipseKeyFactory.SolutionPartConfiger;
             }
 
             else if (group == EclKeyType.Regions)
             {
-                return EclipseKeyFactory.Instance.RegionsPartConfiger;
+                return KeyConfigerFactroy.Instance.EclipseKeyFactory.RegionsPartConfiger;
             }
 
             return null;

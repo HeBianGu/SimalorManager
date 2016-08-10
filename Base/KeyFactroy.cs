@@ -17,7 +17,6 @@
 using OPT.Product.SimalorManager.Base.AttributeEx;
 
 using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
-//using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,39 +38,61 @@ namespace OPT.Product.SimalorManager
             InitCompenont();
         }
 
+        PublicKeyFactory _publicKeyFactory = new PublicKeyFactory();
+
+        public PublicKeyFactory PublicKeyFactory
+        {
+            get { return _publicKeyFactory; }
+            set { _publicKeyFactory = value; }
+        }
+
+        EclipseKeyFactory _eclipseKeyFactory = new EclipseKeyFactory();
+
+        public EclipseKeyFactory EclipseKeyFactory
+        {
+            get { return _eclipseKeyFactory; }
+            set { _eclipseKeyFactory = value; }
+        }
+
+        SimONKeyFactory _simONKeyFactory = new SimONKeyFactory();
+
+        public SimONKeyFactory SimONKeyFactory
+        {
+            get { return _simONKeyFactory; }
+            set { _simONKeyFactory = value; }
+        }
+
+
         /// <summary> 利用反射注册类关键字 抽象工厂 </summary>
-        void InitCompenont()
+        public void InitCompenont()
         {
             //  遍历所有Key注册关键字
             Type[] classes = Assembly.GetExecutingAssembly().GetTypes();
-
+           
             foreach (var item in classes)
             {
                 #region - 初始化公用关键字 -
-                if (item.Namespace == PublicKeyFacory.Instance.Publickeynamespace)
+                if (item.Namespace == _publicKeyFactory.Publickeynamespace)
                 {
-                    EclipseKeyFactory.Instance.BuildRegister(item);
+                    _publicKeyFactory.BuildRegister(item);
                 }
                 #endregion
 
                 #region  - 初始化Eclipse关键字 -
 
-                if (item.Namespace == EclipseKeyFactory.Instance.Publickeynamespace)
+                if (item.Namespace == _eclipseKeyFactory.Publickeynamespace)
                 {
-                    EclipseKeyFactory.Instance.BuildRegister(item);
+                    _eclipseKeyFactory.BuildRegister(item);
                 }
 
                 #endregion
 
                 #region  - 初始化SimON关键字
-                if (item.Namespace == SimONKeyFactory.Instance.Publickeynamespace)
+                if (item.Namespace == _simONKeyFactory.Publickeynamespace)
                 {
-                    SimONKeyFactory.Instance.BuildRegister(item);
+                    _simONKeyFactory.BuildRegister(item);
                 }
                 #endregion
-
-
-
             }
         }
 
@@ -83,15 +104,15 @@ namespace OPT.Product.SimalorManager
             if (simType == SimKeyType.Eclipse)
             {
                 //  如果是Eclipse注册关键字 直接创建
-                if (EclipseKeyFactory.Instance.IsRegisterKey(keyName))
+                if (_eclipseKeyFactory.IsRegisterKey(keyName))
                 {
-                    return EclipseKeyFactory.Instance.CreateKey<BaseKey>(keyName) as T;
+                    return _eclipseKeyFactory.CreateKey<BaseKey>(keyName) as T;
                 }
 
                 //  不是Eclipse注册关键字 在公用关键字中找
-                if (PublicKeyFacory.Instance.IsRegisterKey(keyName))
+                if (_publicKeyFactory.IsRegisterKey(keyName))
                 {
-                    return PublicKeyFacory.Instance.CreateKey<BaseKey>(keyName) as T;
+                    return _publicKeyFactory.CreateKey<BaseKey>(keyName) as T;
                 }
 
                 //  如果都不是走后面UnkownKey
@@ -100,15 +121,15 @@ namespace OPT.Product.SimalorManager
             else if (simType == SimKeyType.SimON)
             {
                 //  如果是SimON注册关键字 直接创建
-                if (SimONKeyFactory.Instance.IsRegisterKey(keyName))
+                if (_simONKeyFactory.IsRegisterKey(keyName))
                 {
-                    return SimONKeyFactory.Instance.CreateKey<BaseKey>(keyName) as T;
+                    return _simONKeyFactory.CreateKey<BaseKey>(keyName) as T;
                 }
 
                 //  不是Eclipse注册关键字 在公用关键字中找
-                if (PublicKeyFacory.Instance.IsRegisterKey(keyName))
+                if (_publicKeyFactory.IsRegisterKey(keyName))
                 {
-                    return PublicKeyFacory.Instance.CreateKey<BaseKey>(keyName) as T;
+                    return _publicKeyFactory.CreateKey<BaseKey>(keyName) as T;
                 }
 
                 //  如果都不是走后面UnkownKey
@@ -124,12 +145,12 @@ namespace OPT.Product.SimalorManager
         {
             if (simType == SimKeyType.Eclipse)
             {
-                return EclipseKeyFactory.Instance.IsRegisterKey(keyName) || PublicKeyFacory.Instance.IsRegisterKey(keyName);
+                return KeyConfigerFactroy.Instance.EclipseKeyFactory.IsRegisterKey(keyName) || KeyConfigerFactroy.Instance.EclipseKeyFactory.IsRegisterKey(keyName);
 
             }
             else if (simType == SimKeyType.SimON)
             {
-                return EclipseKeyFactory.Instance.IsRegisterKey(keyName) || PublicKeyFacory.Instance.IsRegisterKey(keyName);
+                return KeyConfigerFactroy.Instance.EclipseKeyFactory.IsRegisterKey(keyName) || KeyConfigerFactroy.Instance.EclipseKeyFactory.IsRegisterKey(keyName);
 
             }
 
@@ -137,9 +158,11 @@ namespace OPT.Product.SimalorManager
         }
 
 
+
+
     }
 
-    public class BaseKeyFactory<T> : ServiceFactory<T> where T : class,new()
+    public class BaseKeyFactory
     {
         public BaseKeyFactory()
         {
@@ -202,17 +225,17 @@ namespace OPT.Product.SimalorManager
 
     }
 
-    public class PublicKeyFacory : BaseKeyFactory<PublicKeyFacory>
+    public class PublicKeyFactory : BaseKeyFactory
     {
         string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys";
 
-        public PublicKeyFacory()
+        public PublicKeyFactory()
         {
             base.Publickeynamespace = _publickeynamespace;
         }
     }
 
-    public class EclipseKeyFactory : BaseKeyFactory<EclipseKeyFactory>
+    public class EclipseKeyFactory : BaseKeyFactory
     {
         string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys.Eclipse";
 
@@ -351,7 +374,7 @@ namespace OPT.Product.SimalorManager
         }
     }
 
-    public class SimONKeyFactory : BaseKeyFactory<SimONKeyFactory>
+    public class SimONKeyFactory : BaseKeyFactory
     {
         string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys.SimON";
 

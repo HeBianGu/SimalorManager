@@ -347,6 +347,7 @@
     <None Include="ReadMe\关系图.dgml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ReadMe\关键字工厂.cd" />
     <None Include="ReadMe\关键字抽象结构.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -363,6 +364,7 @@
     <None Include="ReadMe\Eclipse简易关键字说明38页.doc" />
     <None Include="ReadMe\结构设计.dgml" />
     <None Include="ReadMe\读写流程图.dgml" />
+    <None Include="ReadMe\通用服务.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Module\SimON\" />
