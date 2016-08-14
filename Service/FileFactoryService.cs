@@ -43,7 +43,9 @@ namespace OPT.Product.SimalorManager
         /// <summary> 利用数模文件异步创建指定大小栈的内存模型 </summary>
         public INCLUDE ThreadLoadFromFile(INCLUDE include, string pfilePath, int stactSize = 4194304)
         {
+
             include.FileName = Path.GetFileName(pfilePath);
+
             include.FilePath = pfilePath;
 
             Thread thread = new Thread(() => include.ReadFromStream(), stactSize);// 4mb栈

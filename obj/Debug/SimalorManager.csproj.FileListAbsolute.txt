@@ -19,3 +19,8 @@ F:\资源\Temp\SimalorManager\obj\Debug\SimalorManager.dll
 F:\资源\Temp\SimalorManager\obj\Debug\SimalorManager.pdb
 F:\Product\bin\SimalorManager.dll
 F:\Product\bin\SimalorManager.pdb
+F:\资源\SimalorManager\obj\Debug\OPT.Product.SimalorManager.Properties.Resources.resources
+F:\资源\SimalorManager\obj\Debug\SimalorManager.csproj.GenerateResource.Cache
+F:\资源\SimalorManager\obj\Debug\SimalorManager.dll
+F:\资源\SimalorManager\obj\Debug\SimalorManager.pdb
+F:\资源\SimalorManager\obj\Debug\SimalorManager.csprojResolveAssemblyReference.cache

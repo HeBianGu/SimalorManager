@@ -1,4 +1,5 @@
-﻿using OPT.Product.SimalorManager;
+﻿using DevExpress.Xpf.Grid;
+using OPT.Product.SimalorManager;
 using OPT.Product.SimalorManager.Eclipse.FileInfos;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tester.ViewModel;
 
 namespace Tester
 {
@@ -22,35 +24,23 @@ namespace Tester
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel _viewModel = new MainViewModel();
         public MainWindow()
         {
             InitializeComponent();
 
-            this.Loaded += MainWindow_Loaded;
+            this.DataContext = _viewModel;
+
+            //this.tv_all.SelectedItemChanged += tv_all_SelectedItemChanged;
+
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        void tv_all_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
         {
-            EclipseData ecl = null;
-            //try
-            //{
-                ecl = new EclipseData(@"D:\BaiduYunDownload\CHX\CHX.DATA");
+            BaseKey bk = this.tv_all.SelectedItem as BaseKey;
 
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //    return;
-            //}
-
-            var bs= ecl.Key.FindAll<BaseKey>();
-
-            this.tv_all.ItemsSource = bs;
-
-            this.tv_all.View.KeyFieldName = "ID";
-
-            this.tv_all.View.ParentFieldName = "Pid";
-           
+            string ss = string.Empty;
         }
+
     }
 }

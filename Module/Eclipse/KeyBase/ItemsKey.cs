@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 带有Item的关键字抽象类 </summary>
-    public class ItemsKey<T> : Key where T : Item, new()
+    public class ItemsKey<T> : Key, ItemsKeyInterface where T : Item, new()
     {
         public ItemsKey(string _name)
             : base(_name)
@@ -179,8 +179,17 @@ namespace OPT.Product.SimalorManager
             Items.Clear();
         }
 
+
+        public IEnumerable<Item> GetItems()
+        {
+            return this.items;
+        }
     }
 
+    public interface ItemsKeyInterface
+    {
+        IEnumerable<Item> GetItems();
+    }
 
     public static class ItemExtend
     {

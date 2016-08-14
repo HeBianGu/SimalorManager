@@ -235,7 +235,10 @@ namespace OPT.Product.SimalorManager
         /// <summary> 是否相等(只比较名称) </summary>
         public override bool Equals(object obj)
         {
+            if (!(obj is BaseKey)) return false;
+
             BaseKey pKey = obj as BaseKey;
+
             return pKey.ID.Equals(this.ID);
         }
 
