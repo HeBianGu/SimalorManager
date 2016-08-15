@@ -51,9 +51,10 @@
   <Class Name="OPT.Product.SimalorManager.ItemsKey&lt;T&gt;" Collapsed="true">
     <Position X="6.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAMAAAAAAAACAAAQAgAAAAAAAAAAAACAACAAAAAAAg=</HashCode>
+      <HashCode>gAAMAAAAAAAACAAAQAgAAAAAAAAAAgACAACAAAAAAAg=</HashCode>
       <FileName>Module\Eclipse\KeyBase\ItemsKey.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="OPT.Product.SimalorManager.Key" Collapsed="true">
     <Position X="6.5" Y="5.75" Width="1.5" />

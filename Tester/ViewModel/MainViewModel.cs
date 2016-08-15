@@ -70,6 +70,70 @@ namespace Tester.ViewModel
             }
         }
 
+        private string _total = "0";
+
+        /// <summary> 总计 </summary>
+        public string Total
+        {
+            get { return _total; }
+            set
+            {
+                _total = value;
+                RaisePropertyChanged("Total");
+            }
+        }
+
+        private string _kownToal = "0";
+        /// <summary> 解析总数 </summary>
+        public string KownTotal
+        {
+            get { return _kownToal; }
+            set
+            {
+                _kownToal = value;
+                RaisePropertyChanged("KownTotal");
+            }
+        }
+
+        private string _unkownTotal = "0";
+
+        /// <summary> 未解析总数 </summary>
+        public string UnKownTotal
+        {
+            get { return _unkownTotal; }
+            set
+            {
+                _unkownTotal = value;
+                RaisePropertyChanged("UnKownTotal");
+            }
+        }
+
+        private string _unkownTotalType = "0";
+        /// <summary> 未解析类型总数 </summary>
+        public string UnKownTotalType
+        {
+            get { return _unkownTotalType; }
+            set
+            {
+                _unkownTotalType = value;
+                RaisePropertyChanged("UnKownTotalType");
+            }
+        }
+
+
+        private string _kownTotalType = "0";
+        /// <summary> 解析类型总数 </summary>
+        public string KownTotalType
+        {
+            get { return _kownTotalType; }
+            set
+            {
+                _kownTotalType = value;
+                RaisePropertyChanged("KownTotalType");
+            }
+        }
+
+
 
         private BaseKey _iteamSel;
         /// <summary> 选中的关键字 </summary>
@@ -80,21 +144,21 @@ namespace Tester.ViewModel
             {
                 _iteamSel = value;
 
-                if(_iteamSel is ItemsKeyInterface)
+                if (_iteamSel is ItemsKeyInterface)
                 {
                     ItemsKeyInterface itemKey = _iteamSel as ItemsKeyInterface;
 
-                    this.DataItems = itemKey.GetItems().ToList();
+                    this.DataItems = itemKey.GetItems();
                 }
-                RaisePropertyChanged("SelectIteam");
+                RaisePropertyChanged("IteamSel");
             }
         }
 
 
-        private List<Item> _dataIteams = new List<Item>();
+        private IEnumerable<Item> _dataIteams = new List<Item>();
 
         /// <summary> 选择项的数据源 </summary>
-        public List<Item> DataItems
+        public IEnumerable<Item> DataItems
         {
             get { return _dataIteams; }
             set
@@ -124,6 +188,20 @@ namespace Tester.ViewModel
             BkSource = _eclipseData.Key.FindAll<BaseKey>();
 
             IteamSel = BkSource.FirstOrDefault();
+
+            Total = BkSource.Count.ToString();
+
+            List<BaseKey> unKonwKeys = BkSource.FindAll(l => !l.IsUnKnowKey);
+
+            UnKownTotalType = unKonwKeys.GroupBy(l => l.Name.Split(' ')[0]).Count().ToString();
+
+            List<BaseKey> KonwKeys = BkSource.FindAll(l => l.IsUnKnowKey);
+
+            KownTotalType =KonwKeys.GroupBy(l => l.Name.Split(' ')[0]).Count().ToString();
+
+            UnKownTotal = unKonwKeys.Count.ToString();
+
+            KownTotal = (int.Parse(Total) - int.Parse(UnKownTotal)).ToString();
 
         }
 

@@ -11,6 +11,7 @@ namespace OPT.Product.SimalorManager
         public Action<BaseKey, BaseKey> AddNodeHandler = (last, per) =>
              {
                  #region - 父关键字规则判断 -
+
                  if (per is ParentKey)
                  {
                      //  如果是父关键字 直接放到文件关键字下面
@@ -24,6 +25,7 @@ namespace OPT.Product.SimalorManager
                      last.Add(per);
                      return;
                  }
+
                  #endregion
 
                  // 如果是主文件关键字
@@ -91,6 +93,7 @@ namespace OPT.Product.SimalorManager
 
                  //  不存在关系 直接添加到本节点的根节点
                  last.ParentKey.Add(per);
+
                  #endregion
              };
     }

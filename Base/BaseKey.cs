@@ -56,6 +56,7 @@ namespace OPT.Product.SimalorManager
             set { _ID = value; }
         }
         string pid;
+        [Browsable(false), ReadOnly(true)]
         public string Pid
         {
             get
@@ -76,7 +77,7 @@ namespace OPT.Product.SimalorManager
 
         List<string> lines = new List<string>();
         /// <summary> 关键字内容 </summary>
-        [Browsable(false), ReadOnly(true)]
+        //[Browsable(false), ReadOnly(true)]
         public List<string> Lines
         {
             get { return lines; }
@@ -84,7 +85,7 @@ namespace OPT.Product.SimalorManager
         }
 
         bool isUnKnowKey = false;
-
+        /// <summary> 是否解析 true为解析 </summary>
         public bool IsUnKnowKey
         {
             get
@@ -105,6 +106,7 @@ namespace OPT.Product.SimalorManager
 
         Predicate<string> _match = l => KeyChecker.IsKeyFormat(l);
         /// <summary> 当前关键字定义的检验是否为普通未识别关键字的方法 </summary>
+        [Browsable(false), ReadOnly(true)]
         public Predicate<string> Match
         {
             get { return _match; }
@@ -114,6 +116,7 @@ namespace OPT.Product.SimalorManager
 
         Action<BaseKey, BaseKey> _createrHandler = BaseKeyHandleFactory.Instance.AddNodeHandler;
         /// <summary> 创建节点结构关系  T1本节点 T2下一节点 </summary>
+        [Browsable(false), ReadOnly(true)]
         public Action<BaseKey, BaseKey> CreaterHandler
         {
             get { return _createrHandler; }
@@ -123,6 +126,7 @@ namespace OPT.Product.SimalorManager
 
         Action<BaseKey, BaseKey> _builderHandler;
         /// <summary> 读取到下一关键字前要做的处理方法 T1本节点 T2下一节点  </summary>
+        [Browsable(false), ReadOnly(true)]
         public Action<BaseKey, BaseKey> BuilderHandler
         {
             get { return _builderHandler; }
@@ -405,6 +409,23 @@ namespace OPT.Product.SimalorManager
             {
                 if (v.parentKey != null)
                 {
+                    v.parentKey.Delete(v);
+                }
+            }
+        }
+
+        /// <summary> 删除所有类型节点 </summary>
+        public void DeleteAll<T>(Predicate<T> match) where T : BaseKey
+        {
+            var keys = this.FindAll<T>();
+
+            foreach (var v in keys)
+            {
+                if (!match(v)) continue;
+
+                if (v.parentKey != null)
+                {
+
                     v.parentKey.Delete(v);
                 }
             }

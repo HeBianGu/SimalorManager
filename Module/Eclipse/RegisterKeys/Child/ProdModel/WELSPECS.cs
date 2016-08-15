@@ -58,7 +58,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
         public class Item : OPT.Product.SimalorManager.Item
         {
-
             /// <summary> 井类型 </summary>
             public WellType WELSPECSType
             {
@@ -241,7 +240,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, jm0.ToEclStr(), jz1.ToEclStr(), jbwgjmm.ToEclStr(), i3.ToDD(), j4.ToDD(), cksd5.ToDD(), yxltx6.ToEclStr(), xlbj7.ToDD(), ldfc8.ToEclStr(), zdgj9.ToEclStr(), cl10.ToEclStr(), pvtbh11.ToDD(), mdjsff12.ToEclStr(), clfqbh13.ToDD(), jmx14.ToDD());
+                return string.Format(formatStr, this.j4.ToEclStr(), jz1.ToEclStr(), jbwgjmm.ToEclStr(), i3.ToDD(), j4.ToDD(), cksd5.ToDD(), yxltx6.ToEclStr(), xlbj7.ToDD(), ldfc8.ToEclStr(), zdgj9.ToEclStr(), cl10.ToEclStr(), pvtbh11.ToDD(), mdjsff12.ToEclStr(), clfqbh13.ToDD(), jmx14.ToDD());
             }
 
             /// <summary> 解析字符串 </summary>

@@ -40,6 +40,8 @@ namespace Tester
             BaseKey bk = this.tv_all.SelectedItem as BaseKey;
 
             string ss = string.Empty;
+
+            this.property.SelectedObject = bk;
         }
 
     }

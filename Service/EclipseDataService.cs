@@ -308,5 +308,11 @@ namespace OPT.Product.SimalorManager
 
             return null;
         }
+
+        /// <summary> 清理父节点只保留INCLUDE </summary>
+        public static void ClearParentKey(this ParentKey parentKey)
+        {
+            parentKey.DeleteAll<BaseKey>(l => !(l is INCLUDE || l is ParentKey));
+        }
     }
 }
