@@ -96,7 +96,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     //  加载文件名
                     fileName = strTemp.Split(new char[] { '\'', '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
                     //  加载文件路径
-                    filePath = BaseFile.FilePath.GetFileFullPathEx(fileName);
+                    filePath = Path.GetDirectoryName(this.BaseFile.FilePath) + "\\" + fileName;
                     break;
                 }
             }
@@ -151,50 +151,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     {
                         //  直接调用基类读取方法
                         base.ReadKeyLine(streamRead);
-                        /*
-                        strTemp = streamRead.ReadLine().TrimEnd();
 
-
-                        bool isRegister = KeyConfigerFactroy.Instance.IsChildRegisterKey(strTemp);
-
-                        //  注册的关键字
-                        if (isRegister)
-                        {
-                            BaseKey pKey = KeyConfigerFactroy.Instance.CreateChildKey<BaseKey>(strTemp);
-                            pKey.BaseFile = this.BaseFile;
-                            pKey.ParentKey = this;
-                            this.Keys.Add(pKey);
-                            pKey.ReadKeyLine(streamRead);
-
-                        }
-                        else
-                        {
-                            if (strTemp.IsKeyFormat())
-                            {
-                                //  添加普通关键字
-                                UnkownKey normalKey = new UnkownKey(KeyChecker.FormatKey(strTemp));
-                                normalKey.ParentKey = this;
-                                normalKey.BaseFile = this.BaseFile;
-
-                                //  触发事件
-                                if (normalKey.BaseFile != null && normalKey.BaseFile.OnUnkownKey != null)
-                                {
-                                    normalKey.BaseFile.OnUnkownKey(normalKey.BaseFile, normalKey);
-                                }
-                                this.Keys.Add(normalKey);
-                                normalKey.ReadKeyLine(streamRead);
-                            }
-                            else
-                            {
-
-                                if (strTemp.IsWorkLine())
-                                {
-                                    this.Lines.Add(strTemp);
-                                }
-
-                            }
-                        
-                        }*/
                     }
                 }
             }

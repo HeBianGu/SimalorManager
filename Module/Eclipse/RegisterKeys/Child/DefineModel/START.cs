@@ -61,16 +61,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             this.Lines.Insert(0, formatStr);
         }
 
-        /// <summary> 解析时间 01  'JAN'  2001  / </summary>
-        DateTime GetDateTime(string str)
-        {
-            string line = str.Replace("'", "");
-            string format = "ddMMMyyyy";
-            string[] strList = line.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries);
-            string str3 = strList[0].PadLeft(2, '0') + strList[1] + strList[2];
-            return _startTime = DateTime.ParseExact(str3, format, CultureInfo.InvariantCulture);
-        }
-
         public override string ToString()
         {
             string formatStr = _startTime.ToString("dd  'MMM'  yyyy  /", CultureInfo.InvariantCulture).Replace("MMM", "'" + _startTime.ToString("MMM", CultureInfo.InvariantCulture) + "'").ToUpper();
@@ -80,14 +70,13 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
         public override void Build(List<string> newStr)
         {
-
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < newStr.Count; i++)
             {
                 sb.Append(newStr[i] + " ");
             }
 
-           this._startTime= GetDateTime(sb.ToString());
+           this._startTime= DatesKeyService.Instance.GetDateTime(sb.ToString());
         }
     }
 }

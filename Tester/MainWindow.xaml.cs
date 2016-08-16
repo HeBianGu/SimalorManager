@@ -31,7 +31,6 @@ namespace Tester
 
             this.DataContext = _viewModel;
 
-            //this.tv_all.SelectedItemChanged += tv_all_SelectedItemChanged;
 
         }
 

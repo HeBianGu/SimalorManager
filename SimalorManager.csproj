@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service\BaseKeyService.cs" />
     <Compile Include="Service\IncludeKeyService.cs" />
     <Compile Include="Service\RestartService.cs" />
     <Compile Include="Utils\CacheFactory\ServiceFactory.cs" />

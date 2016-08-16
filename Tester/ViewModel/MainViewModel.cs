@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Commands;
 using OPT.Product.SimalorManager;
 using OPT.Product.SimalorManager.Eclipse.FileInfos;
+using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -168,7 +169,14 @@ namespace Tester.ViewModel
             }
         }
 
+        private  List<RunLogModel> _runLog=new List<RunLogModel>();
 
+        public  List<RunLogModel> RunLog
+        {
+            get { return _runLog; }
+            set { _runLog = value; }
+        }
+         
 
 
         void SearchFile()
@@ -184,6 +192,13 @@ namespace Tester.ViewModel
 
 
             EclipseData = FileFactoryService.Instance.ThreadLoadResize(this._filePath);
+
+           //END end= this.EclipseData.Key.Find<END>();
+
+           // if(end!=null)
+           // {
+           //     end.ClearAllAfter();
+           // }
 
             BkSource = _eclipseData.Key.FindAll<BaseKey>();
 
@@ -202,6 +217,8 @@ namespace Tester.ViewModel
             UnKownTotal = unKonwKeys.Count.ToString();
 
             KownTotal = (int.Parse(Total) - int.Parse(UnKownTotal)).ToString();
+
+            RunLog = EclipseData.RunLog;
 
         }
 

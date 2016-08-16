@@ -146,9 +146,9 @@ namespace OPT.Product.SimalorManager
         }
 
 
-        List<string> runLog = new List<string>();
+        List<RunLogModel> runLog = new List<RunLogModel>();
         /// <summary> 运行日志 </summary>
-        public List<string> RunLog
+        public List<RunLogModel> RunLog
         {
             get { return runLog; }
             set { runLog = value; }
@@ -163,7 +163,14 @@ namespace OPT.Product.SimalorManager
             set { errLog = value; }
         }
 
+        private string myVar;
 
+        public string MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+        
         RegionParam tempRegion;
         /// <summary> 用于记录修正网格的临时范围 记录过程包括 DIMENS BOX 和其他修正关键字 </summary>
         public RegionParam TempRegion
@@ -234,4 +241,52 @@ namespace OPT.Product.SimalorManager
 
     /// <summary> 解析到未注册关键字的事件 </summary>
     public delegate void WhenUnkownKey(object sender, BaseKey key);
+
+
+    public class RunLogModel
+    {
+        private DateTime _time;
+
+        public DateTime Time
+        {
+            get { return _time; }
+            set { _time = value; }
+        }
+
+        private ReadState _state;
+
+        public ReadState State
+        {
+            get { return _state; }
+            set { _state = value; }
+        }
+
+        private string  _key;
+
+        public string Key
+        {
+            get { return _key; }
+            set { _key = value; }
+        }
+
+        private string _detial;
+
+        public string Detial
+        {
+            get { return _detial; }
+            set { _detial = value; }
+        }
+
+        private string _desc;
+
+        public string Desc
+        {
+            get { return _desc; }
+            set { _desc = value; }
+        }
+        
+        
+        
+    }
+
 }

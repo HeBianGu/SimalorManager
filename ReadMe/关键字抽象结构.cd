@@ -28,7 +28,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIOAgiAAAhIgCIkyGByAAQAAQNMQAECgAACAIFEAhA=</HashCode>
+      <HashCode>IAIuAgiAAAhIgCIkyGByAAQAAQNMQAECgAACAIFEAhA=</HashCode>
       <FileName>Base\BaseKey.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -60,8 +60,8 @@
     <Position X="6.5" Y="5.75" Width="1.5" />
     <InheritanceLine Type="OPT.Product.SimalorManager.BaseKey" FixedToPoint="true">
       <Path>
-        <Point X="2.687" Y="6.25" />
-        <Point X="2.687" Y="5.802" />
+        <Point X="2.39" Y="6.25" />
+        <Point X="2.39" Y="5.802" />
         <Point X="3.625" Y="5.802" />
         <Point X="3.625" Y="5.375" />
         <Point X="7.25" Y="5.375" />

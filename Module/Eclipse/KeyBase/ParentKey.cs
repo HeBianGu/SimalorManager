@@ -14,6 +14,7 @@
  * ========================================================================
 */
 #endregion
+using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
 //using OPT.Product.SimalorManager.Eclipse.RegisterKeys.INCLUDE;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,32 @@ namespace OPT.Product.SimalorManager
             return "Parent:" + this.Name;
         }
 
+
+        /// <summary> 格式化关键字格式 </summary>
+        public virtual void Standardized()
+        {
+            //  构建INCLUDE
+            string filename = this.BaseFile.FileName.GetFileNameWithoutExtension();
+
+            INCLUDE include = new INCLUDE("INCLUDE");
+
+            string tempExtend = this.Name.Substring(0, 3);
+
+            include.FileName = string.Format("{0}_{1}.INC", filename, tempExtend);
+
+            include.BaseFile = this.BaseFile;
+
+            //  将所有关键字合并到一个INCLUDE中
+            List<BaseKey> allKeys = IncludeKeyService.Instance.ConvertToInclue(this.Keys);
+
+            include.AddRange<BaseKey>(allKeys);
+
+            //  清理原有节点
+            this.Clear();
+
+            //  增加INLCUDE
+            this.Add(include);
+        }
 
     }
 }

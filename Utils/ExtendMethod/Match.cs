@@ -510,5 +510,25 @@ namespace OPT.Product.SimalorManager
             Regex regex = new Regex(pattern);
             return regex.IsMatch(path);
         }
+
+        /// <summary>
+        /// 是否是日期的字符串
+        /// </summary>
+        /// <param name="path">只对这些格式进行验证（"d'MMM'yyyy", "dd'MMM'yyyy"）</param>
+        /// <returns></returns>
+        public static bool IsDate(this string path)
+        {
+            string path1 = path.Replace("'", "").Replace(" ", "");
+            DateTime parseDate;
+            string[] formats = { "dMMMyyyy", "ddMMMyyyy" };
+            if (DateTime.TryParseExact(path1, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AllowInnerWhite, out parseDate))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

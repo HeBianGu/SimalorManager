@@ -1,0 +1,17 @@
+﻿<Window x:Class="Tester.View.RunLogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RunLogWindow" Height="300" Width="698.4">
+    <Grid>
+        <DataGrid ItemsSource="{Binding RunLog}">
+    		<DataGrid.Columns>
+    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="时间" MinWidth="100"/>
+    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="关键字" MinWidth="100"/>
+    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="描述" MinWidth="200"/>
+    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="状态" MinWidth="100"/>
+    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="详细信息" MinWidth="200"/>
+    		</DataGrid.Columns>
+    	</DataGrid>
+        
+    </Grid>
+</Window>

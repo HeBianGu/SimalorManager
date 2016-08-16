@@ -104,6 +104,16 @@ namespace OPT.Product.SimalorManager
             set { titleStr = value; }
         }
 
+        private ReadState _runState;
+
+        /// <summary> 解析状态 </summary>
+        public ReadState RunState
+        {
+            get { return _runState; }
+            set { _runState = value; }
+        }
+
+
         Predicate<string> _match = l => KeyChecker.IsKeyFormat(l);
         /// <summary> 当前关键字定义的检验是否为普通未识别关键字的方法 </summary>
         [Browsable(false), ReadOnly(true)]
@@ -124,10 +134,12 @@ namespace OPT.Product.SimalorManager
         }
 
 
-        Action<BaseKey, BaseKey> _builderHandler;
-        /// <summary> 读取到下一关键字前要做的处理方法 T1本节点 T2下一节点  </summary>
+        Func<BaseKey, BaseKey, BaseKey> _builderHandler;
+
+
+        /// <summary> 读取到下一关键字前要做的处理方法 T1上一节点 T2下一节点 T3 构建返回的节点一般是本节点 DATES特殊情况  </summary>
         [Browsable(false), ReadOnly(true)]
-        public Action<BaseKey, BaseKey> BuilderHandler
+        public Func<BaseKey, BaseKey, BaseKey> BuilderHandler
         {
             get { return _builderHandler; }
             set { _builderHandler = value; }
@@ -141,29 +153,17 @@ namespace OPT.Product.SimalorManager
         public virtual void WriteKey(StreamWriter writer)
         {
             BaseKey index = null;
+
             //  写本行
             foreach (var str in this.lines)
             {
 
                 Guid tempId;
+
                 if (!Guid.TryParse(str, out tempId))
                 {
                     writer.WriteLine(str);
                 }
-                //else
-                //{
-                //    index = this.keys.Find(l => l.ID == str.Trim());
-
-                //    if (index != null)
-                //    {
-                //        //  写入到指定位置
-                //        index.WriteKey(writer);
-                //    }
-                //    else
-                //    {
-                //        writer.WriteLine(str);
-                //    }
-                //}
             }
 
 
@@ -184,20 +184,29 @@ namespace OPT.Product.SimalorManager
             {
                 tempStr = reader.ReadLine().TrimEnd();
 
+                //try
+                //{
                 if (tempStr.IsKeyFormat())
                 {
                     BaseKey newKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr);
 
+                    BaseKey perTempKey = this;
+
                     if (this._builderHandler != null)
                     {
                         //  当碰到新关键字 触发本节点构建方法
-                        this._builderHandler.Invoke(this, newKey);
+                        BaseKey temp = this._builderHandler.Invoke(this, newKey);
+
+                        if (temp != null)
+                        {
+                            perTempKey = temp;
+                        }
                     }
 
                     if (newKey._createrHandler != null)
                     {
                         //  触发新关键字构建节点结构的方法
-                        newKey._createrHandler.Invoke(this, newKey);
+                        newKey._createrHandler.Invoke(perTempKey, newKey);
                     }
 
                     //  读到未解析关键字触发事件
@@ -221,12 +230,45 @@ namespace OPT.Product.SimalorManager
                         this.Lines.Add(tempStr);
                     }
                 }
-            }
 
-            if (this._builderHandler != null)
-            {
-                //  读到最后触发一次创建方法
-                this._builderHandler.Invoke(this, this);
+
+                //if (this._builderHandler != null)
+                //{
+                //    //  读到最后触发一次创建方法
+                //    this._builderHandler.Invoke(this, this);
+                //}
+
+                this.RunState = ReadState.Success;
+
+                RunLogModel log = new RunLogModel();
+                log.Time = DateTime.Now;
+                log.State = this.RunState;
+                log.Key = this.name;
+                log.Detial = "详细信息";
+                log.Desc = this.ToString();
+
+                if (this.baseFile != null)
+                {
+                    this.baseFile.RunLog.Add(log);
+
+                }
+
+                //}
+                //catch (Exception ex)
+                //{
+                //    this.RunState = ReadState.Error;
+                //    RunLogModel log = new RunLogModel();
+                //    log.Time = DateTime.Now;
+                //    log.State = this.RunState;
+                //    log.Key = this.name;
+                //    log.Detial = "详细信息";
+                //    log.Desc = ex.ToString();
+                //    if (this.baseFile != null)
+                //    {
+                //        this.baseFile.RunLog.Add(log);
+
+                //    }
+                //}
             }
             //  读到末尾返
             return this;
@@ -246,9 +288,13 @@ namespace OPT.Product.SimalorManager
             return pKey.ID.Equals(this.ID);
         }
 
-        /// <summary> 递归获取节点 </summary>
-        void GetKeys<T>(ref List<T> findKey, BaseKey key, Predicate<BaseKey> match) where T : class
+        /// <summary> 递归获取节点 match1 = 查找匹配条件 match2 = 结束查找匹配条件 </summary>
+        public bool GetKeys<T>(ref List<T> findKey, BaseKey key, Predicate<BaseKey> match, Predicate<BaseKey> endOfMatch) where T : class
         {
+            if (endOfMatch(key))
+            {
+                return true;
+            }
 
             if (match(key) && key is T)
             {
@@ -265,17 +311,21 @@ namespace OPT.Product.SimalorManager
                     {
                         BaseKey kn = k as BaseKey;
                         //  递归处
-                        GetKeys(ref findKey, kn, match);
+                        bool isEndOfMatch = GetKeys(ref findKey, kn, match, endOfMatch);
+
+                        if (isEndOfMatch) return true;
                     }
                 }
             }
+            return false;
         }
 
         public List<T> FindAll<T>(Predicate<BaseKey> match) where T : class
         {
             List<T> findKeys = new List<T>();
 
-            GetKeys<T>(ref findKeys, this, match);
+            //    l=>false 一直查询
+            GetKeys<T>(ref findKeys, this, match, l => false);
 
             return findKeys;
 
@@ -721,6 +771,8 @@ namespace OPT.Product.SimalorManager
             return this.name;
         }
 
+
+
     }
 
     /// <summary> 标示节点是父节点 </summary>
@@ -729,26 +781,14 @@ namespace OPT.Product.SimalorManager
 
     }
 
-    public static class BaseKeyExtend
+
+    public enum ReadState
     {
-        /// <summary> 递归查找指定节点的八大关键字 </summary>
-        public static ParentKey GetParentKey(this BaseKey bk)
-        {
-            if (bk.ParentKey != null)
-            {
-                if (bk.ParentKey is ParentKey)
-                {
-                    return bk.ParentKey as ParentKey;
-                }
-                else
-                {
-                    return bk.ParentKey.GetParentKey();
-                }
-            }
-            else
-            {
-                return null;
-            }
-        }
+        [Desc("完成")]
+        Success = 0,
+        [Desc("错误")]
+        Error
     }
+
+
 }

@@ -271,6 +271,14 @@ namespace OPT.Product.SimalorManager
             }
         }
 
+        /// <summary> 对文件格式化 </summary>
+        public static void Standardized(this EclipseData ecl)
+        {
+            var ps = ecl.Key.FindAll<ParentKey>();
+
+            ps.ForEach(l => l.Standardized());
+        }
+
         /// <summary> 获取指定分组的修正关键字 </summary>
         public static List<ModifyKey> FilterByGroup(this EclKeyType group, List<ModifyKey> modifys)
         {
@@ -309,10 +317,6 @@ namespace OPT.Product.SimalorManager
             return null;
         }
 
-        /// <summary> 清理父节点只保留INCLUDE </summary>
-        public static void ClearParentKey(this ParentKey parentKey)
-        {
-            parentKey.DeleteAll<BaseKey>(l => !(l is INCLUDE || l is ParentKey));
-        }
+
     }
 }

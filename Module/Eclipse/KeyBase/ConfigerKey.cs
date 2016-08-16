@@ -37,23 +37,49 @@ namespace OPT.Product.SimalorManager
             this.BuilderHandler = (l, k) =>
             {
                 CmdToItems();
+
+                return this;
             };
+        }
+
+        bool isReadAllLine = false;
+        /// <summary> 是否解析所有行 </summary>
+        protected bool IsReadAllLine
+        {
+            get { return isReadAllLine; }
+            set { isReadAllLine = value; }
         }
 
         void CmdToItems()
         {
             string str = null;
 
-            this.Lines.RemoveAll(l => l.StartsWith(KeyConfiger.ExcepFlag));
+            this.Lines.RemoveAll(l => !l.IsWorkLine());
 
             for (int i = 0; i < Lines.Count; i++)
             {
-                if (i == 0)
+                if (!isReadAllLine)
+                {
+                    if (i == 0)
+                    {
+                        str = Lines[i];
+
+                        List<string> newStr = str.EclExtendToArray();
+
+                        Build(newStr);
+
+                    }
+                }
+                else
                 {
                     str = Lines[i];
+
                     List<string> newStr = str.EclExtendToArray();
+
                     Build(newStr);
                 }
+
+
             }
         }
 
