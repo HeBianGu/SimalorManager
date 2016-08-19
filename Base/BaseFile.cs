@@ -201,7 +201,6 @@ namespace OPT.Product.SimalorManager
 
         #endregion - 子类扩展方法 End -
 
-
         public void Dispose()
         {
             this.filePath = null;

@@ -11,10 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tester.View;
 
 namespace Tester.ViewModel
 {
-    class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
         public MainViewModel()
         {
@@ -190,8 +191,19 @@ namespace Tester.ViewModel
 
             if (!File.Exists(this._filePath)) return;
 
+            //  加载进度窗体
+            RunLogWindow runLogWindow = new RunLogWindow(this);
+
+            runLogWindow.Show();
+
 
             EclipseData = FileFactoryService.Instance.ThreadLoadResize(this._filePath);
+
+            //this.EclipseData = new EclipseData();
+
+            //RunLog = EclipseData.RunLog;
+
+            //this.EclipseData.Load(this._filePath);
 
            //END end= this.EclipseData.Key.Find<END>();
 
@@ -217,8 +229,6 @@ namespace Tester.ViewModel
             UnKownTotal = unKonwKeys.Count.ToString();
 
             KownTotal = (int.Parse(Total) - int.Parse(UnKownTotal)).ToString();
-
-            RunLog = EclipseData.RunLog;
 
         }
 

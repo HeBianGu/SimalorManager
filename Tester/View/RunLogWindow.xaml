@@ -5,11 +5,11 @@
     <Grid>
         <DataGrid ItemsSource="{Binding RunLog}">
     		<DataGrid.Columns>
-    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="时间" MinWidth="100"/>
-    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="关键字" MinWidth="100"/>
-    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="描述" MinWidth="200"/>
-    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="状态" MinWidth="100"/>
-    			<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="详细信息" MinWidth="200"/>
+    			<DataGridTextColumn Binding="{Binding Time}" ClipboardContentBinding="{x:Null}" Header="时间" MinWidth="100"/>
+                <DataGridTextColumn Binding="{Binding Key}" ClipboardContentBinding="{x:Null}" Header="关键字" MinWidth="100"/>
+                <DataGridTextColumn Binding="{Binding Desc}" ClipboardContentBinding="{x:Null}" Header="描述" MinWidth="200"/>
+                <DataGridTextColumn Binding="{Binding State}" ClipboardContentBinding="{x:Null}" Header="状态" MinWidth="100"/>
+                <DataGridTextColumn Binding="{Binding Detial}" ClipboardContentBinding="{x:Null}" Header="详细信息" MinWidth="200"/>
     		</DataGrid.Columns>
     	</DataGrid>
         

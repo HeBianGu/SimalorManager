@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -180,63 +181,63 @@ namespace OPT.Product.SimalorManager
         {
             string tempStr = string.Empty;
 
-            while (!reader.EndOfStream)
+            try
             {
-                tempStr = reader.ReadLine().TrimEnd();
-
-                //try
-                //{
-                if (tempStr.IsKeyFormat())
+                #region - 读取数据 -
+                while (!reader.EndOfStream)
                 {
-                    BaseKey newKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr);
+                    tempStr = reader.ReadLine().TrimEnd();
 
-                    BaseKey perTempKey = this;
 
-                    if (this._builderHandler != null)
+                    if (tempStr.IsKeyFormat())
                     {
-                        //  当碰到新关键字 触发本节点构建方法
-                        BaseKey temp = this._builderHandler.Invoke(this, newKey);
+                        BaseKey newKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr);
 
-                        if (temp != null)
+                        BaseKey perTempKey = this;
+
+                        if (this._builderHandler != null)
                         {
-                            perTempKey = temp;
+                            //  当碰到新关键字 触发本节点构建方法
+                            BaseKey temp = this._builderHandler.Invoke(this, newKey);
+
+                            if (temp != null)
+                            {
+                                perTempKey = temp;
+                            }
+                        }
+
+                        if (newKey._createrHandler != null)
+                        {
+                            //  触发新关键字构建节点结构的方法
+                            newKey._createrHandler.Invoke(perTempKey, newKey);
+                        }
+
+                        //  读到未解析关键字触发事件
+                        if (newKey is UnkownKey)
+                        {
+                            //  触发事件
+                            if (newKey.BaseFile != null && newKey.BaseFile.OnUnkownKey != null)
+                            {
+                                newKey.BaseFile.OnUnkownKey(newKey.BaseFile, newKey);
+                            }
+                        }
+
+                        //  开始读取新关键字
+                        newKey.ReadKeyLine(reader);
+                    }
+                    else
+                    {
+                        if (tempStr.IsNotExcepLine())
+                        {
+                            //  不是记录行
+                            this.Lines.Add(tempStr);
                         }
                     }
-
-                    if (newKey._createrHandler != null)
-                    {
-                        //  触发新关键字构建节点结构的方法
-                        newKey._createrHandler.Invoke(perTempKey, newKey);
-                    }
-
-                    //  读到未解析关键字触发事件
-                    if (newKey is UnkownKey)
-                    {
-                        //  触发事件
-                        if (newKey.BaseFile != null && newKey.BaseFile.OnUnkownKey != null)
-                        {
-                            newKey.BaseFile.OnUnkownKey(newKey.BaseFile, newKey);
-                        }
-                    }
-
-                    //  开始读取新关键字
-                    newKey.ReadKeyLine(reader);
-                }
-                else
-                {
-                    if (tempStr.IsNotExcepLine())
-                    {
-                        //  不是记录行
-                        this.Lines.Add(tempStr);
-                    }
                 }
 
+                #endregion
 
-                //if (this._builderHandler != null)
-                //{
-                //    //  读到最后触发一次创建方法
-                //    this._builderHandler.Invoke(this, this);
-                //}
+                #region - 运行日志 -
 
                 this.RunState = ReadState.Success;
 
@@ -252,23 +253,26 @@ namespace OPT.Product.SimalorManager
                     this.baseFile.RunLog.Add(log);
 
                 }
+                #endregion
+            }
+            catch (Exception ex)
+            {
 
-                //}
-                //catch (Exception ex)
-                //{
-                //    this.RunState = ReadState.Error;
-                //    RunLogModel log = new RunLogModel();
-                //    log.Time = DateTime.Now;
-                //    log.State = this.RunState;
-                //    log.Key = this.name;
-                //    log.Detial = "详细信息";
-                //    log.Desc = ex.ToString();
-                //    if (this.baseFile != null)
-                //    {
-                //        this.baseFile.RunLog.Add(log);
+                #region - 错误日志 -
 
-                //    }
-                //}
+                this.RunState = ReadState.Error;
+                RunLogModel log = new RunLogModel();
+                log.Time = DateTime.Now;
+                log.State = this.RunState;
+                log.Key = this.name;
+                log.Detial = "详细信息";
+                log.Desc = ex.ToString();
+                if (this.baseFile != null)
+                {
+                    this.baseFile.RunLog.Add(log);
+
+                }
+                #endregion
             }
             //  读到末尾返
             return this;

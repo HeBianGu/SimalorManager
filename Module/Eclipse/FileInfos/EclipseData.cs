@@ -202,54 +202,16 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                 {
                     while (!streamRead.EndOfStream)
                     {
-                        //strTemp = streamRead.ReadLine().TrimEnd();
+                        BaseKey endKey = this.Key.ReadKeyLine(streamRead);
 
-                        //  注释内容 以 -- 开头
-                        //if (strTemp.StartsWith(base.ExceptString))
-                        //{
-                        //    this.Lines.Add(strTemp);
-                        //}
-
-                        this.Key.ReadKeyLine(streamRead);
-
-
-                        /*
-                        bool isRegister = KeyConfigerFactroy.Instance.IsParentRegisterKey(strTemp);
-
-                        if (isRegister)
+                        if (endKey.BuilderHandler != null)
                         {
-                            //  注册的关键字
-                            ParentKey pKey = KeyConfigerFactroy.Instance.CreateParentKey<ParentKey>(strTemp);
-                            pKey.BaseFile = this;
-                            this.Key.Keys.Add(pKey);
-                            pKey.ParentKey = this.Key;
-                            pKey.ReadKeyLine(streamRead);
+                            //  读到最后触发一次创建方法
+                            endKey.BuilderHandler.Invoke(endKey, endKey);
                         }
-                        else
-                        {
-                            isRegister = KeyConfigerFactroy.Instance.IsParentRegisterKey(strTemp);
-
-                            if (strTemp.IsKeyFormat())
-                            {
-                                //  添加普通关键字
-                                Key normalKey = new Key(KeyChecker.FormatKey(strTemp));
-                                normalKey.BaseFile = this;
-                                normalKey.ParentKey = this.Key;
-                                this.Lines.Add(strTemp);
-                                normalKey.ReadKeyLine(streamRead);
-                            }
-                            else
-                            {
-                                this.Lines.Add(strTemp);
-                            }
-
-                        }*/
                     }
                 }
             }
-
-            //  执行参数修改
-            //this.RunModify();
         }
 
         /// <summary> 保存 </summary>

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tester.ViewModel;
 
 namespace Tester.View
 {
@@ -19,9 +20,15 @@ namespace Tester.View
     /// </summary>
     public partial class RunLogWindow : Window
     {
-        public RunLogWindow()
+
+        MainViewModel _mainViewModel;
+        public RunLogWindow(MainViewModel vm)
         {
             InitializeComponent();
+
+            _mainViewModel = vm;
+
+            this.DataContext = _mainViewModel;
         }
     }
 }

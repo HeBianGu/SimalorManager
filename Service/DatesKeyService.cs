@@ -10,6 +10,7 @@ namespace OPT.Product.SimalorManager
     /// <summary> 有关日期的操作服务 </summary>
     public class DatesKeyService : ServiceFactory<DatesKeyService>
     {
+        BaseKeyHandleFactory ss = new BaseKeyHandleFactory();
         /// <summary> 查找指定井名的生产模型起始时间 </summary>
         public DATES GetWellProStartDate(List<DATES> ds, string wellName)
         {
