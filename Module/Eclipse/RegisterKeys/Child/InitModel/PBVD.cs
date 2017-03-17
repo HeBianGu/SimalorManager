@@ -29,7 +29,6 @@ using OPT.Product.SimalorManager;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 泡点压力</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class PBVD : RegionKey<PBVD.Item>
     {
         public PBVD(string _name)
@@ -42,32 +41,33 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         public class Item : OPT.Product.SimalorManager.ItemNormal
         {
             /// <summary> 深度 </summary>
-           public double sd;
+           public string sd;
             /// <summary> 泡点压力 </summary>
-           public double pdyl;
+           public string pdyl;
 
            string formatStr = "{0}{1}";
 
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, sd.ToString().ToDD(), pdyl.ToString().ToDD());
+                return string.Format(formatStr, sd.ToSaveLockDD(), pdyl.ToSaveLockDD());
             }
+
+
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {
                     switch (i)
                     {
                         case 0:
-                            this.sd = newStr[0].ToDouble();
+                            this.sd = newStr[0];
                             break;
                         case 1:
-                            this.pdyl = newStr[1].ToDouble();
+                            this.pdyl = newStr[1];
                             break;
                         default:
                             break;

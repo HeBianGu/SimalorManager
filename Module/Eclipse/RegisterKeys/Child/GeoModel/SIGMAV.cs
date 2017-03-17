@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 形状因子</summary>
-   [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+   [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.Eclipse )]
     public class SIGMAV : TableKey
     {
         public SIGMAV(string _name)

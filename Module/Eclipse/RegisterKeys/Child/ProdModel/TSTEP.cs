@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class TSTEP : Key
     {
         public TSTEP(string _name)

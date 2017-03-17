@@ -28,13 +28,20 @@ namespace OPT.Product.SimalorManager
         public const string EndFlag = "/";
 
         /// <summary> 项字符间隔 </summary>
-        public const int ItemLenght = 8;
+        public const int ItemLenght = 4;
 
         /// <summary> 表格间隔 </summary>
-        public const int TableLenght = 8;
+        public const int TableLenght = 4;
 
         /// <summary> 表格最大列数 </summary>
         public const int MaxColCount = 6;
+
+
+        /// <summary> Eclipse默认值 </summary>
+        public const string EclipseDefalt = "*";
+
+        /// <summary> SimON默认值 </summary>
+        public const string SimONDefalt = "NA";
 
         /// <summary> 注释标识 </summary>
         /// 
@@ -56,5 +63,48 @@ namespace OPT.Product.SimalorManager
 
         /// <summary> 换行+结束标识 </summary>
         public static string NewLine = Environment.NewLine;
+
+        /// <summary> 时间格式 </summary>
+        public static string TimeFormat = "yyyy-MM-dd";
+
+        /// <summary> 当网格维数大于此阀值值启用硬盘读存储 </summary>
+        public static long bingDataSize = 100 * 100 * 100;
+        
+        /// <summary> SimON编码格式 </summary>
+        public static Encoding SimONEncoder = Encoding.Default;// new System.Text.UTF8Encoding(false);
+
+        /// <summary> 间隔 </summary>
+        //public static string Space = " ";
+
+        /// <summary> Include头文件 {0} 3106_SCAL.INC {1} C:\Users\Laobb\Desktop\SimON示例\projectTreeNode\断层案例\断层案例.dat {2} 2014-09-25 20:31:34</summary>
+        public const string IncludeFileDetial =
+@"# SimCore Simulation File (DATA) Data Section Version {5}
+# FileName:    {0}
+# File:        {1}
+# FromFile:    {3}
+# Created on:  {2}
+# Keys Contain:{4}     
+";
+
+        public const string MainFileDetial =
+@"# SimCore Simulation File (DATA) Data Section Version {3}
+# FileName:    {0}
+# File:        {1}
+# Created on:  {2}  
+# MachineName: {4}
+";
+
+
+        /// <summary> 表格镜像文件文件夹名称 </summary>
+        public const string tableMapCache = "tableMapCache";
+
+
+        /// <summary> 老版本Well文件格式 </summary>
+        public const string oldWellLocationName = "Location";
+
+
+        /// <summary> SimON文件扩展名 </summary>
+        public const string SimONExtend = ".DAT";
+
     }
 }

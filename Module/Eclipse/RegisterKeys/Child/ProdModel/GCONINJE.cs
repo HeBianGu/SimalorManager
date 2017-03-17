@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 注入井组控制 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class GCONINJE : ItemsKey<GCONINJE.Item>
     {
         public GCONINJE(string _name)

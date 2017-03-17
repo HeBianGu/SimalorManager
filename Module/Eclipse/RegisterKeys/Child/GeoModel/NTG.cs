@@ -28,13 +28,29 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 流体分区</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Grid,SimKeyType=SimKeyType.Eclipse,IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.EclipseAndSimON )]
     public class NTG : TableKey
     {
         public NTG(string _name)
             : base(_name)
         {
             this.DefaultValue = 1;
+        }
+
+        public override void Build(int tableCount, int xCount, int yCount, string mmf = null)
+        {
+            if (this.BaseFile is SimalorManager.Eclipse.FileInfos.SimONData && this.BaseFile.DoubleType != DoubleType.DKJZMX)
+            {
+                // HTodo  ：SimON文件的双孔双渗只有一半数据 
+
+                this.TransValueZ = l => l / 2;
+            }
+            else
+            {
+                this.TransValueZ = l => l;
+            }
+
+            base.Build(tableCount, xCount, yCount, mmf);
         }
 
     }

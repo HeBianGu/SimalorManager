@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 单井指导产量 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class WGRUPCON  : ItemsKey<WGRUPCON .Item>,IProductEvent
     {
         public WGRUPCON(string _name)

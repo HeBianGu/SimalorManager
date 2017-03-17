@@ -93,6 +93,10 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             tempRegion.ZFrom = 1;
             tempRegion.ZTo = this.z;
             this.BaseFile.TempRegion = tempRegion;
+
+            this.BaseFile.X = this.x;
+            this.BaseFile.Y = this.y;
+            this.BaseFile.Z = this.z;
         }
 
     }

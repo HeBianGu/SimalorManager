@@ -100,6 +100,20 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                         break;
                 }
             }
+
+            //  构造全网格范围
+            RegionParam tempRegion = new RegionParam();
+            tempRegion.XFrom = 1;
+            tempRegion.XTo = this.x;
+            tempRegion.YFrom = 1;
+            tempRegion.YTo = this.y;
+            tempRegion.ZFrom = 1;
+            tempRegion.ZTo = this.z;
+            //this.BaseFile.TempRegion = tempRegion;
+
+            this.BaseFile.X = this.x;
+            this.BaseFile.Y = this.y;
+            this.BaseFile.Z = this.z;
         }
 
     }

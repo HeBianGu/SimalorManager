@@ -32,7 +32,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 平衡计算选项 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class EQLOPTS : ConfigerKey
     {
         public EQLOPTS(string _name)

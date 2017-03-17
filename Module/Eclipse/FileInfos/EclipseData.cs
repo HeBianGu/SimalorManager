@@ -32,19 +32,30 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
     /// <summary> ECLIPSE主文件操作类 </summary>
     public class EclipseData : BaseFile
     {
-        public EclipseData()
+        public EclipseData(): base()
         {
             InitConstruct();
         }
 
-        public EclipseData(string _filePath)
-            : base(_filePath)
+
+        /// <summary> P1=主文件地址 P2=内存镜像文件地址 </summary>
+        public EclipseData(string _filePath, string mmfDirPath = null)
+            : base(_filePath, mmfDirPath)
         {
 
         }
 
-        public EclipseData(string _filePath, WhenUnkownKey UnkownEvent, bool isReadInclud = true)
-            : base(_filePath, UnkownEvent, isReadInclud)
+
+        /// <summary> P1=主文件地址 P2=遇到没解析关键字触发的事件 P3=内存镜像文件地址 </summary>
+        public EclipseData(string _filePath, WhenUnkownKey UnkownEvent, string mmfDirPath = null)
+            : base(_filePath, UnkownEvent, l => true, mmfDirPath)
+        {
+
+        }
+
+        /// <summary> P1=主文件地址 P2=遇到没解析关键字触发的事件 P3=是否读取匹配的INCLUDE文件 P4=内存镜像文件地址 </summary>
+        public EclipseData(string _filePath, WhenUnkownKey UnkownEvent, Predicate<INCLUDE> isReadInclud, string mmfDirPath = null)
+            : base(_filePath, UnkownEvent, isReadInclud, mmfDirPath)
         {
 
         }
@@ -75,7 +86,6 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             SCHEDULE schedule = new SCHEDULE("SCHEDULE");
             this.Key.Add(schedule);
         }
-
 
         /// <summary> 清理父节点 </summary>
         public void ClearParentKey()
@@ -198,7 +208,8 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             //  打开子文件并读取子文件关键字内容
             using (FileStream fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
             {
-                using (StreamReader streamRead = new StreamReader(fileStream, Encoding.Default))
+                //using (StreamReader streamRead = new StreamReader(fileStream, System.Text.Encoding.GetEncoding("GB2312")))
+                using (StreamReader streamRead = new StreamReader(fileStream, System.Text.Encoding.Default))
                 {
                     while (!streamRead.EndOfStream)
                     {
@@ -221,12 +232,14 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         }
 
         /// <summary> 写入文件 文件全路径 </summary>
-        public override void SaveAs(string pathName)
+        public override void SaveAsExtend(string pathName)
         {
             using (FileStream fileStream = new FileStream(pathName, FileMode.Create, FileAccess.Write))
             {
-                using (StreamWriter streamWrite = new StreamWriter(fileStream, Encoding.Default))
+                using (StreamWriter streamWrite = new StreamWriter(fileStream, System.Text.Encoding.Default))
                 {
+                    streamWrite.WriteLine(this.FielDetail);
+
                     //  读写备注
                     foreach (var str in Lines)
                     {

@@ -31,7 +31,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 支撑剂名称表 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class PROPANTNAMES : DynamicKey
     {
         public PROPANTNAMES(string _name)

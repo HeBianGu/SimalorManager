@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 非平衡初始化 - 露点压力</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Solution, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Solution, SimKeyType = SimKeyType.Eclipse )]
     public class PDEW : TableKey
     {
         public PDEW(string _name)

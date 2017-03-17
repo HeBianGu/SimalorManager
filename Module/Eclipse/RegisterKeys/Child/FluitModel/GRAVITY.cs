@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 相对密度 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class GRAVITY : RegionKey<GRAVITY.Item>
     {
         public GRAVITY(string _name)
@@ -57,7 +57,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
+             
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

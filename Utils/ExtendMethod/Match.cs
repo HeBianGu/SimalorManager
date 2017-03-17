@@ -21,7 +21,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace OPT.Product.SimalorManager.Match
 {
     /// <summary> 正则表达式扩展封装 Add By lihaijun 2015.10.28 </summary>
     public static class RegexDao

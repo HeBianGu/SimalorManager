@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OPT.Product.SimalorManager.Base.AttributeEx;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,65 +8,47 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 带有Item的关键字抽象类 </summary>
-    public class ItemsKey<T> : Key, ItemsKeyInterface where T : Item, new()
+    public class ItemsKey<T> : BaseKey, ItemsKeyInterface where T : Item, new()
     {
         public ItemsKey(string _name)
             : base(_name)
         {
-
+            this.EachLineCmdHandler += l =>
+              {
+                  return l.Trim();
+              };
         }
 
         protected virtual void CmdGetWellItems()
         {
-
-            ClearItem();
+            //  清理项
+            Items.Clear();
 
             string str = string.Empty;
 
+            this.Lines.RemoveAll(l => !l.IsWorkLine());
+
             for (int i = 0; i < Lines.Count; i++)
             {
-                str = Lines[i];
+                str = Lines[i].ClearLine();
+
                 //  读到结束符不继续读取
                 if (str.StartsWith("/") && str.EndsWith("/"))
                 {
                     break;
                 }
 
-                ////  不以"/"开头 以 "/" 结束的行
-                //if (!string.IsNullOrEmpty(str) && str.EndsWith("/"))
-                //{
-                //    List<string> newStr = str.EclExtendToArray();
+                List<string> newStr = str.EclExceptSpaceToArray();
 
-                //    if (newStr.Count > 0)
-                //    {
-                //        T pitem = new T();
-                //        pitem.Build(newStr);
-                //        //  标记行的ID位置
-                //        Lines[i] = pitem.ID;
-                //        if (pitem != null)
-                //        {
-                //            Items.Add(pitem);
-                //        }
-                //    }
-                //}
-
-                //  不为空的行
-                if (str.IsWorkLine())
+                if (newStr.Count > 0)
                 {
-                    //List<string> newStr = str.EclExtendToArray();
-
-                    List<string> newStr = str.EclExceptSpaceToArray();
-                    
-                    if (newStr.Count > 0)
+                    T pitem = new T();
+                    pitem.Build(newStr);
+                    //  标记行的ID位置
+                    //Lines[i] = pitem.ID;
+                    if (pitem != null)
                     {
-                        T pitem = new T();
-                        pitem.Build(newStr);
-                        //  标记行的ID位置
-                        //Lines[i] = pitem.ID;
-                        if (pitem != null)
-                        {
-                            Items.Add(pitem);
-                        }
+                        Items.Add(pitem);
                     }
                 }
 
@@ -83,18 +66,7 @@ namespace OPT.Product.SimalorManager
 
             for (int i = 0; i < pItems.Count; i++)
             {
-                int index = this.Lines.FindIndex(l => l == pItems[i].ID);
-
-                if (index >= 0)
-                {
-                    //  找到直接插入
-                    this.Lines[index] = pItems[i].ToString();
-                }
-                else
-                {
-                    //   没找到直接插入 有可能是新增
-                    this.Lines.Add(pItems[i].ToString());
-                }
+                this.Lines.Add(pItems[i].ToString());
             }
 
             this.Lines.Add(KeyConfiger.EndFlag);
@@ -116,10 +88,10 @@ namespace OPT.Product.SimalorManager
             }
         }
 
-        
-         List<T> items = new List<T>();
 
-         /// <summary> 包含项 </summary>
+        List<T> items = new List<T>();
+
+        /// <summary> 包含项 </summary>
         public List<T> Items
         {
             get { return items; }
@@ -135,9 +107,25 @@ namespace OPT.Product.SimalorManager
             return overKey;
         }
 
+        protected virtual void ItemWriteKey(System.IO.StreamWriter writer)
+        {
+            writer.WriteLine();
+            writer.WriteLine(this.Name);
+
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                writer.WriteLine(this.Items[i].ToString());
+            }
+
+            writer.WriteLine(KeyConfiger.EndFlag);
+        }
+
         public override void WriteKey(System.IO.StreamWriter writer)
         {
-            CmdGetWellLines(Items);
+            this.Lines.Clear();
+
+            this.ItemWriteKey(writer);
+
             base.WriteKey(writer);
         }
 
@@ -147,6 +135,7 @@ namespace OPT.Product.SimalorManager
             string str = string.Empty;
 
             List<string> removeLine = new List<string>();
+
             for (int i = 0; i < Lines.Count; i++)
             {
                 str = Lines[i];
@@ -165,18 +154,6 @@ namespace OPT.Product.SimalorManager
             {
                 this.Lines.Remove(v);
             }
-        }
-
-        //  清理记录项
-        public void ClearItem()
-        {
-            //  清理记录
-            foreach (Item it in Items)
-            {
-                this.Lines.Remove(it.ID);
-            }
-            //  清理项
-            Items.Clear();
         }
 
 
@@ -201,7 +178,7 @@ namespace OPT.Product.SimalorManager
 
             foreach (var item in itemKey)
             {
-               itemAll.AddRange(item.Items);
+                itemAll.AddRange(item.Items);
             }
 
             return itemAll;
@@ -222,13 +199,31 @@ namespace OPT.Product.SimalorManager
             {
                 return Guid.NewGuid().ToString();
             }
-            set
-            {
-
-            }
         }
-
         public abstract void Build(List<string> strs);
+
+        public bool IsViad()
+        {
+            var fields = this.GetType().GetFields();
+
+            foreach (var item in fields)
+            {
+                object v = item.GetValue(this);
+                // Todo ：遍历所有字段有一个满足条件即为不可用
+                if (v == null || v == string.Empty)
+                {
+                    return false;
+                }
+
+                // Todo ：是Eclipse和SimON默认值为不可用 
+                if (v.ToString().EndsWith(KeyConfiger.EclipseDefalt) || v.ToString().EndsWith(KeyConfiger.SimONDefalt))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
     }
 

@@ -53,74 +53,11 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             //  打开子文件并读取子文件关键字内容
             using (FileStream fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
             {
-                using (StreamReader streamRead = new StreamReader(fileStream, Encoding.Default))
+                using (StreamReader streamRead = new StreamReader(fileStream, System.Text.Encoding.Default))
                 {
                     while (!streamRead.EndOfStream)
                     {
-                        //tempStr = streamRead.ReadLine().TrimEnd();
-
                         this.Key.ReadKeyLine(streamRead);
-
-                        /*
-
-                        bool isParenRegister = KeyConfigerFactroy.Instance.IsParentRegisterKey(tempStr);
-                        //  读到了父节点
-                        if (isParenRegister)
-                        {
-                            ParentKey findkey = KeyConfigerFactroy.Instance.CreateParentKey<ParentKey>(tempStr);
-                            this.Key.Keys.Add(findkey);
-                            findkey.BaseFile = this;
-                            findkey.ParentKey = this.Key;
-                            findkey.ReadKeyLine(streamRead);
-                        }
-                        else
-                        {
-                            bool isChildRegister = KeyConfigerFactroy.Instance.IsRegister(tempStr,this.SimKeyType);
-
-                            if (isChildRegister)
-                            {
-
-                                //  读到下一关注关键字终止
-                                CatcheKeyFactroy.Instance.TempKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr,this.SimKeyType);
-                                this.Key.Keys.Add(CatcheKeyFactroy.Instance.TempKey);
-                                CatcheKeyFactroy.Instance.TempKey.BaseFile = this;
-                                CatcheKeyFactroy.Instance.TempKey.ParentKey = this.Key;
-                                CatcheKeyFactroy.Instance.TempKey.ReadKeyLine(streamRead);
-
-                            }
-                            else
-                            {
-
-                                //  普通关键字下面可能存在INCLUDE关键字
-                                bool isIncludeKey = KeyConfigerFactroy.Instance.IsINCLUDERegisterKey(tempStr);
-
-                                if (isIncludeKey)
-                                {
-                                    INCLUDE includeKey = KeyConfigerFactroy.Instance.CreateIncludeKey<INCLUDE>(tempStr);
-                                    includeKey.BaseFile = this;
-                                    this.Key.Add(includeKey);
-                                    includeKey.ParentKey = this.Key;
-                                    includeKey.ReadKeyLine(streamRead);
-                                }
-                                else
-                                {
-                                    if (tempStr.IsKeyFormat())
-                                    {
-                                        //  添加普通关键字
-                                        Key normalKey = new Key(KeyChecker.FormatKey(tempStr));
-                                        normalKey.BaseFile = this;
-                                        normalKey.ParentKey = this.Key;
-                                        this.Lines.Add(tempStr);
-                                        normalKey.ReadKeyLine(streamRead);
-                                    }
-                                    else
-                                    {
-                                        this.Lines.Add(tempStr);
-                                    }
-                                }
-                            }
-
-                        }*/
                     }
                 }
             }
@@ -133,11 +70,11 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         }
 
         /// <summary> 写入文件 文件全路径 </summary>
-        public override void SaveAs(string pathName)
+        public override void SaveAsExtend(string pathName)
         {
             using (FileStream fileStream = new FileStream(pathName, FileMode.Create, FileAccess.Write))
             {
-                using (StreamWriter streamWrite = new StreamWriter(fileStream, Encoding.Default))
+                using (StreamWriter streamWrite = new StreamWriter(fileStream, System.Text.Encoding.Default))
                 {
                     //  读写备注
                     foreach (var str in Lines)

@@ -42,6 +42,15 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         /// <summary> 坐标匹配标识 </summary>
         public string zbppbz1;
 
+        /// <summary> 是否使用相对坐标 </summary>
+        public bool IsUseMap
+        {
+            get
+            {
+                return string.IsNullOrEmpty(zbppbz1);
+            }
+        }
+
 
         string formatStr = "{0}{1} /";
 

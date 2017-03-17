@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OPT.Product.SimalorManager.Base.AttributeEx;
+using OPT.Product.SimalorManager.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +21,29 @@ namespace OPT.Product.SimalorManager
             {
                 return 0;
             }
+
+            if (str.EndsWith("NA"))
+            {
+                return 0;
+            }
             return double.Parse(str);
+        }
+
+
+        /// <summary> 如果是默认值转换成 </summary>
+        public static string ToDefalt(this string str,string defalutValue)
+        {
+            if (str.EndsWith("*"))
+            {
+                return defalutValue;
+            }
+
+            if (str.EndsWith("NA"))
+            {
+                return defalutValue;
+            }
+
+            return str;
         }
 
         /// <summary> 转换int </summary>
@@ -69,6 +93,37 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 转换成默认数据 </summary>
+        public static string ToSaveLockDD(this string str)
+        {
+
+            if (EngineConfigerService.Instance.SaveKeyTypeLock == SimKeyType.Eclipse)
+            {
+                return str.ToDD();
+            }
+            else if (EngineConfigerService.Instance.SaveKeyTypeLock == SimKeyType.SimON)
+            {
+                return str.ToSDD();
+            }
+            else
+            {
+                return str.ToDD();
+            }
+        }
+
+        /// <summary> 转换成默认数据 </summary>
+        public static string ToSDD(this string str)
+        {
+            if (string.IsNullOrEmpty(str) || str == "*" || str == "1*")
+            {
+                return " NA".PadRight(KeyConfiger.ItemLenght);
+            }
+            else
+            {
+                return " " + str.PadRight(KeyConfiger.ItemLenght);
+            }
+        }
+
+        /// <summary> 转换成默认数据 </summary>
         public static string ToD(this string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -78,6 +133,19 @@ namespace OPT.Product.SimalorManager
             else
             {
                 return " " + str.PadRight(KeyConfiger.ItemLenght);
+            }
+        }
+
+        /// <summary> 转换成默认数据 </summary>
+        public static string ToDWithOutSpace(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return "".PadRight(KeyConfiger.ItemLenght + 1);
+            }
+            else
+            {
+                return str.PadRight(KeyConfiger.ItemLenght);
             }
         }
 
@@ -117,6 +185,32 @@ namespace OPT.Product.SimalorManager
             }
         }
 
+        /// <summary> 字符串在两边加单引号 </summary>
+        public static string ToSimONStr(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return " NA".PadRight(KeyConfiger.ItemLenght);
+            }
+            else
+            {
+                return (" \'" + str.Trim('\'') + "\'").PadRight(KeyConfiger.ItemLenght + 1);
+            }
+        }
+
+        /// <summary> 字符串在两边加单引号 </summary>
+        public static string ToSimDefaultStr(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return " NA".PadRight(KeyConfiger.ItemLenght);
+            }
+            else
+            {
+                return " " + str.PadRight(KeyConfiger.ItemLenght);
+            }
+        }
+
         /// <summary> 将1*转换成空值 </summary>
         public static string ToEclDefaultStr(this string str)
         {
@@ -127,6 +221,16 @@ namespace OPT.Product.SimalorManager
             else
             {
                 return str;
+            }
+        }
+
+
+        /// <summary> 循环执行指定次数任务 </summary>
+        public static void DoCountWhile(this int count, Action<int> act)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                act(i);
             }
         }
 

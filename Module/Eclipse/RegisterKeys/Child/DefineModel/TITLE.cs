@@ -25,7 +25,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 文件名称 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class TITLE : ConfigerKey
     {
         public TITLE(string _name)

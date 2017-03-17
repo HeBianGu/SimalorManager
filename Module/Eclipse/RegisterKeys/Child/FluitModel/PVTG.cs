@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 气相PVT </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class PVTG : RegionKey<PVTG.Item>
     {
         public PVTG(string _name)
@@ -76,7 +75,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     //else
                     //{
                         //   没找到直接插入 有可能是新增
-                        this.Lines.Add(Regions[i][j].ToString() + s);
+                        this.Lines.Add(Regions[i][j].ToString() +" "+ s);
                     //}
                 }
                 //  增加分区标识
@@ -156,13 +155,14 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, ldyl0.ToD(), hfyqb1.ToString().ToDD(), tjxs2.ToString().ToDD(), nd3.ToDD());//, isUse.ToDD()
+                return string.Format(formatStr, ldyl0.ToD(), hfyqb1.ToSaveLockDD(), tjxs2.ToSaveLockDD(), nd3.ToSaveLockDD());//, isUse.ToDD()
             }
+
+
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 溶解汽油比 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
+     
     public class RSVD : RegionKey<RSVD.Item>
     {
         public RSVD(string _name)
@@ -51,13 +51,15 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, sd.ToDD(), rjqyb.ToDD());
+                return string.Format(formatStr, sd.ToSaveLockDD(), rjqyb.ToSaveLockDD());
             }
+
+
+
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

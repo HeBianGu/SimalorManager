@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 油水相渗 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Props, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Props )]
     public class SWOF : RegionKey<SWOF.Item>
     {
         public SWOF(string _name)
@@ -58,13 +58,14 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, hsbhd.ToDD(), sxxdstl.ToDD(), yxxdstl.ToDD(), mgyl.ToDD());
+                return string.Format(formatStr, hsbhd.ToSaveLockDD(), sxxdstl.ToSaveLockDD(), yxxdstl.ToSaveLockDD(), mgyl.ToSaveLockDD());
             }
+
+
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

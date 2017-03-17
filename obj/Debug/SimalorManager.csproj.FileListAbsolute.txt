@@ -5,3 +5,17 @@ E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorM
 E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.dll
 E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.pdb
 E:\6.x\6.25\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.csprojResolveAssemblyReference.cache
+D:\PEOffice 6.3\DEV\Product\bin\SimalorManager.XML
+D:\PEOffice 6.3\DEV\Product\bin\SimalorManager.dll
+D:\PEOffice 6.3\DEV\Product\bin\SimalorManager.pdb
+D:\PEOffice 6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\OPT.Product.SimalorManager.Properties.Resources.resources
+D:\PEOffice 6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.csproj.GenerateResource.Cache
+D:\PEOffice 6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.dll
+D:\PEOffice 6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.pdb
+D:\PEOffice6.3\DEV\Product\bin\SimalorManager.XML
+D:\PEOffice6.3\DEV\Product\bin\SimalorManager.dll
+D:\PEOffice6.3\DEV\Product\bin\SimalorManager.pdb
+D:\PEOffice6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\OPT.Product.SimalorManager.Properties.Resources.resources
+D:\PEOffice6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.csproj.GenerateResource.Cache
+D:\PEOffice6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.dll
+D:\PEOffice6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.pdb

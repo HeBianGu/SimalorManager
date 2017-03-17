@@ -15,26 +15,10 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         }
     }
 
-    public class MAPAXES : BaseKey
-    {
-        public MAPAXES(string _name)
-            : base(_name)
-        {
-
-        }
-    }
 
     public class COORDSYS : BaseKey
     {
         public COORDSYS(string _name)
-            : base(_name)
-        {
-
-        }
-    }
-    public class MAPUNITS : BaseKey
-    {
-        public MAPUNITS(string _name)
             : base(_name)
         {
 

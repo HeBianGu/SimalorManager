@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 岩石特性 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class ROCKTAB : RegionKey<ROCKTAB.Item>
     {
         public ROCKTAB(string _name)
@@ -65,7 +64,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

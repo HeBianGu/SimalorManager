@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using OPT.Product.SimalorManager.Eclipse.FileInfos;
+using OPT.Product.SimalorManager.RegisterKeys.SimON;
 
 namespace OPT.Product.SimalorManager
 {
@@ -71,27 +72,42 @@ namespace OPT.Product.SimalorManager
             set { filePath = value; }
         }
 
-        /// <summary> 结果文件路径 </summary>
+        string _resultFilePath;
+
+        /// <summary> 结果文件路径(用于判断结果文件是否存在) </summary>
         public string ResultFilePath
         {
             get
             {
-                string p = this.filePath + "\\" + Path.GetFileNameWithoutExtension(this.fileName) + ".EGRID";
 
-                return p;
+                return _resultFilePath;
+                //string p = this.filePath + "\\" + Path.GetFileNameWithoutExtension(this.fileName) + ".EGRID";
+
+                //return p;
+            }
+            set
+            {
+                _resultFilePath = value;
             }
         }
 
+        string _mainFilePath;
         /// <summary> 结果文件路径 </summary>
         public string MainFilePath
         {
             get
             {
-                string _maifilePath = this.filePath + "\\" + this.fileName + ".data";
 
-                return _maifilePath;
+                return _mainFilePath;
+                //string _maifilePath = this.filePath + "\\" + this.fileName + ".data";
+
+                //return _maifilePath;
             }
-            
+            set
+            {
+                _mainFilePath = value;
+            }
+
         }
 
         private int index;
@@ -134,21 +150,85 @@ namespace OPT.Product.SimalorManager
         {
             get
             {
-
                 return schedule;
             }
             set { schedule = value; }
         }
-        [NonSerialized]
-        EclipseData mainData;
-        ///<summary> 主文件 </summary>
+        //[NonSerialized]
+        //EclipseData mainData;
+        /////<summary> 主文件 </summary>
 
-        public EclipseData MainData
+        //public EclipseData MainData
+        //{
+        //    get { return mainData; }
+        //    set { mainData = value; }
+        //}
+
+
+        /// <summary> 清理 </summary>
+        public virtual void Clear()
         {
-            get { return mainData; }
-            set { mainData = value; }
+            //  删除文件
+            File.Delete(this.MainFilePath);
+            File.Delete(this.SchPath);
+            File.Delete(this.InitPath);
+            this.schedule.Clear();
+            this.solution.Clear();
+            this.parent = null;
+        }
+
+    }
+
+    /// <summary> 主文件模型 </summary>
+    public class MainFileRestartSimON : RestartInfoModelSimON
+    {
+
+    }
+
+    /// <summary> SimON模型案例重启 (比Eclipse多一个WELL需要保存)</summary>
+    public class RestartInfoModelSimON : RestartInfoModel
+    {
+        [NonSerialized]
+        WELL well = null;
+        ///<summary> 井口坐标部分 </summary>
+        public WELL Well
+        {
+            get { return well; }
+            set { well = value; }
+        }
+
+
+        string wellPath;
+
+        /// <summary> WELL文件路径 </summary>
+        public string WellPath
+        {
+            get
+            {
+                if (well != null)
+                {
+                    INCLUDE include = well.Find<INCLUDE>();
+
+                    if (include != null)
+                    {
+                        wellPath = include.FilePath;
+                    }
+                }
+                return wellPath;// wellPath; Path.Combine(this.FilePath, this.FileName + "_WELL.DAT"); }
+            }
+
+        }
+
+        /// <summary> 构建路径 </summary>
+        internal void BuildPath()
+        {
+            this.ResultFilePath = this.FilePath + "\\" + Path.GetFileNameWithoutExtension(this.ParentName) + "_rst" + this.Index + ".bin";
+            this.MainFilePath = this.FilePath + "\\" + this.FileName + ".DAT";
+            this.SchPath = this.FilePath + "\\" + this.FileName + "_SCH.DAT";
+            this.InitPath = this.FilePath + "\\" + this.FileName + "_iNIT.DAT";
         }
     }
+
 
     /// <summary> 重启模型 </summary>
     [Serializable]
@@ -169,7 +249,14 @@ namespace OPT.Product.SimalorManager
             get { return fileName; }
             set { fileName = value; }
         }
+
         string parentName;
+        /// <summary> 父重启节点 </summary> 
+        public string ParentName
+        {
+            get { return parentName; }
+            set { parentName = value; }
+        }
 
         string filePath;
 

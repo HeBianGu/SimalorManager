@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" Layout="ForceDirected" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="37ccfb92-9a58-47c9-9ec0-621a340209e01" Category="Comment" Bounds="-11.2296545962213,135.508118791619,243.1,263.386666666667" Label="在这部分，你可指定：井位 完井位置 每口井的生产指数 开井和关井时间 每口井的生&#xD;&#xA;产、注入量  井底压力限制  每口井的作业  经济极限  时间步  指定的重启和输出时&#xD;&#xA;间 自动时间步控制设置&#xD;&#xA;53 WELSPECS &#xD;&#xA;54 COMPDAT&#xD;&#xA;55 WCONHIST  &#xD;&#xA;56 WCONINJE  &#xD;&#xA;57．WEFAC &#xD;&#xA;58 WCONPROD&#xD;&#xA;59 WELTRAG &#xD;&#xA;60 TSTEP &#xD;&#xA;61 DATES&#xD;&#xA;62．END&#xD;&#xA;" UseManualLocation="True" />
+    <Node Id="769cf878-0303-411b-8257-8303580543471" Category="Comment" Bounds="409.269758121169,189.002306075313,103.423333333333,184.203333333333" Label="1. RUNSPEC&#xD;&#xA;2. TITLE&#xD;&#xA;3. DIMENS&#xD;&#xA;4. METRIC|LAB&#xD;&#xA;5. OIL&#xD;&#xA;6. WATER&#xD;&#xA;7. EQLDIMS  &#xD;&#xA;8. TABDIMS&#xD;&#xA;9. WELLDIMS&#xD;&#xA;10. START&#xD;&#xA;" UseManualLocation="True" />
+    <Node Id="EDIT(选择)1" Category="Category2" Bounds="98.1083046468099,527.510242871094,97.1933333333333,25.8366666666666" Label="3、EDIT(选择)" UseManualLocation="True" />
+    <Node Id="EclipeDataFile" Category="Category1" Bounds="271.988969137354,581.883563699687,76.75,25.8366666666667" Label="3T3.DATA" UseManualLocation="True" />
+    <Node Id="GRID(必须)" Category="Category2" Bounds="364.172831838909,693.983394690798,100.473333333333,25.8366666666666" Label="2、GRID(必须)" UseManualLocation="True" />
+    <Node Id="PROPS(必须)" Category="Category2" Bounds="228.810152994792,764.707477978516,110.276666666667,25.8366666666667" Label="4、PROPS(必须)" UseManualLocation="True" />
+    <Node Id="REGION(选择)" Category="Category2" Bounds="42.663389078776,617.170149788411,121.016666666667,25.8366666666667" Label="5、REGION(选择) " UseManualLocation="True" />
+    <Node Id="RUNSPEC(必须)" Category="Category2" Bounds="318.515330597681,449.233918863932,130.043333333333,25.8366666666667" Label="1、RUNSPEC(必须) " UseManualLocation="True" />
+    <Node Id="SCHEDULE(必须)" Category="Category2" Bounds="155.781997265493,439.063869197568,132.733333333333,25.8366666666666" Label="8、SCHEDULE(必须)" UseManualLocation="True" />
+    <Node Id="SOLUTION(必须)" Category="Category2" Bounds="424.737418619792,556.646925387912,132.816666666667,25.8366666666667" Label="6、SOLUTION(必须)" UseManualLocation="True" />
+    <Node Id="SUMMARY(选择)" Category="Category2" Bounds="128.193857594341,682.365782197463,133.903333333333,25.8366666666666" Label="7、SUMMARY(选择)" UseManualLocation="True" />
+    <Node Id="af4b173c-166e-45bb-b649-3431304423941" Category="Comment" Bounds="-141.29066240327,600.27447057329,140.54,73.3466666666667" Label="PVT区  相渗区  平衡区&#xD;&#xA;46 PVTNUM&#xD;&#xA;47 EQLNUM&#xD;&#xA;48 SATNUM" UseManualLocation="True" />
+    <Node Id="dfce0536-0aaa-42c3-8db7-fdf7eadbd3291" Category="Comment" Bounds="158.774631158114,821.546830808206,247.67,390.08" Label="油、水、气PVT数据&#xD;&#xA;流体密度&#xD;&#xA;岩石压缩数据&#xD;&#xA;相渗和毛管压力&#xD;&#xA;29 PVTO&#xD;&#xA;30 PVDG&#xD;&#xA;31 PVDO&#xD;&#xA;33 PVTW  &#xD;&#xA;34 ROCK &#xD;&#xA;35 DENSITY&#xD;&#xA;36 相渗数据，黑油系统考虑有两组 SWFN|SGFN|SOF3,SWOF|SGOF;&#xD;&#xA;             油水系统也考虑两组 SWFN|SOF2,SWOF。&#xD;&#xA;   SWFN  &#xD;&#xA;37 SGFN&#xD;&#xA;38 SOF3  &#xD;&#xA;39 SOF2  &#xD;&#xA;40 SWOF &#xD;&#xA;41 SGOF&#xD;&#xA;42 SOWCR&#xD;&#xA;43 SWCR&#xD;&#xA;44 SWL&#xD;&#xA;45 SWU" UseManualLocation="True" />
+    <Node Id="e8cd3ab7-7887-49f8-94af-d43fe199b0c11" Category="Comment" Bounds="506.826701118335,697.747445562931,248,326.733333333334" Label="指定：网格维数、网格深度、毛厚度、孔隙度、渗透率、净毛比或净厚度&#xD;&#xA;11.GRID&#xD;&#xA;12.DX&#xD;&#xA;13.DY&#xD;&#xA;14.TOPS&#xD;&#xA;15.DZ &#xD;&#xA;16.COORD&#xD;&#xA;17 ZCORN&#xD;&#xA;18 MAPAXES&#xD;&#xA;19 COORDSYS&#xD;&#xA;20 PORO&#xD;&#xA;21 DZNET&#xD;&#xA;22 NTG&#xD;&#xA;23 PERMX&#xD;&#xA;24 PERMY&#xD;&#xA;25 PERMZ&#xD;&#xA;26 MULTX&#xD;&#xA;27 MULTY&#xD;&#xA;28 MULTZ" UseManualLocation="True" />
+    <Node Id="三、EDIT部分（不考虑）" Category="Comment" Bounds="-69.6078666178385,471.673476204427,157.693333333333,25.8366666666666" Label="三、 EDIT部分（不考虑）" UseManualLocation="True" />
+    <Node Id="包括：决定初始饱和度和压力指定重启记录边水数据API重度校正RSO、PB、RV随深度变化" Category="Comment" Bounds="548.782000732422,405.790158721246,247.1,120.856666666667" Label="包括：决定初始饱和度和压力  指定重启记录   边水数据  API重度校正 RSO、PB、RV随深度变化&#xD;&#xA;49 EQUIL&#xD;&#xA;50 PRESSURE&#xD;&#xA;51 SWAT &#xD;&#xA;52 SGAS" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="37ccfb92-9a58-47c9-9ec0-621a340209e01" Target="SCHEDULE(必须)" Bounds="190.020434754359,398.894779866537,19.6502810037523,32.4693604477568" />
+    <Link Source="769cf878-0303-411b-8257-8303580543471" Target="RUNSPEC(必须)" Bounds="392.602450691003,373.205632425944,28.9819707835542,67.7535395422225" />
+    <Link Source="EclipeDataFile" Target="EDIT(选择)1" Bounds="194.129013038152,556.184517740114,79.0902879168461,26.2765868774541" />
+    <Link Source="EclipeDataFile" Target="GRID(必须)" Bounds="322.354140366763,607.720213216146,73.9426491860652,79.6666609794036" />
+    <Link Source="EclipeDataFile" Target="PROPS(必须)" Bounds="287.102013148572,607.720213216146,21.3954522588307,148.079805057803" />
+    <Link Source="EclipeDataFile" Target="REGION(选择)" Bounds="172.527810557171,601.337471895864,99.4611725971258,16.9390917324946" />
+    <Link Source="EclipeDataFile" Target="RUNSPEC(必须)" Bounds="317.490073706597,482.951111263491,54.5737189323344,98.9324352859877" />
+    <Link Source="EclipeDataFile" Target="SCHEDULE(必须)" Bounds="234.857475576131,472.557647472781,67.527249870049,109.325899076698" />
+    <Link Source="EclipeDataFile" Target="SOLUTION(必须)" Bounds="348.738983154297,580.079975006898,67.084867480559,9.36486135680138" />
+    <Link Source="EclipeDataFile" Target="SUMMARY(选择)" Bounds="216.741317290051,607.720213216146,78.8097945376074,68.7301721130488" />
+    <Link Source="af4b173c-166e-45bb-b649-3431304423941" Target="REGION(选择)" Bounds="-0.750656585693335,632.82532446925,34.4210153747962,1.35543014711016" />
+    <Link Source="dfce0536-0aaa-42c3-8db7-fdf7eadbd3291" Target="PROPS(必须)" Bounds="283.702405528496,799.544046567428,0.123277438772334,22.0028064599155" />
+    <Link Source="e8cd3ab7-7887-49f8-94af-d43fe199b0c11" Target="GRID(必须)" Bounds="439.868277347326,725.042879364159,66.9583980677127,47.7125350626724" />
+    <Link Source="三、EDIT部分（不考虑）" Target="EDIT(选择)1" Bounds="41.0428232483654,497.510142871094,65.5197381684401,26.6131681599623" />
+    <Link Source="包括：决定初始饱和度和压力指定重启记录边水数据API重度校正RSO、PB、RV随深度变化" Target="SOLUTION(必须)" Bounds="521.611701769205,526.646839192708,44.7780799818362,25.5409483507667" />
+  </Links>
+  <Categories>
+    <Category Id="Category1" Label="类别 1" Background="#FFE51400" IsTag="True" />
+    <Category Id="Category2" Label="类别 2" Background="#FF339933" IsTag="True" />
+    <Category Id="Comment" Label="注释" Description="表示在图表中用户定义的注释" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="注释" />
+  </Categories>
+  <Properties>
+    <Property Id="Background" Label="背景" Description="背景色" DataType="System.Windows.Media.Brush" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="Label" Label="标签" Description="可批注对象的可显示标签" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="类别 2" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category2')" />
+      <Setter Property="Background" Value="#FF339933" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类别 1" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Category1')" />
+      <Setter Property="Background" Value="#FFE51400" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="注释" ValueLabel="包含注释">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
+  </Styles>
+</DirectedGraph>

@@ -133,6 +133,9 @@ namespace OPT.Product.SimalorManager
 
             }
 
+
+            if (this.DefautRegion == null) this.DefautRegion = this.BaseFile.TempRegion;
+
             ConvertToModel();
         }
 
@@ -164,7 +167,7 @@ namespace OPT.Product.SimalorManager
             CmdGetItems();
 
             //  读到末尾返回空值
-            return null;
+            return this;
         }
 
         public override void WriteKey(StreamWriter writer)
@@ -268,14 +271,14 @@ namespace OPT.Product.SimalorManager
                     region.ZFrom = zf7.ToInt();
                     region.ZTo = zt8.ToInt();
 
+                    // Todo ：将当前范围附加到临时关键字上 
                     modify.DefautRegion = region;
-                    modify.BaseFile.TempRegion = region;
+                    //modify.BaseFile.TempRegion = region;
                 }
                 else
                 {
-
-                    //region = modify.DefautRegion;
-                    region = modify.BaseFile.TempRegion;
+                     region = modify.DefautRegion;
+                    //region = modify.BaseFile.TempRegion;
                 }
 
                 ModifyApplyModel model = new ModifyApplyModel(this.p1, region, this.p2, func);
@@ -303,11 +306,13 @@ namespace OPT.Product.SimalorManager
                     region.ZFrom = zf7.ToInt();
                     region.ZTo = zt8.ToInt();
 
-                    copy.BaseFile.TempRegion = region;
+                    //copy.BaseFile.TempRegion = region;
+                    copy.defautRegion = region;
                 }
                 else
                 {
-                    region = copy.BaseFile.TempRegion;
+                    //region = copy.BaseFile.TempRegion;
+                    region = copy.defautRegion;
                 }
 
                 ModifyCopyModel model = new ModifyCopyModel(this.p2, region, this.p1);
@@ -397,7 +402,6 @@ namespace OPT.Product.SimalorManager
         /// <summary> 执行更改 </summary>
         public void RunModify(TableKey funcKey)
         {
-
             if (CheckRegion(funcKey))
             {
                 double temp;
@@ -413,8 +417,12 @@ namespace OPT.Product.SimalorManager
                         {
                             for (int z = region.ZFrom; z < region.ZTo; z++)
                             {
+                                ////  对值执行func操作
+                                //funcKey.Tables[z].Matrix.Mat[y, x] = func(funcKey.Tables[z].Matrix.Mat[y, x].ToString().ToDouble(), temp);
+
+
                                 //  对值执行func操作
-                                funcKey.Tables[z].Matrix.Mat[y, x] = func(funcKey.Tables[z].Matrix.Mat[y, x].ToString().ToDouble(), temp);
+                                funcKey.Tables[z].Set(y, x,func(funcKey.Tables[z].Get(y, x).ToString().ToDouble(), temp));
                             }
                         }
                     }
@@ -510,8 +518,11 @@ namespace OPT.Product.SimalorManager
                     {
                         for (int z = region.ZFrom; z < region.ZTo; z++)
                         {
+                            ////  对值执行func操作
+                            //funcKey.Tables[z].Matrix.Mat[y, x] = key.Tables[z - region.ZFrom].Matrix.Mat[y - region.YFrom, x - region.XFrom];
+
                             //  对值执行func操作
-                            funcKey.Tables[z].Matrix.Mat[y, x] = key.Tables[z - region.ZFrom].Matrix.Mat[y - region.YFrom, x - region.XFrom];
+                            funcKey.Tables[z].Set(y, x,key.Tables[z - region.ZFrom].Get(y - region.YFrom, x - region.XFrom));
                         }
                     }
                 }
@@ -551,15 +562,64 @@ namespace OPT.Product.SimalorManager
 
             foreach (GridTable v in Key.Tables)
             {
+                //throw new Exception("此处有修改");
 
-                for (int i = 0; i < v.Matrix.Row; i++)
+                //for (int i = 0; i < v.Matrix.Row; i++)
+                //{
+                //    for (int j = 0; j < v.Matrix.Col; j++)
+                //    {
+                //        sb.Append(v.Matrix[i, j].ToString().ToD().PadLeft(KeyConfiger.TableLenght));
+                //    }
+
+                //    if (i == v.Matrix.Row - 1 && v.IndexNum == Key.Tables.Count)
+                //    {
+                //        sb.Append(KeyConfiger.EndFlag);
+                //    }
+
+                //    sb.Append(KeyConfiger.NewLine);
+
+                //}
+
+                //for (int i = 0; i < v.Matrix.Row; i++)
+                //{
+                //    for (int j = 0; j < v.Matrix.Col; j++)
+                //    {
+                //        sb.Append(v.Matrix[i, j].ToString().ToD().PadLeft(KeyConfiger.TableLenght));
+                //    }
+
+                //    if (i == v.Matrix.Row - 1 && v.IndexNum == Key.Tables.Count)
+                //    {
+                //        sb.Append(KeyConfiger.EndFlag);
+                //    }
+
+                //    sb.Append(KeyConfiger.NewLine);
+
+                //}
+
+                for (int i = 0; i < v.XCount; i++)
                 {
-                    for (int j = 0; j < v.Matrix.Col; j++)
+                    for (int j = 0; j < v.YCount; j++)
                     {
-                        sb.Append(v.Matrix[i, j].ToString().ToD().PadLeft(KeyConfiger.TableLenght));
+                        sb.Append(v.Get(j, i).ToString().ToD().PadLeft(KeyConfiger.TableLenght));
                     }
 
-                    if (i == v.Matrix.Row - 1 && v.IndexNum == Key.Tables.Count)
+                    if (i == v.XCount - 1 && v.IndexNum == Key.Tables.Count)
+                    {
+                        sb.Append(KeyConfiger.EndFlag);
+                    }
+
+                    sb.Append(KeyConfiger.NewLine);
+
+                }
+
+                for (int i = 0; i < v.XCount; i++)
+                {
+                    for (int j = 0; j < v.YCount; j++)
+                    {
+                        sb.Append(v.Get(j, i).ToString().ToD().PadLeft(KeyConfiger.TableLenght));
+                    }
+
+                    if (i == v.XCount - 1 && v.IndexNum == Key.Tables.Count)
                     {
                         sb.Append(KeyConfiger.EndFlag);
                     }
@@ -637,8 +697,11 @@ namespace OPT.Product.SimalorManager
                     {
                         for (int z = region.ZFrom; z < region.ZTo; z++)
                         {
+                            ////  对值执行func操作
+                            //toKey.Tables[z].Matrix.Mat[y, x] = fromKey.Tables[z].Matrix.Mat[y, x];
+
                             //  对值执行func操作
-                            toKey.Tables[z].Matrix.Mat[y, x] = fromKey.Tables[z].Matrix.Mat[y, x];
+                            toKey.Tables[z].Set(y, x,fromKey.Tables[z].Get(y, x));
                         }
                     }
                 }
@@ -786,6 +849,21 @@ namespace OPT.Product.SimalorManager
         public override string ToString()
         {
             return string.Format(formatStr, (this.xFrom + 1).ToD(), this.xTo.ToD(), (this.yFrom + 1).ToD(), this.yTo.ToD(), (this.zFrom + 1).ToD(), this.zTo.ToD());
+        }
+
+        
+        /// <summary> 深复制 </summary>
+        public RegionParam Copy()
+        {
+            RegionParam r = new RegionParam();
+            r.xFrom = this.xFrom;
+            r.xTo = this.xTo;
+            r.yFrom = this.yFrom;
+            r.yTo = this.yTo;
+            r.zFrom = this.zFrom;
+            r.zTo = this.zTo;
+            return r;
+
         }
     }
 }

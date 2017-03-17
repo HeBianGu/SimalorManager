@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.Eclipse )]
     public class DZNET : TableKey
     {
         public DZNET(string _name)

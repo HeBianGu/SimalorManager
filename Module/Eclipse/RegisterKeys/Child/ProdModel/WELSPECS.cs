@@ -29,7 +29,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 井定义 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class WELSPECS : ItemsKey<WELSPECS.Item>, IWelspecslDefine,IProductEvent
     {
         public WELSPECS(string _name)
@@ -105,7 +104,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {
@@ -202,7 +200,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
     }
 
     /// <summary> 局部网格加密井定义 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class WELSPECL : ItemsKey<WELSPECL.Item>, IWelspecslDefine,IProductEvent
     {
         public WELSPECL(string _name)
@@ -240,13 +237,12 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, this.j4.ToEclStr(), jz1.ToEclStr(), jbwgjmm.ToEclStr(), i3.ToDD(), j4.ToDD(), cksd5.ToDD(), yxltx6.ToEclStr(), xlbj7.ToDD(), ldfc8.ToEclStr(), zdgj9.ToEclStr(), cl10.ToEclStr(), pvtbh11.ToDD(), mdjsff12.ToEclStr(), clfqbh13.ToDD(), jmx14.ToDD());
+                return string.Format(formatStr, this.jm0.ToEclStr(), jz1.ToEclStr(), jbwgjmm.ToEclStr(), i3.ToDD(), j4.ToDD(), cksd5.ToDD(), yxltx6.ToEclStr(), xlbj7.ToDD(), ldfc8.ToEclStr(), zdgj9.ToEclStr(), cl10.ToEclStr(), pvtbh11.ToDD(), mdjsff12.ToEclStr(), clfqbh13.ToDD(), jmx14.ToDD());
             }
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

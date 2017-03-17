@@ -31,7 +31,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 动态列表抽象类 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
     public abstract class DynamicKey : BaseKey
     {
         public DynamicKey(string _name)

@@ -32,7 +32,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 生产井VFP表维数定义 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class VFPPDIMS : ConfigerKey
     {

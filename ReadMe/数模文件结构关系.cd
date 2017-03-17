@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OPT.Product.SimalorManager.BaseFile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQIA8JAIADQAEOQABAAMABCSABIAgMACANBEBABAYQE=</HashCode>
+      <FileName>Base\BaseFile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.Eclipse.FileInfos.EclipseData" Collapsed="true">
+    <Position X="6" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIIAQQAAAAAAAAAAAAACAAgAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Module\Eclipse\FileInfos\EclipseData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.PetrelData" Collapsed="true">
+    <Position X="0.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAIAAAAAAACAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Module\Petrel\PetrelData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.Eclipse.FileInfos.SimONData" Collapsed="true">
+    <Position X="3.25" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIIIAQQAAAAAAAAAAAAACAEgAAAAAAEAEAAAAAAA=</HashCode>
+      <FileName>Module\SimON\SimONData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

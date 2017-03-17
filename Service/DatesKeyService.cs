@@ -122,5 +122,15 @@ namespace OPT.Product.SimalorManager
             return DateTime.ParseExact(str3, format, CultureInfo.InvariantCulture);
         }
 
+        /// <summary> 解析时间 20100101D  </summary>
+        public DateTime GetSimONDateTime(string str)
+        {
+            string format = "yyyyMMdd";
+            DateTime outTime;
+            DateTime.TryParseExact(str, format, CultureInfo.InvariantCulture,DateTimeStyles.None, out outTime);
+
+            return outTime;
+        }
+
     }
 }

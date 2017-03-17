@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 八种父关键字节点基类 </summary>
-    public class ParentKey : BaseKey
+    public class ParentKey : BaseKey, IStandardized
     {
         public ParentKey(string _name)
             : base(_name)
@@ -35,8 +35,8 @@ namespace OPT.Product.SimalorManager
 
         public override void WriteKey(System.IO.StreamWriter writer)
         {
-            writer.WriteLine(this.Name);
             writer.WriteLine();
+            writer.WriteLine(this.Name);
 
             //base.WriteKey(writer);
 

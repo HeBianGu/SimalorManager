@@ -10,7 +10,7 @@ namespace OPT.Product.SimalorManager
     /// 字段或属性的中文解释属性
     /// </summary>
     [Serializable]
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = false)]
     public class Desc : Attribute
     {
         /// <summary>

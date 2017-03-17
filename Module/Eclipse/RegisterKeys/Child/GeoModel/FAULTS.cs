@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class FAULTS : ItemsKey<FAULTS.Item>
     {
         public FAULTS(string _name)

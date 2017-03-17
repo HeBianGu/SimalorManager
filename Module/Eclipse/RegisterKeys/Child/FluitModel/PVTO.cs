@@ -40,7 +40,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 油相PVT </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class PVTO : RegionKey<PVTO.Item>
     {
         public PVTO(string _name)
@@ -113,7 +112,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
             for (int i = 0; i < Lines.Count; i++)
             {
-                str = Lines[i];
+                str = Lines[i].Trim();
 
                 //  过滤空行和备注行
                 if (string.IsNullOrEmpty(str) || str.StartsWith(KeyConfiger.ExcepFlag) || str.StartsWith(KeyConfiger.ExcepFlag2))
@@ -169,16 +168,17 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
             string formatStr = "{0}{1}{2}{3} ";
 
+
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, rjqyb.ToD(), pdyl.ToDD(), tjxs.ToDD(), nd.ToDD());
+                return string.Format(formatStr, rjqyb.ToD(), pdyl.ToSaveLockDD(), tjxs.ToD(), nd.ToSaveLockDD());
             }
+
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

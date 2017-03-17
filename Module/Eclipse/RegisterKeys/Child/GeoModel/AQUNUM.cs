@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 数值水体 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class AQUNUM : ConnectKey<AQUNUM.Item>
     {
         public AQUNUM(string _name)
@@ -41,8 +41,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
         protected override void CmdGetWellItems()
         {
-
-            ClearItem();
+            this.Items.Clear();
 
             string str = string.Empty;
 
@@ -68,8 +67,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     }
 
                     List<string> newStr = str.EclExtendToArray();
-
-
 
                     if (newStr.Count > 0)
                     {

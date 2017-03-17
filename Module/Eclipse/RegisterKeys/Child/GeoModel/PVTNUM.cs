@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 流体分区</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Regions, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Regions, SimKeyType = SimKeyType.Eclipse )]
     public class PVTNUM : TableKey
     {
         public PVTNUM(string _name)

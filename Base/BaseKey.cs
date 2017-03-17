@@ -1,4 +1,5 @@
-﻿using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+﻿using OPT.Product.SimalorManager.Base.AttributeEx;
+using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 关键字基类 包含子节点 父节点 文件基类一级基本读写方法 </summary>
-    public class BaseKey
+    public partial class BaseKey : IDisposable
     {
         #region - 关键字成员属性 -
         public BaseKey(string pname)
@@ -135,7 +136,7 @@ namespace OPT.Product.SimalorManager
         }
 
 
-        Func<BaseKey, BaseKey, BaseKey> _builderHandler;
+        Func<BaseKey, BaseKey, BaseKey> _builderHandler = BaseKeyHandleFactory.Instance.InitLineHandler;
 
 
         /// <summary> 读取到下一关键字前要做的处理方法 T1上一节点 T2下一节点 T3 构建返回的节点一般是本节点 DATES特殊情况  </summary>
@@ -145,6 +146,32 @@ namespace OPT.Product.SimalorManager
             get { return _builderHandler; }
             set { _builderHandler = value; }
         }
+
+
+        Action<string> _readNewLineHandler;
+        /// <summary> 当读取到一行信息触发 </summary>
+        public Action<string> ReadNewLineHandler
+        {
+            get { return _readNewLineHandler; }
+            set { _readNewLineHandler = value; }
+        }
+
+        private Func<string, string> eachLineCmdHandler = BaseKeyHandleFactory.Instance.EachLineCmdHandler;
+        /// <summary> 每到一行，对这一行进行的处理 </summary>
+        public Func<string, string> EachLineCmdHandler
+        {
+            get { return eachLineCmdHandler; }
+            set { eachLineCmdHandler = value; }
+        }
+
+        private Predicate<string> _isKeyChar = BaseKeyHandleFactory.Instance.IsKeyFormat;
+        /// <summary> 当前关键字下判断子内容是否是关键字的方法 </summary>
+        public Predicate<string> IsKeyChar
+        {
+            get { return _isKeyChar; }
+            set { _isKeyChar = value; }
+        }
+
 
         #endregion
 
@@ -159,12 +186,12 @@ namespace OPT.Product.SimalorManager
             foreach (var str in this.lines)
             {
 
-                Guid tempId;
+                //Guid tempId;
 
-                if (!Guid.TryParse(str, out tempId))
-                {
-                    writer.WriteLine(str);
-                }
+                //if (!Guid.TryParse(str, out tempId))
+                //{
+                writer.WriteLine(str);
+                //}
             }
 
 
@@ -176,105 +203,107 @@ namespace OPT.Product.SimalorManager
 
         }
 
-        /// <summary> 读取关键字内容 (具体关键字读取方法不同) </summary>
+        /// <summary> 读取关键字内容 (具体关键字读取方法不同)  return  用于关键字传递 </summary>
         public virtual BaseKey ReadKeyLine(StreamReader reader)
         {
             string tempStr = string.Empty;
 
-            try
+            #region - 读取数据 -
+
+            while (!reader.EndOfStream)
             {
-                #region - 读取数据 -
-                while (!reader.EndOfStream)
+                tempStr = this.eachLineCmdHandler(reader.ReadLine());
+
+                try
                 {
-                    tempStr = reader.ReadLine().TrimEnd();
-
-
-                    if (tempStr.IsKeyFormat())
+                    if (this.IsKeyChar(tempStr))
                     {
-                        BaseKey newKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr);
+                        #region - 交接关键字 -
+
+                        // Todo ：没有找到主文件默认Eclipse关键字 
+                        SimKeyType typesim = this.baseFile == null ? SimKeyType.Eclipse : this.baseFile.SimKeyType;
+
+                        BaseKey newKey = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(tempStr, typesim);
+
+                        LogProviderHandler.Instance.OnRunLog("", "正在读取关键字 - " + newKey.Name);
 
                         BaseKey perTempKey = this;
 
                         if (this._builderHandler != null)
                         {
-                            //  当碰到新关键字 触发本节点构建方法
+                            // Todo ：当碰到新关键字 触发本节点构建方法 
                             BaseKey temp = this._builderHandler.Invoke(this, newKey);
 
                             if (temp != null)
                             {
                                 perTempKey = temp;
                             }
+
+                            if (this.baseFile != null && this is IProductTime)
+                            {
+                                // HTodo  ：将读取到的生产信息记录到主文件中，用于解析TSTEP 
+                                IProductTime p = this as IProductTime;
+                                this.baseFile.ReadTempTime = p.DateTime;
+                            }
                         }
 
                         if (newKey._createrHandler != null)
                         {
-                            //  触发新关键字构建节点结构的方法
+                            // Todo ：触发新关键字构建节点结构的方法 
                             newKey._createrHandler.Invoke(perTempKey, newKey);
                         }
 
-                        //  读到未解析关键字触发事件
+
+                        // Todo ：读到未解析关键字触发事件 
                         if (newKey is UnkownKey)
                         {
-                            //  触发事件
+                            // Todo ：触发事件 
                             if (newKey.BaseFile != null && newKey.BaseFile.OnUnkownKey != null)
                             {
                                 newKey.BaseFile.OnUnkownKey(newKey.BaseFile, newKey);
                             }
                         }
 
-                        //  开始读取新关键字
+
+                        // Todo ：开始读取新关键字 
                         newKey.ReadKeyLine(reader);
+
+                        #endregion
                     }
                     else
                     {
+                        #region - 记录数据 -
+
                         if (tempStr.IsNotExcepLine())
                         {
-                            //  不是记录行
-                            this.Lines.Add(tempStr);
+
+                            if (this.ReadNewLineHandler == null)
+                            {
+                                // Todo ：当前关键字没有实时读取方法 
+                                this.Lines.Add(tempStr);
+                            }
+                            else
+                            {
+                                // Todo ：当前关键字实现实时读取方法 
+                                this.ReadNewLineHandler(tempStr);
+                            }
                         }
+
+                        #endregion
                     }
                 }
-
-                #endregion
-
-                #region - 运行日志 -
-
-                this.RunState = ReadState.Success;
-
-                RunLogModel log = new RunLogModel();
-                log.Time = DateTime.Now;
-                log.State = this.RunState;
-                log.Key = this.name;
-                log.Detial = "详细信息";
-                log.Desc = this.ToString();
-
-                if (this.baseFile != null)
+                catch (Exception ex)
                 {
-                    this.baseFile.RunLog.Add(log);
+                    LogProviderHandler.Instance.OnErrLog("读取关键字" + this.GetType().Name + "错误!", ex);
+                }
+                finally
+                {
 
                 }
-                #endregion
             }
-            catch (Exception ex)
-            {
 
-                #region - 错误日志 -
+            #endregion
 
-                this.RunState = ReadState.Error;
-                RunLogModel log = new RunLogModel();
-                log.Time = DateTime.Now;
-                log.State = this.RunState;
-                log.Key = this.name;
-                log.Detial = "详细信息";
-                log.Desc = ex.ToString();
-                if (this.baseFile != null)
-                {
-                    this.baseFile.RunLog.Add(log);
-
-                }
-                #endregion
-            }
-            //  读到末尾返
             return this;
         }
 
@@ -324,12 +353,25 @@ namespace OPT.Product.SimalorManager
             return false;
         }
 
-        public List<T> FindAll<T>(Predicate<BaseKey> match) where T : class
+        /// <summary> 查找所有匹配类型和匹配规则的项 </summary>
+        public List<T> FindAll<T>(Predicate<T> match) where T : class
         {
+            Predicate<BaseKey> m = l =>
+            {
+                if (l is T)
+                {
+                    T t = l as T;
+
+                    return match(t);
+                }
+
+                return false;
+            };
+
             List<T> findKeys = new List<T>();
 
             //    l=>false 一直查询
-            GetKeys<T>(ref findKeys, this, match, l => false);
+            GetKeys<T>(ref findKeys, this, m, l => false);
 
             return findKeys;
 
@@ -339,7 +381,7 @@ namespace OPT.Product.SimalorManager
         /// <summary> 查找所有关键字类型 </summary>
         public List<T> FindAll<T>() where T : class
         {
-            return FindAll<T>(l => l is T) as List<T>;
+            return FindAll<T>(l => l is T);
         }
 
         /// <summary> 对每个节点执行方法 </summary>
@@ -418,16 +460,94 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 查找所有关键字类型 </summary>
-        public T Find<T>() where T : class
+        public T Find<T>() where T : BaseKey
         {
             return this.Find<T>(l => true);
         }
 
-        /// <summary> 查找所有关键字类型 </summary>
-        public T Find<T>(Predicate<BaseKey> match) where T : class
+        /// <summary> 查找所有关键字类型 按基类BaseKey查找 </summary>
+        public T Find<T>(Predicate<T> match) where T : BaseKey
         {
-            return GetKeys<T>(this, match);
+            Predicate<BaseKey> m = l =>
+            {
+                if (l is T)
+                {
+                    T t = l as T;
+
+                    return match(t);
+                }
+
+                return false;
+            };
+
+            return GetKeys<T>(this, m);
         }
+
+        ///// <summary> 查找所有关键字类型  按泛型查找 </summary>
+        //public T FindBaseKey<T>(Predicate<T> match) where T : BaseKey
+        //{
+        //    return GetBaseKeys<T>(this, match);
+        //}
+
+        /// <summary> 查找关键字类型最后一个  按泛型查找 </summary>
+        public T FindLast<T>(Predicate<T> match) where T : BaseKey
+        {
+            Predicate<BaseKey> m = l =>
+              {
+                  if (l is T)
+                  {
+                      T t = l as T;
+
+                      return match(t);
+                  }
+
+                  return false;
+              };
+
+            var fs = this.FindAll<T>(m);
+
+            if (fs != null && fs.Count > 0) return fs.Last();
+
+            return null;
+        }
+
+        ///// <summary> 获取匹配的一个节点 找到一个立即返回 </summary>
+        //T GetBaseKeys<T>(BaseKey key, Predicate<T> match) where T : BaseKey
+        //{
+        //    //  匹配当前类型
+        //    if (key is T)
+        //    {
+        //        T find = key as T;
+
+        //        //  匹配当前条件 
+        //        if (match(find)) return find;
+        //    }
+
+        //    if (key.Keys.Count > 0)
+        //    {
+        //        foreach (var k in key.Keys)
+        //        {
+        //            if (k is BaseKey)
+        //            {
+        //                BaseKey kn = k as BaseKey;
+
+        //                //  递归处
+        //                T temp = GetBaseKeys<T>(kn, match);
+
+        //                if (temp != null)
+        //                {
+        //                    return temp;
+        //                }
+        //            }
+        //        }
+
+        //        return null;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
         /// <summary> 移除 </summary>
         public void Delete(BaseKey key)
@@ -444,11 +564,9 @@ namespace OPT.Product.SimalorManager
         /// <summary> 删除所有节点 （不是父节点也删除） </summary>
         public void DeleteAll<T>(List<T> keys) where T : BaseKey
         {
-            if (keys == null || keys.Count == 0)
-            {
-                return;
-            }
-            foreach (T b in keys)
+            if (keys == null || keys.Count == 0) return;
+
+            foreach (T b in keys) // 注：这个删除方法用迭代器删除可能会有问题
             {
                 b.Delete();
             }
@@ -588,7 +706,9 @@ namespace OPT.Product.SimalorManager
         public bool InsertBefore(BaseKey inKey)
         {
             BaseKey parentKey = this.parentKey;
+
             inKey.parentKey = parentKey;
+
             if (parentKey == null)
             {
                 return false;
@@ -599,16 +719,16 @@ namespace OPT.Product.SimalorManager
                 int findKey = parentKey.Keys.FindIndex(l => l.Equals(this));
 
                 //  找到到当前行的占位标记
-                int findLine = parentKey.lines.FindIndex(l => l == this.ID);
+                //int findLine = parentKey.lines.FindIndex(l => l == this.ID);
 
-                if (findKey == -1 || findLine == -1)
+                if (findKey == -1)//|| findLine == -1
                 {
                     return false;
                 }
                 else
                 {
                     parentKey.Keys.Insert(findKey, inKey);
-                    parentKey.lines.Insert(findLine, inKey.ID);
+                    //parentKey.lines.Insert(findLine, inKey.ID);
                     return true;
                 }
             }
@@ -690,6 +810,25 @@ namespace OPT.Product.SimalorManager
             return find;
         }
 
+        /// <summary> 在本节点下面查找指定数量的关键字 如果有返回 如果没有创建并插入到本节点下</summary>
+        public List<T> CreateOfCount<T>(int count) where T : BaseKey
+        {
+            Type t = typeof(T);
+
+            List<T> find = this.FindAll<T>();
+
+            int addCount = count - find.Count;
+
+            addCount.DoCountWhile(l =>
+                {
+                    T f = Activator.CreateInstance(t, new string[] { typeof(T).Name }) as T;
+                    this.Add(f);
+                    find.Add(f);
+                });
+
+            return find;
+        }
+
         /// <summary> 增加节点 注意： 此方法改变了原节点的父节点引用 </summary>
         public void Add(BaseKey key)
         {
@@ -697,7 +836,11 @@ namespace OPT.Product.SimalorManager
             //  记录位置
             //this.Lines.Add(key.ID);
             this.keys.Add(key);
+
             key.baseFile = this.baseFile;
+
+            // Todo ：替换所有关键字文件 
+            key.Foreach(l => l.baseFile = this.baseFile);
         }
 
         /// <summary> 批量增加节点 </summary>
@@ -732,17 +875,56 @@ namespace OPT.Product.SimalorManager
             this.Keys.Clear();
         }
 
+        /// <summary> 清理数据 </summary>
+        public void ClearChild(Predicate<BaseKey> match)
+        {
+            this.Lines.Clear();
+
+            List<BaseKey> bk = this.keys.FindAll(l => match(l));
+
+
+            bk.ForEach(l => this.keys.Remove(l));
+
+            //this.keys.RemoveAll(bk);
+
+            //this.keys.ForEach(l =>
+            //    {
+            //        if (match(l))
+            //        {
+            //            this.Keys.Remove(l);
+            //        }
+            //    }
+            //);
+        }
+
+
+
         /// <summary> 替换对应节点的所有内容 </summary>
         public bool ExChangeData(BaseKey key)
         {
             //  删除本节点所有数据
             this.Keys.RemoveAll(l => true);
 
-            //  添加替换的数据
-            this.Keys.AddRange(key.Keys);
+            if (key == null) return true;
+
+            ////  添加替换的数据
+            //this.Keys.AddRange(key.Keys);
+
+            foreach (var item in key.Keys)
+            {
+                this.Add(item);
+            }
 
             return true;
 
+        }
+
+        /// <summary> 将本节点替换为指定节点 </summary>
+        public void ReplaceTo(BaseKey key)
+        {
+            this.InsertBefore(key);
+
+            this.Delete();
         }
 
         ///// <summary> 复制对象 </summary>
@@ -775,9 +957,44 @@ namespace OPT.Product.SimalorManager
             return this.name;
         }
 
-
-
     }
+
+
+
+    partial class BaseKey : IDisposable
+    {
+        #region - 资源释放 -
+
+        protected bool _isDisposed = false;
+        ~BaseKey()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            //  告诉GC不需要再次调用
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                // 释放托管资源
+
+                // 释放非托管资源
+
+                // 释放大对象
+
+                this._isDisposed = true;
+            }
+        }
+
+        #endregion
+    }
+
 
     /// <summary> 标示节点是父节点 </summary>
     public interface IRootNode

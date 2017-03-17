@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 定压头水体水体属性 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class AQUCHWAT : ItemsKey<AQUCHWAT.Item>
     {
         public AQUCHWAT(string _name)

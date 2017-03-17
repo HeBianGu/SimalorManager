@@ -26,12 +26,12 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 模型起始时间 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class START : ConfigerKey
+    public class START : ConfigerKey,IProductTime
     {
         public START(string _name)
             : base(_name)
         {
+
         }
         public START(string _name, DateTime dt)
             : base(_name)
@@ -43,6 +43,19 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         /// <summary> 模型起始时间 </summary>
         [CategoryAttribute("模型参数"), DescriptionAttribute("开始时间"), DisplayName("开始时间")]
         public DateTime StartTime
+        {
+            get
+            {
+                return _startTime;
+            }
+            set
+            {
+                _startTime = value;
+            }
+        }
+
+        /// <summary> 模型起始时间 </summary>
+        public DateTime DateTime
         {
             get
             {

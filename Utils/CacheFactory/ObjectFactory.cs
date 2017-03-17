@@ -40,7 +40,7 @@ namespace OPT.Product.SimalorManager
             return GetObject<T>(typeof(T), args, isCreate);
         }
 
-        public T GetObject<T>(object[] args)
+        public T GetObject<T>(params object[] args)
         {
             return GetObject<T>(typeof(T), args, false);
         }

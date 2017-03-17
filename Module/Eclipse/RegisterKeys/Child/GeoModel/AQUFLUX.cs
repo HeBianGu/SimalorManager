@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 恒量水体水体属性 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class AQUFLUX : ItemsKey<AQUFLUX.Item>
     {
         public AQUFLUX(string _name)

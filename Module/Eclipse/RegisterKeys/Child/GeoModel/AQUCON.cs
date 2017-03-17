@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 数值水体连接 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class AQUCON : ConnectKey<AQUCON.Item>
     {
         public AQUCON(string _name)
@@ -207,7 +207,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     }
                 }
             }
-
+ 
         }
     }
 

@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\..\Product\bin\SimalorManager.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -83,14 +84,69 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\IProductTime.cs" />
+    <Compile Include="Base\IStandardized.cs" />
+    <Compile Include="Module\Eclipse\RegisterKeys\Child\GeoModel\MAPUNITS.cs" />
+    <Compile Include="Module\Eclipse\RegisterKeys\Child\GeoModel\MAPAXES.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\AQUANCON.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\AQUFETP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\DAYS.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\CPG.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\MULTIPORO.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\SIGMA.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\RPTSUM.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\RPTSCHED.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\KROTYPE.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\TSTART.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\WELLSCHED.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\USE_TF.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\FAULTS.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\MSWSET.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\RESTART.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\PGAS.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\POIL.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\PERF.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\ROCKMAP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\PVTMAP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\ROCKREG.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\LIMIT.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\SWGF.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\WELSSTD.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\WLSGSIZE.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\WELL.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\TIME.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\USEENDTIME.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\USESTARTTIME.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\TUNING.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\EQUILPAR.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\NAME.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\ECHO_ON.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\EQUILREG.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\PVTREG.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\FIPMAP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\EQUILMAP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\ECHO_OFF.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\SATMAP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\FIPREG.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\SATREG.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\RSVSIZE.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\MODELTYPE.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\BOX.cs" />
+    <Compile Include="Module\SimON\SimONData.cs" />
     <Compile Include="Service\BaseKeyService.cs" />
+    <Compile Include="Service\ConfigerResourceService.cs" />
+    <Compile Include="Service\EngineConfigerService.cs" />
     <Compile Include="Service\IncludeKeyService.cs" />
-    <Compile Include="Service\RestartService.cs" />
+    <Compile Include="Service\RestartEclipseService.cs" />
+    <Compile Include="Service\RestartSimONService.cs" />
+    <Compile Include="Service\SimDataConvertService.cs" />
+    <Compile Include="Service\SimONDataService.cs" />
     <Compile Include="Utils\CacheFactory\ServiceFactory.cs" />
+    <Compile Include="Utils\LogProviderHandler.cs" />
+    <Compile Include="Utils\MmfEntity.cs" />
     <Compile Include="Utils\SimalorDefine\Desc.cs" />
     <Compile Include="Utils\CacheFactory\ObjectFactory.cs" />
     <Compile Include="Utils\CacheFactory\TypeCacheFactory.cs" />
@@ -107,7 +163,6 @@
     <Compile Include="Service\OutPutService.cs" />
     <Compile Include="Module\Eclipse\FileInfos\RestartInfoModel.cs" />
     <Compile Include="Base\BaseKeyHandleFactory.cs" />
-    <Compile Include="Module\Eclipse\KeyBase\BigDataKey.cs" />
     <Compile Include="Module\Eclipse\KeyBase\ConfigerKey.cs" />
     <Compile Include="Module\Eclipse\KeyBase\ConnectKey.cs" />
     <Compile Include="Module\Eclipse\KeyBase\DynamicKey.cs" />
@@ -300,7 +355,6 @@
     <Compile Include="Module\Eclipse\RegisterKeys\Child\RockModel\ROCKTAB.cs" />
     <Compile Include="Module\Eclipse\RegisterKeys\Child\RockModel\ROCK.cs" />
     <Compile Include="Module\Eclipse\RegisterKeys\Child\DefineModel\START.cs" />
-    <Compile Include="Module\Eclipse\RegisterKeys\Child\ProdModel\TSTEP.cs" />
     <Compile Include="Module\Eclipse\RegisterKeys\Child\DefineModel\UNIFOUT.cs" />
     <Compile Include="Module\Eclipse\RegisterKeys\Child\ProdModel\WCONPROD.cs" />
     <Compile Include="Module\Eclipse\RegisterKeys\Child\ProdModel\WECON.cs" />
@@ -338,18 +392,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="ReadMe\ClassDiagram2.cd" />
-    <None Include="ReadMe\EclipseData.cd" />
-    <None Include="ReadMe\INCLUDE.cd" />
-    <None Include="ReadMe\Item.cd" />
-    <None Include="ReadMe\ParentKey.cd" />
-    <None Include="ReadMe\RegionKey.cd" />
-    <None Include="ReadMe\TableKey.cd" />
     <None Include="ReadMe\关系图.dgml">
       <SubType>Designer</SubType>
     </None>
     <None Include="ReadMe\关键字工厂.cd" />
-    <None Include="ReadMe\关键字抽象结构.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -359,16 +405,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="ReadMe\EclipseParams.dgml">
+    <None Include="ReadMe\Eclipse文件结构关系s.dgml">
       <SubType>Designer</SubType>
     </None>
     <None Include="ReadMe\Eclipse简易关键字说明38页.doc" />
+    <None Include="ReadMe\关键字抽象结构关系图.cd" />
+    <None Include="ReadMe\数模文件结构关系.cd" />
     <None Include="ReadMe\结构设计.dgml" />
     <None Include="ReadMe\读写流程图.dgml" />
     <None Include="ReadMe\通用服务.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Module\SimON\" />
+    <Folder Include="Module\SimON\KeyBase\" />
     <Folder Include="Module\tNavigator\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

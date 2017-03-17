@@ -54,18 +54,18 @@ namespace OPT.Product.SimalorManager
 
             if (temps == null || temps.Length == 0)
             {
-                return str.AnatherName();
+                return str.AnatherName().ToUpper();
             }
 
             if (temps.Length > 1)
             {
                 if (!temps[1].StartsWith(KeyConfiger.ExcepFlag) && !temps[1].StartsWith(KeyConfiger.ExcepFlag1))
                 {
-                    return str.AnatherName();
+                    return temps[0].AnatherName().ToUpper();
                 }
             }
 
-            return temps[0].AnatherName();
+            return temps[0].AnatherName().ToUpper();
 
         }
 
@@ -118,6 +118,37 @@ namespace OPT.Product.SimalorManager
                 return false;
             }
         }
+
+        /// <summary> 判断是否是结束行 </summary> 
+        public static bool IsEndLine(this string tempStr)
+        {
+            return tempStr.StartsWith(KeyConfiger.EndFlag) && tempStr.EndsWith(KeyConfiger.EndFlag);
+        }
+
+        /// <summary> 过滤一行中的备注部分 示例：  19900101D # Use date or time? </summary> 
+        public static string ClearLine(this string tempStr)
+        {
+            ;
+            tempStr = func(tempStr, KeyConfiger.ExcepFlag);
+            tempStr = func(tempStr, KeyConfiger.ExcepFlag1);
+            tempStr = func(tempStr, KeyConfiger.ExcepFlag2);
+
+            return tempStr;
+
+        }
+
+        static Func<string, string, string> func = (l, k) =>
+              {
+                  if (l.Contains(k))
+                  {
+                      return l.Split(new string[] { k }, StringSplitOptions.RemoveEmptyEntries)[0];
+                  }
+                  else
+                  {
+                      return l;
+                  }
+
+              };
 
     }
 }

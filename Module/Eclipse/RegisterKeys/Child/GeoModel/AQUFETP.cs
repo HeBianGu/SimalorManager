@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> Fetkovich水体属性 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class AQUFETP : ItemsKey<AQUFETP.Item>
     {
         public AQUFETP(string _name)

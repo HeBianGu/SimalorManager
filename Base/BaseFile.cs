@@ -1,18 +1,22 @@
 ﻿using OPT.Product.SimalorManager.Base.AttributeEx;
 using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using OPT.Product.SimalorManager.Service;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 文件基础类 </summary>
-    public abstract class BaseFile : IDisposable
+    public abstract partial class BaseFile : IDisposable
     {
 
-        #region - Start 文件公用成员 -
+        #region - 文件公用成员 -
 
         public BaseFile()
         {
@@ -20,10 +24,10 @@ namespace OPT.Product.SimalorManager
             this.Key.BaseFile = this;
 
         }
-        public BaseFile(string _filePath)
+        public BaseFile(string _filePath, string mmfDirPath = null)
         {
             filePath = _filePath;
-
+            _mmfDirPath = mmfDirPath == null ? _filePath.GetDirectoryName() : mmfDirPath;
             fileName = _filePath.GetFileNameWithoutExtension();
 
             this.Key = new FileKey(fileName);
@@ -39,15 +43,18 @@ namespace OPT.Product.SimalorManager
 
             fileName = fileFulPath.GetFileNameWithoutExtension();
 
+            _mmfDirPath = fileFulPath.GetDirectoryName();
+
             this.Key = new FileKey(fileName);
             this.Key.BaseFile = this;
 
             InitializeComponent();
         }
 
-        public BaseFile(string _filePath, WhenUnkownKey UnkownEvent)
+        public BaseFile(string _filePath, WhenUnkownKey UnkownEvent, string mmfDirPath = null)
         {
             filePath = _filePath;
+            _mmfDirPath = mmfDirPath == null ? _filePath.GetDirectoryName() : mmfDirPath;
             fileName = _filePath.GetFileNameWithoutExtension();
             this.Key = new FileKey(fileName);
             this.Key.BaseFile = this;
@@ -55,20 +62,35 @@ namespace OPT.Product.SimalorManager
             InitializeComponent();
         }
 
-        public BaseFile(string _filePath, WhenUnkownKey UnkownEvent, bool isReadInclu = false)
+        public BaseFile(string _filePath, WhenUnkownKey UnkownEvent, Predicate<INCLUDE> isReadIncHandle, string mmfDirPath = null)
         {
             filePath = _filePath;
             fileName = _filePath.GetFileNameWithoutExtension();
+            _mmfDirPath = mmfDirPath == null ? _filePath.GetDirectoryName() : mmfDirPath;
             this.Key = new FileKey(fileName);
             this.Key.BaseFile = this;
             this.OnUnkownKey = UnkownEvent;
-            isReadIclude = isReadInclu;
+            _isReadIncHandle = isReadIncHandle;
 
             InitializeComponent();
         }
 
-        bool isReadIclude = true;
+        private string _mmfDirPath;
+        /// <summary> 镜像文件夹路径 </summary>
+        public string MmfDirPath
+        {
+            get { return _mmfDirPath; }
+            set { _mmfDirPath = value; }
+        }
 
+        private Predicate<INCLUDE> _isReadIncHandle = l => true;
+
+        /// <summary> 匹配INCLUDE是否读取 </summary>
+        public Predicate<INCLUDE> IsReadIncHandle
+        {
+            get { return _isReadIncHandle; }
+            set { _isReadIncHandle = value; }
+        }
 
         SimKeyType _simKeyType = SimKeyType.Eclipse;
 
@@ -78,13 +100,8 @@ namespace OPT.Product.SimalorManager
             set { _simKeyType = value; }
         }
 
-        public bool IsReadIclude
-        {
-            get { return isReadIclude; }
-            set { isReadIclude = value; }
-        }
         string fileName;
-        /// <summary> 文件名 </summary>
+        /// <summary> 文件名  Case.data </summary>
         public string FileName
         {
             get
@@ -100,7 +117,7 @@ namespace OPT.Product.SimalorManager
         }
 
         string filePath;
-        /// <summary> 文件全路径 包含文件名</summary>
+        /// <summary> 文件全路径 包含文件名 E:\WorkArea\LaoBB\3106\Case.data</summary>
         public string FilePath
         {
             get
@@ -170,7 +187,7 @@ namespace OPT.Product.SimalorManager
             get { return myVar; }
             set { myVar = value; }
         }
-        
+
         RegionParam tempRegion;
         /// <summary> 用于记录修正网格的临时范围 记录过程包括 DIMENS BOX 和其他修正关键字 </summary>
         public RegionParam TempRegion
@@ -179,14 +196,77 @@ namespace OPT.Product.SimalorManager
             set { tempRegion = value; }
         }
 
-        #endregion - 文件公用成员 End -
 
+        private int _x;
+        /// <summary> x维数 </summary>
+        public int X
+        {
+            get { return _x; }
+            set { _x = value; }
+        }
+
+        private int _y;
+        /// <summary> y维数 </summary>
+        public int Y
+        {
+            get { return _y; }
+            set { _y = value; }
+        }
+
+        private int _z;
+        /// <summary> z维数 </summary>
+        public int Z
+        {
+            get { return _z; }
+            set { _z = value; }
+        }
+
+
+        /// <summary> 说明 </summary>
+        public string FielDetail
+        {
+            get
+            {
+                string version = string.Empty;
+                try
+                {
+                    version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+                }
+                catch
+                {
+
+                }
+
+                string machineName = Environment.MachineName + "  " + Environment.UserName;
+
+                return string.Format(KeyConfiger.MainFileDetial, this.FileName, this.FilePath, DateTime.Now.ToString("yyyy-MM-dd hh:mi:ss"), version, machineName);
+            }
+        }
+
+        private DateTime _readTempTime;
+        /// <summary> 当前解析到的生产时间 </summary>
+        internal DateTime ReadTempTime
+        {
+            get { return _readTempTime; }
+            set { _readTempTime = value; }
+        }
+
+
+        private DoubleType _doubleType;
+        /// <summary> 孔隙类型 </summary>
+        public DoubleType DoubleType
+        {
+            get { return _doubleType; }
+            set { _doubleType = value; }
+        }
+
+
+        #endregion - 文件公用成员 End -
 
         #region - Start 文件公用方法 -
 
 
         #endregion - 文件公用方法 End -
-
 
         #region - Start 子类扩展方法 -
 
@@ -197,49 +277,138 @@ namespace OPT.Product.SimalorManager
         public abstract void Save();
 
         /// <summary> 另存为 </summary>
-        public abstract void SaveAs(string path);
-
-        #endregion - 子类扩展方法 End -
-
-        public void Dispose()
+        public void SaveAs(string path)
         {
-            this.filePath = null;
-            this.fileName = null;
-            this.key = null;
-            this.lines = null;
-            this.modify.Clear();
-            this.isReadBigData = default(bool);
+            // Todo ：保存时占用一个信号(设计原则：不同类型的模拟器保存只允许同时保存一个，其他时等待结束)
+            EngineConfigerService.Instance.SaveKeyTypeLock=  this.SimKeyType;
+
+            if(this.key.Find<FIELD>()!=null)
+            {
+                EngineConfigerService.Instance.Unittype = UnitType.FIELD;
+            }
+
+            if (this.key.Find<METRIC>() != null)
+            {
+                EngineConfigerService.Instance.Unittype = UnitType.METRIC;
+            }
+
+
+            try
+            {
+                this.SaveAsExtend(path);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                // Todo ：释放一个信号 
+                EngineConfigerService.Instance.SaveLockRelease();
+            }
+
         }
 
-        //public void Delete(Predicate<BaseKey> match)
-        //{
-        //    this.key.Keys.RemoveAll(match);
-        //}
+        public abstract void SaveAsExtend(string path);
 
-        //public bool Exist(Predicate<BaseKey> match)
-        //{
-        //    return this.key.Keys.Exists(match);
-        //}
-
-        //public BaseKey Find(Predicate<BaseKey> match)
-        //{
-        //    BaseKey findKey = this.key.Keys.Find(match);
-        //    return findKey;
-        //}
-
-        //public List<BaseKey> FindAll(Predicate<BaseKey> match)
-        //{
-        //    return this.key.Keys.FindAll(match);
-        //}
+        #endregion - 子类扩展方法 End -
 
 
         /// <summary> 读取到为解析的 </summary>
         public WhenUnkownKey OnUnkownKey;
 
     }
+    partial class BaseFile : IDisposable
+    {
+        #region - 资源释放 -
+        
+        // Todo ：保证重复释放资源时系统异常 
+        private bool _isDisposed = false;
+
+        ~BaseFile()
+        {
+            // 此处只需要释放非托管代码即可，因为GC调用时该对象资源可能还不需要释放
+            Dispose(false);
+        }
+       
+        public void Dispose()
+        {
+            Dispose(true);
+            
+            // Todo ：告诉GC不需要再次调用 
+            GC.SuppressFinalize(this); 
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                //  查找出所有要释放资源的关键字释放资源
+                var dis = this.Key.FindAll<TableKey>();
+
+                foreach (var item in dis)
+                {
+                    item.Dispose();
+                }
+
+                this.filePath = null;
+                this.fileName = null;
+                this.key.Clear();
+                this.lines = null;
+                this.modify.Clear();
+                this.isReadBigData = default(bool);
+
+                this._isDisposed = true;
+            }
+        }
+
+        #endregion
+    }
+
 
     /// <summary> 解析到未注册关键字的事件 </summary>
     public delegate void WhenUnkownKey(object sender, BaseKey key);
+
+    /// <summary> 单位类型 </summary>
+    public enum UnitType : int
+    {
+        /// <summary> 公制 </summary>
+        [Description("公制")]
+        METRIC = 0,
+        /// <summary> 英制 </summary>
+        [Description("英制")]
+        FIELD
+    }
+    /// <summary> 流体类型 </summary>
+    public enum MetricType
+    {
+        /// <summary> 黑油模型 </summary>
+        [Description("黑油模型")]
+        BLACKOIL = 0,
+        /// <summary> 油水模型 </summary>
+        [Description("油水模型")]
+        OILWATER,
+        /// <summary> 气水模型 </summary>
+        [Description("气水模型")]
+        GASWATER,
+        /// <summary> 挥发油模型 </summary>
+        [Description("挥发油模型")]
+        HFOIL
+
+    }
+
+    /// <summary> 孔隙类型 </summary>
+    public enum DoubleType
+    {
+        /// <summary> 单孔介质 </summary>
+        [Description("单孔介质")]
+        DKJZMX = 0,
+        /// <summary> 双孔单渗 </summary>
+        [Description("双孔单渗")]
+        SKDSMX,
+        /// <summary> 双孔双渗 </summary>
+        [Description("双孔双渗")]
+        SKSSMX,
+    }
 
 
     public class RunLogModel
@@ -260,7 +429,7 @@ namespace OPT.Product.SimalorManager
             set { _state = value; }
         }
 
-        private string  _key;
+        private string _key;
 
         public string Key
         {
@@ -283,9 +452,9 @@ namespace OPT.Product.SimalorManager
             get { return _desc; }
             set { _desc = value; }
         }
-        
-        
-        
+
+
+
     }
 
 }

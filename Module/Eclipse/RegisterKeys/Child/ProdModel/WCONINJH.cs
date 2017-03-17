@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 注入井 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class WCONINJH : ItemsKey<WCONINJH.Item>,IProductEvent
     {
         public WCONINJH(string _name)

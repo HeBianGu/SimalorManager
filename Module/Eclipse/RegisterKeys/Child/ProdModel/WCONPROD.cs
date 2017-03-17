@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class WCONPROD : ItemsKey<WCONPROD.ItemHY>,IProductEvent
     {
         public WCONPROD(string _name)
@@ -251,6 +251,8 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             }
 
         }
+
+  
     }
 
 

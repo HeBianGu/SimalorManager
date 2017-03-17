@@ -1,45 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="OPT.Product.SimalorManager.DatesKeyService">
-    <Position X="1.25" Y="4" Width="2.75" />
+  <Class Name="OPT.Product.SimalorManager.DatesKeyService" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAQAAAAAAIAAAA=</HashCode>
+      <HashCode>AAAAAAAAAEAAgAAAAAAAAAAAAAAEAAAQAAABAAIAAAA=</HashCode>
       <FileName>Service\DatesKeyService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OPT.Product.SimalorManager.ServiceFactory&lt;T&gt;">
-    <Position X="3.5" Y="0.5" Width="2" />
+    <Position X="6.75" Y="2.75" Width="2" />
     <TypeIdentifier>
       <HashCode>ACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAEAAAA=</HashCode>
       <FileName>Utils\CacheFactory\ServiceFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OPT.Product.SimalorManager.FileFactoryService">
-    <Position X="6" Y="0.5" Width="3" />
+  <Class Name="OPT.Product.SimalorManager.FileFactoryService" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAUAAAAAAAAAQAAAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>Service\FileFactoryService.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OPT.Product.SimalorManager.IncludeKeyService">
-    <Position X="6" Y="2.25" Width="3" />
+  <Class Name="OPT.Product.SimalorManager.IncludeKeyService" Collapsed="true">
+    <Position X="10.5" Y="1.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>Service\IncludeKeyService.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OPT.Product.SimalorManager.OutPutService">
-    <Position X="5.5" Y="4" Width="2.75" />
+  <Class Name="OPT.Product.SimalorManager.OutPutService" Collapsed="true">
+    <Position X="9" Y="6" Width="2" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAAAAAAgAAAABAAAAAAAAAIAAAAAAAAAAA=</HashCode>
       <FileName>Service\OutPutService.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OPT.Product.SimalorManager.RestartService">
-    <Position X="0.5" Y="0.5" Width="2.5" />
+  <Class Name="OPT.Product.SimalorManager.Service.ConfigerResourceService" Collapsed="true">
+    <Position X="3.25" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAASAAAAAAA=</HashCode>
+      <FileName>Service\ConfigerResourceService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.Service.EngineConfigerService" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAABAAAAAAAABAAAAAAAFAQAQ=</HashCode>
+      <FileName>Service\EngineConfigerService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.RestartEclipseService" Collapsed="true">
+    <Position X="2.75" Y="3" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAAAQAAAUCQAAQAAAAAAAAAACAAwIAAAAAAA=</HashCode>
-      <FileName>Service\RestartService.cs</FileName>
+      <FileName>Service\RestartEclipseService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.Service.RestartSimONService" Collapsed="true">
+    <Position X="2.75" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAQAAAQAQAAAACAAACAAAACAAgIACAAAAA=</HashCode>
+      <FileName>Service\RestartSimONService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.SimDataConvertService" Collapsed="true">
+    <Position X="5.75" Y="7.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAQAAAAAACAAAAAAEAAAAAA=</HashCode>
+      <FileName>Service\SimDataConvertService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OPT.Product.SimalorManager.Service.SimONDataService" Collapsed="true">
+    <Position X="3.5" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAEAAAAAAAAAAEAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Service\SimONDataService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

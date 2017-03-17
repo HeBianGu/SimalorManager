@@ -42,11 +42,28 @@ namespace OPT.Product.SimalorManager
 
         }
 
-        public PetrelData(string _filePath, WhenUnkownKey UnkownEvent, bool isReadInclud = true)
-            : base(_filePath, UnkownEvent, isReadInclud)
+        //public PetrelData(string _filePath, WhenUnkownKey UnkownEvent, Predicate<INCLUDE> isReadInclud)
+        //    : base(_filePath, UnkownEvent, isReadInclud)
+        //{
+
+        //}
+           public PetrelData(string _filePath, string mmfDirPath = null)
+            : base(_filePath, mmfDirPath)
         {
 
         }
+
+        public PetrelData(string _filePath, WhenUnkownKey UnkownEvent, string mmfDirPath = null)
+            : base(_filePath, UnkownEvent, l => true, mmfDirPath)
+        {
+
+        }
+
+        public PetrelData(string _filePath, WhenUnkownKey UnkownEvent, Predicate<INCLUDE> isReadInclud, string mmfDirPath = null)
+            : base(_filePath, UnkownEvent, isReadInclud, mmfDirPath)
+        {
+        }
+
 
         INCLUDE include;
 
@@ -70,9 +87,8 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 写入文件 文件全路径 </summary>
-        public override void SaveAs(string pathName)
+        public override void SaveAsExtend(string pathName)
         {
-
             include.WriteToFile(pathName);
 
         }

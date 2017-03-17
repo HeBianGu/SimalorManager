@@ -68,7 +68,7 @@ namespace OPT.Product.SimalorManager
         {
             //  遍历所有Key注册关键字
             Type[] classes = Assembly.GetExecutingAssembly().GetTypes();
-           
+
             foreach (var item in classes)
             {
                 #region - 初始化公用关键字 -
@@ -83,6 +83,8 @@ namespace OPT.Product.SimalorManager
                 if (item.Namespace == _eclipseKeyFactory.Publickeynamespace)
                 {
                     _eclipseKeyFactory.BuildRegister(item);
+
+                    _simONKeyFactory.InitRegisterFromEclipse(item);
                 }
 
                 #endregion
@@ -132,7 +134,33 @@ namespace OPT.Product.SimalorManager
                     return _publicKeyFactory.CreateKey<BaseKey>(keyName) as T;
                 }
 
+                //  如果是Eclipse注册关键字 直接创建
+                if (_eclipseKeyFactory.IsRegisterKey(keyName))
+                {
+                    return _eclipseKeyFactory.CreateKey<BaseKey>(keyName) as T;
+                }
+
                 //  如果都不是走后面UnkownKey
+            }
+            else if (simType == SimKeyType.EclipseAndSimON)
+            {
+                //  如果是Eclipse注册关键字 直接创建
+                if (_eclipseKeyFactory.IsRegisterKey(keyName))
+                {
+                    return _eclipseKeyFactory.CreateKey<BaseKey>(keyName) as T;
+                }
+
+                //  如果是SimON注册关键字 直接创建
+                if (_simONKeyFactory.IsRegisterKey(keyName))
+                {
+                    return _simONKeyFactory.CreateKey<BaseKey>(keyName) as T;
+                }
+
+                //  不是Eclipse注册关键字 在公用关键字中找
+                if (_publicKeyFactory.IsRegisterKey(keyName))
+                {
+                    return _publicKeyFactory.CreateKey<BaseKey>(keyName) as T;
+                }
             }
 
             UnkownKey unkownKey = new UnkownKey(KeyChecker.FormatKey(keyName));
@@ -158,10 +186,11 @@ namespace OPT.Product.SimalorManager
         }
 
 
-
-
     }
 
+
+
+    /// <summary> 关键字工厂基类 </summary>
     public class BaseKeyFactory
     {
         public BaseKeyFactory()
@@ -199,9 +228,9 @@ namespace OPT.Product.SimalorManager
         /// <summary> 通过关键字名称找到对应名称的类型 </summary>
         public T CreateKey<T>(string keyName) where T : BaseKey
         {
-            keyName = KeyChecker.FormatKey(keyName);
+            //keyName = KeyChecker.FormatKey(keyName);
 
-            Type objType = TypeCacheFactory.GetInstance().GetType(_publickeynamespace + "." + keyName, false);
+            Type objType = TypeCacheFactory.GetInstance().GetType(_publickeynamespace + "." + KeyChecker.FormatKey(keyName), false);
 
             object obj = Activator.CreateInstance(objType, new object[] { keyName });
 
@@ -225,6 +254,7 @@ namespace OPT.Product.SimalorManager
 
     }
 
+    /// <summary> 公用关键字工厂基类 </summary>
     public class PublicKeyFactory : BaseKeyFactory
     {
         string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys";
@@ -235,6 +265,7 @@ namespace OPT.Product.SimalorManager
         }
     }
 
+    /// <summary> Eclipse关键字工厂基类 </summary>
     public class EclipseKeyFactory : BaseKeyFactory
     {
         string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys.Eclipse";
@@ -358,8 +389,7 @@ namespace OPT.Product.SimalorManager
                 }
 
 
-
-                if (k.SimKeyType == SimKeyType.Eclipse)
+                if (k.SimKeyType == SimKeyType.EclipseAndSimON || k.SimKeyType == SimKeyType.Eclipse)
                 {
                     //  表格形式关键字
                     if (item.IsSubclassOf(typeof(TableKey)))
@@ -374,6 +404,7 @@ namespace OPT.Product.SimalorManager
         }
     }
 
+    /// <summary> SimON关键字工厂基类 </summary>
     public class SimONKeyFactory : BaseKeyFactory
     {
         string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys.SimON";
@@ -381,6 +412,66 @@ namespace OPT.Product.SimalorManager
         public SimONKeyFactory()
         {
             base.Publickeynamespace = _publickeynamespace;
+        }
+
+
+        #region - 表格形式关键字工厂 -
+
+        //  关键字注册表
+        private List<string> keyTableSimONConfiger = new List<string>();
+        /// <summary> 所有解析的SimON表格形式关键字 </summary>
+        public List<string> KeyTableSimONConfiger
+        {
+            get { return keyTableSimONConfiger; }
+            set { keyTableSimONConfiger = value; }
+        }
+
+        #endregion
+
+        public override void BuildRegister(Type item)
+        {
+            var objs = item.GetCustomAttributes(typeof(KeyAttribute), false);
+
+            this.AddRegionList(item.Name);
+
+
+            if (objs != null && objs.Length > 0)
+            {
+                KeyAttribute k = objs[0] as KeyAttribute;
+
+                if (k.SimKeyType == SimKeyType.EclipseAndSimON || k.SimKeyType == SimKeyType.SimON)
+                {
+                    //  表格形式关键字
+                    if (item.IsSubclassOf(typeof(TableKey)))
+                    {
+                        this.KeyTableSimONConfiger.Add(item.Name);
+                    }
+                }
+            }
+
+        }
+
+
+        
+        /// <summary> 需要从Eclipse命名空间初始化的项 </summary> 
+        public void InitRegisterFromEclipse(Type item)
+        {
+            var objs = item.GetCustomAttributes(typeof(KeyAttribute), false);
+
+            if (objs != null && objs.Length > 0)
+            {
+                KeyAttribute k = objs[0] as KeyAttribute;
+
+                if (k.SimKeyType == SimKeyType.EclipseAndSimON || k.SimKeyType == SimKeyType.SimON)
+                {
+                    //  表格形式关键字
+                    if (item.IsSubclassOf(typeof(TableKey)))
+                    {
+                        this.KeyTableSimONConfiger.Add(item.Name);
+                    }
+                }
+            }
+
         }
     }
 

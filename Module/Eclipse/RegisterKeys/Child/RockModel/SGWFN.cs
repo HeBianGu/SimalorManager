@@ -18,6 +18,7 @@
 */
 #endregion
 using OPT.Product.SimalorManager.Base.AttributeEx;
+using OPT.Product.SimalorManager.RegisterKeys.SimON;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 油水相渗 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
+     
     public class SGWFN : RegionKey<SGWFN.Item>
     {
         public SGWFN(string _name)
@@ -38,33 +39,63 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         }
 
         /// <summary> 分区数量 </summary>
-        public int RegionCount=0;
+        public int RegionCount = 0;
+
+        
+        /// <summary> 转换成SWGF </summary>
+        public List<SWGF> ConvertTo()
+        {
+            List<SWGF> swgfs = new List<SWGF>();
+            foreach (var items in this.Regions)
+            {
+                SWGF swgf = new SWGF("SWGF");
+                SWGF.Region r = new RegionKey<SWGF.Item>.Region(items.RegionIndex);
+                swgf.Regions.Add(r);
+
+                for (int i = 0; i < items.Count; i++)
+                {
+                    var item = items[items.Count - i-1];
+
+                    SWGF.Item it = new SWGF.Item();
+                    it.sbhd0 = (1 - item.hqbhd0.ToDouble()).ToString();
+                    it.sdxdstl1 = item.sxxdstl2;
+                    it.qxdxdstl2 = item.qxxdstl1;
+                    it.mgyl3 = item.mgyl;
+                    r.Add(it);
+                }
+              
+                   
+
+                swgfs.Add(swgf);
+            }
+
+            return swgfs;
+        }
 
 
-        public class Item: OPT.Product.SimalorManager.ItemNormal
+        public class Item : OPT.Product.SimalorManager.ItemNormal
         {
             /// <summary> 含气饱和度 </summary>
             public string hqbhd0;
-           /// <summary> 气相相对渗透率 </summary>
+            /// <summary> 气相相对渗透率 </summary>
             public string qxxdstl1;
-           /// <summary> 水相相对渗透率 </summary>
+            /// <summary> 水相相对渗透率 </summary>
             public string sxxdstl2;
-           /// <summary> 气水毛管压力 </summary>
+            /// <summary> 气水毛管压力 </summary>
             public string mgyl;
 
 
-           string formatStr = "{0}{1}{2}{3}";
+            string formatStr = "{0}{1}{2}{3}";
 
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, hqbhd0.ToDD(), qxxdstl1.ToDD(), sxxdstl2.ToDD(), mgyl.ToDD());
+                return string.Format(formatStr, hqbhd0.ToSaveLockDD(), qxxdstl1.ToSaveLockDD(), sxxdstl2.ToSaveLockDD(), mgyl.ToSaveLockDD());
             }
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {
@@ -96,8 +127,8 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                 {
                     hqbhd0 = this.hqbhd0,
                     qxxdstl1 = this.qxxdstl1,
-                    sxxdstl2=this.sxxdstl2,
-                    mgyl=this.mgyl
+                    sxxdstl2 = this.sxxdstl2,
+                    mgyl = this.mgyl
                 };
                 return item;
             }

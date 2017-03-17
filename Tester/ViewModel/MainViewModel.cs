@@ -20,6 +20,9 @@ namespace Tester.ViewModel
         public MainViewModel()
         {
             this.SearchFileHandler = new DelegateCommand(this.SearchFile);
+
+            this.SaveAsHandler = new DelegateCommand(this.SaveFile);
+
         }
 
         private string _filePath = "--请浏览数模文件路径--";
@@ -58,6 +61,8 @@ namespace Tester.ViewModel
                 RaisePropertyChanged("EclipseData");
             }
         }
+
+
 
         private List<BaseKey> _bkSource = new List<BaseKey>();
 
@@ -170,14 +175,14 @@ namespace Tester.ViewModel
             }
         }
 
-        private  List<RunLogModel> _runLog=new List<RunLogModel>();
+        private List<RunLogModel> _runLog = new List<RunLogModel>();
 
-        public  List<RunLogModel> RunLog
+        public List<RunLogModel> RunLog
         {
             get { return _runLog; }
             set { _runLog = value; }
         }
-         
+
 
 
         void SearchFile()
@@ -191,13 +196,26 @@ namespace Tester.ViewModel
 
             if (!File.Exists(this._filePath)) return;
 
-            //  加载进度窗体
-            RunLogWindow runLogWindow = new RunLogWindow(this);
 
-            runLogWindow.Show();
+            //var ut = EclipseDataService.GetUnitType(this.FilePath);
+
+            //MessageBox.Show(ut.ToString());
+            //return;
+
+            ////  加载进度窗体
+            //RunLogWindow runLogWindow = new RunLogWindow(this);
+
+            //runLogWindow.Show();
 
 
-            EclipseData = FileFactoryService.Instance.ThreadLoadResize(this._filePath);
+
+
+
+            //EclipseData ecl = FileFactoryService.Instance.ThreadLoadResize(this._filePath);
+
+            //this.EclipseData = SimDataConvertService.Instance.ConvertToSimON(ecl);
+
+            SimONData sim = FileFactoryService.Instance.ThreadLoadSimONResize(this._filePath);
 
             //this.EclipseData = new EclipseData();
 
@@ -205,16 +223,21 @@ namespace Tester.ViewModel
 
             //this.EclipseData.Load(this._filePath);
 
-           //END end= this.EclipseData.Key.Find<END>();
+            //END end= this.EclipseData.Key.Find<END>();
 
-           // if(end!=null)
-           // {
-           //     end.ClearAllAfter();
-           // }
+            // if(end!=null)
+            // {
+            //     end.ClearAllAfter();
+            // }
 
-            BkSource = _eclipseData.Key.FindAll<BaseKey>();
+            List<BaseKey> bb = sim.Key.FindAll<BaseKey>();
 
-            IteamSel = BkSource.FirstOrDefault();
+            var ssr = bb.FindAll(l => l.ParentKey == null);
+
+            BkSource = sim.Key.FindAll<BaseKey>();
+
+            if (BkSource.Count > 0)
+                IteamSel = BkSource.FirstOrDefault();
 
             Total = BkSource.Count.ToString();
 
@@ -224,7 +247,7 @@ namespace Tester.ViewModel
 
             List<BaseKey> KonwKeys = BkSource.FindAll(l => l.IsUnKnowKey);
 
-            KownTotalType =KonwKeys.GroupBy(l => l.Name.Split(' ')[0]).Count().ToString();
+            KownTotalType = KonwKeys.GroupBy(l => l.Name.Split(' ')[0]).Count().ToString();
 
             UnKownTotal = unKonwKeys.Count.ToString();
 
@@ -232,9 +255,24 @@ namespace Tester.ViewModel
 
         }
 
+        void SaveFile()
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+
+            dlg.Filter = "文本文件(*.dat)|*.dat|所有文件(*.*)|*.*";
+            dlg.FileName = this._eclipseData.FileName;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                this._eclipseData.SaveAs(dlg.FileName);
+            }
+        }
+
         public DelegateCommand SearchFileHandler { get; set; }
 
         public DelegateCommand SelectItemChanged { get; set; }
+
+        public DelegateCommand SaveAsHandler { get; set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

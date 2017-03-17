@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tester.View;
 using Tester.ViewModel;
 
 namespace Tester
@@ -25,12 +26,23 @@ namespace Tester
     public partial class MainWindow : Window
     {
         MainViewModel _viewModel = new MainViewModel();
+
+        TestModel t;
         public MainWindow()
         {
             InitializeComponent();
 
             this.DataContext = _viewModel;
 
+            //t = new TestModel();
+
+            //t.MyProperty = "dddddd";
+
+            //Window1ViewModel vm = new Window1ViewModel(t);
+
+            //Window1 w = new Window1(vm);
+
+            //w.Show();
 
         }
 

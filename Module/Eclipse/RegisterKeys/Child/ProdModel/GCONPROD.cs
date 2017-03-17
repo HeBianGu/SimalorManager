@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 生产井组控制 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class GCONPROD : ItemsKey<GCONPROD.Item>
     {
         public GCONPROD(string _name)

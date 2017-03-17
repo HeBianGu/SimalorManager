@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+     
     public class THPRESFT : ItemsKey<THPRESFT.Item>
     {
         public THPRESFT(string _name)

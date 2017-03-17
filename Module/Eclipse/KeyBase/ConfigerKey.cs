@@ -28,14 +28,15 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager
 {
-    /// <summary> 写入方法是直接调用this.ToString()方法 </summary>
-    public abstract class ConfigerKey : Key
+    /// <summary>配置信息解析抽象类型 </summary>
+    public abstract class ConfigerKey : BaseKey
     {
         public ConfigerKey(string _name)
             : base(_name)
         {
-            this.BuilderHandler = (l, k) =>
+            this.BuilderHandler += (l, k) =>
             {
+
                 CmdToItems();
 
                 return this;
@@ -50,7 +51,7 @@ namespace OPT.Product.SimalorManager
             set { isReadAllLine = value; }
         }
 
-        void CmdToItems()
+        protected virtual void CmdToItems()
         {
             string str = null;
 
@@ -86,13 +87,47 @@ namespace OPT.Product.SimalorManager
         /// <summary> 只调用ToString()方法 </summary>
         public override void WriteKey(StreamWriter writer)
         {
+            WriteKeyMethod(writer);
+            this.Lines.Clear();
+            base.WriteKey(writer);
+        }
+
+        /// <summary> 提供子类扩展的写当前关键字方法 </summary>
+        public virtual void WriteKeyMethod(StreamWriter writer)
+        {
             writer.WriteLine();
-            writer.WriteLine(this.Name);
+            writer.WriteLine(this.GetType().Name);
             writer.WriteLine(this.ToString());
-            writer.WriteLine();
         }
 
 
         public abstract void Build(List<string> newStr);
+
+    }
+
+
+    /// <summary> 将多行合并一行的配置信息解析抽象类型 </summary>
+    public abstract class MergeConfiger : ConfigerKey
+    {
+        public MergeConfiger(string _name)
+            : base(_name)
+        {
+        }
+
+        protected override void CmdToItems()
+        {
+            StringBuilder str = new StringBuilder();
+
+            this.Lines.RemoveAll(l => !l.IsWorkLine());
+
+            for (int i = 0; i < Lines.Count; i++)
+            {
+                str.Append(Lines[i].ClearLine() + " ");
+            }
+
+            List<string> newStr = str.ToString().EclExtendToArray();
+
+            Build(newStr);
+        }
     }
 }

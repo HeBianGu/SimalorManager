@@ -18,6 +18,7 @@
 */
 #endregion
 using OPT.Product.SimalorManager.Base.AttributeEx;
+using OPT.Product.SimalorManager.Service;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,7 +29,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 岩石特性 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class ROCK : RegionKey<ROCK.Item>
     {
         public ROCK(string _name)
@@ -49,13 +49,41 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, ckyl.ToDD(), ysxs.ToDD());
+                if (EngineConfigerService.Instance.SaveKeyTypeLock == SimKeyType.Eclipse)
+                {
+                    return string.Format(formatStr, ckyl.ToSaveLockDD(), ysxs.ToSaveLockDD());
+                }
+                else if (EngineConfigerService.Instance.SaveKeyTypeLock == SimKeyType.SimON)
+                {
+                    // HTodo  ：因为内核目前不支持NA作为这些参数的默认值且水相PVT不同油田数据很接近，以上默认值参考了Eclipse。岩石压缩性质ROCK 关键字也做类似处理，参考压力1.0132（公制，bar）及14.7（英制，psi），岩石压缩系数0（公英制单位都是）。
+ 
+                    string ckyl_temp = null;
+                    string ysxs_temp = null;
+
+                    if (EngineConfigerService.Instance.Unittype==UnitType.METRIC)
+                    {
+                        ckyl_temp = ckyl.ToSDD().Contains(KeyConfiger.SimONDefalt) ? "1.0132" : ckyl;
+                    }
+                    else
+                    {
+                        ckyl_temp = ckyl.ToSDD().Contains(KeyConfiger.SimONDefalt) ? "14.7" : ckyl;
+                    }
+
+                    ysxs_temp = ysxs.ToSDD().Contains(KeyConfiger.SimONDefalt) ? "0" : ysxs;
+
+                    return string.Format(formatStr, ckyl_temp.ToSaveLockDD(), ysxs_temp.ToSaveLockDD());
+                }
+                else
+                {
+                    return string.Format(formatStr, ckyl.ToSaveLockDD(), ysxs.ToSaveLockDD());
+                }
+
+               
             }
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {
@@ -72,7 +100,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     }
                 }
             }
-
 
 
             public override object Clone()

@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> PRVD </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class PRVD : RegionKey<PRVD.Item>
     {
         public PRVD(string _name)
@@ -49,13 +48,12 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, sd.ToDD(), yl.ToDD());
+                return string.Format(formatStr, sd.ToSaveLockDD(), yl.ToSaveLockDD());
             }
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

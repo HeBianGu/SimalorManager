@@ -1,17 +1,22 @@
-﻿using System;
+﻿using OPT.Product.SimalorManager.Base.AttributeEx;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
 namespace OPT.Product.SimalorManager
 {
     /// <summary> 带分区的关键字 </summary>
-    public abstract class RegionKey<T> : Key where T : Item, new()
+    public abstract class RegionKey<T> : Key, IRegionInterface where T : Item, new()
     {
         public RegionKey(string _name)
             : base(_name)
         {
-
+            this.EachLineCmdHandler += l =>
+            {
+                return l.Trim();
+            };
         }
 
         public int RegionCount = 0;
@@ -84,19 +89,27 @@ namespace OPT.Product.SimalorManager
 
             Region pRegion = new Region(1);
 
+            this.Regions.Add(pRegion);
+
+            // Todo ：删除所有无效行 不包括分区行
+            this.Lines.RemoveAll(l => !l.IsWorkLine() && !l.IsEndLine());
+
             for (int i = 0; i < Lines.Count; i++)
             {
-                str = Lines[i].Trim();
+                str = Lines[i].ClearLine().Trim();
 
                 //  读到结束符 增加分区
                 if (str.StartsWith(KeyConfiger.EndFlag) && str.EndsWith(KeyConfiger.EndFlag))
                 {
-                    ////  如果是最后一行的结束符 退出循环
-                    //if (i == Lines.Count - 1) break;
+                    if (!this.Regions.Contains(pRegion) && pRegion.Count > 0)
+                    {
+                        //  只是结束符时 
+                        this.Regions.Add(pRegion);
+                    }
 
+                    //  如果是最后一行的结束符 退出循环
+                    if (i == Lines.Count - 1) break;
 
-                    //  只是结束符时 
-                    this.Regions.Add(pRegion);
                     regionNum++;
                     pRegion = new Region(regionNum);
                     continue;
@@ -110,7 +123,6 @@ namespace OPT.Product.SimalorManager
                     if (newStr.Count > 0)
                     {
                         T pitem = new T();
-
                         pitem.Build(newStr);
                         //  标记行的ID位置
                         //Lines[i] = pitem.ID;
@@ -122,9 +134,14 @@ namespace OPT.Product.SimalorManager
                     }
 
                     //  包含结束符创建分区
-                    if (str.EndsWith(KeyConfiger.EndFlag))
+                    //if (str.EndsWith(KeyConfiger.EndFlag))
+                    if (str.Contains(KeyConfiger.EndFlag))
                     {
-                        this.Regions.Add(pRegion);
+                        if (!this.Regions.Contains(pRegion))
+                        {
+                            //  只是结束符时 
+                            this.Regions.Add(pRegion);
+                        }
                         regionNum++;
                         pRegion = new Region(regionNum);
 
@@ -137,6 +154,7 @@ namespace OPT.Product.SimalorManager
         /// <summary> 获取项字符串集合 </summary>
         protected virtual void CmdGetWellLines()
         {
+
             string s = string.Empty;
 
             this.Lines.Clear();
@@ -235,5 +253,32 @@ namespace OPT.Product.SimalorManager
                 return newReion;
             }
         }
+
+        public void TransToSimONRegion()
+        {
+            foreach (Region r in this.regions)
+            {
+                var key = KeyConfigerFactroy.Instance.CreateKey<BaseKey>(this.Name, SimKeyType.Eclipse);
+                //  拆分分区节点
+                this.ParentKey.Add(key);
+
+                RegionKey<T> rkey = key as RegionKey<T>;
+
+                //  添加分区
+                rkey.Regions.Add(r);
+
+            }
+
+            //  删除本分区
+            this.ParentKey.Delete(this);
+        }
+    }
+
+
+    /// <summary> 分区接口 </summary>
+    interface IRegionInterface
+    {
+        /// <summary> 转换成SimON格式的分区 </summary>
+        void TransToSimONRegion();
     }
 }

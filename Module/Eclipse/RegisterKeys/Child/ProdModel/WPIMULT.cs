@@ -31,7 +31,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 井指数乘子修改 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class WPIMULT : ItemsKey<WPIMULT.Item>,IProductEvent
     {
         public WPIMULT(string _name)
@@ -63,7 +62,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
         public class Item : OPT.Product.SimalorManager.Item, IProductItem
         {
-
             /// <summary> 井名 </summary>
             public string jm0;
             /// <summary> 井指数乘子 </summary>
@@ -98,7 +96,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

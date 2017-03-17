@@ -24,7 +24,8 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
+
+    /// <summary> 公制单位 </summary>
     public class METRIC : Key
     {
         public METRIC(string _name)
@@ -33,13 +34,13 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
         }
 
-        private MetricType metrictype;
-        /// <summary> 流体类型 </summary>
-        public MetricType Metrictype
-        {
-            get { return metrictype; }
-            set { metrictype = value; }
-        }
+        //private MetricType metrictype;
+        ///// <summary> 流体类型 </summary>
+        //public MetricType Metrictype
+        //{
+        //    get { return metrictype; }
+        //    set { metrictype = value; }
+        //}
 
         public override void WriteKey(System.IO.StreamWriter writer)
         {
@@ -49,46 +50,31 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             base.WriteKey(writer);
         }
 
-        void CmdToStr()
-        {
-            this.Lines.Clear();
+        //void CmdToStr()
+        //{
+        //    this.Lines.Clear();
 
-            switch (Metrictype)
-            {
-                case MetricType.BLACKOIL:
-                    this.Lines.Add("GAS");
-                    this.Lines.Add("OIL");
-                    this.Lines.Add("WATER");
-                    this.Lines.Add("DISGAS");
-                    break;
-                case MetricType.OILWATER:
-                    this.Lines.Add("OIL");
-                    this.Lines.Add("WATER");
-                    break;
-                case MetricType.GASWATER:
-                    this.Lines.Add("GAS");
-                    this.Lines.Add("WATER");
-                    break;
-                default:
-                    break;
-            }
-        }
+        //    switch (Metrictype)
+        //    {
+        //        case MetricType.BLACKOIL:
+        //            this.Lines.Add("GAS");
+        //            this.Lines.Add("OIL");
+        //            this.Lines.Add("WATER");
+        //            this.Lines.Add("DISGAS");
+        //            break;
+        //        case MetricType.OILWATER:
+        //            this.Lines.Add("OIL");
+        //            this.Lines.Add("WATER");
+        //            break;
+        //        case MetricType.GASWATER:
+        //            this.Lines.Add("GAS");
+        //            this.Lines.Add("WATER");
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
-
-
-        /// <summary> 流体类型 </summary>
-        public enum MetricType
-        {
-            [Description("黑油模型")]
-            BLACKOIL = 0,
-            [Description("油水模型")]
-            OILWATER,
-            [Description("气水模型")]
-            GASWATER,
-            [Description("挥发油模型")]
-            HFOIL
-            
-        }
     }
 
 

@@ -5,6 +5,8 @@ using System.Text;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
+
+    /// <summary> 英制单位 </summary>
     public class FIELD : Key
     {
         public FIELD(string _name)

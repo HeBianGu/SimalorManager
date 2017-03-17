@@ -35,7 +35,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 门槛压力 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class THPRES : ItemsKey<THPRES.Item>
     {
         public THPRES(string _name)
@@ -73,7 +72,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

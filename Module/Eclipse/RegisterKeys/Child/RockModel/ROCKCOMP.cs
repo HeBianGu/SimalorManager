@@ -29,7 +29,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 岩石压实参数 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class ROCKCOMP : ConfigerKey
     {
         public ROCKCOMP(string _name)

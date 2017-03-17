@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,13 +28,16 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> INCLUDE 关键字 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
+
     public class INCLUDE : BaseKey, IRootNode
     {
         public INCLUDE(string _name)
             : base(_name)
         {
-
+            this.BuilderHandler += (l, k) =>
+                {
+                    return this;
+                };
         }
 
         string format = @"'{0}'  /";
@@ -86,7 +90,36 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         {
             string strTemp = string.Empty;
 
-            //  查找INCLUDE文件
+            int index = this.Name.Trim().IndexOf(' ');
+
+
+            if (index > 0)
+            {
+                string nameValues = this.Name.Substring(index).Trim();
+
+                //  过滤第一条信息
+                this.Lines.Add(nameValues);
+
+                this.Lines.RemoveAll(l => !l.IsWorkLine());
+
+                if (this.Lines.Count > 0)
+                {
+                    //  加载文件名
+                    //fileName = this.Lines[0].Split(new char[] { '\'', '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    fileName = strTemp.Trim(new char[] { '\'', '/', ' ' });
+                    //  加载文件路径
+                    filePath = Path.GetDirectoryName(this.BaseFile.FilePath) + "\\" + fileName.Trim();
+
+                    //  不读取INCLUDE文件
+                    if (!this.BaseFile.IsReadIncHandle(this)) return this;
+
+                    this.ReadFromStream();
+
+                    return this;
+                }
+            }
+
+            //  从下一行有效数据读取
             while (!reader.EndOfStream)
             {
                 strTemp = reader.ReadLine().TrimEnd();
@@ -94,23 +127,22 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                 if (strTemp.IsWorkLine())
                 {
                     //  加载文件名
-                    fileName = strTemp.Split(new char[] { '\'', '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    //fileName = strTemp.Split(new char[] { '\'', '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    fileName = strTemp.Trim(new char[] { '\'', '/', ' ' });
                     //  加载文件路径
-                    filePath = Path.GetDirectoryName(this.BaseFile.FilePath) + "\\" + fileName;
+                    filePath = Path.GetDirectoryName(this.BaseFile.FilePath) + "\\" + fileName.Trim();
                     break;
                 }
             }
 
-            if (!this.BaseFile.IsReadIclude)
-                return null;
-
+            //  不读取INCLUDE文件
+            if (!this.BaseFile.IsReadIncHandle(this)) return this;
 
             this.ReadFromStream();
 
-            return null;
+            return this;
 
         }
-
 
         /// <summary> 从文件中创建INCLUDE  </summary>
         public static INCLUDE LoadFromFile(string pfilePath)
@@ -127,8 +159,9 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         {
             using (FileStream fileStream = new FileStream(newFile, FileMode.Create, FileAccess.Write))
             {
-                using (StreamWriter newWriter = new StreamWriter(fileStream))
+                using (StreamWriter newWriter = new StreamWriter(fileStream, KeyConfiger.SimONEncoder))
                 {
+                    newWriter.WriteLine(this.FielDetail);
                     //  写子关键字
                     foreach (BaseKey key in this.Keys)
                     {
@@ -138,35 +171,117 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             }
         }
 
+        /// <summary> 说明 </summary>
+        public string FielDetail
+        {
+            get
+            {
+                var keys = this.FindAll<BaseKey>();
+                //  删除本节点
+                keys.Remove(this);
+
+                //  查找所有类型的名称
+                //List<string> names = keys.Select(l => l.GetType().Name.Trim()).ToList();
+
+                var group = keys.GroupBy(l => l.GetType().Name.Trim());
+
+                List<string> names= group.Select(l => l.First().GetType().Name + "(" + l.Count() + ")").ToList();
+
+                StringBuilder sb = new StringBuilder();
+
+                string version = string.Empty;
+                try
+                {
+                    version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+                }
+                catch (Exception)
+                {
+                    
+                }
+                  
+
+                //  添加到文本中
+                names.ForEach(l => sb.Append(l.ToD()));
+
+                if (this.BaseFile != null)
+                {
+                    return string.Format(KeyConfiger.IncludeFileDetial, this.fileName, this.FilePath, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), this.BaseFile.FilePath, sb.ToString(), version);
+
+                }
+                else
+                {
+                    return string.Format(KeyConfiger.IncludeFileDetial, this.fileName, this.FilePath, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), string.Empty, sb.ToString(), version);
+
+                }
+
+            }
+
+            //get
+            //{
+            //    return string.Empty;
+            //}
+        }
+
+
+        /// <summary> 从流中读取文件 </summary>
         public void ReadFromStream()
         {
             string strTemp = string.Empty;
 
+            if (string.IsNullOrEmpty(Path.GetExtension(this.FilePath)))
+            {
+                this.FilePath = this.FilePath.Trim() + ".dat";
+            }
+
+
             //  打开子文件并读取子文件关键字内容
             using (FileStream fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
             {
-                using (StreamReader streamRead = new StreamReader(fileStream))
+                //using (StreamReader streamRead = new StreamReader(fileStream, System.Text.Encoding.GetEncoding("GB2312")))
+                using (StreamReader streamRead = new StreamReader(fileStream, System.Text.Encoding.Default))
                 {
                     while (!streamRead.EndOfStream)
                     {
                         //  直接调用基类读取方法
                         base.ReadKeyLine(streamRead);
-
                     }
                 }
             }
+
+            if (this.Keys.Count == 0) return;
+
+            //  触发最后一个关键字的构造
+            BaseKey lastKey = this.Keys.Last();
+
+            if (lastKey.BuilderHandler != null)
+            {
+                lastKey.BuilderHandler(lastKey, lastKey);
+            }
+
         }
 
         /// <summary> 写入关键字内容的方法 = 创建新文件将子节点写入子文件中 </summary>
         public override void WriteKey(StreamWriter writer)
         {
             //  写主文件
-            writer.WriteLine(this.Name);
-            writer.WriteLine(string.Format(format, this.fileName.GetFileName()));
             writer.WriteLine();
+            writer.WriteLine(this.Name);
 
-            if (!IsCreateFile)
-                return;
+            if (this.BaseFile != null && this.BaseFile.SimKeyType == SimKeyType.SimON)
+            {
+                //  SimON的INCLUDE
+                writer.WriteLine(string.Format("'{0}'", this.fileName.GetFileName()));
+            }
+            else
+            {
+                writer.WriteLine(string.Format(format, this.fileName.GetFileName()));
+            }
+
+
+            ////  不读取INCLUDE文件
+            //if (!this.BaseFile.IsReadIclude) return;
+
+            if (!IsCreateFile) return;
 
             //  写入子文件
             FileStream stream = writer.BaseStream as FileStream;
@@ -174,19 +289,19 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             //  记录新文件路径
             string newFile = stream.Name.GetFileFullPathEx(this.fileName);
 
-            bool isExist = this.Keys.Exists(l => l is BigDataKey);
+            //bool isExist = this.Keys.Exists(l => l is BigDataKey);
 
-            //  存在且不读取大数据 = 拷贝文件
-            if (isExist && !this.BaseFile.IsReadBigData)
-            {
-                CopyFileTo(newFile);
-            }
-            else
-            {
+            ////  存在且不读取大数据 = 拷贝文件
+            //if (isExist && !this.BaseFile.IsReadBigData)
+            //{
+            //    CopyFileTo(newFile);
+            //}
+            //else
+            //{
 
-                WriteToFile(newFile);
+            WriteToFile(newFile);
 
-            }
+            //}
 
 
 
@@ -203,6 +318,13 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 File.Copy(oldFile, newPath, true);
             }
+        }
+
+
+        /// <summary> 保存成文件 </summary>
+        public void Save()
+        {
+            this.WriteToFile(this.filePath);
         }
 
 

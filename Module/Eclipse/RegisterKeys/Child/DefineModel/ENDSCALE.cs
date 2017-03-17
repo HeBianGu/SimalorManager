@@ -23,7 +23,6 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class ENDSCALE : Key
     {
         public ENDSCALE(string _name)

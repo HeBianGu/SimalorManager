@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 油相PVT </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class PVCO : RegionKey<PVCO.Item>
     {
         public PVCO(string _name)
@@ -61,13 +60,13 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, pdyl0.ToDD(), rjqyb1.ToD(), tjxs2.ToDD(), nd3.ToDD(), ysxs4.ToDD(), ndysxs5.ToDD());
+                return string.Format(formatStr, pdyl0.ToSaveLockDD(), rjqyb1.ToD(), tjxs2.ToSaveLockDD(), nd3.ToSaveLockDD(), ysxs4.ToSaveLockDD(), ndysxs5.ToSaveLockDD());
             }
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
+                //this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

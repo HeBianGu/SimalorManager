@@ -158,19 +158,12 @@ namespace OPT.Product.SimalorManager
             return outStr;
         }
 
-
-        /// <summary> 比较两个日期相差天数是否相等 </summary>
-        public static bool IsEqulByDay(this DateTime ptime, DateTime comTime)
+        /// <summary> 按配置信息截取有效信息 </summary>
+        public static List<string> EclToArray(this string str)
         {
-            TimeSpan span = ptime - comTime;
-            if (span.TotalDays == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            string[] tempStr = str.Split('/');
+
+            return tempStr[0].Split(KeyConfiger.splitKeyWord, StringSplitOptions.RemoveEmptyEntries).ToList();
         }
 
     }

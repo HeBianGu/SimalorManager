@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-     [KeyAttribute(EclKeyType = EclKeyType.Props, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+     [KeyAttribute(EclKeyType = EclKeyType.Props, SimKeyType = SimKeyType.Eclipse )]
     public class SGU: TableKey
     {
         public SGU(string name)

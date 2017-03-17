@@ -36,8 +36,8 @@ namespace OPT.Product.SimalorManager
             //  是否输出
             if (isCheck)
             {
+                writer.WriteLine();
                 writer.WriteLine(this.Name);
-                writer.WriteLine(writer.NewLine);
                 base.WriteKey(writer);
             }
         }

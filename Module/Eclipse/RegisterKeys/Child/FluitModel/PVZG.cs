@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 气相PVT </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class PVZG : RegionKey<PVZG.Item>
     {
         public PVZG(string _name)
@@ -42,11 +41,11 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         public class Item: OPT.Product.SimalorManager.ItemNormal
         {
            /// <summary> 参考温度 </summary>
-           public double ckwd0=0;
+           public string ckwd0="0";
             /// <summary> 压力 </summary>
-           public double yl1 = 0;
+           public string yl1 = "0";
            /// <summary> 压缩因子 </summary>
-           public double ysyz2 = 0;
+           public string ysyz2 = "0";
            /// <summary> 粘度</summary>
            public string nd3;
 
@@ -55,26 +54,27 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, ckwd0.ToString().ToDD(), yl1.ToString().ToDD(), ysyz2.ToString().ToDD(), nd3.ToString().ToDD());//, isUse.ToDD()
+                return string.Format(formatStr, ckwd0.ToSaveLockDD(), yl1.ToSaveLockDD(), ysyz2.ToSaveLockDD(), nd3.ToSaveLockDD());//, isUse.ToDD()
             }
+
+
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {
                     switch (i)
                     {
                         case 0:
-                            this.ckwd0 = newStr[0].ToDouble();
+                            this.ckwd0 = newStr[0];
                             break;
                         case 1:
-                            this.yl1 = newStr[1].ToDouble();
+                            this.yl1 = newStr[1];
                             break;
                         case 2:
-                            this.ysyz2 = newStr[2].ToDouble();
+                            this.ysyz2 = newStr[2];
                             break;
                         case 3:
                             this.nd3 = newStr[3];

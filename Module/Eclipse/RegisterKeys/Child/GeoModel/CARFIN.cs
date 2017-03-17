@@ -287,7 +287,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     {
                         ReadBOX(reader, tempStr);
 
-                        return null;
+                        return this;
                     }
 
                     else
@@ -295,7 +295,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
                         ReadBOX(reader, tempStr);
 
-                        return null;
+                        return this;
                     }
                 }
                 else
@@ -324,7 +324,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             }
 
             //  读到末尾返回空值
-            return null;
+            return this;
         }
 
         /// <summary> 获取全部修正模型 </summary>

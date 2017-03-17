@@ -8,7 +8,7 @@ using System.Text;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 压力 </summary>
-     [KeyAttribute(EclKeyType = EclKeyType.Solution, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+     [KeyAttribute(EclKeyType = EclKeyType.Solution, SimKeyType = SimKeyType.EclipseAndSimON )]
     public class PRESSURE : TableKey
     {
         public PRESSURE(string name)

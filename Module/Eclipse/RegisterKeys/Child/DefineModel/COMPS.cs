@@ -27,7 +27,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 组分个数 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class COMPS : Key
     {

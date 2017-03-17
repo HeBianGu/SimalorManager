@@ -34,8 +34,8 @@ namespace OPT.Product.SimalorManager.Base.AttributeEx
         /// <summary> 关键字类型（用于对不同关键字分组） </summary>
         public EclKeyType EclKeyType { get; set; }
 
-        /// <summary> 标识关键字是否包含大数据 </summary>
-        public bool IsBigDataKey { get; set; }
+        ///// <summary> 标识关键字是否包含大数据 </summary>
+        //public bool IsBigDataKey { get; set; }
 
         /// <summary> 关键字的别名（用于兼容老版本关键字） </summary>
         public string AnatherName { get; set; }
@@ -48,8 +48,8 @@ namespace OPT.Product.SimalorManager.Base.AttributeEx
         Parent = 0,
         /// <summary> 子关键字类型 暂时没用 </summary>
         Child,
-        /// <summary> INCLUDE关键字类型 暂时没用 </summary>
-        Include,
+        ///// <summary> INCLUDE关键字类型 暂时没用 </summary>
+        //Include,
         /// <summary> 用于标识输出类型的关键字类型 初始化是注册到内存中 </summary>
         OutPut,
         /// <summary> 用于标识保存在GRID主关键字下面的类型  </summary>
@@ -64,14 +64,17 @@ namespace OPT.Product.SimalorManager.Base.AttributeEx
         Edit
     }
 
-    /// <summary> 关键字所属模拟器 </summary>
+    /// <summary> 关键字所属模拟器(用来区分关键字都属于哪种模拟器) </summary>
     public enum SimKeyType
     {
         Eclipse = 0,
         SimON,
         tNavigator,
         Petrel,
-        All
+        Fault,
+        All,
+        EclipseAndSimON
+       
     }
 
 

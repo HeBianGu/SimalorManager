@@ -71,7 +71,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     region = new RegionParam();
                     region.BuildExtend(tempStr);
                     this.DefautRegion = region;
-                    this.BaseFile.TempRegion = region;
+                    //this.BaseFile.TempRegion = region;
                 }
 
                 //  读到结束符结束
@@ -104,7 +104,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     {
                         ReadBOX(reader, tempStr);
 
-                        return null;
+                        return this;
                     }
 
                     else
@@ -112,7 +112,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
                         ReadBOX(reader,tempStr);
 
-                        return null;
+                        return this;
                     }
                 }
                 else
@@ -141,7 +141,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             }
 
             //  读到末尾返回空值
-            return null;
+            return this;
         }
 
         /// <summary> 循环读取BOX修改的关键字 </summary>
@@ -149,6 +149,8 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         {
             TableKey tk = KeyConfigerFactroy.Instance.CreateKey<TableKey>(keyName, this.BaseFile.SimKeyType) as TableKey;
 
+            tk.BaseFile = this.BaseFile;
+            tk.ParentKey = this;
             string tempStr;
 
             while (!reader.EndOfStream)
@@ -223,6 +225,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
             model.Value = sb.ToString();
 
+            //  创建BOX表格数据内存镜像文件
             tk.Build(region.ZTo - region.ZFrom, region.XTo - region.XFrom, region.YTo - region.YFrom);
 
             model.ParentKey = this;

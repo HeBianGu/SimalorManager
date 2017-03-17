@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 渗透率</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.Petrel, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.Petrel )]
     public class PERMEABILITY : TableKey
     {
         public PERMEABILITY(string _name)

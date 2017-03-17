@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 储量分区</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Regions, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Regions, SimKeyType = SimKeyType.Eclipse )]
     public class FIPNUM : TableKey
     {
         public FIPNUM(string _name)

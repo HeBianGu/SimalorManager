@@ -31,7 +31,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 多段井维数定义 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class WSEGDIMS : ConfigerKey
     {

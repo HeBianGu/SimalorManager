@@ -71,8 +71,7 @@ namespace OPT.Product.SimalorManager
 
         protected override void CmdGetWellItems()
         {
-
-            ClearItem();
+            this.Items.Clear();
 
             string str = string.Empty;
 

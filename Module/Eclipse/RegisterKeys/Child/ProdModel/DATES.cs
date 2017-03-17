@@ -35,13 +35,49 @@ using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
-    [KeyAttribute(EclKeyType = EclKeyType.Include)]
-    public class DATES : BaseKey, IComparable, IRootNode
+
+    /// <summary> 生产时间关键字(用别名解析TSTEP关键字数据) </summary>
+    [KeyAttribute(AnatherName = "TSTEP")]
+    public class DATES : BaseKey, IComparable, IRootNode, IProductTime
     {
         public DATES(string _name)
             : base(_name)
         {
-            this.BuilderHandler = CmdToItems;
+            this.BuilderHandler = (l, k) =>
+             {
+                 this.Lines.RemoveAll(m => !m.IsWorkLine());
+
+                 //if (this.Lines[0].EclToArray().Count == 1)
+                 //{
+                 //    // HTodo  ：此条件视为TSTEP 
+                 //    int d = this.GetDataCount(this.Lines[0]);
+
+                 //    this.DateTime = this.BaseFile.ReadTempTime.AddDays(d);
+
+                 //    return this;
+                 //}
+                 if (this.Name == "TSTEP")
+                 {
+                     // HTodo  ：此条件视为TSTEP 
+                     int d = this.GetDataCount(this.Lines[0]);
+
+                     this.DateTime = this.BaseFile.ReadTempTime.AddDays(d);
+
+                     return this;
+                 }
+                 else
+                 {
+                     // HTodo  ：此条件视为DATES
+                     return CmdToItems(l, k);
+                 }
+
+             };
+
+            this.EachLineCmdHandler = l =>
+            {
+                //  截取前后空格判断是否为关键字
+                return l.Trim();
+            };
         }
 
         DateTime _dateTime = default(DateTime);
@@ -522,9 +558,9 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
         BaseKey CmdToItems(BaseKey last, BaseKey per)
         {
-            string str = null;
-
             this.Lines.RemoveAll(l => !l.IsWorkLine());
+
+            string str = null;
 
             BaseKey outKey = null;
 
@@ -537,8 +573,37 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                 outKey = Build(newStr, last, per);
 
             }
+            // Todo ：构建完成删除数据 
+            this.Lines.Clear();
 
             return outKey;
+        }
+
+        //  解析TSTEP时间步中的天数
+        int GetDataCount(string s)
+        {
+            int count = 0;
+
+            s.Split(' ').ToList().ForEach(l =>
+            {
+                if (l.Contains('*'))
+                {
+                    count += l.Split('*')[0].ToInt();
+                }
+                else
+                {
+
+
+
+                    int temp;
+                    if (int.TryParse(l, out temp))
+                    {
+                        count+= temp;
+                    }
+                }
+            });
+
+            return count;
         }
 
         public BaseKey Build(List<string> newStr, BaseKey last, BaseKey per)
@@ -584,7 +649,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
             }
         }
-
 
     }
 }

@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 气相PVT </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
     public class PVDG : RegionKey<PVDG.Item>
     {
         public PVDG(string _name)
@@ -42,11 +41,11 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         public class Item: OPT.Product.SimalorManager.ItemNormal
         {
            /// <summary> 压力 </summary>
-           public double yl=0;
+           public string yl="0";
             /// <summary> 体积系数 </summary>
-           public double tjxs = 0;
+           public string tjxs = "0";
            /// <summary> 粘度 </summary>
-           public double nd = 0;
+           public string nd = "0";
            /// <summary> 使用气体压缩因子</summary>
            public string isUse;
 
@@ -55,26 +54,25 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, yl.ToString().ToDD(), tjxs.ToString().ToDD(), nd.ToString().ToDD());//, isUse.ToDD()
+                return string.Format(formatStr, yl.ToSaveLockDD().ToSaveLockDD(), tjxs.ToSaveLockDD().ToSaveLockDD(), nd.ToSaveLockDD().ToSaveLockDD());//, isUse.ToDD()
             }
 
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {
                     switch (i)
                     {
                         case 0:
-                            this.yl = newStr[0].ToDouble();
+                            this.yl = newStr[0];
                             break;
                         case 1:
-                            this.tjxs = newStr[1].ToDouble();
+                            this.tjxs = newStr[1];
                             break;
                         case 2:
-                            this.nd = newStr[2].ToDouble();
+                            this.nd = newStr[2];
                             break;
                         case 3:
                             this.isUse = newStr[3];

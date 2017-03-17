@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 相渗分区</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Regions, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Regions, SimKeyType = SimKeyType.Eclipse )]
     public class SATNUM : TableKey
     {
         public SATNUM(string _name)

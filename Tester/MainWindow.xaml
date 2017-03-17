@@ -13,6 +13,7 @@
             <ColumnDefinition Width="200*"/>
             <ColumnDefinition Width="329*"/>
             <ColumnDefinition Width="122*"/>
+            <ColumnDefinition Width="122*"/>
         </Grid.ColumnDefinitions>
         <dxg:TreeListControl x:Name="tv_all" ItemsSource="{Binding BkSource}" SelectedItem="{Binding IteamSel, Mode=TwoWay}"  AutoGenerateColumns="KeepOld" EnableSmartColumnsGeneration="True" Margin="1,5,0,0" SelectionMode="Row" Grid.Column="0" Grid.ColumnSpan="2">
             <dxg:TreeListControl.Columns>
@@ -25,7 +26,7 @@
         </dxg:TreeListControl>
         <Label Content="数模文件路径：" HorizontalAlignment="Left" Margin="17,-32,0,0" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="0"/>
         <TextBox x:Name="txt_filepath" Text="{Binding FilePath}" HorizontalAlignment="Left" Margin="5,-28,0,0" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Width="418" Grid.ColumnSpan="2" />
-        <Button x:Name="btn_search"  Content="浏览" Command="{Binding SearchFileHandler}" VerticalAlignment="Top" Grid.Row="0" Grid.Column="3" Margin="0,-25,45.359,0" HorizontalAlignment="Right" Width="76"/>
+        <Button x:Name="btn_search"  Content="浏览" Command="{Binding SearchFileHandler}" VerticalAlignment="Top" Grid.Row="0" Grid.Column="3" Margin="0,-26,16.2,0" HorizontalAlignment="Right" Width="76"/>
         <StatusBar Margin="1,0,0,-10.6" Grid.Row="1" Grid.ColumnSpan="4">
             <Label x:Name="lbl_total" Content="总计：" Width="46" Height="23"/>
             <Label Content="{Binding Total}" Width="37" RenderTransformOrigin="0.5,0.5" Height="23"/>
@@ -40,5 +41,6 @@
 
         </StatusBar>
         <dxprg:PropertyGridControl Name="property" SelectedObject="{Binding IteamSel, Mode=TwoWay}" Grid.Column="2" Margin="9.8,10,0,0" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_search_Copy"  Content="另存为" Command="{Binding SaveAsHandler}" VerticalAlignment="Top" Grid.Row="0" Grid.Column="3" Margin="0,-26,21,0" HorizontalAlignment="Right" Width="76" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

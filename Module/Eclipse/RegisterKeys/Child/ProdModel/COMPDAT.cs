@@ -19,6 +19,7 @@
 #endregion
 using OPT.Product.SimalorManager.Base.AttributeEx;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -28,34 +29,56 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 完井数据 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class COMPDAT : ItemsKey<COMPDAT.Item>, ICompdatInterface,IProductEvent
+    public class COMPDAT : ItemsKey<COMPDAT.Item>, ICompdatInterface, IProductEvent
     {
         public COMPDAT(string _name)
             : base(_name)
         {
-
+            this.EachLineCmdHandler = l =>
+            {
+                //  截取前后空格判断是否为关键字
+                return l.Trim();
+            };
         }
 
-        public Item GetSingleItem
+        public Item GetSingleItem()
         {
-            get
+            if (this.Items.Count == 0)
             {
-                if (this.Items.Count == 0)
-                {
-                    Item item = new Item();
-                    this.Items.Add(item);
-                    return item;
+                Item item = new Item();
+                this.Items.Add(item);
+                return item;
 
-                }
-                else
-                {
-                    return this.Items[0];
-                }
+            }
+            else
+            {
+                return this.Items[0];
             }
         }
 
-        public class Item : OPT.Product.SimalorManager.Item,IProductItem
+
+        /// <summary> 排序</summary>
+        public void OrderBy()
+        {
+            //this.Items.OrderBy(l => l.i1 + l.j2 + l.swg3);
+
+            this.Items = this.Items.OrderBy(l => l.i1.ToInt()).ThenBy(l => l.j2.ToInt()).ThenBy(l => l.swg3.ToInt()).ToList();
+        }
+
+
+        /// <summary> 去重复 </summary>
+        public void Distinct()
+        {
+            var its = this.Items.Distinct(new COMPDAT.ItemCompare()).ToList();
+
+            this.Items.Clear();
+
+            this.Items.AddRange(its);
+        }
+
+
+
+        public class Item : OPT.Product.SimalorManager.Item, IProductItem
         {
             /// <summary> 井名 </summary>
             public string jm0 = "新增";
@@ -113,7 +136,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {
@@ -176,8 +198,18 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                 }
                 set
                 {
-                    this.jm0=value;
+                    this.jm0 = value;
                 }
+            }
+
+            public bool Equals(object x, object y)
+            {
+                throw new NotImplementedException();
+            }
+
+            public int GetHashCode(object obj)
+            {
+                throw new NotImplementedException();
             }
         }
 
@@ -190,11 +222,35 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         {
             this.Items.ForEach(l => l.Name = wellName);
         }
+
+        /// <summary> 自定义Item比较方法 </summary>
+        public class ItemCompare : IEqualityComparer<Item>
+        {
+
+            public bool Equals(Item x, Item y)
+            {
+                //Check whether the compared objects reference the same data. 
+                if (Object.ReferenceEquals(x, y)) return true;
+
+                if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+                    return false;
+
+                return x.i1 == y.i1 && x.j2 == y.j2 && x.swg3 == y.swg3 && x.xwg4 == y.xwg4;
+
+            }
+
+            public int GetHashCode(Item obj)
+            {
+                //Check whether the object is null  
+                if (Object.ReferenceEquals(obj, null)) return 0;
+
+                return (obj.i1 + obj.j2 + obj.swg3 + obj.xwg4).GetHashCode();
+            }
+        }
     }
 
     /// <summary> 局部加密完井数据 </summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Include, IsBigDataKey = true)]
-    public class COMPDATL : ItemsKey<COMPDATL.Item>, ICompdatInterface,IProductEvent
+    public class COMPDATL : ItemsKey<COMPDATL.Item>, ICompdatInterface, IProductEvent
     {
         public COMPDATL(string _name)
             : base(_name)
@@ -230,7 +286,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, jm0.ToEclStr(),jbwgjmm.ToEclStr(), i1.ToDD(), j2.ToDD(),
+                return string.Format(formatStr, jm0.ToEclStr(), jbwgjmm.ToEclStr(), i1.ToDD(), j2.ToDD(),
                     swg3.ToDD(), xwg4.ToDD(), kgbz5.ToEclStr(), xsfqh6.ToDD(),
                     ljyz7.ToDD(), jtnj8.ToDD(), yxdcxs9.ToDD(), bpxs10.ToDD(),
                     dyz11.ToDD(), skfx12.ToDD(), dxylbj13.ToDD());
@@ -239,7 +295,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             /// <summary> 解析字符串 </summary>
             public override void Build(List<string> newStr)
             {
-                this.ID = Guid.NewGuid().ToString();
 
                 for (int i = 0; i < newStr.Count; i++)
                 {

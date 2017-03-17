@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> Z方向传导率</summary>
-    [KeyAttribute(EclKeyType = EclKeyType.Edit, SimKeyType = SimKeyType.Eclipse, IsBigDataKey = true)]
+    [KeyAttribute(EclKeyType = EclKeyType.Edit, SimKeyType = SimKeyType.EclipseAndSimON )]
     public class TRANZ : TableKey
     {
         public TRANZ(string _name)
