@@ -5,7 +5,7 @@
  * ========================================================================
  *    
  * 作者：[李海军]   时间：2015/11/26 15:59:00
- * 文件名：INCLUDE
+
  * 说明：
  * 
  * 
@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> INCLUDE 关键字 </summary>
-
     public class INCLUDE : BaseKey, IRootNode
     {
         public INCLUDE(string _name)
@@ -70,7 +69,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         }
 
         string fileName = string.Empty;
-        /// <summary> 文件名称 </summary>
+        /// <summary> 文件名称 </summary>   
         public string FileName
         {
             get { return fileName; }
@@ -222,7 +221,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             //}
         }
 
-
         /// <summary> 从流中读取文件 </summary>
         public void ReadFromStream()
         {
@@ -319,7 +317,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                 File.Copy(oldFile, newPath, true);
             }
         }
-
 
         /// <summary> 保存成文件 </summary>
         public void Save()

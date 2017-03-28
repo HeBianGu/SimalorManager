@@ -175,6 +175,38 @@ namespace OPT.Product.SimalorManager.Service
             return perf;
         }
 
+
+
+        /// <summary> 获取单位制 </summary>
+        public  UnitType GetUnitType(string dataFile)
+        {
+            //  不读取INCLUDE部分数据
+            SimONData data = new SimONData(dataFile, null, l => false);
+
+            // Todo ：释放表格缓存文件
+            data.Key.SetAllMmfDispose();
+
+            //  读到METRIC英制单位
+            METRIC metric = data.Key.Find<METRIC>();
+
+            if (metric != null)
+            {
+                return UnitType.METRIC;
+            }
+
+            //  单位类型
+            FIELD field = data.Key.Find<FIELD>();
+
+            if (field != null)
+            {
+                return UnitType.FIELD;
+            }
+
+            data.Dispose();
+
+            return UnitType.METRIC;
+        }
+
     }
 
 

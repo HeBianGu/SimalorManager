@@ -3038,7 +3038,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  两矩阵相乘  </summary>
-        /// <remarks>用的是常规算法</remarks>
         public static Matrix operator *(Matrix mat1, Matrix mat2)
         {
             Matrix mat = new Matrix(mat1.Row, mat2.Col);
@@ -3057,9 +3056,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  两矩阵相乘的  </summary>
-        /// <remarks>注：用到了维诺格拉德方法（快速算法）。主要参考自《计算机常用算法》
-        /// （第二版） 徐士良 编著 清华大学出版社
-        /// </remarks>
         public static Matrix MulWino(Matrix A, Matrix B)
         {
             Matrix C = new Matrix(A.Row, B.Col);
@@ -3104,10 +3100,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  矩阵与其转置矩阵的乘积矩阵  </summary>
-        /// <remarks>
-        /// 注：用到了两矩阵相乘的维诺格拉德方法（快速算法）。主要参考自《计算机常用算法》
-        /// （第二版） 徐士良 编著 清华大学出版社 
-        /// </remarks>
         public static Matrix MulWino(Matrix A)
         {
             Matrix C = new Matrix(A.Col);
@@ -3191,12 +3183,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  用乘幂法求实方阵的最大特征值及其特征向量  </summary>
-        /// <param name="A">待求特征值及特征向量的矩阵</param>
-        /// <param name="vv0">初始化列向量（列矩阵）</param>
-        /// <param name="epsl">算法精度</param>
-        /// <param name="eigvalue">求出的最大特征值</param>
-        /// <remarks>注：主要参考自《计算机常用算法》（第二版） 徐士良 编著 清华大学出版社
-        /// </remarks>
         public static Matrix EigPower(Matrix A, Matrix vv0, double epsl, out double eigvalue)
         {
             Matrix v0 = Matrix.Clone(vv0);//为了不造成vv0被改变，克隆至v0
@@ -3243,12 +3229,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  用雅可比过关法求实对称矩阵的所有特征值与特征向量  </summary>
-        /// <param name="A">实对称矩阵</param>
-        /// <param name="epsl">精度</param>
-        /// <param name="EigVec">特征向量矩阵，每一列是一个特征向量</param>
-        /// <param name="EigVal">特征值，主对角线元素对应于所在列的特征向量</param>
-        /// <remarks>注：参考自《计算机常用算法》（第二版） 徐士良 编著 清华大学出版社 
-        /// </remarks>
         public static void EigJcb(Matrix A, double epsl, out Matrix EigVec, out Matrix EigVal)
         {
             EigVec = Matrix.Eye(A.Row);  //产生单位阵
@@ -3328,20 +3308,12 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  用雅可比过关法求实对称矩阵的所有特征值与特征向量  </summary>
-        /// <param name="A"></param>
-        /// <param name="EigVec"></param>
-        /// <param name="EigVal"></param>
         public static void EigJcb(Matrix A, out Matrix EigVec, out Matrix EigVal)
         {
             Matrix.EigJcb(A, Matrix.EPS, out EigVec, out EigVal);
         }
 
         /// <summary>  线性代数方程组求解  </summary>
-        /// <remarks>
-        /// 注：约当（Jordan）全选主元消去法，如果系数矩阵不可逆，那么返回的任意一个解向量，如果
-        /// 方程组无解，则返回它的最小二乘解。参考自《计算机常用算法》（第二版） 徐士良 编著 清华
-        /// 大学出版社
-        /// </remarks>
         public static Matrix[] DJordan(Matrix A, Matrix B)
         {
             Matrix[] X;
@@ -3492,9 +3464,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  方阵的LU分解 / </summary>
-        /// <param name="mat"></param>
-        /// <remarks>参考自《计算机常用算法》（第二版） 徐士良 编著 清华大学出版社
-        /// </remarks>
         public static Matrix[] Lu(Matrix mat)
         {
             Matrix Q = Matrix.Clone(mat);
@@ -3528,9 +3497,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  方阵的QR分解  </summary>
-        /// <param name="mat">非奇异方阵</param>
-        /// <returns>采用Schmidt正交化方法进行QR分解</returns>
-        /// <remarks>注：该法较快</remarks>
         public static Matrix[] QrSchmidt(Matrix mat)
         {
             Matrix Q = Matrix.Zeros(mat.Row);
@@ -3564,9 +3530,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  方阵的QR分解  </summary>
-        /// <param name="mat">非奇异方阵</param>
-        /// <returns>采用Householder方法进行QR分解</returns>
-        /// <remarks>注：该法较慢</remarks>
         public static Matrix[] QrHouse(Matrix mat)
         {
             //初始化
@@ -3599,9 +3562,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  用全主元高斯消去法求矩阵的秩  </summary>
-        /// <remarks>
-        /// 注：本方法比较稳定。参考自《计算机常用算法》（第二版） 徐士良 编著 清华大学出版社
-        /// </remarks>
         public static int Rank(Matrix A)
         {
             double vv = 0;  //寄存变量
@@ -3650,7 +3610,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  求方阵A的逆  </summary>
-        /// <remarks>注：用的是全主元高斯消去法，比较稳定。</remarks>
         public static Matrix Inverse(Matrix A)
         {
             int n = A.Row;  //方阵的阶数
@@ -3743,9 +3702,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  求方阵的逆矩阵  </summary>
-        /// <remarks>
-        /// 如果第2个参数为真，说明把第1个参数视为主对角矩阵；否则视为一般方阵。
-        /// </remarks>
         public static Matrix Inverse(Matrix A, bool IsDiag)
         {
             if (IsDiag)
@@ -3809,9 +3765,6 @@ namespace OPT.Product.SimalorManager
             return DetV;  //循环完毕表明d一直不为0，所以矩阵的秩为n
         }
 
-        //----------------------------------------------------------------
-        //基本数学矩阵函数
-        //----------------------------------------------------------------
         /// <summary>  正弦矩阵函数  </summary>
         public static Matrix Sin(Matrix X)
         {
@@ -4103,10 +4056,6 @@ namespace OPT.Product.SimalorManager
             return Y;  //返回Y
         }
 
-        //矩阵元素的小数点左右一定位数的四舍五入函数
-        //如果n为正整数，则是指小数点左侧n位后的数进行四舍五入
-        //如果n为负整数，则是指小数点右侧n位后的数进行四舍五入
-        //如果n为0，则就是我们通常的四舍五入
         public static Matrix Round(Matrix X, int n)
         {
             Matrix Y = new Matrix(X.Row, X.Col);  //初始化矩阵Y
@@ -4177,8 +4126,6 @@ namespace OPT.Product.SimalorManager
             return Y;
         }
         /// <summary>  符号矩阵函数  </summary>
-        /// <param name="X">输入矩阵</param>
-        /// <remarks>用于求输入矩阵的每一个元素的符号</remarks>
         public static Matrix Sign(Matrix X)
         {
             Matrix Y = new Matrix(X.Row, X.Col);
@@ -4224,12 +4171,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  求样品矩阵的协方差矩阵  </summary>
-        /// <param name="Data">样品矩阵</param>
-        /// <returns>协方差矩阵</returns>
-        /// <remarks>
-        /// （1）除的的N-1（是样本容量）
-        /// （2）参考自《多元统计分析及其应用》 裴鑫德 编著  北京农业大学出版社 1991
-        /// </remarks>
         public static Matrix Cov(Matrix Data)
         {
             double vv;  //中间变量
@@ -4259,12 +4200,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  求两样本矩阵决定的协方差矩阵  </summary>
-        /// <param name="X">样本1</param>
-        /// <param name="Y">样本2</param>
-        /// <returns></returns>
-        /// <remarks>
-        /// 两样本矩阵的行数应相同
-        /// </remarks>
         public static Matrix Covxy(Matrix X, Matrix Y)
         {
             if (X.Row != Y.Row)
@@ -4289,10 +4224,6 @@ namespace OPT.Product.SimalorManager
 
 
         /// <summary>  求相关系数矩阵  </summary>
-        /// <param name="Data">数据矩阵</param>
-        /// <remarks>
-        /// 数据矩阵的一行代表一个样品，列代表特征
-        /// </remarks>
         public static Matrix Correl(Matrix Data)
         {
             Matrix cormat = Matrix.Cov(Data);  //求出数据矩阵的协方差矩阵
@@ -4336,8 +4267,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  生成n阶Hilbert矩阵  </summary>
-        /// <param name="n">矩阵的阶数</param>
-        /// <returns></returns>
         public static Matrix Hilbert(int n)
         {
             Matrix H = new Matrix(n);
@@ -4399,12 +4328,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  重载ToString()  </summary>
-        /// <returns></returns>
-        /// <remarks>
-        /// 按一定规则输出矩阵，为了矩阵整齐，我们特意设计了一个属性DotRightDigit，通过它
-        /// 可以设定小数点左侧显示出的位数，不过这并不影响计算的精度（类似与matlab中数据
-        /// 的显示，不过这里是左对齐）。
-        /// </remarks>
         public override string ToString()
         {
             int maxlen;   //数字的最大长度
@@ -4493,7 +4416,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> / 判断矩阵是否主对角占优  </summary>
-        /// <remarks>矩阵必须是方阵</remarks>
         public bool IsDiagSup
         {
             get
@@ -4515,8 +4437,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  Gauss-Seidel迭代法求系数阵主对角占优的方程组的解  </summary>
-        /// <param name="loop">主循环次数</param>
-        /// <remarks>迭代的精度取Matrix.EPS</remarks>
         public static Matrix GaussSeidelDiagSup(Matrix A, Matrix b, ref int loop)
         {
             if (A.Row != A.Col)
@@ -4548,8 +4468,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  Gauss-Seidel迭代法求系数阵主对角占优的方程组的解  </summary>
-        /// <param name="A">系数阵</param>
-        /// <param name="b">右端常数项</param>
         public static Matrix GaussSeidelDiagSup(Matrix A, Matrix b)
         {
             int loop = 0;
@@ -4557,10 +4475,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  SOR方法求系数阵主对角占优的方程组的解 </summary>
-        /// <param name="A">系数阵</param>
-        /// <param name="b">右端常数项</param>
-        /// <param name="omga">松弛因子</param>
-        /// <param name="loop">主循环次数</param>
         public static Matrix SorDiagSup(Matrix A, Matrix b, double omga, ref int loop)
         {
             if (A.Row != A.Col)
@@ -4594,9 +4508,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary>  SOR方法求系数阵主对角占优的方程组的解  </summary>
-        /// <param name="A">系数阵</param>
-        /// <param name="b">右端常数项</param>
-        /// <param name="omga">松弛因子</param>
         public static Matrix SorDiagSup(Matrix A, Matrix b, double omga)
         {
             int loop = 0;
@@ -4604,11 +4515,6 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> / 给出指定数在哪个区间中  </summary>
-        /// <param name="pv">
-        /// 数组，指定由小到大顺序的区间端点，比如数组为{1，3，4}，则有
-        /// 四个区间依次为(-inf,1]，(1,3]，(3,4]，(4,+inf)，从-1计数，也
-        /// 就是区间-1，区间0，区间1，区间2</param>
-        /// <param name="v">要求在哪个区间的指定的数</param>
         public static int SelectSpan(double[] pv, double v)
         {
             int k = Array.BinarySearch(pv, v);
@@ -4624,14 +4530,11 @@ namespace OPT.Product.SimalorManager
         private string errorstring;
 
         /// <summary>  构造函数  </summary>
-        /// <param name="errorstr">错误信息</param>
         public MatrixException(string errorstr)
         {
             this.errorstring = errorstr;
         }
 
-        /// <summary>  重载ToString()  </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             return this.errorstring;

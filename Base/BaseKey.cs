@@ -483,11 +483,6 @@ namespace OPT.Product.SimalorManager
             return GetKeys<T>(this, m);
         }
 
-        ///// <summary> 查找所有关键字类型  按泛型查找 </summary>
-        //public T FindBaseKey<T>(Predicate<T> match) where T : BaseKey
-        //{
-        //    return GetBaseKeys<T>(this, match);
-        //}
 
         /// <summary> 查找关键字类型最后一个  按泛型查找 </summary>
         public T FindLast<T>(Predicate<T> match) where T : BaseKey
@@ -510,44 +505,6 @@ namespace OPT.Product.SimalorManager
 
             return null;
         }
-
-        ///// <summary> 获取匹配的一个节点 找到一个立即返回 </summary>
-        //T GetBaseKeys<T>(BaseKey key, Predicate<T> match) where T : BaseKey
-        //{
-        //    //  匹配当前类型
-        //    if (key is T)
-        //    {
-        //        T find = key as T;
-
-        //        //  匹配当前条件 
-        //        if (match(find)) return find;
-        //    }
-
-        //    if (key.Keys.Count > 0)
-        //    {
-        //        foreach (var k in key.Keys)
-        //        {
-        //            if (k is BaseKey)
-        //            {
-        //                BaseKey kn = k as BaseKey;
-
-        //                //  递归处
-        //                T temp = GetBaseKeys<T>(kn, match);
-
-        //                if (temp != null)
-        //                {
-        //                    return temp;
-        //                }
-        //            }
-        //        }
-
-        //        return null;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
 
         /// <summary> 移除 </summary>
         public void Delete(BaseKey key)
@@ -926,30 +883,7 @@ namespace OPT.Product.SimalorManager
 
             this.Delete();
         }
-
-        ///// <summary> 复制对象 </summary>
-        //public BaseKey Clone()
-        //{
-        //    if(this.keys.Count>0)
-        //    {  
-        //        List<BaseKey> ks=new List<BaseKey>();
-
-        //         foreach(var k in this.keys)
-        //        {
-        //            ks.Add(k.Clone());
-        //        }
-        //        this.Keys.Clear();
-        //        this.Keys = ks;
-        //    }
-
-        //     //object obj = Activator.CreateInstance(objType, new object[] { objType.Name });
-
-        //     BaseKey c = new BaseKey(this.name);
-
-        //     return c;
-
-
-        //}
+      
         #endregion
 
         public override string ToString()
@@ -996,7 +930,9 @@ namespace OPT.Product.SimalorManager
     }
 
 
-    /// <summary> 标示节点是父节点 </summary>
+    /// <summary> 标示节点是父节点 </summary>  
+    /// 
+
     public interface IRootNode
     {
 

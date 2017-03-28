@@ -83,7 +83,6 @@ namespace OPT.Product.SimalorManager
             return null;
         }
 
-
         /// <summary> 查找指定井名的生产模型起始时间 </summary>
         public DATES GetWellProStartDate(BaseKey key, string wellName)
         {
@@ -110,7 +109,6 @@ namespace OPT.Product.SimalorManager
 
             return null;
         }
-
 
         /// <summary> 解析时间 01  'JAN'  2001  / </summary>
         public DateTime GetDateTime(string str)

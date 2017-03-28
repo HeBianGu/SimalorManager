@@ -316,6 +316,7 @@ namespace OPT.Product.SimalorManager.Service
         /// <summary> 从文件读取生产信息 </summary>
         public INCLUDE RefreshRestartWellLocation(string wellPath)
         {
+            if (string.IsNullOrEmpty(wellPath)) return null;
             string oldName = Path.GetFileNameWithoutExtension(wellPath) + (KeyConfiger.oldWellLocationName) + KeyConfiger.SimONExtend;
 
             string oldFullPath = Path.Combine(Path.GetDirectoryName(wellPath), oldName);
@@ -390,10 +391,18 @@ namespace OPT.Product.SimalorManager.Service
             //model.MainData = data;
 
 
-            // Todo ：插入关键字到最后 
-            RPTSCHED rptsched = new RPTSCHED("RPTSCHED");
+            //// Todo ：插入关键字到最后 
+            //RPTSCHED rptsched = new RPTSCHED("RPTSCHED");
 
-            data.Key.Add(rptsched);
+            //data.Key.Add(rptsched);
+
+            RPTSCHED rptsched = mainData.Key.Find<RPTSCHED>();
+
+            RPTSUM rptsum = mainData.Key.Find<RPTSUM>();
+
+            if (rptsched != null) data.Key.Add(rptsched);
+
+            if (rptsum != null) data.Key.Add(rptsum);
 
 
             // Todo ：插入标识到第二个关键字 
