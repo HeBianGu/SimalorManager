@@ -606,26 +606,26 @@ namespace OPT.Product.SimalorManager
                     {
                         sb.Append(KeyConfiger.EndFlag);
                     }
-
+                      
                     sb.Append(KeyConfiger.NewLine);
 
                 }
 
-                for (int i = 0; i < v.XCount; i++)
-                {
-                    for (int j = 0; j < v.YCount; j++)
-                    {
-                        sb.Append(v.Get(j, i).ToString().ToD().PadLeft(KeyConfiger.TableLenght));
-                    }
+                //for (int i = 0; i < v.XCount; i++)
+                //{
+                //    for (int j = 0; j < v.YCount; j++)
+                //    {
+                //        sb.Append(v.Get(j, i).ToString().ToD().PadLeft(KeyConfiger.TableLenght));
+                //    }
 
-                    if (i == v.XCount - 1 && v.IndexNum == Key.Tables.Count)
-                    {
-                        sb.Append(KeyConfiger.EndFlag);
-                    }
+                //    if (i == v.XCount - 1 && v.IndexNum == Key.Tables.Count)
+                //    {
+                //        sb.Append(KeyConfiger.EndFlag);
+                //    }
 
-                    sb.Append(KeyConfiger.NewLine);
+                //    sb.Append(KeyConfiger.NewLine);
 
-                }
+                //}
             }
 
             return sb.ToString();

@@ -24,7 +24,7 @@ namespace OPT.Product.SimalorManager.Service
             foreach (var n in names)
             {
                 //  查找包含井名的时间步
-                var findTimes = times.FindAll(l => l.Find<WELL>() != null && l.Find<WELL>().WellName0 == n.WellName);
+                var findTimes = times.FindAll(l => l.Find<WELLCTRL>() != null && l.Find<WELLCTRL>().WellName0 == n.WellName);
 
                 DAYS days = new DAYS("DAYS");
                 n.Add(days);
@@ -35,7 +35,7 @@ namespace OPT.Product.SimalorManager.Service
                     it.Time0 = item.Date;
                     days.Items.Add(it);
 
-                    WELL well = item.Find<WELL>();
+                    WELLCTRL well = item.Find<WELLCTRL>();
 
                     switch (well.ProType)
                     {
@@ -77,14 +77,14 @@ namespace OPT.Product.SimalorManager.Service
         }
 
         /// <summary> 获取当前时间前的所有生产信息 </summary>
-        public List<WELL> GetAllWellBeforeTime(BaseKey sch, DateTime time = default(DateTime))
+        public List<WELLCTRL> GetAllWellBeforeTime(BaseKey sch, DateTime time = default(DateTime))
         {
             if (time == default(DateTime))
                 time = DateTime.MaxValue;
 
 
             // Todo ：比当前时间小的所有WELL关键字 
-            var wells = sch.FindAll<WELL>(l =>
+            var wells = sch.FindAll<WELLCTRL>(l =>
             {
                 if (l.ParentKey != null && l.ParentKey is TIME)
                 {
@@ -108,7 +108,7 @@ namespace OPT.Product.SimalorManager.Service
                 time = DateTime.MaxValue;
 
             // Todo ：比当前时间小的所有WELL关键字 
-            List<WELL> wells = this.GetAllWellBeforeTime(sch, time);
+            List<WELLCTRL> wells = this.GetAllWellBeforeTime(sch, time);
 
             // Todo ：获取不重复井名 
             var wellNames = wells.Select(l => l.WellName0).Distinct();
@@ -154,7 +154,7 @@ namespace OPT.Product.SimalorManager.Service
         }
 
         /// <summary> 获取指定井名的所有完井信息和最后一个时间点的井别 </summary>
-        public Tuple<List<PERF>, SimONProductType> GetAllLoaction(List<WELL> wells, string wellName)
+        public Tuple<List<PERF>, SimONProductType> GetAllLoaction(List<WELLCTRL> wells, string wellName)
         {
             var locations = wells.FindAll(l => l.WellName0 == wellName);
 
@@ -163,7 +163,7 @@ namespace OPT.Product.SimalorManager.Service
             Tuple<List<PERF>, SimONProductType> perf = new Tuple<List<PERF>, SimONProductType>(new List<PERF>(), locations.Last().ProType);
 
             // Todo ：获取最后一个存在完井信息的生产数据 
-            WELL lastWellContain = locations.FindLast(l => l.Find<PERF>() != null);
+            WELLCTRL lastWellContain = locations.FindLast(l => l.Find<PERF>() != null);
 
             if (lastWellContain != null)
             {
@@ -174,8 +174,6 @@ namespace OPT.Product.SimalorManager.Service
 
             return perf;
         }
-
-
 
         /// <summary> 获取单位制 </summary>
         public  UnitType GetUnitType(string dataFile)

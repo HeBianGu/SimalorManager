@@ -23,11 +23,11 @@ using System.Text;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
-    /// <summary>  </summary
-    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.SimON)]
-    public class PGAS : TableKey
+    /// <summary>  </summary>
+    [KeyAttribute(SimKeyType = SimKeyType.SimON, AnatherName = "WELLSCHED")]
+    public class RECURRENT : SingleKey
     {
-        public PGAS(string _name)
+        public RECURRENT(string _name)
             : base(_name)
         {
 

@@ -8,11 +8,6 @@
 
  * 说明：
 
-AQUANCON # Connection data for analytic aquifers
-# ID  X1  X2  Y1  Y2  Z1  Z2  Dir  Mult   No-use
-  1   1   4   1   1   1   5   -2   1.0    0.0 
-  2   1   4   4   4   1   5   +2   1.0    0.0 
-
  * 
  * 修改者：           时间：               
  * 修改说明：
@@ -31,113 +26,134 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
     /// <summary> 数值水体连接 </summary>
      
-    public class AQUANCON : ConnectKey<AQUANCON.Item>
+    public class AQUCON : ConnectKey<AQUCON.Item>
     {
-        public AQUANCON(string _name)
+        public AQUCON(string _name)
             : base(_name)
         {
 
         }
 
-
-
         /// <summary> 数值水体实体 </summary>
         public class Item : OPT.Product.SimalorManager.Item
         {
-            
+            /// <summary> 水体编号 </summary>
             private string stbh0;
-            /// <summary>  水体的编号； </summary>
+
             public string Stbh0
             {
                 get { return stbh0; }
                 set { stbh0 = value; }
             }
-            
+            /// <summary> 水体连接网格的X坐标（开始） </summary>
             private string xzbks1;
-            /// <summary> 第二，三列是水体与网格连接的x范围 </summary>
+
             public string Xzbks1
             {
                 get { return xzbks1; }
                 set { xzbks1 = value; }
             }
-           
+            /// <summary> 水体连接网格的X坐标（结束）</summary>
             private string xzbjs2;
-            /// <summary> 第二，三列是水体与网格连接的x范围 </summary>
+
             public string Xzbjs2
             {
                 get { return xzbjs2; }
                 set { xzbjs2 = value; }
             }
-            
+            /// <summary> 水体连接网格的Y坐标（开始） </summary>
             private string yks3;
-            /// <summary> 第四，五列是水体与网格连接的y范围；</summary>
+
             public string Yks3
             {
                 get { return yks3; }
                 set { yks3 = value; }
             }
-           
+            /// <summary> 水体连接网格的Y坐标（结束 </summary>
             private string yjs4;
-            /// <summary> 第四，五列是水体与网格连接的y范围；</summary>
+
             public string Yjs4
             {
                 get { return yjs4; }
                 set { yjs4 = value; }
             }
-           
+            /// <summary> 水体连接网格的Z坐标（开始） </summary>
             private string zks5;
-            /// <summary> 第六，七列是水体与网格连接的z范围 </summary>
+
             public string Zks5
             {
                 get { return zks5; }
                 set { zks5 = value; }
             }
-          
+            /// <summary> 水体连接网格的Z坐标（结束） </summary>
             private string zjs6;
-            /// <summary> 第六，七列是水体与网格连接的z范围 </summary>
+
             public string Zjs6
             {
                 get { return zjs6; }
                 set { zjs6 = value; }
             }
-            
+            /// <summary> 水体连接网格面朝向 </summary>
             private string wgmcx7;
-            /// <summary> 第八列是网格面的朝向，1代表x+，2代表y+，4代表z+，-1代表x-，-2代表y-，-4代表z-； </summary>
+
             public string Wgmcx7
             {
                 get { return wgmcx7; }
                 set { wgmcx7 = value; }
             }
-           
+            /// <summary> 传导率乘子 </summary>
             private string cdlcz8 = "1";
-            /// <summary> 第九列是水体与网格接触面积的乘数，接触面积不用给定，由模拟器计算； </summary>
+
             public string Cdlcz8
             {
                 get { return cdlcz8; }
                 set { cdlcz8 = value; }
             }
-            
+            /// <summary> 传导率计算选项 </summary>
             private string cdljsxx9 = "0";
-            /// <summary> 第十列数据暂不使用，仅用于占位 </summary>
+
             public string Cdljsxx9
             {
                 get
                 {
-                    return cdljsxx9;
+                    if (cdljsxx9 == "0")
+                    {
+                        return "设置横截面积";
+                    }
+                    else
+                    {
+                        return "通过公式计算横截面积";
+                    }
                 }
                 set
                 {
-                    cdljsxx9 = value;
+                    if (value == "设置横截面积")
+                    {
+                        cdljsxx9 = "0";
+                    }
+                    else
+                    {
+                        cdljsxx9 = "1";
+                    }
                 }
             }
+            /// <summary> 允许连接到相邻网格面 </summary>
+            private string yxljdxlwgm10 = "NO";
 
-            string formatStr = "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9} /";
+            public string Yxljdxlwgm10
+            {
+                get { return yxljdxlwgm10; }
+                set { yxljdxlwgm10 = value; }
+            }
+
+
+            string formatStr = "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10} /";
 
             /// <summary> 转换成字符串 </summary>
             public override string ToString()
             {
-                return string.Format(formatStr, stbh0.ToSDD(), xzbks1.ToSDD(), xzbjs2.ToSDD(), yks3.ToSDD(), yjs4.ToSDD(), zks5.ToSDD(),
-                    zjs6.ToSDD(), wgmcx7.ToSDD(), cdlcz8.ToSDD(), cdljsxx9.ToSDD()); //, scsl11.ToDD()
+                return string.Format(formatStr, stbh0.ToDD(), xzbks1.ToDD(), xzbjs2.ToDD(), yks3.ToDD(), yjs4.ToDD(), zks5.ToDD(),
+                    zjs6.ToDD(), wgmcx7.ToDD(), cdlcz8.ToDD(), cdljsxx9.ToDD(), yxljdxlwgm10.ToDD()); //, scsl11.ToDD()
             }
 
             /// <summary> 解析字符串 </summary>
@@ -177,12 +193,15 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
                         case 9:
                             this.cdljsxx9 = newStr[9];
                             break;
+                        case 10:
+                            this.yxljdxlwgm10 = newStr[10];
+                            break;
                         default:
                             break;
                     }
                 }
             }
-
+ 
         }
     }
 

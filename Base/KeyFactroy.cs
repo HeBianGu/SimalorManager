@@ -225,7 +225,7 @@ namespace OPT.Product.SimalorManager
         #region - 关键字工厂 -
 
         /// <summary> 通过关键字名称找到对应名称的类型 </summary>
-        public T CreateKey<T>(string keyName) where T : BaseKey
+        public virtual T CreateKey<T>(string keyName) where T : BaseKey
         {
             //keyName = KeyChecker.FormatKey(keyName);
 
@@ -237,7 +237,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 验证字符串是否为注册关键字 </summary>
-        internal bool IsRegisterKey(string keyName)
+        internal virtual bool IsRegisterKey(string keyName)
         {
             string temp = KeyChecker.FormatKey(keyName);
 
@@ -427,6 +427,13 @@ namespace OPT.Product.SimalorManager
 
         #endregion
 
+        #region - 别名关键字工厂 -
+
+        //  关键字注册表
+        internal Dictionary<string, string> AnatherNameConfiger = new Dictionary<string, string>();
+
+        #endregion
+
         public override void BuildRegister(Type item)
         {
             var objs = item.GetCustomAttributes(typeof(KeyAttribute), false);
@@ -445,13 +452,81 @@ namespace OPT.Product.SimalorManager
                     {
                         this.KeyTableSimONConfiger.Add(item.Name);
                     }
+
+                    if (!string.IsNullOrEmpty(k.AnatherName))
+                    {
+                        //  注册有别名关键字
+                        this.AnatherNameConfiger.Add(k.AnatherName, item.Name);
+                    }
+
                 }
             }
 
         }
 
+        /// <summary> 通过关键字名称找到对应名称的类型 </summary>
+        public virtual T CreateKey<T>(string keyName) where T : BaseKey
+        {
+            keyName = this.GetAnthoerName(keyName);
 
-        
+            Type objType = TypeCacheFactory.GetInstance().GetType(_publickeynamespace + "." + KeyChecker.FormatKey(keyName), false);
+
+            object obj = Activator.CreateInstance(objType, new object[] { keyName });
+
+            return obj as T;
+        }
+
+        /// <summary> 验证字符串是否为注册关键字 </summary>
+        internal override bool IsRegisterKey(string keyName)
+        {
+            string temp = KeyChecker.FormatKey(keyName);
+
+            temp = this.GetAnthoerName(temp);
+
+            return RegisterList.Contains(temp);
+        }
+
+        /// <summary> 获取注册的别名 </summary>
+        public string GetAnthoerName(string str)
+        {
+            if (string.IsNullOrEmpty(str)) return str;
+
+            string[] temps = str.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (temps.Length == 1)
+            {
+                if (this.AnatherNameConfiger.ContainsKey(str))
+                {
+                    return AnatherNameConfiger[str].ToUpper();
+                }
+                else
+                {
+                    return str;
+                }
+            }
+            else
+            {
+                if (!temps[1].StartsWith(KeyConfiger.ExcepFlag) && !temps[1].StartsWith(KeyConfiger.ExcepFlag1))
+                {
+                    if (this.AnatherNameConfiger.ContainsKey(temps[0]))
+                    {
+                        return str.Replace(temps[0], AnatherNameConfiger[temps[0]].ToUpper());
+                        //return AnatherNameConfiger[temps[0]].ToUpper();
+                    }
+                    else
+                    {
+                        return str;
+                    }
+                }
+                else
+                {
+                    return str;
+                }
+            }
+        }
+
+
+
         /// <summary> 需要从Eclipse命名空间初始化的项 </summary> 
         public void InitRegisterFromEclipse(Type item)
         {

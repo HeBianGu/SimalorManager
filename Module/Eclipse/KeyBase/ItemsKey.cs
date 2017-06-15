@@ -202,7 +202,7 @@ namespace OPT.Product.SimalorManager
         }
         public abstract void Build(List<string> strs);
 
-        public bool IsViad()
+        public bool IsVaild()
         {
             var fields = this.GetType().GetFields();
 

@@ -47,7 +47,16 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
             this.EachLineCmdHandler += l =>
             {
                 // Todo ：读取时兼容老版本DATE，替换成DAYS  截取前后空格判断是否为关键字
-                return l.Contains("DATE") ? l.Replace("DATE", "DAYS").Trim() : l.Trim();
+
+                if (l.Contains("DATE"))
+                {
+                    return l.Replace("DATE", "DAYS").Trim();
+                }
+
+
+                // HTodo  ：兼容WELL关键字 2017-05-24 14:27:53 
+                return BaseKeyHandleFactory.Instance.ForWellToWellCtrl(l).Trim();
+
             };
 
             _date = date;
@@ -67,7 +76,16 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
             this.EachLineCmdHandler += l =>
             {
                 // Todo ：读取时兼容老版本DATE，替换成DAYS  截取前后空格判断是否为关键字
-                return l.Contains("DATE") ? l.Replace("DATE", "DAYS").Trim() : l.Trim();
+
+                if (l.Contains("DATE"))
+                {
+                    return l.Replace("DATE", "DAYS").Trim();
+                }
+
+
+                // HTodo  ：兼容WELL关键字 2017-05-24 14:27:53 
+                return BaseKeyHandleFactory.Instance.ForWellToWellCtrl(l).Trim();
+
             };
 
         }
@@ -85,6 +103,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
         /// <summary> 构建日期 </summary>
         void Build()
         {
+
             //  构建WELL
             this.Lines.RemoveAll(l => !l.IsWorkLine());
 
@@ -120,7 +139,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
             get
             {
                 //return isContain = this.Find<END>() != null;
-                isContain = this.Find<RESTART>() != null;
+                isContain = this.Find<STEPRST>() != null;
                 return isContain;
             }
             set
@@ -129,9 +148,9 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
                 if (value)
                 {
                     //  是则没有增加
-                    if (this.Find<RESTART>() == null)
+                    if (this.Find<STEPRST>() == null)
                     {
-                        RESTART end = new RESTART("RESTART");
+                        STEPRST end = new STEPRST("STEPRST");
 
                         this.Add(end);
                     }
@@ -140,7 +159,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
                 {
                     //  否则删除节点下所有End
 
-                    RESTART end = this.Find<RESTART>();
+                    STEPRST end = this.Find<STEPRST>();
 
                     if (end != null)
                     {
@@ -182,10 +201,10 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
         void Sort()
         {
             //  将RESTART放到最后
-            RESTART wpimult = this.Find<RESTART>();
+            STEPRST wpimult = this.Find<STEPRST>();
             if (wpimult != null)
             {
-                this.Keys.RemoveAll(l => l is RESTART);
+                this.Keys.RemoveAll(l => l is STEPRST);
                 this.Add(wpimult);
             }
         }
@@ -194,11 +213,11 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
         /// <summary> 去重复保存最后一项 </summary>
         void Distinct()
         {
-            var wells = this.FindAll<WELL>();
+            var wells = this.FindAll<WELLCTRL>();
 
             var boxs = this.FindAll<BOX>();
 
-            var restart = this.Find<RESTART>();
+            var restart = this.Find<STEPRST>();
 
             this.Clear();
 
@@ -221,5 +240,9 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 
         }
 
+        public List<string> GetChildKeys()
+        {
+            return null;
+        }
     }
 }

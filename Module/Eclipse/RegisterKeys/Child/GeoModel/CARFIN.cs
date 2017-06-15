@@ -349,7 +349,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         public void ReadBOX(System.IO.StreamReader reader, string keyName)
         {
             TableKey tk = KeyConfigerFactroy.Instance.CreateKey<TableKey>(keyName,this.BaseFile.SimKeyType) as TableKey;
-
+            tk.BaseFile = this.BaseFile;
             ModifyBoxModel model = new ModifyBoxModel(tk, this.newRegion);
             BOX box = new BOX("BOX");
             box.Region = this.newRegion;

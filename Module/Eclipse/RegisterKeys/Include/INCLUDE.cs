@@ -228,7 +228,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
             if (string.IsNullOrEmpty(Path.GetExtension(this.FilePath)))
             {
-                this.FilePath = this.FilePath.Trim() + ".dat";
+                this.FilePath = this.FilePath.Trim() + KeyConfiger.SimONExtend;
             }
 
 
@@ -324,6 +324,9 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             this.WriteToFile(this.filePath);
         }
 
-
+        public List<string> GetChildKeys()
+        {
+            return null;
+        }
     }
 }

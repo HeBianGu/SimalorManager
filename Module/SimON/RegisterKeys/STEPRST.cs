@@ -4,9 +4,13 @@
  * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/12/1 13:39:53
+ * 作者：[李海军]   时间：2015/12/2 10:38:01
 
  * 说明：
+
+
+/
+ * 
  * 
  * 修改者：           时间：               
  * 修改说明：
@@ -14,23 +18,33 @@
 */
 #endregion
 using OPT.Product.SimalorManager.Base.AttributeEx;
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
-    /// <summary>  </summary
-    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.SimON)]
-    public class PGAS : TableKey
+    /// <summary> 重启时间标志 RESTART </summary>
+    [KeyAttribute(SimKeyType = SimKeyType.SimON, AnatherName = "RESTART")]
+    public class STEPRST : SingleKey
     {
-        public PGAS(string _name)
+
+        public STEPRST(string _name)
             : base(_name)
         {
 
+            this.EachLineCmdHandler = l =>
+            {
+                //  截取前后空格判断是否为关键字
+                return l.Trim();
+
+            };
+
         }
+
     }
 }

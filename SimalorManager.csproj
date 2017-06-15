@@ -91,17 +91,37 @@
     <Compile Include="Base\IStandardized.cs" />
     <Compile Include="Module\Eclipse\RegisterKeys\Child\GeoModel\MAPUNITS.cs" />
     <Compile Include="Module\Eclipse\RegisterKeys\Child\GeoModel\MAPAXES.cs" />
+    <Compile Include="Module\SimON\KeyBase\FinConfigerKey.cs" />
+    <Compile Include="Module\SimON\Parent\SIMSET.cs" />
+    <Compile Include="Module\SimON\Parent\TUNESET.cs" />
+    <Compile Include="Module\SimON\Parent\MODIFY.cs" />
+    <Compile Include="Module\SimON\Parent\ADSORB.cs" />
+    <Compile Include="Module\SimON\Parent\WELL.cs" />
     <Compile Include="Module\SimON\RegisterKeys\AQUANCON.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\AQUCON.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\AQUCT.cs" />
     <Compile Include="Module\SimON\RegisterKeys\AQUFETP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\ROCKDEN.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\GLOBAL.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\CARFNAME.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\FINBOX.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\CARFIN.cs" />
     <Compile Include="Module\SimON\RegisterKeys\DAYS.cs" />
     <Compile Include="Module\SimON\RegisterKeys\CPG.cs" />
     <Compile Include="Module\SimON\RegisterKeys\MULTIPORO.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\NXFIN.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\NYFIN.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\NZFIN.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\COALREG.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\COALMAP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\LANGPROP.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\STEPRST.cs" />
     <Compile Include="Module\SimON\RegisterKeys\SIGMA.cs" />
     <Compile Include="Module\SimON\RegisterKeys\RPTSUM.cs" />
-    <Compile Include="Module\SimON\RegisterKeys\RPTSCHED.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\OUTSCHED.cs" />
     <Compile Include="Module\SimON\RegisterKeys\KROTYPE.cs" />
     <Compile Include="Module\SimON\RegisterKeys\TSTART.cs" />
-    <Compile Include="Module\SimON\RegisterKeys\WELLSCHED.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\RECURRENT.cs" />
     <Compile Include="Module\SimON\RegisterKeys\USE_TF.cs" />
     <Compile Include="Module\SimON\RegisterKeys\FAULTS.cs" />
     <Compile Include="Module\SimON\RegisterKeys\MSWSET.cs" />
@@ -116,11 +136,11 @@
     <Compile Include="Module\SimON\RegisterKeys\SWGF.cs" />
     <Compile Include="Module\SimON\RegisterKeys\WELSSTD.cs" />
     <Compile Include="Module\SimON\RegisterKeys\WLSGSIZE.cs" />
-    <Compile Include="Module\SimON\RegisterKeys\WELL.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\WELLCTRL.cs" />
     <Compile Include="Module\SimON\RegisterKeys\TIME.cs" />
     <Compile Include="Module\SimON\RegisterKeys\USEENDTIME.cs" />
     <Compile Include="Module\SimON\RegisterKeys\USESTARTTIME.cs" />
-    <Compile Include="Module\SimON\RegisterKeys\TUNING.cs" />
+    <Compile Include="Module\SimON\RegisterKeys\SOLVECTRL.cs" />
     <Compile Include="Module\SimON\RegisterKeys\EQUILPAR.cs" />
     <Compile Include="Module\SimON\RegisterKeys\NAME.cs" />
     <Compile Include="Module\SimON\RegisterKeys\ECHO_ON.cs" />
@@ -392,6 +412,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram2.cd" />
     <None Include="ReadMe\关系图.dgml">
       <SubType>Designer</SubType>
     </None>
@@ -416,7 +437,6 @@
     <None Include="ReadMe\通用服务.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Module\SimON\KeyBase\" />
     <Folder Include="Module\tNavigator\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -650,5 +650,9 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             }
         }
 
+        public List<string> GetChildKeys()
+        {
+            return null;
+        }
     }
 }

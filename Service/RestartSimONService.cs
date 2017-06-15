@@ -17,13 +17,13 @@ namespace OPT.Product.SimalorManager.Service
         /// <summary> 获取所有重启时间步 </summary>
         public List<TIME> GetAllRestartTime(SCHEDULE sch)
         {
-            return sch.FindAll<TIME>(l => l.Find<OPT.Product.SimalorManager.RegisterKeys.SimON.RESTART>() != null);
+            return sch.FindAll<TIME>(l => l.Find<OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST>() != null);
         }
 
         /// <summary> 创建初始重启模型 </summary>
         public MainFileRestartSimON InitRestartInfoModel(SimONData mainData)
         {
-            TUNING start = mainData.Key.Find<TUNING>();
+            SOLVECTRL start = mainData.Key.Find<SOLVECTRL>();
             if (start == null) return null;
             MainFileRestartSimON restart = new MainFileRestartSimON();
             restart.Parent = null;
@@ -32,7 +32,7 @@ namespace OPT.Product.SimalorManager.Service
             restart.FilePath = Path.GetDirectoryName(mainData.FilePath);
             restart.Index = 0;
             restart.ResultFilePath = restart.FilePath + "\\" + Path.GetFileNameWithoutExtension(restart.FileName) + "_rst1.bin";
-            restart.MainFilePath = restart.FilePath + "\\" + restart.FileName + ".DAT";
+            restart.MainFilePath = restart.FilePath + "\\" + restart.FileName + KeyConfiger.SimONExtend;
 
             //  把主文件的SCH和SOLU部分传进来
             restart.Solution = mainData.Key.Find<SOLUTION>();
@@ -95,39 +95,42 @@ namespace OPT.Product.SimalorManager.Service
         /// <summary> 通过模型创建初始化文件 </summary>
         public SOLUTION InitRestartSolution(string parentFileName, RestartInfoModelSimON mode, DateTime time, int index)
         {
-
             SOLUTION solution = new SOLUTION("SOLUTION");
             INCLUDE include = new INCLUDE("INCLUDE");
             include.FileName = mode.FileName + "_INIT.DAT";
             include.FilePath = mode.FilePath + "\\" + include.FileName;
             solution.Add(include);
 
-            TSTART tstart = new TSTART("TSTART");
-            tstart.Date = time;
-            include.Add(tstart);
+            RegisterKeys.SimON.RESTART r = new RegisterKeys.SimON.RESTART("RESTART");
+            r.Filename = parentFileName;
+            r.StepCount = index.ToString();
 
-            Key key = new Key("RSTFILE");
-
-            string parentName = "'" + parentFileName + "_rst" + index + ".bin'";
-            key.Lines.Add(parentName);
-            include.Add(key);
-
-            //INCLUDE ince = new INCLUDE("INCLUDE");
-            //ince.FileName = parent.FileName + "_wrst" + index + ".dat";
-            //ince.FilePath = parent.FilePath + "\\" + include.FileName;
-
-            string format = @"INCLUDE
-'{0}_wrst{1}.dat'";
-
-            key.Lines.Add(string.Format(format, parentFileName, index));
-
-            //// Todo ：只做标识不清空源文件 
-            //ince.IsCreateFile = false;
-            //include.Add(ince);
-
-
+            include.Add(r);
 
             mode.InitPath = include.FilePath;
+
+            return solution;
+        }
+
+        /// <summary> 通过模型创建初始化文件 </summary>
+        public SOLUTION InitRestartSolutionRestartCase(string parentFileName, RestartInfoModelSimON mode, DateTime time, int index)
+        {
+            SOLUTION solution = new SOLUTION("SOLUTION");
+            INCLUDE include = new INCLUDE("INCLUDE");
+            include.FileName = mode.FileName + "_INIT.DAT";
+            include.FilePath = mode.FilePath + "\\" + include.FileName;
+            solution.Add(include);
+
+            RegisterKeys.SimON.RESTART r = new RegisterKeys.SimON.RESTART("RESTART");
+            r.Filename = parentFileName;
+            r.StepCount = index.ToString();
+
+            include.Add(r);
+
+            mode.InitPath = include.FilePath;
+
+            // HTodo  ：保存生产文件 
+            include.Save();
 
             return solution;
         }
@@ -185,14 +188,14 @@ namespace OPT.Product.SimalorManager.Service
             schedule.Add(include);
 
             include.Add(new USESTARTTIME("USESTARTTIME"));
-            include.Add(new WELLSCHED("WELLSCHED"));
+            include.Add(new RECURRENT("WELLSCHED"));
             TIME start = new TIME("TIME", time);
 
             foreach (var item in wellProducts)
             {
-                WELL well = new WELL("WELL");
+                WELLCTRL well = new WELLCTRL("WELLCTRL");
                 well.WellName0 = item.Key;
-                well.ProType = datype == 0 ? SimONProductType.GRAT : SimONProductType.ORAT;
+                well.ProType = datype == 0 ? SimONProductType.GRAT : datype == 1? SimONProductType.ORAT: SimONProductType.LRAT;
                 well.Jcyblxz2 = item.Value.ToString();
                 start.Add(well);
             }
@@ -201,7 +204,7 @@ namespace OPT.Product.SimalorManager.Service
 
             TIME end = new TIME("TIME", endtime);
 
-            end.Add(new RegisterKeys.SimON.RESTART("RESTART"));
+            end.Add(new RegisterKeys.SimON.STEPRST("STEPRST"));
 
             List<VFPINJ> Vins = sch.FindAll<VFPINJ>();
 
@@ -285,7 +288,8 @@ namespace OPT.Product.SimalorManager.Service
             //  创建关键字
             SCHEDULE schedule = new SCHEDULE("SCHEDULE");
 
-            if (restart.SchPath != null && File.Exists(restart.SchPath))
+            //if (restart.SchPath != null && File.Exists(restart.SchPath))
+            if (File.Exists(restart.SchPath))
             {
                 INCLUDE include = FileFactoryService.Instance.ThreadLoadFromFile(restart.SchPath, SimKeyType.SimON);
                 schedule.Add(include);
@@ -358,12 +362,12 @@ namespace OPT.Product.SimalorManager.Service
             WELL well = data.Key.Find<WELL>();
 
             //  更改起始时间
-            TUNING tuning = data.Key.Find<TUNING>();
+            SOLVECTRL tuning = data.Key.Find<SOLVECTRL>();
 
             // Todo ：主文件没有在solotion中找 
             if (tuning == null)
             {
-                tuning = sl.Find<TUNING>();
+                tuning = sl.Find<SOLVECTRL>();
             }
 
             tuning.Date = model.RestartTime;
@@ -396,7 +400,7 @@ namespace OPT.Product.SimalorManager.Service
 
             //data.Key.Add(rptsched);
 
-            RPTSCHED rptsched = mainData.Key.Find<RPTSCHED>();
+            OUTSCHED rptsched = mainData.Key.Find<OUTSCHED>();
 
             RPTSUM rptsum = mainData.Key.Find<RPTSUM>();
 
@@ -405,14 +409,85 @@ namespace OPT.Product.SimalorManager.Service
             if (rptsum != null) data.Key.Add(rptsum);
 
 
-            // Todo ：插入标识到第二个关键字 
-            OPT.Product.SimalorManager.RegisterKeys.SimON.RESTART restart = new OPT.Product.SimalorManager.RegisterKeys.SimON.RESTART("RESTART");
-            data.Key.InsertKey(1, restart);
+            //// Todo ：插入标识到第二个关键字 
+            //OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST restart = new OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST("STEPRST");
+            //data.Key.InsertKey(1, restart);
 
             return data;
 
         }
 
+
+        /// <summary> 用重启信息生成新重启数据（只包含主文件，初始化文件和生产文件） </summary>
+        public SimONData ChangeRestartModel(string mainFilePath, RestartInfoModelSimON model)
+        {
+            //  不读取INCLUDE部分数据 只读取SCHEDLE中INCLUDE
+            SimONData data = FileFactoryService.Instance.ThreadLoadFunc<SimONData>(() => new SimONData(mainFilePath, null, l => l.GetParentKey() is SCHEDULE));
+
+
+            // HTodo  ：传递输出参数  需要测试
+            OUTSCHED rptsched = data.Key.Find<OUTSCHED>();
+
+            RPTSUM rptsum = data.Key.Find<RPTSUM>();
+
+            var incs = data.Key.FindAll<INCLUDE>();
+
+
+            //  设置所有INCLUDE都不生成文件
+            incs.ForEach(l => l.IsCreateFile = false);
+
+            //  保存主文件
+            SOLUTION sl = data.Key.Find<SOLUTION>();
+
+            SCHEDULE sc = data.Key.Find<SCHEDULE>();
+
+            WELLCTRL well = data.Key.Find<WELLCTRL>();
+
+            //  更改起始时间
+            SOLVECTRL tuning = data.Key.Find<SOLVECTRL>();
+              
+            // Todo ：主文件没有在solotion中找 
+            if (tuning == null)
+            {
+                tuning = sl.Find<SOLVECTRL>();
+            }
+
+            tuning.Date = model.RestartTime;
+
+            model.Solution.Add(tuning);
+
+            //    替换数据
+            sl.ExChangeData(model.Solution);
+            sc.ExChangeData(model.Schedule);
+            well.ExChangeData(model.Well);
+
+            //  
+
+            //    设置保存部分数据
+            List<INCLUDE> slIncludes = sl.FindAll<INCLUDE>();
+            slIncludes.ForEach(l => l.IsCreateFile = true);
+
+            List<INCLUDE> scIncludes = sc.FindAll<INCLUDE>();
+            scIncludes.ForEach(l => l.IsCreateFile = true);
+
+            List<INCLUDE> wellIncludes = well.FindAll<INCLUDE>();
+            wellIncludes.ForEach(l => l.IsCreateFile = true);
+
+            //  保存主文件（目前没用）
+            //model.MainData = data;
+
+            if (rptsched != null) data.Key.Add(rptsched);
+
+            if (rptsum != null) data.Key.Add(rptsum);
+
+
+            //// Todo ：插入标识到第二个关键字 
+            //OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST restart = new OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST("STEPRST");
+            //data.Key.InsertKey(1, restart);
+
+            return data;
+
+        }
 
         /// <summary> 转换成序列化模型 </summary>
         public RestartSerialize TransSerialize(RestartInfoModelSimON m)
@@ -450,9 +525,11 @@ namespace OPT.Product.SimalorManager.Service
         /// <summary> 返回生产信息中 指定时间之前(包含当前时间)总共重启个数 </summary>
         public int RestartCount(SCHEDULE sch, DateTime time)
         {
-            List<TIME> ts = sch.FindAll<TIME>(l => l.Find<OPT.Product.SimalorManager.RegisterKeys.SimON.RESTART>() != null && l.Date.Date <= time.Date);
+            //List<TIME> ts = sch.FindAll<TIME>(l => l.Find<OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST>() != null && l.Date.Date <= time.Date);
 
-            return ts.Count;
+            List<TIME> ts = sch.FindAll<TIME>(l => l.Date.Date <= time.Date);
+
+            return ts.Count - 1;
         }
 
 

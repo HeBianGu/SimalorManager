@@ -38,9 +38,6 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 
         }
 
-
-
-        /// <summary> 数值水体实体 </summary>
         public class Item : OPT.Product.SimalorManager.Item
         {
 
@@ -69,7 +66,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
             }
 
 
-            string formatStr = "{0}{1}{2}{3}{4}{5}{6}";
+            string formatStr = "{0}{1}{2}{3}{4}{5}{6} /";
 
             /// <summary> 转换成字符串 </summary>
             public override string ToString()

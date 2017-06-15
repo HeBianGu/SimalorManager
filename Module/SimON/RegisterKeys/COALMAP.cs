@@ -23,14 +23,13 @@ using System.Text;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
-    /// <summary>  </summary
-    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.SimON)]
-    public class PGAS : TableKey
+   [KeyAttribute(EclKeyType = EclKeyType.Regions, SimKeyType = SimKeyType.SimON)]
+    public class COALMAP : TableKey
     {
-        public PGAS(string _name)
+        public COALMAP(string _name)
             : base(_name)
         {
-
+            this.DefaultValue = 1;
         }
     }
 }

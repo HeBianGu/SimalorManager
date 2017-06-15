@@ -71,6 +71,30 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
             }
         }
 
+
+        /// <summary> 获取所有子项 包括CARFNAME和GLOBAL部分 </summary>
+        public List<NAME.Item> GetItems()
+        {
+            List<NAME.Item> its = new List<Item>();
+
+            var c = this.Find<CARFNAME>();
+            if (c != null && c.Items != null)
+            {
+                its.AddRange(c.Items);
+            }
+
+
+            var g = this.Find<GLOBAL>();
+            if (g != null && g.Items != null)
+            {
+                its.AddRange(g.Items);
+            }
+
+            its.AddRange(this.Items);
+
+            return its;
+        }
+
         public class Item : OPT.Product.SimalorManager.Item
         {
             /// <summary> 第一列是井射孔所在网格的i编号 </summary>
@@ -223,8 +247,13 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
         /// <summary> 排序</summary>
         public void OrderBy()
         {
-            this.Items = this.Items.OrderBy(l => l.k12.ToInt()).ThenBy(l=>l.j1.ToInt()).ThenBy(l=>l.i0.ToInt()).ToList();
+            this.Items = this.Items.OrderBy(l => l.k12.ToInt()).ThenBy(l => l.j1.ToInt()).ThenBy(l => l.i0.ToInt()).ToList();
             //this.Items = this.Items.OrderBy(l => l.k12.ToInt() * 100000000 + l.i0.ToInt() * 10000 + l.j1.ToInt()).ToList();
+        }
+
+        public List<string> GetChildKeys()
+        {
+            return null;
         }
     }
 }

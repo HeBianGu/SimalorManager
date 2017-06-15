@@ -13,6 +13,7 @@
  * ========================================================================
 */
 #endregion
+using OPT.Product.SimalorManager.Base.AttributeEx;
 using OPT.Product.SimalorManager.Eclipse.FileInfos;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ using System.Text;
 namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
     /// <summary>  </summary>
+    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.SimON)]
     public class POIL : TableKey
     {
         public POIL(string _name)

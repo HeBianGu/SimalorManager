@@ -30,8 +30,8 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
         {
             this.EachLineCmdHandler = l =>
             {
-                //  截取前后空格判断是否为关键字
-                return l.Trim();
+                // HTodo  ：兼容WELL关键字 2017-05-24 14:27:53 
+                return BaseKeyHandleFactory.Instance.ForWellToWellCtrl(l).Trim();
             };
         }
         private string _wellName;
@@ -207,12 +207,16 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
                 }
             }
 
-            if (this.ParentKey is WELL)
-            {
-                WELL w = this.ParentKey as WELL;
+            WELLCTRL wellctrl = this.FindParentKey(l => l is WELLCTRL) as WELLCTRL;
 
-                this._wellName = w.WellName0;
-            }
+            this._wellName = wellctrl.WellName0;
+
+            //if (this.GetKeys is WELLCTRL)
+            //{
+            //    WELLCTRL w = this.ParentKey as WELLCTRL;
+
+            //    this._wellName = w.WellName0;
+            //}
         }
 
 

@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
     /// <summary> 重启时间标志 </summary>
-    public class RESTART : SingleKey
+    public class RESTART : ConfigerKey
     {
 
         public RESTART(string _name)
@@ -43,6 +43,70 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 
             };
 
+        }
+
+
+        string filename;
+
+        /// <summary> 文件名 </summary>
+        public string Filename
+        {
+            get
+            {
+                return filename;
+            }
+
+            set
+            {
+                filename = value;
+            }
+        }
+
+
+        string stepCount;
+
+        /// <summary> 时间步数量 </summary>
+        public string StepCount
+        {
+            get
+            {
+                return stepCount;
+            }
+
+            set
+            {
+                stepCount = value;
+            }
+        }
+
+        string formatStr = "{0}{1} /";
+
+
+        /// <summary> 转换成字符串 </summary>
+        public override string ToString()
+        {
+            return string.Format(formatStr, Filename.ToEclStr(), StepCount.ToDD());
+        }
+
+        /// <summary> 解析字符串 </summary>
+        public override void Build(List<string> newStr)
+        {
+            this.ID = Guid.NewGuid().ToString();
+
+            for (int i = 0; i < newStr.Count; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        this.Filename = newStr[0];
+                        break;
+                    case 1:
+                        this.StepCount = newStr[1];
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
     }

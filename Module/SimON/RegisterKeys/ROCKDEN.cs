@@ -13,48 +13,36 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Base.AttributeEx;
+using OPT.Product.SimalorManager.Eclipse.FileInfos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;  
 
-namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
+namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
-    /// <summary> 平衡计算选项 </summary>
-     
-    public class EQLOPTS : ConfigerKey
+    /// <summary> 岩石密度  （如果要增加和Cosim一样带枚举的 请参考Cosim关键字） </summary>
+    public class ROCKDEN : ConfigerKey
     {
-        public EQLOPTS(string _name)
+        public ROCKDEN(string _name)
             : base(_name)
         {
 
         }
 
-        private string thpres0 = "THPRES";
-        /// <summary> 开启门槛压力选项，如果设置了断层开启压力的话，也需要设置该参数进行开启 </summary>
-        public string Phfqs0
+        private string _value = "1";
+
+        public string Value
         {
-            get { return thpres0; }
-            set { thpres0 = value; }
+            get { return _value; }
+            set { _value = value; }
         }
+        string formatStr = "{0} ";
 
-        private string irrevers1 = "IRREVERS";
-        /// <summary> 允许每个方向的门槛压力不同，因此需要为每个方向设置启动压力 </summary>
-        public string Ylsdbzds1
-        {
-            get { return irrevers1; }
-            set { irrevers1 = value; }
-        }
-
-
-        string formatStr = "{0}{1} /";
-        /// <summary> 转换成字符串 </summary>
         public override string ToString()
         {
-            return string.Format(formatStr, thpres0.ToD(), irrevers1.ToD());
+            return string.Format(formatStr, Value.ToSDD());
         }
 
         /// <summary> 解析字符串 </summary>
@@ -67,10 +55,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                 switch (i)
                 {
                     case 0:
-                        this.thpres0 = newStr[0];
-                        break;
-                    case 1:
-                        this.irrevers1 = newStr[1];
+                        this._value = newStr[0];
                         break;
                     default:
                         break;

@@ -20,10 +20,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.IO;
+using OPT.Product.SimalorManager.Base.AttributeEx;
 
 namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
     /// <summary> 形状因子 分单值和枚举 </summary>
+    [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.SimON)]
     public class SIGMA : TableKey
     {
         public SIGMA(string _name)

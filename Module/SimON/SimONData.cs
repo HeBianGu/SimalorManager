@@ -63,8 +63,8 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         {
             this.SimKeyType = SimKeyType.SimON;
         }
-      
-        
+
+
 
         BaseFile _historyData;
         /// <summary> 历史数据信息 </summary>
@@ -77,9 +77,9 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         /// <summary> 初始化结构 </summary>
         public void InitConstruct(string mmfPath = null)
         {
-            this.MmfDirPath = mmfPath==null?this.MmfDirPath:mmfPath;
+            this.MmfDirPath = mmfPath == null ? this.MmfDirPath : mmfPath;
             this.SimKeyType = SimKeyType.SimON;
-            string historyDataPath = this.FilePath.GetDirectoryName() + "\\" + this.FilePath.GetFileNameWithoutExtension() + histroyFileName;
+            string historyDataPath = this.FilePath.GetDirectoryName() + "\\" + this.FilePath.GetFileNameWithoutExtension() +KeyConfiger.HistroyFileName;
 
             //  加载历史数据
             _historyData = new SimONData(historyDataPath);
@@ -100,10 +100,11 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
         }
 
         /// <summary> 清理父节点 </summary>
-        public void InitParentKey()
+        public void InitParentKey(bool isCoal = false)
         {
-
             this.Key.Clear();
+
+            this.Key.CreateSingle<SIMSET>("SIMSET");
 
             GRID grid = this.Key.CreateSingle<GRID>("GRID");
 
@@ -138,6 +139,8 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                 grid.Add(echo_on);
             }
 
+            this.Key.CreateSingle<MODIFY>("MODIFY");
+
             WELL well = this.Key.CreateSingle<WELL>("WELL");
 
             USE_TF use_tf = new USE_TF("USE_TF");
@@ -168,7 +171,16 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                 include.FilePath = this.FilePath.GetDirectoryName() + "\\" + include.FileName;
                 props.Add(include);
             }
+            if(isCoal)
+            {
+                ADSORB adsorb= this.Key.CreateSingle<ADSORB>("ADSORB");
 
+                INCLUDE include = new INCLUDE("INCLUDE");
+                include.FileName = this.FileName.GetFileNameWithoutExtension() + "_ADS.DAT";
+                include.FilePath = this.FilePath.GetDirectoryName() + "\\" + include.FileName;
+                adsorb.Add(include);
+            }
+           
 
             SOLUTION solution = this.Key.CreateSingle<SOLUTION>("SOLUTION");
 
@@ -185,16 +197,20 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                 solution.Add(include);
             }
 
+            TUNESET tuneset = this.Key.CreateSingle<TUNESET>("TUNESET");
 
 
-            TUNING tuning = this.Key.CreateSingle<TUNING>("TUNING");
-            if (tuning != null)
-            {
-                INCLUDE include = new INCLUDE("INCLUDE");
-                include.FileName = this.FileName.GetFileNameWithoutExtension() + "_TUN.DAT";
-                include.FilePath = this.FilePath.GetDirectoryName() + "\\" + include.FileName;
-                tuning.Add(include);
-            }
+            SOLVECTRL solvectrl = new SOLVECTRL("SOLVECTRL");
+
+            tuneset.Add(solvectrl);
+
+            //if (solvectrl != null)
+            //{
+            //    INCLUDE include = new INCLUDE("INCLUDE");
+            //    include.FileName = this.FileName.GetFileNameWithoutExtension() + "_TUN.DAT";
+            //    include.FilePath = this.FilePath.GetDirectoryName() + "\\" + include.FileName;
+            //    solvectrl.Add(include);
+            //}
 
             //SUMMARY summary = this.Key.CreateSingle<SUMMARY>("SUMMARY");
             //if (summary != null)
@@ -225,7 +241,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             //END end = this.Key.CreateSingle<END>("END");
 
             //  输出关键字
-            RPTSCHED rptsched = new RPTSCHED("RPTSCHED");
+            OUTSCHED rptsched = new OUTSCHED("RPTSCHED");
             this.Key.Add(rptsched);
 
         }
@@ -258,7 +274,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
                 }
             }
 
-            string historyDataPath = this.FilePath.GetDirectoryName() + "\\" + this.FilePath.GetFileNameWithoutExtension() + histroyFileName;
+            string historyDataPath = this.FilePath.GetDirectoryName() + "\\" + this.FilePath.GetFileNameWithoutExtension() + KeyConfiger.HistroyFileName;
 
             //if (File.Exists(historyDataPath))
             //{
@@ -267,10 +283,7 @@ namespace OPT.Product.SimalorManager.Eclipse.FileInfos
             //}
 
         }
-
-
-
-        public const string histroyFileName = "_HistoryProduction.DAT";
+      
 
         /// <summary> 保存 </summary>
         public override void Save()

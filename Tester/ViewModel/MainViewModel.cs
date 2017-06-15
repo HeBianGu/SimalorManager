@@ -21,6 +21,9 @@ namespace Tester.ViewModel
         {
             this.SearchFileHandler = new DelegateCommand(this.SearchFile);
 
+
+            this.SearchFileHandlerEclipse = new DelegateCommand(this.SearchFileEclipse);
+
             this.SaveAsHandler = new DelegateCommand(this.SaveFile);
 
         }
@@ -217,6 +220,9 @@ namespace Tester.ViewModel
 
             SimONData sim = FileFactoryService.Instance.ThreadLoadSimONResize(this._filePath);
 
+            //SimONData sim = FileFactoryService.Instance.ThreadLoadFunc<SimONData>(() => new SimONData(this._filePath, null, l => l.GetParentKey() is SCHEDULE));
+
+
             //this.EclipseData = new EclipseData();
 
             //RunLog = EclipseData.RunLog;
@@ -255,11 +261,66 @@ namespace Tester.ViewModel
 
         }
 
+        void SearchFileEclipse()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                this.FilePath = dlg.FileName;
+            }
+
+            if (!File.Exists(this._filePath)) return;
+
+            EclipseData ecl = FileFactoryService.Instance.ThreadLoadResize(this._filePath);
+
+            //this.EclipseData = SimDataConvertService.Instance.ConvertToSimON(ecl);
+
+            //SimONData sim = FileFactoryService.Instance.ThreadLoadSimONResize(this._filePath);
+
+            //this.EclipseData = new EclipseData();
+
+            //RunLog = EclipseData.RunLog;
+
+            //this.EclipseData.Load(this._filePath);
+
+            //END end= this.EclipseData.Key.Find<END>();
+
+            // if(end!=null)
+            // {
+            //     end.ClearAllAfter();
+            // }
+
+            List<BaseKey> bb = ecl.Key.FindAll<BaseKey>();
+
+            var ssr = bb.FindAll(l => l.ParentKey == null);
+
+            BkSource = ecl.Key.FindAll<BaseKey>();
+
+            if (BkSource.Count > 0)
+                IteamSel = BkSource.FirstOrDefault();
+
+            Total = BkSource.Count.ToString();
+
+            List<BaseKey> unKonwKeys = BkSource.FindAll(l => !l.IsUnKnowKey);
+
+            UnKownTotalType = unKonwKeys.GroupBy(l => l.Name.Split(' ')[0]).Count().ToString();
+
+            List<BaseKey> KonwKeys = BkSource.FindAll(l => l.IsUnKnowKey);
+
+            KownTotalType = KonwKeys.GroupBy(l => l.Name.Split(' ')[0]).Count().ToString();
+
+            UnKownTotal = unKonwKeys.Count.ToString();
+
+            KownTotal = (int.Parse(Total) - int.Parse(UnKownTotal)).ToString();
+
+        }
+
         void SaveFile()
         {
             SaveFileDialog dlg = new SaveFileDialog();
 
-            dlg.Filter = "文本文件(*.dat)|*.dat|所有文件(*.*)|*.*";
+            dlg.Filter = "文本文件(*.DATA)|*.DATA|所有文件(*.*)|*.*";
             dlg.FileName = this._eclipseData.FileName;
 
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -269,6 +330,9 @@ namespace Tester.ViewModel
         }
 
         public DelegateCommand SearchFileHandler { get; set; }
+
+
+        public DelegateCommand SearchFileHandlerEclipse { get; set; }
 
         public DelegateCommand SelectItemChanged { get; set; }
 

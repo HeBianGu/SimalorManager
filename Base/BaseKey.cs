@@ -184,6 +184,7 @@ namespace OPT.Product.SimalorManager
 
             //  写本行
             foreach (var str in this.lines)
+
             {
 
                 //Guid tempId;
@@ -212,10 +213,13 @@ namespace OPT.Product.SimalorManager
 
             while (!reader.EndOfStream)
             {
+
+                // HTodo  ：读取数据要处理的方法 一般用来截取前面空格判断是否解析成关键字 
                 tempStr = this.eachLineCmdHandler(reader.ReadLine());
 
                 try
                 {
+                    // HTodo  ：当前关键字用来判断文本是否为关键字的方法 
                     if (this.IsKeyChar(tempStr))
                     {
                         #region - 交接关键字 -
@@ -883,7 +887,7 @@ namespace OPT.Product.SimalorManager
 
             this.Delete();
         }
-      
+        
         #endregion
 
         public override string ToString()
@@ -935,7 +939,7 @@ namespace OPT.Product.SimalorManager
 
     public interface IRootNode
     {
-
+        List<string> GetChildKeys();
     }
 
 

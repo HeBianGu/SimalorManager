@@ -47,11 +47,11 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         }
 
         /// <summary> 重建项 </summary>
-        public void BuildItem(int count,string defaultValue=null )
+        public void BuildItem(int count, string defaultValue = null)
         {
             items.Clear();
 
-            for(int i=0;i<count;i++)
+            for (int i = 0; i < count; i++)
             {
                 StringModel sm = new StringModel();
                 sm.Index = (i + 1).ToString();
@@ -113,6 +113,18 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 
             string tempStr = null;
 
+
+            // HTodo  ：NXFIN  4   3   2兼容SimON格式 
+            var simonLine = this.Name.Split(' ');
+
+            if (simonLine.Length > 1)
+            {
+                if(simonLine[1].IsWorkLine())
+                {
+                    this.Lines.Add(simonLine[1]);
+                }
+            }
+
             while (!reader.EndOfStream)
             {
                 tempStr = reader.ReadLine().TrimEnd();
@@ -123,7 +135,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
                     this.Lines.Add(tempStr);
                     break;
                 }
-                   
+
 
                 if (tempStr.IsWorkLine())
                 {

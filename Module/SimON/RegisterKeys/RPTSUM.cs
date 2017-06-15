@@ -21,6 +21,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using OPT.Product.SimalorManager.RegisterKeys.SimON;
+
 namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 输出控制 </summary>
@@ -50,20 +52,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l=>l.Value==v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -82,20 +71,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -114,20 +90,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -145,20 +108,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
         /// <summary> 说明 </summary>
@@ -175,20 +125,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -206,20 +143,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -237,20 +161,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -268,20 +179,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -299,20 +197,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -330,20 +215,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -361,20 +233,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -392,20 +251,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1]+ " WAVG";
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
         /// <summary> 说明 </summary>
@@ -423,22 +269,32 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
+                Act(name, value);
+            }
+        }
 
-                if (value)
+        Action<string, bool> Act
+        {
+            get
+            {
+                return (n, k) =>
                 {
-                    if (!this.Items.Exists(l => l.Value == v))
+                    string v = n.Split('_')[1];
+
+                    if (k)
                     {
-                        this.Items.Add((Item)v);
+                        if (!this.Items.Exists(l => l.Value == v))
+                        {
+                            this.Items.Add((Item)v);
+                        }
                     }
                     else
                     {
                         this.Items.RemoveAll(l => l.Value == v);
                     }
-                }
+                };
             }
-        }
-
+        } 
         /// <summary> 说明 </summary>
         public bool WWPR
         {
@@ -454,19 +310,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -485,19 +329,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -516,19 +348,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -547,19 +367,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -578,19 +386,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -609,19 +405,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -640,19 +424,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -670,20 +442,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -702,19 +461,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -732,22 +479,9 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
-        }
+            }
 
         /// <summary> 说明 </summary>
         public bool WBHP
@@ -764,19 +498,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -794,20 +516,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -826,19 +535,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -849,27 +546,14 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1]+ " WAVG";
+                string v = name.Split('_')[1] + " WAVG";
 
                 return this.Items.Exists(l => l.Value == v);
             }
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1] + " WAVG"; ;
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -887,20 +571,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -918,20 +589,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -950,20 +608,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             set
             {
                 string name = MethodBase.GetCurrentMethod().Name;
-
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
@@ -982,26 +627,204 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
             {
                 string name = MethodBase.GetCurrentMethod().Name;
 
-                string v = name.Split('_')[1];
-
-                if (value)
-                {
-                    if (!this.Items.Exists(l => l.Value == v))
-                    {
-                        this.Items.Add((Item)v);
-                    }
-                    else
-                    {
-                        this.Items.RemoveAll(l => l.Value == v);
-                    }
-                }
+                Act(name, value);
             }
         }
 
-        
+        /// <summary> 说明 </summary>
+        public bool WBP
+        {
+            get
+            {
+                string name = MethodBase.GetCurrentMethod().Name;
+
+                string v = name.Split('_')[1];
+
+                return this.Items.Exists(l => l.Value == v);
+            }
+            set
+            {
+                string name = MethodBase.GetCurrentMethod().Name;
+                Act(name, value);
+            }
+        }
+
+        /// <summary> 说明 </summary>
+        public bool WBP4
+        {
+            get
+            {
+                string name = MethodBase.GetCurrentMethod().Name;
+
+                string v = name.Split('_')[1];
+
+                return this.Items.Exists(l => l.Value == v);
+            }
+            set
+            {
+                string name = MethodBase.GetCurrentMethod().Name;
+                Act(name, value);
+            }
+        }
+
+
+        /// <summary> 说明 </summary>
+        public bool WBP5
+        {
+            get
+            {
+                string name = MethodBase.GetCurrentMethod().Name;
+
+                string v = name.Split('_')[1];
+
+                return this.Items.Exists(l => l.Value == v);
+            }
+            set
+            {
+                string name = MethodBase.GetCurrentMethod().Name;
+                Act(name, value);
+            }
+        }
+
+        /// <summary> 说明 </summary>
+        public bool WBP9
+        {
+            get
+            {
+                string name = MethodBase.GetCurrentMethod().Name;
+
+                string v = name.Split('_')[1];
+
+                return this.Items.Exists(l => l.Value == v);
+            }
+            set
+            {
+                string name = MethodBase.GetCurrentMethod().Name;
+
+                Act(name, value);
+            }
+        }
+
+
 
         protected override void ItemWriteKey(System.IO.StreamWriter writer)
         {
+
+            MODELTYPE modeltype = this.BaseFile.Key.Find<MODELTYPE>();
+
+            if (modeltype.MetricType == MetricType.BLACKOIL || modeltype.MetricType == MetricType.HFOIL)
+            {
+                #region - 说明 -
+
+                this.FOPR = true;
+                this.FWPR = true;
+                this.FGPR = true;
+                this.FLPR = true;
+                this.FGIP = true;
+                this.FWIR = true;
+                this.FWCT = true;
+                this.FOPT = true;
+                this.FWPT = true;
+                this.FGPT = true;
+                this.FLPT = true;
+                this.FGIT = true;
+                this.FWIT = true;
+                this.POIL = true;
+                this.FOIP = true;
+                this.FGIP = true;
+                this.WOPR = true;
+                this.WWPR = true;
+                this.WGPR = true;
+                this.WLPR = true;
+                this.WGIR = true;
+                this.WWIR = true;
+                this.WWCT = true;
+                this.WOPT = true;
+                this.WWPT = true;
+                this.WGPT = true;
+                this.WLPT = true;
+                this.WGIT = true;
+                this.WWIT = true;
+                this.WBHP = true;
+                this.WBP = true;
+                this.WBP4 = true;
+                this.WBP5 = true;
+                this.WBP9 = true;
+
+                #endregion
+            }
+
+            else if (modeltype.MetricType == MetricType.GASWATER)
+            {
+                #region - 说明 -
+
+                this.FWPR = true;
+                this.FGPR = true;
+                this.FLPR = true;
+                this.FGIR = true;
+                this.FWIR = true;
+                this.FWCT = true;
+                this.FWPT = true;
+                this.FGPT = true;
+                this.FLPT = true;
+                this.FGIT = true;
+                this.FWIT = true;
+                this.PGAS = true;
+                this.FGIP = true;
+                this.WWPR = true;
+                this.WGPR = true;
+                this.WLPR = true;
+                this.WGIR = true;
+                this.WWIR = true;
+                this.WWPT = true;
+                this.WGPT = true;
+                this.WLPT = true;
+                this.WGIT = true;
+                this.WWIT = true;
+                this.WBHP = true;
+
+                this.WBP = true;
+                this.WBP4 = true;
+                this.WBP5 = true;
+                this.WBP9 = true;
+
+                #endregion
+            }
+
+            else if (modeltype.MetricType == MetricType.OILWATER)
+            {
+                #region - 说明 -
+                this.FOPR = true;
+                this.FWPR = true;
+                this.FLPR = true;
+                this.FWIR = true;
+                this.FWCT = true;
+                this.FOPT = true;
+                this.FWPT = true;
+                this.FLPT = true;
+                this.FWIT = true;
+                this.POIL = true;
+                this.FOIP = true;
+                this.WOPR = true;
+                this.WWPR = true;
+                this.WLPR = true;
+                this.WWIR = true;
+                this.WWCT = true;
+                this.WOPT = true;
+                this.WWPT = true;
+                this.WLPT = true;
+                this.WWIT = true;
+                this.WBHP = true;
+
+                this.WBP = true;
+                this.WBP4 = true;
+                this.WBP5 = true;
+                this.WBP9 = true;
+
+                #endregion
+            }
+
+
             this.Lines.Clear();
 
             writer.WriteLine();

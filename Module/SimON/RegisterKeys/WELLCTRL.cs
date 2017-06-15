@@ -25,15 +25,15 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
 {
     /// <summary>  </summary>
     [KeyAttribute(SimKeyType = SimKeyType.SimON)]
-    public class WELL : ConfigerKey, IRootNode
+    public class WELLCTRL : ConfigerKey, IRootNode
     {
-        public WELL(string _name)
+        public WELLCTRL(string _name)
             : base(_name)
         {
             this.EachLineCmdHandler = l =>
             {
-                //  截取前后空格判断是否为关键字
-                return l.Trim();
+                // HTodo  ：兼容WELL关键字 2017-05-24 14:27:53 
+                return BaseKeyHandleFactory.Instance.ForWellToWellCtrl(l).Trim();
             };
         }
 
@@ -174,7 +174,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.SimON
             else
             {
                 //    WELL  'MSW2'  4   4   101.35  
-                writer.WriteLine(string.Empty.ToD() + "WELL".ToDWithOutSpace() + this.ToString());
+                writer.WriteLine(string.Empty.ToD() + "WELLCTRL".ToDWithOutSpace() + this.ToString());
             }
 
         }

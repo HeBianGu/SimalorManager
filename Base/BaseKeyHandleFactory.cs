@@ -48,8 +48,28 @@ namespace OPT.Product.SimalorManager
 
                  if (last is IRootNode && !(per is IRootNode))
                  {
-                     //  上一关键字是父节点类型 下一关键字不是 直接添加到子节点
-                     last.Add(per);
+                     IRootNode r = last as IRootNode;
+
+                     var cs = r.GetChildKeys();
+
+                     if (cs == null)
+                     {
+                         // HTodo  ：如果为空标识直接增加到子节点 
+                         last.Add(per);
+                     }
+                     else
+                     {
+                         if (cs.Contains(per.GetType().Name))
+                         {
+                             // HTodo  ：如果包含在该子节点集合中增加到子节点 
+                             last.Add(per);
+                         }
+                         else
+                         {
+                             // HTodo  ：如果不包含则增加到同级别
+                             last.ParentKey.Add(per);
+                         }
+                     }
                      return;
                  }
 
@@ -198,6 +218,19 @@ namespace OPT.Product.SimalorManager
         {
             return l.Trim().Equals(KeyConfiger.EndFlag);
         };
+
+
+        /// <summary> WELL格式转换WELLCTRL格式 </summary>
+        public Func<string, string> ForWellToWellCtrl = l =>
+           {
+               // HTodo  ：兼容WELL关键字 2017-05-24 14:27:53 
+               if (l.Trim().Split(' ')[0].Trim() == "WELL")
+               {
+                   return l.Replace("WELL", "WELLCTRL").Trim();
+               }
+
+               return l;
+           };
 
     }
 }

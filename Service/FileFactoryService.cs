@@ -52,7 +52,6 @@ namespace OPT.Product.SimalorManager
 
             return eclData;
         }
-
         /// <summary> 利用数模文件异步创建指定大小栈的内存模型  SimONData data = FileFactoryService.Instance.ThreadLoadFunc<SimONData>(() => new SimONData(mainData.FilePath, null, l => false))</summary>
         public T ThreadLoadFunc<T>(Func<T> act, int stactSize = 4194304) where T : BaseFile
         {
@@ -89,7 +88,7 @@ namespace OPT.Product.SimalorManager
 
             include.FilePath = pfilePath;
 
-            if (include.BaseFile==null)
+            if (include.BaseFile == null)
             {
                 if (keyType == SimKeyType.Eclipse)
                 {
@@ -102,7 +101,7 @@ namespace OPT.Product.SimalorManager
                     include.BaseFile = simon;
                 }
             }
-           
+
 
             Thread thread = new Thread(() => include.ReadFromStream(), stactSize);// 4mb栈
 

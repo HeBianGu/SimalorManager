@@ -103,7 +103,9 @@ namespace OPT.Product.SimalorManager
 
 
         /// <summary> SimON文件扩展名 </summary>
-        public const string SimONExtend = ".DAT";
+        public const string SimONExtend = ".DATA";
+
+        public const string HistroyFileName = "_HistoryProduction.DAT";
 
     }
 }

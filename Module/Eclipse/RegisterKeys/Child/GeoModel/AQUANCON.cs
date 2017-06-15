@@ -38,89 +38,89 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         /// <summary> Fetkovich水体实体 </summary>
         public class Item : OPT.Product.SimalorManager.Item, ICloneable
         {
-            /// <summary> 水体编号 </summary>
+        
             private string stbh0;
-
+            /// <summary> 水体编号 </summary>
             public string Stbh0
             {
                 get { return stbh0; }
                 set { stbh0 = value; }
             }
-            /// <summary> 水体连接网格的X坐标（开始） </summary>
+            
             private string xzbks1;
-
+            /// <summary> 水体连接网格的X坐标（开始） </summary>
             public string Xzbks1
             {
                 get { return xzbks1; }
                 set { xzbks1 = value; }
             }
-            /// <summary> 水体连接网格的X坐标（结束）</summary>
+            
             private string xzbjs2;
-
+            /// <summary> 水体连接网格的X坐标（结束）</summary>
             public string Xzbjs2
             {
                 get { return xzbjs2; }
                 set { xzbjs2 = value; }
             }
-            /// <summary> 水体连接网格的Y坐标（开始） </summary>
+           
             private string yks3;
-
+            /// <summary> 水体连接网格的Y坐标（开始） </summary>
             public string Yks3
             {
                 get { return yks3; }
                 set { yks3 = value; }
             }
-            /// <summary> 水体连接网格的Y坐标（结束 </summary>
+            
             private string yjs4;
-
+            /// <summary> 水体连接网格的Y坐标（结束 </summary>
             public string Yjs4
             {
                 get { return yjs4; }
                 set { yjs4 = value; }
             }
-            /// <summary> 水体连接网格的Z坐标（开始） </summary>
+            
             private string zks5;
-
+            /// <summary> 水体连接网格的Z坐标（开始） </summary>
             public string Zks5
             {
                 get { return zks5; }
                 set { zks5 = value; }
             }
-            /// <summary> 水体连接网格的Z坐标（结束） </summary>
+           
             private string zjs6;
-
+            /// <summary> 水体连接网格的Z坐标（结束） </summary>
             public string Zjs6
             {
                 get { return zjs6; }
                 set { zjs6 = value; }
             }
-            /// <summary> 水体连接网格面朝向 </summary>
+           
             private string wgmcx7 = "I+";
-
+            /// <summary> 水体连接网格面朝向 </summary>
             public string Wgmcx7
             {
                 get { return wgmcx7; }
                 set { wgmcx7 = value; }
             }
-            /// <summary> 水体流量系数 </summary>
+           
             private string cdlcz8;
-
+            /// <summary> 水体流量系数 </summary>
             public string Cdlcz8
             {
                 get { return cdlcz8; }
                 set { cdlcz8 = value; }
             }
-            /// <summary> 水体流量系数乘子 </summary>
+            
             private string cdljsxx9;
-
+            /// <summary> 水体流量系数乘子 </summary>
             public string Cdljsxx9
             {
                 get { return cdljsxx9; }
                 set { cdljsxx9 = value; }
             }
-            /// <summary> 允许连接到相邻网格面 </summary>
+            
             private string yxljdxlwgm10 = "NO";
-
+            /// <summary> 允许连接到相邻网格面 </summary>
             public string Yxljdxlwgm10
             {
                 get { return yxljdxlwgm10; }

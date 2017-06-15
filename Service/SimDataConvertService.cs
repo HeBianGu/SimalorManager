@@ -3,6 +3,7 @@ using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
 using OPT.Product.SimalorManager.RegisterKeys.SimON;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -42,7 +43,7 @@ namespace OPT.Product.SimalorManager
 
             #region - 起始时间 -
 
-            TUNING tuning = new TUNING("TUNING");
+            SOLVECTRL tuning = new SOLVECTRL("TUNING");
 
             tuning.Date = ecl.Key.Find<START>().StartTime;
 
@@ -259,19 +260,31 @@ namespace OPT.Product.SimalorManager
             #endregion
 
             #region - 断层 -
-            var eclFaults = grid.FindAll<OPT.Product.SimalorManager.RegisterKeys.Eclipse.FAULTS>();
+            //var eclFaults = grid.FindAll<OPT.Product.SimalorManager.RegisterKeys.Eclipse.FAULTS>();
 
-            foreach (var v in eclFaults)
-            {
-                grid.AddRange(this.ConvertToSimON(v));
+            //foreach (var v in eclFaults)
+            //{
+            //grid.AddRange(this.ConvertToSimON(v));
 
-                v.Delete();
-            }
+            //v.Delete();
+            //}
             #endregion
 
             #region - 水体 -
 
             //AQUFETP AQUFETP=
+
+            // Todo ：Fetkovich水体数据转换
+            var ct = solution.Find<OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUCT>();
+
+            if (ct != null)
+            {
+                var newFetp = this.ConvertToSimON(ct);
+
+                solution.Add(newFetp);
+
+                ct.Delete();
+            }
 
             // Todo ：Fetkovich水体数据转换
             var fetp = solution.Find<OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUFETP>();
@@ -472,12 +485,12 @@ namespace OPT.Product.SimalorManager
                             if (wconinje.Exists(l => l.Items.Exists(k => k.jm0 == citem.jm0))) continue;
                             if (wconinjh.Exists(l => l.Items.Exists(k => k.jm0 == citem.jm0))) continue;
 
-                            WELL well = time.Find<WELL>(l => l.WellName0 == citem.jm0);
+                            WELLCTRL well = time.Find<WELLCTRL>(l => l.WellName0 == citem.jm0);
 
                             if (well == null)
                             {
                                 // Todo ：创建一个空的生产信息 
-                                well = new WELL("WELL");
+                                well = new WELLCTRL("WELLCTRL");
                                 well.ProType = SimONProductType.NA;
                                 well.WellName0 = citem.jm0;
                                 time.Add(well);
@@ -576,11 +589,11 @@ namespace OPT.Product.SimalorManager
 
                             var findComs = coms.FindAll(match);
 
-                            WELL well = time.Find<WELL>(l => l.WellName0 == v.jm0);
+                            WELLCTRL well = time.Find<WELLCTRL>(l => l.WellName0 == v.jm0);
                             if (well == null)
                             {
                                 // Todo ：创建一个空的生产信息 
-                                well = new WELL("WELL");
+                                well = new WELLCTRL("WELLCTRL");
                                 well.ProType = SimONProductType.NA;
                                 well.WellName0 = v.jm0;
                                 time.Add(well);
@@ -609,19 +622,19 @@ namespace OPT.Product.SimalorManager
                     foreach (WCONPROD.ItemHY it in item.Items)
                     {
                         //  生产数据
-                        WELL well = new WELL("WELL");
+                        WELLCTRL well = new WELLCTRL("WELLCTRL");
 
                         well.WellName0 = it.jm0;
 
                         well = this.ConvertToSimON(it, d, histNames);
 
-                        if(well!=null)
+                        if (well != null)
                         {
                             this.ConvertCompadat(well, names, compdats, wpimult, comAllTemp);
 
                             time.Add(well);
                         }
-                       
+
                     }
                 }
 
@@ -631,7 +644,7 @@ namespace OPT.Product.SimalorManager
                     foreach (WCONHIST.Item it in item.Items)
                     {
                         //  生产数据
-                        WELL well = new WELL("WELL");
+                        WELLCTRL well = new WELLCTRL("WELLCTRL");
 
                         well.WellName0 = it.wellName0;
 
@@ -650,7 +663,7 @@ namespace OPT.Product.SimalorManager
                     {
 
                         //  生产数据
-                        WELL well = new WELL("WELL");
+                        WELLCTRL well = new WELLCTRL("WELLCTRL");
 
                         well.WellName0 = it.jm0;
 
@@ -668,7 +681,7 @@ namespace OPT.Product.SimalorManager
                     foreach (WCONINJH.Item it in item.Items)
                     {
                         //  生产数据
-                        WELL well = new WELL("WELL");
+                        WELLCTRL well = new WELLCTRL("WELLCTRL");
 
                         well.WellName0 = it.jm0;
 
@@ -693,10 +706,10 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 转换成SimON格式的项 </summary>
-        public WELL ConvertToSimON(OPT.Product.SimalorManager.Item item, DATES date, List<NAME> histNames)
+        public WELLCTRL ConvertToSimON(OPT.Product.SimalorManager.Item item, DATES date, List<NAME> histNames)
         {
 
-            WELL well = new WELL("WELL");
+            WELLCTRL well = new WELLCTRL("WELLCTRL");
 
             if (item is WCONPROD.ItemHY)
             {
@@ -951,7 +964,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 将Eclipse完井数据转换成SimON完井数据 </summary>
-        void ConvertCompadat(WELL well, List<NAME> names, List<BaseKey> basekey, List<WPIMULT> wpimult, List<PERF> compTemps)
+        void ConvertCompadat(WELLCTRL well, List<NAME> names, List<BaseKey> basekey, List<WPIMULT> wpimult, List<PERF> compTemps)
         {
             List<BaseKey> compdats = basekey.FindAll(l => l is COMPDAT).ToList();
             //List<WELOPEN> welopen
@@ -1080,37 +1093,37 @@ namespace OPT.Product.SimalorManager
             }
         }
 
-        /// <summary> 将Eclipse断层转换为SimON断层 </summary>
-        public List<OPT.Product.SimalorManager.RegisterKeys.SimON.FAULTS> ConvertToSimON(OPT.Product.SimalorManager.RegisterKeys.Eclipse.FAULTS faults)
-        {
+        ///// <summary> 将Eclipse断层转换为SimON断层 </summary>
+        //public List<OPT.Product.SimalorManager.RegisterKeys.SimON.FAULTS> ConvertToSimON(OPT.Product.SimalorManager.RegisterKeys.Eclipse.FAULTS faults)
+        //{
 
-            List<RegisterKeys.SimON.FAULTS> fs = new List<RegisterKeys.SimON.FAULTS>();
-            var names = faults.Items.Select(l => l.dcm0).Distinct();
+        //    List<RegisterKeys.SimON.FAULTS> fs = new List<RegisterKeys.SimON.FAULTS>();
+        //    var names = faults.Items.Select(l => l.dcm0).Distinct();
 
-            foreach (var name in names)
-            {
-                OPT.Product.SimalorManager.RegisterKeys.SimON.FAULTS f = new RegisterKeys.SimON.FAULTS("FAULTS");
-                fs.Add(f);
+        //    foreach (var name in names)
+        //    {
+        //        OPT.Product.SimalorManager.RegisterKeys.SimON.FAULTS f = new RegisterKeys.SimON.FAULTS("FAULTS");
+        //        fs.Add(f);
 
-                var items = faults.Items.FindAll(l => l.dcm0 == name);
+        //        var items = faults.Items.FindAll(l => l.dcm0 == name);
 
-                items.ForEach(l =>
-                    {
-                        RegisterKeys.SimON.FAULTS.Item item = new RegisterKeys.SimON.FAULTS.Item();
-                        item.X11 = l.X11;
-                        item.X22 = l.X22;
-                        item.Y13 = l.Y13;
-                        item.Y24 = l.Y24;
-                        item.Z15 = l.Z15;
-                        item.Z26 = l.Z26;
-                        item.Dcm7 = l.Dcm7;
+        //        items.ForEach(l =>
+        //            {
+        //                RegisterKeys.SimON.FAULTS.Item item = new RegisterKeys.SimON.FAULTS.Item();
+        //                item.X11 = l.X11;
+        //                item.X22 = l.X22;
+        //                item.Y13 = l.Y13;
+        //                item.Y24 = l.Y24;
+        //                item.Z15 = l.Z15;
+        //                item.Z26 = l.Z26;
+        //                item.Dcm7 = l.Dcm7;
 
-                        f.Items.Add(item);
-                    });
-            }
+        //                f.Items.Add(item);
+        //            });
+        //    }
 
-            return fs;
-        }
+        //    return fs;
+        //}
 
 
         /// <summary> 将Eclipse水体数据转换成SimON水体数据 </summary>
@@ -1129,6 +1142,37 @@ namespace OPT.Product.SimalorManager
                 nItem.stysxs4 = item.stysxs4;
                 nItem.productionindex5 = item.sqzs5;
                 nItem.sxpvtbbh6 = item.sxpvtbbh6;
+                simon.Items.Add(nItem);
+            }
+
+            return simon;
+
+        }
+
+        /// <summary> 将Eclipse水体数据转换成SimON水体数据 </summary>
+        public OPT.Product.SimalorManager.RegisterKeys.SimON.AQUCT ConvertToSimON(OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUCT eclaqu)
+        {
+            OPT.Product.SimalorManager.RegisterKeys.SimON.AQUCT simon = new RegisterKeys.SimON.AQUCT("AQUCT");
+
+            foreach (var item in eclaqu.Items)
+            {
+                RegisterKeys.SimON.AQUCT.Item nItem = new RegisterKeys.SimON.AQUCT.Item();
+
+                nItem.stbh0 = item.stbh0;
+                nItem.cksd1 = item.cksd1;
+                nItem.cksdccsyl2 = item.cksdccsyl2;
+                nItem.ststl3 = item.ststl3;
+                nItem.stkxd4 = item.stkxd4;
+                nItem.stysxs5 = item.stysxs5;
+                nItem.stnj6 = item.stnj6;
+                nItem.sthd7 = item.sthd7;
+                nItem.yxj8 = item.yxj8;
+                nItem.sxpvtbbh9 = item.sxpvtbbh9;
+                nItem.yxhsbbh10 = item.yxhsbbh10;
+
+                //nItem.stcshynd11 = item.stysxs4;
+                //nItem.stwd12 = item.sqzs5;
+                //nItem.yxhsbbh10 = item.sxpvtbbh6;
                 simon.Items.Add(nItem);
             }
 
@@ -1162,24 +1206,24 @@ namespace OPT.Product.SimalorManager
 
         }
 
-        /// <summary> 转换存储格式 </summary>
-        public void TransToSimONFaults(List<RegisterKeys.SimON.FAULTS> fs)
-        {
-            //FAULTS -- 示例
-            //FAULTS1
-            //30 30 8 8 75 76  Y + 1 0
-            //FAULTS2
-            //30 30 8 8 75 76  Y + 1 0
+        ///// <summary> 转换存储格式 </summary>
+        //public void TransToSimONFaults(List<RegisterKeys.SimON.FAULTS> fs)
+        //{
+        //    //FAULTS -- 示例
+        //    //FAULTS1
+        //    //30 30 8 8 75 76  Y + 1 0
+        //    //FAULTS2
+        //    //30 30 8 8 75 76  Y + 1 0
 
-            for (int i = 1; i <= fs.Count; i++)
-            {
-                RegisterKeys.SimON.FAULTS f = fs[i - 1];
-                f.Name = "FAULTS" + i.ToString();
-            }
+        //    for (int i = 1; i <= fs.Count; i++)
+        //    {
+        //        RegisterKeys.SimON.FAULTS f = fs[i - 1];
+        //        f.Name = "FAULTS" + i.ToString();
+        //    }
 
-            RegisterKeys.SimON.FAULTS faults = new RegisterKeys.SimON.FAULTS("FAULTS");
-            fs.Insert(0, faults);
-        }
+        //    RegisterKeys.SimON.FAULTS faults = new RegisterKeys.SimON.FAULTS("FAULTS");
+        //    fs.Insert(0, faults);
+        //}
 
         /// <summary> 相对密度转换成绝对密度 </summary>
         public DENSITY ConvertTo(GRAVITY gravity, UnitType utype)
@@ -1227,6 +1271,61 @@ namespace OPT.Product.SimalorManager
 
 
 
+        }
+
+
+
+        /// <summary> 更换案例路径 P1= D:\WorkArea\3106  P2 = D:\WorkArea\数值模拟</summary>
+        public void ChangePath(SimONData _simONData, string newFullPath, string tempOld)
+        {
+            string caseName = Path.GetFileNameWithoutExtension(newFullPath);
+            
+
+            string tempPath = Path.Combine(newFullPath, caseName);//  E:\\aaaa\\aaaa
+
+            _simONData.FilePath = tempOld + KeyConfiger.SimONExtend;
+
+            string oldFile = Path.Combine(newFullPath, Path.GetFileName(_simONData.FilePath));//  E:\\aaaa\\数值模拟.dat
+
+            string newStr = Path.Combine(newFullPath, caseName + Path.GetExtension(oldFile));//  E:\\aaaa\\aaaa.dat
+
+            // Todo ：更改文件路径  E:\\数值模拟\\数值模拟_prd.dat To:E:\\aaaa\\aaaa_prd.dat
+            Func<string, string> replace = old => old.Replace(tempOld, tempPath);
+
+            string oldCaseName = Path.GetFileNameWithoutExtension(_simONData.FilePath);//    数值模拟
+
+            // Todo ：重新保存一份主文件 不加载INCLUDE 只处理主文件
+            SimONData tempSimon = FileFactoryService.Instance.ThreadLoadFunc<SimONData>(() => new SimONData(newStr, null, k => false));
+            var allInc = tempSimon.Key.FindAll<INCLUDE>();
+
+            foreach (var item in allInc)
+            {
+                // Todo ：不保存 防止覆盖原INCLUDE文件 
+                item.IsCreateFile = false;
+                item.FileName = item.FileName.Replace(oldCaseName, caseName);
+                item.FilePath = replace(item.FilePath);
+            }
+            tempSimon.Save();
+
+            // Todo ：修改所有INCLUDE文件名 
+            List<INCLUDE> includes = _simONData.Key.FindAll<INCLUDE>();
+
+            foreach (var item in includes)
+            {
+                string includePath = Path.Combine(newFullPath, item.FileName);
+                File.Move(includePath, replace(item.FilePath));
+                item.FileName = item.FileName.Replace(oldCaseName, caseName);
+                item.FilePath = replace(item.FilePath);
+            }
+
+            _simONData.FilePath = newStr;
+
+
+            string hist = tempPath + KeyConfiger.HistroyFileName;
+
+            string oldhist= Path.Combine(newFullPath, oldCaseName) + KeyConfiger.HistroyFileName;
+
+            File.Move(oldhist, hist);
         }
 
     }

@@ -223,7 +223,7 @@ namespace OPT.Product.SimalorManager
         internal void BuildPath()
         {
             this.ResultFilePath = this.FilePath + "\\" + Path.GetFileNameWithoutExtension(this.ParentName) + "_rst" + this.Index + ".bin";
-            this.MainFilePath = this.FilePath + "\\" + this.FileName + ".DAT";
+            this.MainFilePath = this.FilePath + "\\" + this.FileName + KeyConfiger.SimONExtend;
             this.SchPath = this.FilePath + "\\" + this.FileName + "_SCH.DAT";
             this.InitPath = this.FilePath + "\\" + this.FileName + "_iNIT.DAT";
         }
