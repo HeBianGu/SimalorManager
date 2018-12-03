@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/10/28 16:33:27
+ * 作者：[HeBianGu]   时间：2015/10/28 16:33:27
 
  * 说明：正则表达式扩展封装
  * 
@@ -21,7 +21,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Match
+namespace HeBianGu.Product.SimalorManager.Match
 {
     /// <summary> 正则表达式扩展封装 Add By lihaijun 2015.10.28 </summary>
     public static class RegexDao

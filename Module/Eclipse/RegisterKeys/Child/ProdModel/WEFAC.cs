@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/12/1 17:43:17
+ * 作者：[HeBianGu]   时间：2015/12/1 17:43:17
 
  * 说明：
  * 
@@ -20,7 +20,7 @@ WEFAC
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,7 +28,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
+namespace HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 单井生产时率 该关键字主要用于设置修井时间（downtime）对于模拟的影响。 </summary>
      
@@ -47,7 +47,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         }
 
         /// <summary> 黑油项实体 </summary>
-        public class Item : OPT.Product.SimalorManager.Item,IProductItem
+        public class Item : HeBianGu.Product.SimalorManager.Item,IProductItem
         {
             /// <summary> 井名 </summary>
             public string jm0;

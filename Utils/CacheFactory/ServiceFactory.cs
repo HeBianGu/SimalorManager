@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 单例工厂父类</summary>
     public class ServiceFactory<T> where T : class, new()

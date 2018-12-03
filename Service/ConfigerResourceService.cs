@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.Service
+namespace HeBianGu.Product.SimalorManager.Service
 {
 
     /// <summary> 配置文件 </summary>

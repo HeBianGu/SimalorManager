@@ -14,8 +14,8 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
-using OPT.Product.SimalorManager;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace OPT.Product.SimalorManager.Eclipse.FileInfos
+namespace HeBianGu.Product.SimalorManager.Eclipse.FileInfos
 {
     /// <summary> ECLIPSE主文件操作类 </summary>
     public class NormalData : BaseFile

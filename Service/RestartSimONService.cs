@@ -1,14 +1,14 @@
-﻿using OPT.Product.SimalorManager.Base.AttributeEx;
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
-using OPT.Product.SimalorManager.RegisterKeys.SimON;
+﻿using HeBianGu.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager.RegisterKeys.SimON;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.Service
+namespace HeBianGu.Product.SimalorManager.Service
 {
     /// <summary> SimON重启服务 </summary>
     public class RestartSimONService : ServiceFactory<RestartSimONService>
@@ -17,7 +17,7 @@ namespace OPT.Product.SimalorManager.Service
         /// <summary> 获取所有重启时间步 </summary>
         public List<TIME> GetAllRestartTime(SCHEDULE sch)
         {
-            return sch.FindAll<TIME>(l => l.Find<OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST>() != null);
+            return sch.FindAll<TIME>(l => l.Find<HeBianGu.Product.SimalorManager.RegisterKeys.SimON.STEPRST>() != null);
         }
 
         /// <summary> 创建初始重启模型 </summary>
@@ -410,7 +410,7 @@ namespace OPT.Product.SimalorManager.Service
 
 
             //// Todo ：插入标识到第二个关键字 
-            //OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST restart = new OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST("STEPRST");
+            //HeBianGu.Product.SimalorManager.RegisterKeys.SimON.STEPRST restart = new HeBianGu.Product.SimalorManager.RegisterKeys.SimON.STEPRST("STEPRST");
             //data.Key.InsertKey(1, restart);
 
             return data;
@@ -482,7 +482,7 @@ namespace OPT.Product.SimalorManager.Service
 
 
             //// Todo ：插入标识到第二个关键字 
-            //OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST restart = new OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST("STEPRST");
+            //HeBianGu.Product.SimalorManager.RegisterKeys.SimON.STEPRST restart = new HeBianGu.Product.SimalorManager.RegisterKeys.SimON.STEPRST("STEPRST");
             //data.Key.InsertKey(1, restart);
 
             return data;
@@ -525,7 +525,7 @@ namespace OPT.Product.SimalorManager.Service
         /// <summary> 返回生产信息中 指定时间之前(包含当前时间)总共重启个数 </summary>
         public int RestartCount(SCHEDULE sch, DateTime time)
         {
-            //List<TIME> ts = sch.FindAll<TIME>(l => l.Find<OPT.Product.SimalorManager.RegisterKeys.SimON.STEPRST>() != null && l.Date.Date <= time.Date);
+            //List<TIME> ts = sch.FindAll<TIME>(l => l.Find<HeBianGu.Product.SimalorManager.RegisterKeys.SimON.STEPRST>() != null && l.Date.Date <= time.Date);
 
             List<TIME> ts = sch.FindAll<TIME>(l => l.Date.Date <= time.Date);
 

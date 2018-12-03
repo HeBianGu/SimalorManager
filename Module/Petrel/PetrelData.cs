@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/11/27 13:24:46
+ * 作者：[HeBianGu]   时间：2015/11/27 13:24:46
 
  * 说明：使用方法 = 传递Petrel主文件名，将关键字读写到树形类型内存中操作
  *       调用Save()方法存储文件
@@ -15,8 +15,8 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
-using OPT.Product.SimalorManager;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,7 +26,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> ECLIPSE主文件操作类 </summary>
     public class PetrelData : BaseFile

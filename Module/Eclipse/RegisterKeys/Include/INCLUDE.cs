@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/11/26 15:59:00
+ * 作者：[HeBianGu]   时间：2015/11/26 15:59:00
 
  * 说明：
  * 
@@ -14,8 +14,8 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Base.AttributeEx;
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,7 +25,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
+namespace HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> INCLUDE 关键字 </summary>
     public class INCLUDE : BaseKey, IRootNode

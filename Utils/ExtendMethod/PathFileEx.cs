@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 公用字符串文件扩展方法 --   Add By lihaijun 2015.09.30 11：43 </summary>
     public static class PathFileEx

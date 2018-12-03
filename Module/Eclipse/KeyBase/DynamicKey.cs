@@ -19,7 +19,7 @@ WEFAC
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,7 +27,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
+namespace HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 动态列表抽象类 </summary>
     public abstract class DynamicKey : BaseKey

@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/12/1 17:43:17
+ * 作者：[HeBianGu]   时间：2015/12/1 17:43:17
 
  * 说明：
  * 
@@ -21,7 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.RegisterKeys.SimON
+namespace HeBianGu.Product.SimalorManager.RegisterKeys.SimON
 {
     /// <summary> 范围类 </summary>
     public class FINBOX : ConfigerKey

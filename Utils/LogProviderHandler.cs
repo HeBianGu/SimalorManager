@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
 
     /// <summary> 注册事件写日志 (优势可以注册取消多个，静态注册) </summary>

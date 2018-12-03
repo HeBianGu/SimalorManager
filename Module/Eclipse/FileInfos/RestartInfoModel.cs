@@ -1,14 +1,14 @@
-﻿using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
-using OPT.Product.SimalorManager;
+﻿using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
-using OPT.Product.SimalorManager.RegisterKeys.SimON;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.RegisterKeys.SimON;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 主文件模型 </summary>
     public class MainFileRestart : RestartInfoModel

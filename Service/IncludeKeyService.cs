@@ -1,4 +1,4 @@
-﻿using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+﻿using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> INCLUDE关键字的服务 </summary>
     public class IncludeKeyService : ServiceFactory<IncludeKeyService>

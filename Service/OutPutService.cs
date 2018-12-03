@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 有关输出控制的扩展方法 </summary>
     public  class OutPutService : ServiceFactory<OutPutService>

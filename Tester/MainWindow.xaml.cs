@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Grid;
-using OPT.Product.SimalorManager;
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

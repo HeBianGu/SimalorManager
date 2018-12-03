@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2016/12/21 16:06:04
+ * 作者：[HeBianGu]   时间：2016/12/21 16:06:04
 
  * 说明：
  * 
@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
+namespace HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse
 {
     
     /// <summary> 相对坐标 </summary>

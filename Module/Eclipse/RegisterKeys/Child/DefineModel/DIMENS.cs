@@ -12,14 +12,14 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
+namespace HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse
 {
     /// <summary> 模型维数 </summary>
     [TypeConverter(typeof(ExpandableObjectConverter))]

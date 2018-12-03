@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/12/2 9:25:19
+ * 作者：[HeBianGu]   时间：2015/12/2 9:25:19
 
  * 说明：
  * 
@@ -14,20 +14,20 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
-using OPT.Product.SimalorManager.RegisterKeys.SimON;
-using OPT.Product.SimalorManager;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager.RegisterKeys.SimON;
+using HeBianGu.Product.SimalorManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OPT.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 using System.Threading;
 using System.IO;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> Eclipse文件服务 </summary>
     public static class EclipseDataService
@@ -523,7 +523,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 获取指定分组的修正关键字 </summary>
-        public static List<OPT.Product.SimalorManager.RegisterKeys.SimON.BOX> FilterByGroup(this EclKeyType group, List<OPT.Product.SimalorManager.RegisterKeys.SimON.BOX> modifys)
+        public static List<HeBianGu.Product.SimalorManager.RegisterKeys.SimON.BOX> FilterByGroup(this EclKeyType group, List<HeBianGu.Product.SimalorManager.RegisterKeys.SimON.BOX> modifys)
         {
             List<string> findKeys = group.GetGroupKeyNames();
 

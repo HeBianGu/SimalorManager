@@ -7,7 +7,7 @@
     <ProjectGuid>{43347470-5A12-42D6-910F-F9A1529822C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OPT.Product.SimalorManager</RootNamespace>
+    <RootNamespace>HeBianGu.Product.SimalorManager</RootNamespace>
     <AssemblyName>SimalorManager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

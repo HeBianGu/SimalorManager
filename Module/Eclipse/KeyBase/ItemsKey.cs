@@ -1,11 +1,11 @@
-﻿using OPT.Product.SimalorManager.Base.AttributeEx;
+﻿using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 带有Item的关键字抽象类 </summary>
     public class ItemsKey<T> : BaseKey, ItemsKeyInterface where T : Item, new()

@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/12/1 17:43:17
+ * 作者：[HeBianGu]   时间：2015/12/1 17:43:17
 
  * 说明：
  * WCONPROD
@@ -18,7 +18,7 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,7 +26,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
+namespace HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse
 {
      
     public class WCONPROD : ItemsKey<WCONPROD.ItemHY>,IProductEvent
@@ -44,7 +44,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         }
 
         /// <summary> 黑油项实体 </summary>
-        public class ItemHY : OPT.Product.SimalorManager.Item, IProductItem
+        public class ItemHY : HeBianGu.Product.SimalorManager.Item, IProductItem
         {
             /// <summary> 井名 </summary>
             public string jm0;
@@ -150,7 +150,7 @@ namespace OPT.Product.SimalorManager.RegisterKeys.Eclipse
         }
 
         /// <summary> 组分项实体 </summary>
-        public class ItemZF : OPT.Product.SimalorManager.Item
+        public class ItemZF : HeBianGu.Product.SimalorManager.Item
         {
             /// <summary> 井名 </summary>
             public string wellName0;

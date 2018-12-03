@@ -1,6 +1,6 @@
-﻿using OPT.Product.SimalorManager.Base.AttributeEx;
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+﻿using HeBianGu.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 带有Item的关键字抽象类 创建的表资源要记得释放Dispose() </summary>
     public partial class TableKey : Key

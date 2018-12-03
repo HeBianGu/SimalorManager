@@ -1,11 +1,11 @@
-﻿using OPT.Product.SimalorManager.Base.AttributeEx;
+﻿using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 带分区的关键字 </summary>
     public abstract class RegionKey<T> : Key, IRegionInterface where T : Item, new()

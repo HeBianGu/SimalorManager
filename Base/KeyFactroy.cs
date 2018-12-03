@@ -13,9 +13,9 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +24,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 关键字工厂(一个关键字对应于一个关键字的实现类，没有实现用NormalKey) </summary>
     public class KeyConfigerFactroy : ServiceFactory<KeyConfigerFactroy>
@@ -196,7 +196,7 @@ namespace OPT.Product.SimalorManager
         {
 
         }
-        string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys";
+        string _publickeynamespace = "HeBianGu.Product.SimalorManager.RegisterKeys";
 
         public string Publickeynamespace
         {
@@ -256,7 +256,7 @@ namespace OPT.Product.SimalorManager
     /// <summary> 公用关键字工厂基类 </summary>
     public class PublicKeyFactory : BaseKeyFactory
     {
-        string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys";
+        string _publickeynamespace = "HeBianGu.Product.SimalorManager.RegisterKeys";
 
         public PublicKeyFactory()
         {
@@ -267,7 +267,7 @@ namespace OPT.Product.SimalorManager
     /// <summary> Eclipse关键字工厂基类 </summary>
     public class EclipseKeyFactory : BaseKeyFactory
     {
-        string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys.Eclipse";
+        string _publickeynamespace = "HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse";
 
         public EclipseKeyFactory()
         {
@@ -406,7 +406,7 @@ namespace OPT.Product.SimalorManager
     /// <summary> SimON关键字工厂基类 </summary>
     public class SimONKeyFactory : BaseKeyFactory
     {
-        string _publickeynamespace = "OPT.Product.SimalorManager.RegisterKeys.SimON";
+        string _publickeynamespace = "HeBianGu.Product.SimalorManager.RegisterKeys.SimON";
 
         public SimONKeyFactory()
         {

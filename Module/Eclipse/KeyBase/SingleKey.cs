@@ -19,7 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 只有名称没有内容的关键字 </summary>
     public abstract class SingleKey : BaseKey, OutPutBindKey

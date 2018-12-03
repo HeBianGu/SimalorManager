@@ -1,11 +1,11 @@
-﻿using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+﻿using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 关键字服务 </summary>
     public static class BaseKeyService

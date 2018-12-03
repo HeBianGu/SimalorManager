@@ -24,15 +24,15 @@ ENDBOX
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 修改参数抽象类 （ 兼容BOX和修改参数关键字 ） </summary>
     public abstract class ModifyKey : Key

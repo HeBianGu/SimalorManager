@@ -1,6 +1,6 @@
-﻿using OPT.Product.SimalorManager.Base.AttributeEx;
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
-using OPT.Product.SimalorManager.Service;
+﻿using HeBianGu.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 文件基础类 </summary>
     public abstract partial class BaseFile : IDisposable

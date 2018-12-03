@@ -1,5 +1,5 @@
-﻿using OPT.Product.SimalorManager.Base.AttributeEx;
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+﻿using HeBianGu.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 关键字基类 包含子节点 父节点 文件基类一级基本读写方法 </summary>
     public partial class BaseKey : IDisposable

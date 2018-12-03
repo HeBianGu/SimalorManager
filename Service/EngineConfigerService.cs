@@ -1,11 +1,11 @@
-﻿using OPT.Product.SimalorManager.Base.AttributeEx;
+﻿using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace OPT.Product.SimalorManager.Service
+namespace HeBianGu.Product.SimalorManager.Service
 {
 
     /// <summary> 读取写入文件时用的锁 </summary>

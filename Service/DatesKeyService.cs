@@ -1,11 +1,11 @@
-﻿using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+﻿using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 有关日期的操作服务 </summary>
     public class DatesKeyService : ServiceFactory<DatesKeyService>

@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2017/4/12 14:36:24
+ * 作者：[HeBianGu]   时间：2017/4/12 14:36:24
  * 文件名：FinConfigerKey
  * 说明：
  * 
@@ -14,13 +14,13 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
 
     /// <summary> 加密区格式解析规则 示例：NXFIN  4   3   2 </summary>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 需要和其他关键字做关联的关键字 </summary>
     public abstract class ConnectKey<T> : ItemsKey<T> where T : Item, new()

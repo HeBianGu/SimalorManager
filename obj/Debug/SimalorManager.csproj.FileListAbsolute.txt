@@ -19,3 +19,11 @@ D:\PEOffice6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\OPT.P
 D:\PEOffice6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.csproj.GenerateResource.Cache
 D:\PEOffice6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.dll
 D:\PEOffice6.3\DEV\Source\GeneralLayer\ModuleData\SimalorManager\obj\Debug\SimalorManager.pdb
+F:\Product\bin\SimalorManager.XML
+F:\Product\bin\SimalorManager.dll
+F:\Product\bin\SimalorManager.pdb
+F:\GitHub\SimalorManager\obj\Debug\SimalorManager.csprojResolveAssemblyReference.cache
+F:\GitHub\SimalorManager\obj\Debug\HeBianGu.Product.SimalorManager.Properties.Resources.resources
+F:\GitHub\SimalorManager\obj\Debug\SimalorManager.csproj.GenerateResource.Cache
+F:\GitHub\SimalorManager\obj\Debug\SimalorManager.dll
+F:\GitHub\SimalorManager\obj\Debug\SimalorManager.pdb

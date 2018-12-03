@@ -1,13 +1,13 @@
-﻿using OPT.Product.SimalorManager.Eclipse.FileInfos;
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
-using OPT.Product.SimalorManager.RegisterKeys.SimON;
+﻿using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager.RegisterKeys.SimON;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     /// <summary> 数模文件相互转换服务 </summary>
     public class SimDataConvertService : ServiceFactory<SimDataConvertService>
@@ -260,7 +260,7 @@ namespace OPT.Product.SimalorManager
             #endregion
 
             #region - 断层 -
-            //var eclFaults = grid.FindAll<OPT.Product.SimalorManager.RegisterKeys.Eclipse.FAULTS>();
+            //var eclFaults = grid.FindAll<HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse.FAULTS>();
 
             //foreach (var v in eclFaults)
             //{
@@ -275,7 +275,7 @@ namespace OPT.Product.SimalorManager
             //AQUFETP AQUFETP=
 
             // Todo ：Fetkovich水体数据转换
-            var ct = solution.Find<OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUCT>();
+            var ct = solution.Find<HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse.AQUCT>();
 
             if (ct != null)
             {
@@ -287,7 +287,7 @@ namespace OPT.Product.SimalorManager
             }
 
             // Todo ：Fetkovich水体数据转换
-            var fetp = solution.Find<OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUFETP>();
+            var fetp = solution.Find<HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse.AQUFETP>();
 
             if (fetp != null)
             {
@@ -299,7 +299,7 @@ namespace OPT.Product.SimalorManager
             }
 
             // Todo ：水体连接数据转换
-            var aquancon = solution.Find<OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUANCON>();
+            var aquancon = solution.Find<HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse.AQUANCON>();
 
             if (aquancon != null)
             {
@@ -706,7 +706,7 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 转换成SimON格式的项 </summary>
-        public WELLCTRL ConvertToSimON(OPT.Product.SimalorManager.Item item, DATES date, List<NAME> histNames)
+        public WELLCTRL ConvertToSimON(HeBianGu.Product.SimalorManager.Item item, DATES date, List<NAME> histNames)
         {
 
             WELLCTRL well = new WELLCTRL("WELLCTRL");
@@ -1094,7 +1094,7 @@ namespace OPT.Product.SimalorManager
         }
 
         ///// <summary> 将Eclipse断层转换为SimON断层 </summary>
-        //public List<OPT.Product.SimalorManager.RegisterKeys.SimON.FAULTS> ConvertToSimON(OPT.Product.SimalorManager.RegisterKeys.Eclipse.FAULTS faults)
+        //public List<HeBianGu.Product.SimalorManager.RegisterKeys.SimON.FAULTS> ConvertToSimON(HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse.FAULTS faults)
         //{
 
         //    List<RegisterKeys.SimON.FAULTS> fs = new List<RegisterKeys.SimON.FAULTS>();
@@ -1102,7 +1102,7 @@ namespace OPT.Product.SimalorManager
 
         //    foreach (var name in names)
         //    {
-        //        OPT.Product.SimalorManager.RegisterKeys.SimON.FAULTS f = new RegisterKeys.SimON.FAULTS("FAULTS");
+        //        HeBianGu.Product.SimalorManager.RegisterKeys.SimON.FAULTS f = new RegisterKeys.SimON.FAULTS("FAULTS");
         //        fs.Add(f);
 
         //        var items = faults.Items.FindAll(l => l.dcm0 == name);
@@ -1127,9 +1127,9 @@ namespace OPT.Product.SimalorManager
 
 
         /// <summary> 将Eclipse水体数据转换成SimON水体数据 </summary>
-        public OPT.Product.SimalorManager.RegisterKeys.SimON.AQUFETP ConvertToSimON(OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUFETP eclaqu)
+        public HeBianGu.Product.SimalorManager.RegisterKeys.SimON.AQUFETP ConvertToSimON(HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse.AQUFETP eclaqu)
         {
-            OPT.Product.SimalorManager.RegisterKeys.SimON.AQUFETP simon = new RegisterKeys.SimON.AQUFETP("AQUFETP");
+            HeBianGu.Product.SimalorManager.RegisterKeys.SimON.AQUFETP simon = new RegisterKeys.SimON.AQUFETP("AQUFETP");
 
             foreach (var item in eclaqu.Items)
             {
@@ -1150,9 +1150,9 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 将Eclipse水体数据转换成SimON水体数据 </summary>
-        public OPT.Product.SimalorManager.RegisterKeys.SimON.AQUCT ConvertToSimON(OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUCT eclaqu)
+        public HeBianGu.Product.SimalorManager.RegisterKeys.SimON.AQUCT ConvertToSimON(HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse.AQUCT eclaqu)
         {
-            OPT.Product.SimalorManager.RegisterKeys.SimON.AQUCT simon = new RegisterKeys.SimON.AQUCT("AQUCT");
+            HeBianGu.Product.SimalorManager.RegisterKeys.SimON.AQUCT simon = new RegisterKeys.SimON.AQUCT("AQUCT");
 
             foreach (var item in eclaqu.Items)
             {
@@ -1181,9 +1181,9 @@ namespace OPT.Product.SimalorManager
         }
 
         /// <summary> 将Eclipse水体数据转换成SimON水体数据 </summary>
-        public OPT.Product.SimalorManager.RegisterKeys.SimON.AQUANCON ConvertToSimON(OPT.Product.SimalorManager.RegisterKeys.Eclipse.AQUANCON eclaqu)
+        public HeBianGu.Product.SimalorManager.RegisterKeys.SimON.AQUANCON ConvertToSimON(HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse.AQUANCON eclaqu)
         {
-            OPT.Product.SimalorManager.RegisterKeys.SimON.AQUANCON simon = new RegisterKeys.SimON.AQUANCON("AQUANCON");
+            HeBianGu.Product.SimalorManager.RegisterKeys.SimON.AQUANCON simon = new RegisterKeys.SimON.AQUANCON("AQUANCON");
 
             foreach (var item in eclaqu.Items)
             {

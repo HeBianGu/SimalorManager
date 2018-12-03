@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/12/1 13:39:53
+ * 作者：[HeBianGu]   时间：2015/12/1 13:39:53
 
  * 说明：
  * 
@@ -13,16 +13,16 @@
  * ========================================================================
 */
 #endregion
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.IO;
-using OPT.Product.SimalorManager.Base.AttributeEx;
+using HeBianGu.Product.SimalorManager.Base.AttributeEx;
 
-namespace OPT.Product.SimalorManager.RegisterKeys.SimON
+namespace HeBianGu.Product.SimalorManager.RegisterKeys.SimON
 {
     /// <summary> 形状因子 分单值和枚举 </summary>
     [KeyAttribute(EclKeyType = EclKeyType.Grid, SimKeyType = SimKeyType.SimON)]

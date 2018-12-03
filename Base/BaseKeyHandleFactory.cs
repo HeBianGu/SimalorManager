@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OPT.Product.SimalorManager.Match;
+using HeBianGu.Product.SimalorManager.Match;
 
-namespace OPT.Product.SimalorManager
+namespace HeBianGu.Product.SimalorManager
 {
     class BaseKeyHandleFactory : ServiceFactory<BaseKeyHandleFactory>
     {

@@ -1,10 +1,10 @@
 ﻿#region <版 本 注 释>
 /*
  * ========================================================================
- * Copyright(c) 北京奥伯特石油科技有限公司, All Rights Reserved.
+ * Copyright(c) ********************, All Rights Reserved.
  * ========================================================================
  *    
- * 作者：[李海军]   时间：2015/11/26 16:01:43
+ * 作者：[HeBianGu]   时间：2015/11/26 16:01:43
 
  * 说明：
  * 
@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPT.Product.SimalorManager.Base.AttributeEx
+namespace HeBianGu.Product.SimalorManager.Base.AttributeEx
 {
     /// <summary> key特性 用于描述Key的特征 </summary>
     public class KeyAttribute : Attribute

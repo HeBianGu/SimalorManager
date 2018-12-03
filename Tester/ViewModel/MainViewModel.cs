@@ -1,8 +1,8 @@
 ﻿using DevExpress.Xpf.Grid;
 using Microsoft.Practices.Prism.Commands;
-using OPT.Product.SimalorManager;
-using OPT.Product.SimalorManager.Eclipse.FileInfos;
-using OPT.Product.SimalorManager.RegisterKeys.Eclipse;
+using HeBianGu.Product.SimalorManager;
+using HeBianGu.Product.SimalorManager.Eclipse.FileInfos;
+using HeBianGu.Product.SimalorManager.RegisterKeys.Eclipse;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
